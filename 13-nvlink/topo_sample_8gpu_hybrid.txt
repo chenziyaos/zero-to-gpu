@@ -1,0 +1,12 @@
+# topo -m 样例：8 卡混合拓扑，前 4 卡通过 NVSwitch，后 4 卡通过另一个 NVSwitch，中间过 PCIe
+# 这种配置下 ring all-reduce 会受 PCIe 链路影响
+
+GPU 0   GPU 1   GPU 2   GPU 3   GPU 4   GPU 5   GPU 6   GPU 7
+X       1       1       1       10      10      10      10
+1       X       1       1       10      10      10      10
+1       1       X       1       10      10      10      10
+1       1       1       X       10      10      10      10
+10      10      10      10      X       1       1       1
+10      10      10      10      1       X       1       1
+10      10      10      10      1       1       X       1
+10      10      10      10      1       1       1       X

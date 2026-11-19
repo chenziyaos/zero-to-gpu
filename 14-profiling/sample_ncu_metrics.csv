@@ -1,0 +1,4 @@
+Kernel Name,GPU Time (ns),SOL - Compute (%),SOL - Memory (%),Memory Throughput (GB/s),Achieved SM Occupancy (%),Stall Reason - LG Throttle (%),Stall Reason - Instruction Cache Miss (%),Stall Reason - Execution Dependency (%),Stall Reason - Memory Dependency (%),Stall Reason - Texture Cache Miss (%)
+volta_fp32_gemm_1,2345600,68.5,28.3,2245.6,85.2,12.5,2.3,8.7,45.6,5.1
+volta_fp32_gemm_2,2456700,71.2,31.5,2389.3,87.1,10.2,1.9,6.4,42.8,4.2
+volta_fp32_scale_1,567800,15.3,78.9,2856.4,42.3,5.2,0.8,3.1,72.4,6.3

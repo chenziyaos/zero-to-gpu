@@ -1,0 +1,7 @@
+Name,Duration (ns),Grid X
+volta_fp32_gemm_kernel,1345600000,128
+volta_fp32_gemm_kernel,1456700000,128
+memcpy_HtoD,800000000,0
+volta_fp32_scale_kernel,567800000,256
+memcpy_DtoH,1000000000,0
+volta_fp32_gemm_kernel,1389200000,128

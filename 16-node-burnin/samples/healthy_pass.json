@@ -1,0 +1,203 @@
+{
+  "model": "H100-SXM",
+  "compute": [
+    {
+      "gpu": 0,
+      "bf16_tflops": 774.0,
+      "fp32_tflops": 56.4
+    },
+    {
+      "gpu": 1,
+      "bf16_tflops": 775.5,
+      "fp32_tflops": 56.5
+    },
+    {
+      "gpu": 2,
+      "bf16_tflops": 777.0,
+      "fp32_tflops": 56.599999999999994
+    },
+    {
+      "gpu": 3,
+      "bf16_tflops": 778.5,
+      "fp32_tflops": 56.699999999999996
+    },
+    {
+      "gpu": 4,
+      "bf16_tflops": 780.0,
+      "fp32_tflops": 56.8
+    },
+    {
+      "gpu": 5,
+      "bf16_tflops": 781.5,
+      "fp32_tflops": 56.9
+    },
+    {
+      "gpu": 6,
+      "bf16_tflops": 783.0,
+      "fp32_tflops": 57.0
+    },
+    {
+      "gpu": 7,
+      "bf16_tflops": 784.5,
+      "fp32_tflops": 57.099999999999994
+    }
+  ],
+  "memory": [
+    {
+      "gpu": 0,
+      "hbm_bw_tbs": 2.92,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 75
+    },
+    {
+      "gpu": 1,
+      "hbm_bw_tbs": 2.9699999999999998,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 76
+    },
+    {
+      "gpu": 2,
+      "hbm_bw_tbs": 2.92,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 77
+    },
+    {
+      "gpu": 3,
+      "hbm_bw_tbs": 2.9699999999999998,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 75
+    },
+    {
+      "gpu": 4,
+      "hbm_bw_tbs": 2.92,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 76
+    },
+    {
+      "gpu": 5,
+      "hbm_bw_tbs": 2.9699999999999998,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 77
+    },
+    {
+      "gpu": 6,
+      "hbm_bw_tbs": 2.92,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 75
+    },
+    {
+      "gpu": 7,
+      "hbm_bw_tbs": 2.9699999999999998,
+      "hbm_gb": 79.5,
+      "ecc_dbe": 0,
+      "max_temp_c": 76
+    }
+  ],
+  "links": [
+    {
+      "gpu": 0,
+      "min_nvlink_gbs": 385.0,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 1,
+      "min_nvlink_gbs": 385.3,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 2,
+      "min_nvlink_gbs": 385.6,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 3,
+      "min_nvlink_gbs": 385.9,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 4,
+      "min_nvlink_gbs": 386.2,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 5,
+      "min_nvlink_gbs": 386.5,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 6,
+      "min_nvlink_gbs": 386.8,
+      "busbw_gbs": 360.0
+    },
+    {
+      "gpu": 7,
+      "min_nvlink_gbs": 387.1,
+      "busbw_gbs": 360.0
+    }
+  ],
+  "pcie": [
+    {
+      "gpu": 0,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 1,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 2,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 3,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 4,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 5,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 6,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    },
+    {
+      "gpu": 7,
+      "link_gen": 5,
+      "link_width": 16,
+      "bw_gbs": 50.5
+    }
+  ],
+  "xids": [],
+  "burnin": {
+    "hours": 24.5,
+    "cards_dropped": 0,
+    "ecc_dbe_total": 0,
+    "throttle_events": 0,
+    "nccl_failures": 0
+  }
+}
