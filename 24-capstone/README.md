@@ -1,5 +1,7 @@
 # 24-capstone
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/24-capstone.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-24 综合：从选卡到上线的训推方案计算器。
 
 ## 文件说明

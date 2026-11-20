@@ -1,5 +1,7 @@
 # 04-memory：访存与归约
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/04-memory.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-04「访存与归约：合并访存、共享内存与 warp 归约」的配套代码。
 
 模拟和分析 GPU 全局内存的 sector 合并、共享内存的 bank 冲突，以及矩阵转置和并行归约的逐步优化。

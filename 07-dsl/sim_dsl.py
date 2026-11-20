@@ -129,7 +129,10 @@ def layout_algebra_demo(shape_str: str, do_coalesce: bool = False):
 
     if do_coalesce:
         coalesced = layout.coalesce()
-        if coalesced != layout:
+        if coalesced is None:
+            result['coalesced_shape'] = '不可合并（最后一维 stride 不是 1）'
+            result['coalesced_stride'] = '-'
+        elif coalesced != layout:
             result['coalesced_shape'] = coalesced.shape
             result['coalesced_stride'] = coalesced.stride
 

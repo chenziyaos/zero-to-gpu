@@ -1,5 +1,7 @@
 # GPU-05 GEMM 逐步优化：配套代码
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/05-gemm.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-05 对应 GEMM 每一级分块的性能账本和优化效果。配套代码模拟不同分块策略下的访存和占用率，回答"为什么分块能加速、线程分块怎样提高数据复用、低占用率是否影响 GEMM 性能"三个问题。
 
 ## 文件清单

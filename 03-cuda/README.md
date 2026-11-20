@@ -1,5 +1,7 @@
 # GPU-03 CUDA 编程模型与并行执行
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/03-cuda.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 对应文档《GPU-03｜硬件｜CUDA 编程模型：线程层级、stream 与编译链》。
 
 ## 概述

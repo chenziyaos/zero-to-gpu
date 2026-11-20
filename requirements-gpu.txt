@@ -1,0 +1,5 @@
+# GPU 实验：gpu_*.py、08-attention/triton_attn.py。需要 NVIDIA GPU 和 R615 及以上驱动（见 README 版本基线）。
+# triton 随 torch 一起安装。07-dsl 和 14-profiling 文件头提到的 CUTLASS DSL、pycuda 当前代码没有 import，所以不列。
+# 已用 uv pip compile 在 Python 3.11、Linux x86_64 上解析通过；没有在 GPU 上逐个脚本实跑。
+-r requirements-cpu.txt
+torch==2.15.0

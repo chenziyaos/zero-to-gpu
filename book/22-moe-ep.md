@@ -641,6 +641,8 @@ V4.1 在注意力侧引入 SWA（Sliding Window Attention）与 DSA（DeepSeek S
 
 > 🔑 **本章要点**：从 V3 到 V4.1，MoE 的专家数（256）与激活（top-8）未变，演进集中在 router（aux-loss-free）、拓扑（NVL72 上 TP=72 + EP=72 + DP=4）、通信库（DeepEP 2.0 micro-batch overlap）、注意力（SWA + DSA + Bounded Replay）四条线；V4.1 的 96% 本卡命中把 dispatch 从 per-GPU 经济账的关键路径上移除，使吞吐公式从 $1/(t_d+t_g+t_{kv})$ 变成 $1/(t_g+t_{kv})$；前文五步闭环仍然适用，但"定天花板/测实际/消除等待"的工程基线需要按当代实现更新；GPU-18 的 NCCL 教科书模式已被 DeepEP 2.0 的非对称 micro-batch overlap 超越，GPU-23 的推理系统需要补 SWA Bounded Replay。
 
+**延伸阅读**：Maarten Grootendorst 的 [A Visual Guide to Mixture of Experts](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts)（2024 年 10 月）用示意图讲 router、负载均衡的辅助损失、capacity factor、Switch Transformer，以及 Mixtral 的总参数和激活参数之分，适合在读本篇之前先建立直觉。它讲的是模型结构和训练，不涉及推理时的专家放置和通信，这两块以本篇为准。
+
 # 参考文献
 
 按正文首次引用顺序编号，资料截至 2026 年 11 月初。
@@ -697,4 +699,4 @@ V4.1 在注意力侧引入 SWA（Sliding Window Attention）与 DSA（DeepSeek S
 
 ---
 
-上一章：[GPU-21｜LLM｜训练并行：TP、PP、DP、ZeRO 与 FP8](./21-train-parallel.md) · [目录](./README.md) · 下一章：[GPU-23｜LLM｜推理系统：KV cache、PagedAttention 与 PD 分离](./23-inference.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/22-moe-ep.ipynb) · 上一章：[GPU-21｜LLM｜训练并行：TP、PP、DP、ZeRO 与 FP8](./21-train-parallel.md) · [目录](./README.md) · 下一章：[GPU-23｜LLM｜推理系统：KV cache、PagedAttention 与 PD 分离](./23-inference.md)

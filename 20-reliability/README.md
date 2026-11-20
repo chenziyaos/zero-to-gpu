@@ -1,5 +1,7 @@
 # GPU-20: Reliability & Observability — Checkpoint Interval, Failure Rates & Stragglers
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/20-reliability.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 Large-scale GPU training faces three main reliability challenges: (1) hardware failures cause job interruption, (2) slow nodes stall synchronous training, (3) silent data corruption corrupts models. This directory contains simulators for checkpoint interval optimization (Young/Daly formulas), job-level failure rate estimation, and straggler impact analysis.
 
 ## Files

@@ -4,6 +4,8 @@
 
 > 🎯 本章解决什么问题:GPU-01\~31 把 Hopper 到 Blackwell 世代的知识对齐到 2026 年初,但 NVIDIA 在 2026 GTC 上发布的 Vera Rubin 与 Dynamo 把"一台机器"的边界又往外推了一级 — 单机柜 72 卡的 NVL72 还是当下,Rubin NVL72 NVFP4 推理 50 PFLOPS、260 TB/s NVLink 总带宽、HBM4 22 TB/s,下一代推理系统的等待名目要再换一次。本章按五步闭环展开:先定 Vera Rubin 与 Rubin CPX 的规格天花板(第 1 章),再测 NVFP4 与 FA4 的实际收益(第 2 章),再逐项定位等待的转移(第 3 章模型结构倒逼 kernel:FlashMLA/DeepGEMM/DeepEP),再列出 NVIDIA 官方提供的消等方案(第 4 章 Dynamo 分离式推理 + KVBM 分层),最后回到时间账坐标系(第 5 章),衔接 GPU-27/28/30/31 的当代口径。使用方式:硬件与整机规划团队看第 1-2 章,推理系统工程团队看第 4-5 章,模型团队看第 3 章。
 
+> 💡 **扩展 GPU-27、GPU-23**：[GPU-27](./27-nvl72.md) 讲 Blackwell 的 NVL72，[GPU-23](./23-inference.md) 讲推理系统；本篇往后看 Rubin 一代硬件和 Dynamo 推理框架。
+
 ## 本章地图
 
 - **第 1 章 硬件换代:Vera Rubin、Rubin CPX 与 NVLink 6**:单 GPU NVFP4 50 PFLOPS 推理(稀疏口径)、288 GB HBM4 22 TB/s、NVL72 130→260 TB/s,从 Blackwell Ultra 到下一次代际跳跃

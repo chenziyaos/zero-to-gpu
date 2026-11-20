@@ -1,5 +1,7 @@
 # 07-dsl
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/07-dsl.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-07 Triton、CUTLASS 与 CuTe DSL 的配套练习。
 
 ## 文件表

@@ -355,6 +355,8 @@ Tensor Core 优化的过程从 s06 和 s07 的原理讲清楚后，工程化为�
 
 > 🔑 **本章要点**：Tensor Core 优化遵循闭环：定天花板用 Roofline、测实际用 sim_tc.py、定位等待用时间账、消除用异步化和多级流水、复测观察瓶颈迁移。核对清单把这个过程工程化为 9 个检查点，每项都可独立测试，通过了才能上线。本章消掉的等待是搬运延迟与计算的不匹配，代价是指令复杂度和同步管理成本。
 
+**延伸阅读**：Maarten Grootendorst 的 [A Visual Guide to Quantization](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-quantization)（2024 年 7 月）用示意图讲对称和非对称量化、离群值裁剪、GPTQ、GGUF 的分块量化和 BitNet，适合在读本篇的账本之前先建立直觉。它不讲推理引擎里的 kernel 选择和 KV cache 量化，这两块以本篇为准。
+
 # 参考文献
 
 按正文首次引用顺序编号，资料截至 2026 年 11 月初。
@@ -463,4 +465,4 @@ GPU-06 §3 已讲 wgmma(per-threadgroup 异步 GEMM);Blackwell 核心 tensor cor
 
 ---
 
-上一章：[GPU-05｜硬件｜GEMM 逐步优化：从朴素循环到 warp 分块](./05-gemm.md) · [目录](./README.md) · 下一章：[GPU-07｜硬件｜Triton、CUTLASS 与 CuTe DSL](./07-dsl.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/06-tensor-core.ipynb) · 上一章：[GPU-05｜硬件｜GEMM 逐步优化：从朴素循环到 warp 分块](./05-gemm.md) · [目录](./README.md) · 下一章：[GPU-07｜硬件｜Triton、CUTLASS 与 CuTe DSL](./07-dsl.md)

@@ -432,4 +432,4 @@ PagedAttention [[7]](https://arxiv.org/abs/2309.06180) 和 vAttention [[14]](htt
 
 ---
 
-上一章：[GPU-09｜系统｜驱动、CUDA 兼容与 Xid](./09-driver.md) · [目录](./README.md) · 下一章：[GPU-11｜系统｜PCIe、NUMA 与 GPUDirect](./11-pcie-gdr.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/10-memory-mgmt.ipynb) · 上一章：[GPU-09｜系统｜驱动、CUDA 兼容与 Xid](./09-driver.md) · [目录](./README.md) · 下一章：[GPU-11｜系统｜PCIe、NUMA 与 GPUDirect](./11-pcie-gdr.md)

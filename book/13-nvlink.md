@@ -746,4 +746,4 @@ A：SHARP 在交换机上做 reduce，把原本在 GPU 上做聚合的开销卸�
 
 ---
 
-上一章：[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md) · [目录](./README.md) · 下一章：[GPU-14｜单机｜性能分析与 Profiling](./14-profiling.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/13-nvlink.ipynb) · 上一章：[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md) · [目录](./README.md) · 下一章：[GPU-14｜单机｜性能分析与 Profiling](./14-profiling.md)
