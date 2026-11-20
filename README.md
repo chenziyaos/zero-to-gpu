@@ -4,6 +4,12 @@
 
 系列文档的 Markdown 版放在 [`book/`](book/README.md)，从索引页 GPU-00 读起；各章末尾有上一章、下一章的链接。
 
+## 在 Colab 上跑
+
+[`colab/`](colab/) 下每章一个 notebook，打开后依次执行：克隆本仓库、装 `requirements-cpu.txt`、跑本章单元测试、跑正文里的 CPU 命令。notebook 里的命令都在 Python 3.11 的 CPU 环境下实跑过，退出码为 0；少数演示脚本按设计以非 0 退出（样例本身不达标），已在命令后注明。需要 GPU、模型文件或运行中服务的命令没有放进去。
+
+入口示例：[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/02-ledger.ipynb)
+
 ## 版本基线
 
 - CUDA 13.4 Update 2，驱动分支 R615；13.x 应用可在 R580 及以上驱动运行，13.4 新特性要求 R615
@@ -55,6 +61,15 @@
 
 全系列共用一条主线：GPU 优化就是把等待一层层消掉。每篇处理时间账 T = T_compute + W_mem + W_host + W_comm + W_idle 里的一项，配套代码负责把这一项的天花板、实际值和消除前后的差算出来。
 
+## 安装依赖
+
+依赖分两档，版本都锁定了：
+
+```bash
+pip install -r requirements-cpu.txt          # 模拟器和单元测试
+pip install -r requirements-gpu.txt          # 有 GPU 的机器
+```
+
 ## 快速试跑
 
 一次跑完全部单元测试：
@@ -68,4 +83,18 @@ for d in [0-2][0-9]-*; do (cd $d && for t in test_*.py; do python3 $t > /dev/nul
 ```bash
 cd zero-to-gpu
 python3 common/specs.py          # 打印各代 GPU 规格和 BF16 拐点
+```
+
+## 引用
+
+如果本系列对你的工作有帮助，可以这样引用：
+
+```bibtex
+@misc{zero-to-gpu,
+  author       = {chenziyaos},
+  title        = {从 0 开始 GPU 优化（zero-to-gpu）},
+  year         = {2026},
+  howpublished = {\url{https://github.com/chenziyaos/zero-to-gpu}},
+  note         = {GitHub repository}
+}
 ```

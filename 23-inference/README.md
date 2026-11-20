@@ -1,5 +1,7 @@
 # 23-inference
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/23-inference.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-23 推理系统的配套练习。KV cache 显存账本、Decode 延迟与吞吐、Prefill/Decode 分离配比。
 
 | 文件 | 环境 | 做什么 | 对应文档章节 |

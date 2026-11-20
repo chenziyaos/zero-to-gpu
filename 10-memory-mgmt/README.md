@@ -1,5 +1,7 @@
 # GPU-10 显存管理 — PyTorch 缓存分配器与 OOM
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/10-memory-mgmt.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 PyTorch CUDA caching allocator 的工作机制模拟（CPU 端），以及训练显存预算与 OOM 重试链分析。核心演示：块对齐、两池设计、碎片化、切分合并、重试流程。
 
 ## 文件清单

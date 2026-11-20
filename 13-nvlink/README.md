@@ -1,5 +1,7 @@
 # 13-nvlink
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/13-nvlink.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 GPU-13 NVLink 与 NVSwitch 配套代码。单机内部的四层互连与环形 all-reduce 的带宽模型。
 
 ## 文件清单

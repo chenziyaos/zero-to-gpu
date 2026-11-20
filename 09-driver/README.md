@@ -1,5 +1,7 @@
 # GPU-09 驱动、CUDA 兼容与 Xid
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/09-driver.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 驱动版本与 CUDA 版本的兼容性检查、Xid 错误诊断、GPU 节点环境验证。
 
 ## 文件清单

@@ -1,5 +1,7 @@
 # GPU-06 Tensor Core 与低精度
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/06-tensor-core.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 配套代码：Tensor Core 峰值、片段布局、浮点格式与低精度量化的 CPU 模拟器和单元测试。
 
 ## 文件清单

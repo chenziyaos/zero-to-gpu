@@ -1,5 +1,7 @@
 # GPU-14 Profiling：配套代码
 
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/14-profiling.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+
 性能分析的核心思想：先用 Nsight Systems 看整体时间线找空隙，再用 Nsight Compute 深挖 kernel 内的瓶颈。本目录包含两个 CSV 解析器、四段示例负载和一份分析脚本。
 
 ## 文件清单

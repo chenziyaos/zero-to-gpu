@@ -180,7 +180,7 @@ def main():
     print(f"  Worst (max collision): {bw_result['worst_case_bw_per_flow_gb_s']:.2f} GB/s\n")
 
     print(f"Time to send 1 GB per flow:")
-    print(f"  Ideal:  {bw_result["ideal_all_reduce_latency_1gb_ms"]:.1f} ms")
+    print(f"  Ideal:  {bw_result['ideal_all_reduce_latency_1gb_ms']:.1f} ms")
     print(f"  Typical: {bw_result['typical_all_reduce_latency_1gb_ms']:.2f} ms")
     print(f"  Worst: {bw_result['worst_case_all_reduce_latency_1gb_ms']:.2f} ms\n")
 
