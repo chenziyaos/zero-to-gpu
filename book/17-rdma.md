@@ -610,4 +610,4 @@ Reduce-scatter 和 all-gather 各耗时 20 ms（单平面 50 GB/s，8 卡跨机 
 
 ---
 
-上一章：[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md) · [目录](./README.md) · 下一章：[GPU-18｜集群｜NCCL：算法、协议与挂死排查](./18-nccl.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/17-rdma.ipynb) · 上一章：[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md) · [目录](./README.md) · 下一章：[GPU-18｜集群｜NCCL：算法、协议与挂死排查](./18-nccl.md)

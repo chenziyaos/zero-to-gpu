@@ -2,6 +2,8 @@
 
 > 🎯 **这篇文档解决什么问题**：KV cache 推理时显存不够用了怎么办？GPU-23 讲过 PD 分离 + KV cache 概念，但 KV 真正能"卸载"到哪里？答案是 CXL —— 一个比 PCIe 慢但比内存池大的缓存一致性互连。本篇说清楚 CXL 是什么、它的物理参数（直连 170ns / 单级 Switch 250ns / 端到端 +57ns）、和 GPU-23 的 KV offload 工程化接口、以及和 NVLink/GPUDirect 的分工边界。
 
+> 💡 **扩展 GPU-23、GPU-11**：[GPU-23](./23-inference.md) 提出 KV 分层卸载，[GPU-11](./11-pcie-gdr.md) 讲 PCIe 与 GPUDirect；本篇讲 KV 卸载到 CXL 内存时的互连参数和工程接口。
+
 # 导读 · 先给结论
 
 - **CXL 是搭在 PCIe 物理层之上的一致性协议栈**。厂商之所以不另起一根线，是因为复用 PCIe Gen5/Gen6 的 PHY 就能让现有的 root port 和 retimer 直接用，省掉重新布线的成本。在这根 PHY 上，CXL 同时跑三个子协议——CXL.io 管设备发现和 DMA、CXL.cache 让设备来缓存主机内存、CXL.mem 让主机把设备内存当 System RAM 读，把"PCIe 设备"升级成"内存可缓存、设备可寻址"的统一域。[[1]](https://ieeexplore.ieee.org/document/9933381)这就是 CXL 把 PCIe 从"I/O 总线"升维成"内存互连"的核心机制。

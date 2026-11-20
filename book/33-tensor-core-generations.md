@@ -4,6 +4,8 @@
 
 > 🎯 本章解决什么问题:GPU-06 讲了 Hopper 与 Blackwell 的 tensor core(wgmma/UMMA/tcgen05/TE 2.0),但 tensor core 不是从 Hopper 才开始的 — 从 2017 年 Volta 第一次把矩阵乘单元塞进 GPU,到 2022 年 Hopper 第四代,每一代的指令集、寄存器布局、同步原语都被重新写过,而老 kernel 在新代上不能直接跑。理解这条"重写"的循环,是理解为什么 GPU-06 讲的 Blackwell 改动不是一次性事件的关键。本章按五步闭环展开:先定 Volta 第一代 wmma 是怎么把 tensor core 摆进 GPU 的(第 1 章),测 Turing 与 Ampere 在精度与同步上加了什么(第 2-3 章),定位每代之间因 kernel 不兼容而暴露的等待(第 4 章),再列 Hopper 的 wgmma 是怎么一次性把前 3 代的坑填掉(第 5 章,衔接 GPU-06),复测在 2026 年的视角下四代一脉的"重写"循环会不会继续(第 6 章)。使用方式:要写 tensor core kernel 的工程师看全部,只关心 Blackwell 当代口径的可以跳到第 5-6 章接 GPU-06。
 
+> 💡 **扩展 GPU-06**：[GPU-06](./06-tensor-core.md) 讲 Hopper 与 Blackwell 的 Tensor Core，本篇往前补 Volta 到 Hopper 四代的指令演进，解释为什么每一代都要重写 kernel。
+
 ## 本章地图
 
 - **第 1 章 Volta (2017):tensor core 起点与 wmma 编程模型**:第一次把矩阵乘单元塞进 GPU,HMMA 指令 + 16x16x16 fragment,寄存器布局的限制

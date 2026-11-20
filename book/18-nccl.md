@@ -861,4 +861,4 @@ NCCL_NET_GDR_READ 是一个微优化，当 GPU 网卡支持 RDMA 读时，NCCL �
 
 ---
 
-上一章：[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md) · [目录](./README.md) · 下一章：[GPU-19｜集群｜Kubernetes 上的 GPU：设备插件与拓扑感知调度](./19-k8s.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/18-nccl.ipynb) · 上一章：[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md) · [目录](./README.md) · 下一章：[GPU-19｜集群｜Kubernetes 上的 GPU：设备插件与拓扑感知调度](./19-k8s.md)

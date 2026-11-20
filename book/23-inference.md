@@ -766,4 +766,4 @@ Qwen3-Next 与 Kimi Linear 走混合架构：3 层 KDA（kernel-decoupled attent
 
 ---
 
-上一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md) · [目录](./README.md) · 下一章：[GPU-24｜LLM｜综合：从选卡到上线](./24-capstone.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/23-inference.ipynb) · 上一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md) · [目录](./README.md) · 下一章：[GPU-24｜LLM｜综合：从选卡到上线](./24-capstone.md)

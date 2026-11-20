@@ -369,4 +369,4 @@ MIG、MPS 和容器的配置细节众多，部署前需要逐项核对。这一�
 
 ---
 
-上一章：[GPU-11｜系统｜PCIe、NUMA 与 GPUDirect](./11-pcie-gdr.md) · [目录](./README.md) · 下一章：[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/12-sharing.ipynb) · 上一章：[GPU-11｜系统｜PCIe、NUMA 与 GPUDirect](./11-pcie-gdr.md) · [目录](./README.md) · 下一章：[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)

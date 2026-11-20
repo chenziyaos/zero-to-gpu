@@ -4,6 +4,8 @@
 
 > 🎯 本章解决什么问题:KDA(Kimi Delta Attention)等线性注意力把 KV cache 从"显存账主角"推到"退役边缘",模型侧这本账换了名目之后,系统侧的等待也换名目 — 不再等 KV 命中页,而是等状态 checkpoint、等状态刚性强制的串行 prefill。本章按五步闭环展开:先定谱系天花板(第 1-2 章 GDN/DeltaNet/KDA 三行递推),再测双引擎实现差异(第 3-4 章),再定位线性注意力专属的等待(chunkwise 严格串行,第 5 章),再列出状态语义带来的新应对(第 6-7 章 TP 按头切分零通信),最后换口径规划容量(第 8 章)。衔接 GPU-23 的 KV cache 账与 GPU-28 的成本账。使用方式:模型团队看 1-4 章,serving 团队看 5-8 章。
 
+> 💡 **扩展 GPU-23、GPU-08**：[GPU-23](./23-inference.md) 的显存账以 KV cache 为主角，[GPU-08](./08-attention.md) 讲注意力内核；本篇讲线性注意力把 KV 换成固定大小的状态以后，显存账和 serving 怎么变。
+
 ## 本章地图
 
 - **第 1章 谱系与 3:1 公约数**:DeltaNet → Gated DeltaNet → KDA,Qwen3-Next/Kimi Linear/K3 的"3 层线性 + 1 层全注意力"
@@ -668,6 +670,8 @@ GPU-26 讲的 KV offload 到 CXL.mem(扩展内存层)在 KDA 模型里依然适�
 状态池硬顶容量公式 + 双账本对比。上半:容量公式框图——concurrency = min(State_pool / (S_size × KDA_layers × head_num/TP), KV_pool / (KV_per_token × seq_len × MLA_layers)),左侧代入状态池数(12GB/384MB=31),右侧代入 KV 池数(8GB/32MB=256),中间 min 取 31,标注"木桶短板在状态池"。下半:双账本对比表——左列"KDA 状态账"(刚性、纯 HBM、不 offload、TP 不降总量、不能压缩/逐出),右列"MLA KV 账"(弹性、HBM+CXL.mem、可 offload、TP 降总量、可压缩/逐出/共享),底部一行"两账独立预算,集群共用 TP/PP 拓扑,admission 双查"。右侧标注 GPU-23(容量公式源头)和 GPU-26(CXL.mem offload)的跨章引用。
 
 > 🔑 本章要点:线性注意力把显存账从 KV cache 换成状态 R,等待名目跟着换 — 不再等 KV 页命中,改等状态 checkpoint 的串行读、等 chunkwise prefill 的严格串行、等状态刚性强制的资源分配。五步闭环走完:谱系天花板由 3:1 公约数定(GDN/KDA),实测瓶颈在 prefill 串行(W_idle 由状态刚性造成),消除手段是 TP 按头切分把 W_comm 压到零(W_comm 消掉),复测口径是状态池容量硬顶 vs KV 弹性。衔接 GPU-23 KV cache 账、GPU-28 成本账(cache_read/write 定价失效),GPU-31 Agent 负载下状态重算的可行性。
+
+**延伸阅读**：Maarten Grootendorst 的 [A Visual Guide to Mamba and State Space Models](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mamba-and-state)（2024 年 2 月）从 SSM、S4 讲到 Mamba 的选择性扫描，适合先弄清「固定大小的状态为什么能替代随长度增长的 KV」。本篇的 GDN / KDA 属于线性注意力一支，和 Mamba 一样按固定状态记账，但递推形式不同，状态大小和显存账以本篇为准。
 
 # 参考文献
 

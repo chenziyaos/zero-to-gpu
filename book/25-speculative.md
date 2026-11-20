@@ -2,6 +2,8 @@
 
 > 🎯 **这篇文档解决什么问题**：Decode 串行 1 token / forward，是推理吞吐天花板。GPU-23 讲过 KV cache + PD 分离优化的是"内存侧"，本篇补"算法侧"——Speculative Decoding 用一个小草稿模型一次猜 K 个 token，大模型一次 forward 验证最长匹配前缀，*数学期望等价于大模型单独生成*。重点说清楚 αK 接受率公式、ngram/Medusa/EAGLE/Draft/MTP 五条谱系、DeepSeek-V3 MTP 1.8× 工程数据、以及和 PD 分离 / CXL offload 的协同位置。
 
+> 💡 **扩展 GPU-23**：[GPU-23](./23-inference.md) 讲推理系统的内存侧（KV cache、PagedAttention、PD 分离），本篇补算法侧的投机解码。建议先读 [GPU-23](./23-inference.md)。
+
 # 导读 · 先给结论
 
 - **SD 是用算力换延迟**：草稿模型花 ρ·K 代价猜 K 个 token，大模型 1 次 forward 验证；期望吞吐 = (1+αK) / (1+ρK)，仅当 αK > 1+ρK 才赚[[1]](https://arxiv.org/abs/2211.17192)。
