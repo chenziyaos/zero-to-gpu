@@ -4,7 +4,7 @@
 
 **使用方式**：第 1 章把一步训练拆开。第 2、3 章算显存。第 4 到 7 章逐一讲分片、张量并行、流水线并行和沿序列维的切分。第 8 章讲 FP8，第 9 章讲选方案，第 10 章给清单和自测。
 
-**代码**：zero-to-gpu/21-train-parallel/ 下的 sim_memory.py、sim_parallel.py、test_parallel.py 只需 Python 标准库，但 sim_parallel.py 要 Python 3.12 以上才能解析。显存口径、激活估计、TP 通信模型和方案搜索有误，第 10 章逐条说明。
+**代码**：zero-to-gpu/21-train-parallel/ 下的 sim_memory.py、sim_parallel.py、test_parallel.py 只需 Python 标准库。显存口径、激活估计、TP 通信模型和方案搜索有误，第 10 章逐条说明。
 
 <b>🧭 主线位置</b>：GPU-00（[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md)）建立了时间账 T = T_compute + W_mem + W_host + W_comm + W_idle。GPU-18（[GPU-18｜集群｜NCCL：算法、协议与挂死排查](./18-nccl.md)）讲集合通信本身，GPU-20（[GPU-20｜集群｜可靠性与可观测：故障、静默错误与 checkpoint](./20-reliability.md)）讲作业层面的故障和恢复。本篇讲训练作业内部：并行切分决定了 W_comm 里有多少 TP 和 DP 通信、W_idle 里有多少流水线气泡，FP8 缩短的是 T_compute。专家并行的 all-to-all 交给 GPU-22（[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md)）。
 
@@ -44,7 +44,7 @@ Llama 3 405B 预训练的三个阶段用了三组配置[[1]](https://arxiv.org/p
 
 这些数字说明，上万卡的训练里一半以上的峰值算力没有变成有效计算；最好的配置是按各自的代价把几种并行组合起来：TP 留在机内，PP 跨机，DP 扩规模。后面各章逐项解释为什么。
 
-配套代码 zero-to-gpu/21-train-parallel/ 有 sim_memory.py、sim_parallel.py 和 test_parallel.py 三个文件。sim_parallel.py 用了 Python 3.12 才支持的 f-string 写法[[7]](https://docs.python.org/3/whatsnew/3.12.html)，在 Python 3.9.6 上报 SyntaxError，本篇用 Python 3.14.7 重跑；两个脚本的显存口径也不一致，第 2、3 章说明。
+配套代码 zero-to-gpu/21-train-parallel/ 有 sim_memory.py、sim_parallel.py 和 test_parallel.py 三个文件。sim_parallel.py 原先用了 Python 3.12 才支持的 f-string 写法[[7]](https://docs.python.org/3/whatsnew/3.12.html)，公开仓库已改掉，在 Python 3.9.6 上也能跑；两个脚本的显存口径也不一致，第 2、3 章说明。
 
 按五步闭环看并行：
 
@@ -344,7 +344,7 @@ Llama 3 把这几条写成了一个排列次序：并行维度按 [TP, CP, PP, D
 
 ### 代码练习：配套代码的问题
 
-zero-to-gpu/21-train-parallel/ 的 sim_memory.py 在 Python 3.9.6 上能跑；sim_parallel.py 第 217 行在 f-string 的花括号里又用了双引号，这种写法 Python 3.12 才支持[[7]](https://docs.python.org/3/whatsnew/3.12.html)，所以在 3.9.6 上 sim_parallel.py 和依赖它的 test_parallel.py 都报 SyntaxError，README 没有写版本要求。用 Python 3.14.7 重跑，6 个测试全部通过，但下面几处与事实或自身描述不符，适合作为练习：
+zero-to-gpu/21-train-parallel/ 的 sim_memory.py 在 Python 3.9.6 上能跑；sim_parallel.py 第 217 行原先在 f-string 的花括号里又用了双引号，这种写法 Python 3.12 才支持[[7]](https://docs.python.org/3/whatsnew/3.12.html)；公开仓库已改成单引号，sim_parallel.py 和 test_parallel.py 在 3.9.6 上都能跑，6 个测试全部通过，但下面几处与事实或自身描述不符，适合作为练习：
 
 - **优化器状态少算 4 字节**：sim_memory.py 把优化器状态写成每参数 8 字节，漏了 32 位参数副本，8B 模型算成 96 GB；sim_parallel.py 用的是 16 字节，两个文件互相矛盾（第 2 章）。练习：改成 12 字节，让 8B 模型状态变成 128 GB。
 - **测试没对上论文还通过**：第一个测试声称验证 ZeRO 论文，用 7.5B 算出纯 DP 90 GB、ZeRO-3 1.41 GB，论文是 120 GB 和 1.9 GB，测试只检查是否放得下（第 2 章）。练习：把论文数字写成断言。

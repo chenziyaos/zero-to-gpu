@@ -34,12 +34,4 @@
 | `23-inference/` | 并发数少除了张量并行度；不检查容量；MHA 基准漏乘层数；预填充按带宽算时间；goodput 定义 | [GPU-23](book/23-inference.md) 第 10 章 |
 | `24-capstone/` | 检查点开销固定为一半；时间账比例写死；推理计划的常数没有依据；校准表和 README 示例与实际输出不符 | [GPU-24](book/24-capstone.md) 第 10 章 |
 
-## 已在仓库修复、文档仍按旧版描述的问题
-
-文档的核对是对着修复前的代码做的。下面几处在本仓库已经改好，文档里相应的句子可以忽略：
-
-- `09-driver/sim_xid.py` 已导入 `Tuple`，在 Python 3.9 上也能导入，`test_driver.py` 通过。
-- `17-rdma/sim_ecmp.py`、`21-train-parallel/sim_parallel.py` 的 f-string 不再嵌套双引号，不需要 Python 3.12，`test_ecmp.py`、`test_parallel.py` 在 Python 3.9 上通过。
-- `22-moe-ep/` 的两个测试不再写死工作目录，换一台机器也能跑。
-
 全部 27 个测试文件在 Python 3.9.6 上运行通过（2026-11-21）。

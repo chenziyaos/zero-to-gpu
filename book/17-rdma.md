@@ -4,7 +4,7 @@
 
 **使用方式**：第 1、2 章讲跨机这一跳的上限和两种 RDMA 网络。第 3 到 7 章讲网络里的等待：拓扑、哈希、PFC、拥塞控制、多路径。第 8 章讲主机配置，第 9 章讲诊断，第 10 章给清单和自测。
 
-**代码**：zero-to-gpu/17-rdma/ 下的 sim_fabric.py、sim_ecmp.py、sim_pfc.py 只需 Python 标准库，另有两个要在 RDMA 机器上运行的脚本。sim_ecmp.py 需要 Python 3.12 以上，perftest 脚本的参数有误，第 10 章逐条说明。
+**代码**：zero-to-gpu/17-rdma/ 下的 sim_fabric.py、sim_ecmp.py、sim_pfc.py 只需 Python 标准库，另有两个要在 RDMA 机器上运行的脚本。perftest 脚本的参数有误，第 10 章逐条说明。
 
 <b>🧭 主线位置</b>：GPU-00（[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md)）建立了时间账 T = T_compute + W_mem + W_host + W_comm + W_idle。GPU-13（[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)）处理了机内的 W_comm，GPU-16（[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md)）验收了单台机器。本篇处理跨机那部分 W_comm 里网络造成的等待。集合通信库怎样用这张网络，交给 GPU-18（[GPU-18｜集群｜NCCL：算法、协议与挂死排查](./18-nccl.md)）。
 
@@ -347,9 +347,8 @@ perftest 是 RDMA 的微基准集合，ib_write_bw 用 RDMA write 测带宽[[11]
 
 ### 代码练习
 
-zero-to-gpu/17-rdma/ 下有 sim_fabric.py、sim_ecmp.py、sim_pfc.py 三个模拟器和对应的测试，以及两个要在 RDMA 机器上运行的脚本。主编在系统自带的 Python 3.9.6 上运行，test_fabric.py 和 test_pfc.py 各 6 条全部通过，sim_fabric.py 和 sim_pfc.py 的输出与 README 一致。有几处问题适合当作找错练习：
+zero-to-gpu/17-rdma/ 下有 sim_fabric.py、sim_ecmp.py、sim_pfc.py 三个模拟器和对应的测试，以及两个要在 RDMA 机器上运行的脚本。主编在系统自带的 Python 3.9.6 上运行，test_fabric.py、test_pfc.py 和 test_ecmp.py 全部通过，三个模拟器的输出与 README 一致，sim_ecmp.py 是每流理想 25.00、典型 11.96 GB/s，效率 47.8%。有几处问题适合当作找错练习：
 
-- sim_ecmp.py 第 183 行在 f-string 里嵌套了双引号，Python 3.12 之前是语法错误，所以 sim_ecmp.py 和 test_ecmp.py 在 3.9 上都跑不起来。换成 Python 3.14.7 后，sim_ecmp.py 的输出和 README 一致（每流理想 25.00、典型 11.96 GB/s，效率 47.8%）。
 - test_ecmp.py 全部通过，但它自己打印出了矛盾的结果：allreduce_latency 一项的碰撞场景比基线更快（41.82 ms 对 61.39 ms），并注明“unexpected”；meta_roce_scenario 一项里上行更多的场景反而更慢（14.2 对 36.4 GB/s）。测试只检查数值落在宽松的区间，没有检查方向。
 - sim_ecmp.py 的“典型”带宽用平均意义下最挤的那条上行来算每条流，“最坏”用一万次抽样里的最大值，两者都假设所有流同时满速，没有拥塞控制。
 - gpu_perftest_bw.sh 用的是 ib_send_bw 而不是 README 写的 ib_write_bw；-a GID_BASED、-t UD 的用法和 perftest 的参数定义不符；消息大小和时长参数没有用上（第 9 章）。
