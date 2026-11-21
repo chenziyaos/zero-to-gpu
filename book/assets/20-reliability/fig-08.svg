@@ -1,67 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="880"
-     viewBox="-20 -20 1240 880">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="840" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">网络 Packet Loss 对计算的影响与容错协议的缓解</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">0.1% 随机 loss → 13% 计算效率下降（无容错）；LTP 容错协议在 0-10% 范围稳定 ~75%</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="c2:2" transform="translate(100, 560)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:3" transform="translate(91, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="9"><tspan x="9" y="14.118"><tspan x="0.145" text-anchor="start">0%</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:4" transform="translate(414.5, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="17.5"><tspan x="17.5" y="14.118"><tspan x="0.315" text-anchor="start">0.02%</tspan></tspan></text></g>
-<g id="c2:4" transform="translate(432, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:5" transform="translate(596, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.145" text-anchor="start">0.1%</tspan></tspan></text></g>
-<g id="c2:5" transform="translate(610, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:6" transform="translate(774, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.145" text-anchor="start">0.5%</tspan></tspan></text></g>
-<g id="c2:6" transform="translate(788, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:7" transform="translate(856, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="9"><tspan x="9" y="14.118"><tspan x="0.145" text-anchor="start">1%</tspan></tspan></text></g>
-<g id="c2:7" transform="translate(865, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:8" transform="translate(1107.5, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="12.5"><tspan x="12.5" y="14.118"><tspan x="0.315" text-anchor="start">10%</tspan></tspan></text></g>
-<g id="c2:8" transform="translate(1120, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 380"/></g>
-<g id="a2:9" transform="translate(72, 549.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="18"><tspan x="18" y="14.118"><tspan x="0.29" text-anchor="start">0%</tspan></tspan></text></g>
-<g id="c2:9" transform="translate(100, 560)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:10" transform="translate(65, 473.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">20%</tspan></tspan></text></g>
-<g id="c2:10" transform="translate(100, 484)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:11" transform="translate(65, 397.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">40%</tspan></tspan></text></g>
-<g id="c2:11" transform="translate(100, 408)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:12" transform="translate(65, 321.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">60%</tspan></tspan></text></g>
-<g id="c2:12" transform="translate(100, 332)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:13" transform="translate(65, 245.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">80%</tspan></tspan></text></g>
-<g id="c2:13" transform="translate(100, 256)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:14" transform="translate(59, 169.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="31"><tspan x="31" y="14.118"><tspan x="-0.03" text-anchor="start">100%</tspan></tspan></text></g>
-<g id="c2:14" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a2:15" transform="translate(524.5, 594.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="85.5"><tspan x="85.5" y="15.295"><tspan x="16.02" text-anchor="start">Packet loss 率（对数）</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(100, 140.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">吞吐比 (%)</tspan></tspan></text></g>
-<g id="c2:15" transform="translate(100, 476)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 8 L 332 0"/></g>
-<g id="c2:16" transform="translate(432, 454)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 22 L 178 0"/></g>
-<g id="c2:17" transform="translate(610, 370)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 84 L 178 0"/></g>
-<g id="c2:18" transform="translate(788, 313)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 57 L 77 0"/></g>
-<g id="c2:19" transform="translate(865, 218)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 95 L 255 0"/></g>
-<g id="o2:2" transform="translate(94, 478)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:3" transform="translate(426, 470)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:4" transform="translate(604, 448)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:5" transform="translate(782, 364)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:6" transform="translate(859, 307)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:7" transform="translate(1114, 212)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:17" transform="translate(1016, 172.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="end" dominant-baseline="alphabetic" x="84"><tspan x="84" y="15.295"><tspan x="19" text-anchor="start">无容错协议</tspan></tspan></text></g>
-<g id="c2:20" transform="translate(100, 461)"><path fill="none" stroke="#34c724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 332 0"/></g>
-<g id="c2:21" transform="translate(432, 461)"><path fill="none" stroke="#34c724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 178 0"/></g>
-<g id="c2:22" transform="translate(610, 461)"><path fill="none" stroke="#34c724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 178 0"/></g>
-<g id="c2:23" transform="translate(788, 461)"><path fill="none" stroke="#34c724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 77 0"/></g>
-<g id="c2:24" transform="translate(865, 461)"><path fill="none" stroke="#34c724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 255 0"/></g>
-<g id="o2:8" transform="translate(94, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:9" transform="translate(426, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:10" transform="translate(604, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:11" transform="translate(782, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:12" transform="translate(859, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:13" transform="translate(1114, 455)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:18" transform="translate(998, 471.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="102"><tspan x="102" y="15.295"><tspan x="24.51" text-anchor="start">LTP 容错协议</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(630, 421.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">↑ 5% 改善</tspan></tspan></text></g>
-<g id="o2:14" transform="translate(40, 640)"><rect x="0" y="0" width="1120" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:20" transform="translate(56, 651.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">落地解读</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(56, 682.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 无容错时：loss 增加导致重传延迟累积，计算吞吐剧降（loss 1% 时吞吐仅 5%）</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 704.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· LTP 启用自适应重传与流控，在 loss 0-10% 范围内吞吐稳定在 75% ± 2%</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 726.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 结论：集群 ＞ 1000 卡时，必须启用 LTP 否则网络抖动会拖垮整个训练</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(40, 801.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Distributed Training；LTP</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">静默数据错误：两轮分组重放，交集就是可疑机器</text>
+<text x="40" y="92" font-size="14" fill="#646A73">保持 TP、PP 不变，只改数据并行的分组；第一轮连续分组，第二轮按编号取模分组</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">现象</text>
+<text x="56" y="211" font-size="14" fill="#646A73">损失尖峰、NaN</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">回退重跑</text>
+<text x="347" y="211" font-size="14" fill="#646A73">能复现：数据或代码</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">分组重放</text>
+<text x="638" y="211" font-size="14" fill="#646A73">复现不了：怀疑硬件</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">隔离压测</text>
+<text x="929" y="211" font-size="14" fill="#646A73">定位机器后长时间压测</text>
+<rect x="40" y="262" width="548" height="128" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="293" font-size="18" fill="#1F2329" font-weight="bold">有多常见</text>
+<text x="56" y="323" font-size="14" fill="#646A73">Meta：数十万台机器中查出数百颗 CPU</text>
+<text x="56" y="346" font-size="14" fill="#646A73">Google：每几千台机器几个 mercurial 核</text>
+<text x="56" y="369" font-size="14" fill="#646A73">Llama 3：6 次中断归因于 SDC（1.4%）</text>
+<rect x="612" y="262" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="293" font-size="18" fill="#1F2329" font-weight="bold">为什么难</text>
+<text x="628" y="323" font-size="14" fill="#646A73">唯一症状是算错</text>
+<text x="628" y="346" font-size="14" fill="#646A73">行为不确定，短时间难复现</text>
+<text x="628" y="369" font-size="14" fill="#646A73">ByteRobust 一例：离线压测 8 小时以上</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：ByteRobust 论文；Llama 3 论文；Dixit et al.（Meta）；Hochschild et al.（Google）</text>
 </svg>

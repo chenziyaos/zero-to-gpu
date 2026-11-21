@@ -1,427 +1,412 @@
 # GPU-11｜系统｜PCIe、NUMA 与 GPUDirect
 
-> 🎯 **这篇文档解决什么问题**
->
-> GPU 的显存带宽达 TB/s 级，但与 CPU、网卡、硬盘之间只靠 PCIe x16 这一条总线连接。数据加载喂不饱卡、跨机通信只跑出峰值的一半、卡间拷贝比预期慢三倍，这些现象通常源于 PCIe 链路降宽、网卡被 CPU 隔离、IOMMU 翻译出现瓶颈或 ACS 将点对点流量绕回根复合体。本章逐层剖析这些瓶颈的物理根源与测量方法。
->
-> **使用方式**
->
-> 按顺序阅读第 1 到 10 章：第 1 章介绍主机与 GPU 间的多条物理路径，第 2 章推导 PCIe 带宽账本，第 3、4 章讲拓扑读法和 NUMA 绑核策略，第 5 章演示 H2D 拷贝的实测验证，第 6、7 章分别展开 ACS 和 IOMMU 配置陷阱，第 8、9 章讲 GPUDirect RDMA 与 Storage 如何绕过传统路径，第 10 章对比机型差异，第 11 章给出上线清单。
->
-> **代码**
->
-> `repo/zero-to-gpu/11-pcie-gdr/` 包含 `pcie_bw.py`、`topo.py`、`iommu_check.sh`、`test_pcie_gdr.py`（均依赖标准库），以及 `h2d_bench.py` 和 `check_node.sh`（需 GPU 节点与 PyTorch）。
+> 🎯 **这篇文档解决什么问题**：H100 的显存带宽是 TB/s 级，GPU 和 CPU 内存、网卡、NVMe 之间却大多只靠一条 PCIe x16。数据喂不饱卡、卡间拷贝比同型号机器慢、NCCL 在 P2P 阶段卡住，原因常常出在这条链路上，GPU 本身没有问题：降速降宽、跨 NUMA、IOMMU 翻译、ACS 改道、经主机内存中转。本篇讲怎么定这条链路的天花板，怎么查出数据实际走了哪条路，以及怎么把路上多余的等待去掉。
 
-**🧭 主线位置**
+**使用方式**：第 1 章定 PCIe 的天花板。第 2 章读 topo -m，看 NCCL 怎么据此决定走不走 P2P。第 3 到 6 章逐项处理主机链路上的等待：NUMA 绑核，pinned 内存和 IOMMU，网卡直达显存的 GPUDirect RDMA，存储直达显存的 GPUDirect Storage。第 7 章讲 ACS 这个看不见的改道开关。第 8 章拿 DGX H100 和 GH200 练习，第 9 章给上线前清单和自测。
 
-GPU-10 消掉了显存分配和回收的延迟瓶颈；本篇处理的等待是 GPU 等主机链路（时间账的 W_host），即 PCIe 宽度与延迟、NUMA 跨域访问、IOMMU 翻译、bounce buffer 复制引入的等待。读完后瓶颈会转到 GPU 之间的互联与通信（GPU-12 进阶到多卡共存与隔离）。
+**代码**：zero-to-gpu/11-pcie-gdr/ 下的 sim_pcie_bw.py、sim_topo.py、test_pcie_gdr.py 只需 Python。其中 H2D 的扣减比例、拓扑距离数值和“Gen4 用 8b/10b”的断言与公开资料不符，第 9 章逐条说明，正文以核实过的资料为准。
 
-# 导读 · 先给结论
+<b>🧭 主线位置</b>：GPU-00（[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md)）建立了时间账 T = T_compute + W_mem + W_host + W_comm + W_idle。GPU-10（[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)）处理了显存的分配和碎片。本篇处理 W_host 里链路这一段：GPU 和主机内存、网卡、存储之间搬数据时的等待；跨机通信经主机中转时，这段等待还会叠到 W_comm 上。链路理顺后，下一个问题是多个作业怎么共享 GPU，交给 GPU-12（[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)）。
 
-- **PCIe 规格页上的峰值是双向合计。**Gen5 x16 单向编码后 63 GB/s，再扣数据链路层 MPS 包头与 ACK 往返，pinned 内存 H2D 有效带宽约 47 GB/s；实测会在 44-50 GB/s 范围（±6% 系统变异）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
-- **topo -m 的六级距离决定 NCCL 开不开 P2P。**NCCL 默认 P2P 和 GPUDirect RDMA 仅许 PXB（单平面、不过 CPU host bridge），PHB、NODE、SYS 一律回源主存 [[2]](https://github.com/NVIDIA/nccl/blob/master/src/graph/paths.cc)[[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
-- **跨 NUMA 主要伤小包延迟。**64 字节 DMA 读在远端节点上慢 20%，512 字节以上基本不受影响；大块拷贝损失多来自 UPI 争用 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
-- **裸机 IOMMU Translated + P2P 不可用。**NCCL 文档明文指出可能静默出错，训练节点应当用 `iommu=pt`；ACS SrcValid+ 把 P2P 流量绕回根复合体 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
-- **Pinned 内存加速 H2D 拷贝 1.8-2.2 倍。**避免 CPU 分页与 bounce buffer 复制，可分页内存 H2D 约 21 GB/s，pinned 内存可达 47 GB/s（Gen5 x16）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
-- **GPUDirect RDMA 与 Storage 绕过主机内存。**RDMA 让网卡直达 GPU 显存，Storage 让硬盘直达显存，省掉的是 W_host 的一部分传输与同步开销。
-- **单卡聚合 NVLink4 是 PCIe 带宽的 7 倍。**H100 NVLink 单向 450 GB/s vs PCIe Gen5 x16 的 64 GB/s，两代产品升级或跨 socket NUMA 会掉到主存中转 [[4]](https://www.nvidia.com/en-us/data-center/h100/)[[5]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)。
+## 导读 · 先给结论
 
-![跨 NUMA 延迟开销](assets/11-pcie-gdr/fig-01.svg)
+- <b>PCIe 的天花板按单向、编码后算。</b>Gen5 x16 每个方向 63.015 GB/s，H100 的显存带宽约是它的 47.6 倍；再扣数据链路层约 8% 到 10% 的开销，所以实际目标取规格、负载下实际协商的代际宽度和同型号实测三者中最小的（第 1 章）。[[1]](https://en.wikipedia.org/wiki/PCI_Express)[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)
+- <b>topo -m 填的是符号，不是距离。</b>NV#、PIX、PXB、PHB、NODE、SYS 按路径经过的部件区分；NCCL_P2P_LEVEL 用同一套符号定义 P2P 的最大距离，超出就经主机内存中转（第 2 章）。[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)
+- <b>跨 NUMA 的代价集中在小块读上。</b>公开测量里，64 字节 DMA 读远端比本地低 20%，512 字节看不出差别，写不受影响；绑核要 CPU 和内存一起绑（第 3 章）。[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)
+- <b>裸机 IOMMU 首先是正确性问题。</b>CUDA 不支持开着 IOMMU 的裸机 P2P，可能静默破坏显存；裸机用 iommu=pt 或关闭，虚拟机开 IOMMU 并用 VFIO（第 4 章）。[[5]](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html)
+- <b>GPUDirect 省掉主机内存里的中转缓冲。</b>RDMA 让网卡直接读写显存，路径上只有 PCIe switch 时最好；GDS 让存储直接写显存，条件不满足时会悄悄退回 POSIX 兼容模式（第 5、6 章）。[[6]](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)
+- <b>ACS 会把 switch 内的 P2P 改道到根复合体。</b>结果是显著降速甚至挂起，topo -m 上看不出来；用 lspci 找 SrcValid+，虚拟机里不能关（第 7 章）。[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)
+- <b>DGX H100 的卡间走 NVSwitch，主机侧仍是 PCIe。</b>8 张卡、两颗 CPU、8 块 ConnectX-7；GH200 用 900 GB/s 的 NVLink-C2C 代替 PCIe，厂商口径是 Gen5 的 7 倍（第 8 章）。[[9]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)[[10]](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)
 
-**📎 与系列其他文档的分工**
+![一台 GPU 服务器里，数据进出显存的四条路](assets/11-pcie-gdr/fig-01.svg)
 
-GPU-10（显存管理）交接：分配器碎片与 OOM 解决后，剩下的主机侧等待在这一章；本章不再讨论显存本身。GPU-12（MIG/MPS）接手：多卡竞争调度与隔离，独立于 PCIe 拓扑。GPU-13（单机多卡）依赖：NVLink、NVSwitch、PCIe 拓扑是多卡性能基础。GPU-17（集群通信）依赖：网络与 PCIe 如何协同决定有效带宽。
+<b>📎 与系列其他文档的分工</b>：GPU-03（[GPU-03｜硬件｜CUDA 编程模型：线程层级、stream 与编译链](./03-cuda.md)）讲 pinned 内存和异步拷贝在编程模型里的用法，本篇讲拷贝走的那条物理链路。GPU-10（[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)）讲显存本身的管理。GPU-12（[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)）讲多个作业共享 GPU。GPU-13（[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)）讲卡间的 NVLink 和 NVSwitch，GPU-17（[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md)）讲跨机的 RDMA 网络，两篇都会用到本篇的拓扑读法和 GPUDirect RDMA。
 
-# 第 1 章 · 主机与 GPU 在等什么
+## 第 1 章 · 主机链路的天花板：PCIe 每代带宽怎么读
 
-## 1.1 链路的物理极限：PCIe 规格
+GPU-10 把显存内部的等待理清了。本章往外走一层：数据从 CPU 内存、网卡、硬盘进到显存，都要过 PCIe。先把这条链路的天花板算清，后面七章讲的拓扑、NUMA、IOMMU、GPUDirect 和 ACS，都在解释实测为什么到不了天花板。
 
-PCIe 规格由 PCI-SIG 组织发布，逐代翻倍带宽 [[6]](https://en.wikipedia.org/wiki/PCI_Express)。Gen4 x16 双向合计 64 GB/s（单向 32 GB/s），Gen5 x16 双向 128 GB/s（单向 64 GB/s）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。规格表给出的是未编码的原始线速；实际数据吞吐需减掉编码开销。Gen4 采用 8b/10b 编码（80% 效率），Gen5 升级到 128b/130b（98.5% 效率）。Gen5 x16 单向线速 64 GB/s 减掉编码就是 63 GB/s，这是链路的真实承载能力。
+### 规格表里的数字是每方向、已扣编码
 
-PCIe 宽度（x1、x2、x4、x8、x16）与带宽成正比。单 GPU 服务器通常配 PCIe x16（最宽）来连接主卡，某些通用节点可能只能给 x8 甚至 x4。检查链路是否降宽的命令是 `lspci -vv` 查 LnkSta，或 `nvidia-smi topo -m` 中的距离矩阵指示 [[7]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)[[8]](https://man7.org/linux/man-pages/man8/lspci.8.html)。降宽通常因为：(1) BIOS 配置错误，(2) 硬件卡槽设计，(3) 主机内存容量让 CPU 关闭部分 PCIe 通道。本篇第 10 章会举具体例子。
+PCIe 每代把单条通道（lane）的传输速率翻倍：3.0 是 8.0 GT/s，4.0 是 16.0 GT/s，5.0 是 32.0 GT/s。按 x16 算，每方向的吞吐分别是 15.754、31.508、63.015 GB/s[[1]](https://en.wikipedia.org/wiki/PCI_Express)。
 
-## 1.2 真实可用带宽与封装开销
+读这张表要注意两个口径。其一，表里的吞吐是每个方向的：每条 lane 是一对单工通道，上行和下行可以同时满速[[1]](https://en.wikipedia.org/wiki/PCI_Express)。宣传材料里常见的“128 GB/s”，是把两个方向加在一起。其二，表里的数字已经扣掉了线路编码。3.0 起改用 128b/130b 编码，开销从 2.0 时代的 20% 降到约 1.54%（= 2/130）[[1]](https://en.wikipedia.org/wiki/PCI_Express)。所以 Gen5 x16 的 63.015 GB/s 已经是编码之后的值，不要再乘一次编码效率。
 
-H2D 拷贝（CPU 到 GPU）的实际带宽低于编码后的 63 GB/s，因为 PCIe 协议引入包头和往返确认。根据 Neugebauer 等人的丰富实测数据，MPS（Max Payload Size）256 字节时，包头占比和流控机制导致有效率下跌约 25%。最终 Gen5 x16 H2D 实测上限（pinned 内存）约 47 GB/s；实测会在 44-50 GB/s 范围（±6% 系统变异）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。D2H（GPU 到 CPU）因往返确认的额外开销比 H2D 慢约 9%，约 43 GB/s。
+![PCIe 每代翻倍，Gen5 x16 每个方向 63.015 GB/s](assets/11-pcie-gdr/fig-02.svg)
 
-实测数据来自本篇代码 `sim_pcie_bw.py h2d` 和 `sim_pcie_bw.py d2h` 的输出。运行后会看到逐级扣减：单向峰值 64 GB/s → 编码 63 GB/s → MPS+ACK 约 47 GB/s。这个数字对应的是理论上限；真实 DMA 吞吐还要看 CPU、GPU、PCIe 枚举和驱动的实现质量。
+和显存比，这条链路窄得多。H100 的 HBM3 最高 3 TB/s[[11]](https://docs.nvidia.com/cuda/hopper-tuning-guide/index.html)，是 Gen5 x16 单方向的 3000 ÷ 63.015 ≈ 47.6 倍。凡是每一步都要从主机取数据的负载，例如数据加载、CPU offload、先落主机内存再发出去的跨机通信，W_host 都很容易成为时间账里最大的一项。
 
-## 1.3 完整案例：从天花板到实测
+### 编码之后还有协议开销
 
-GPU 优化的五步闭环在这里的应用如下。
+编码之后的吞吐也不是应用能拿到的。PCIe 把数据切成事务层包（TLP）传输：每个事务在物理层加 2 字节帧，数据链路层再加 6 字节头；数据链路层自己的流控和确认消息还要占掉约 8–10%[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。再往上，事务层包头的大小和最大载荷（MPS）决定了每个包里有效数据的比例，包越小，头的占比越高。Neugebauer 等人据此建了一个 PCIe 吞吐模型，并用 pcie-bench 在多台服务器上做了测量[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
 
-**定天花板**：查规格，Gen5 x16 单向 64 GB/s（规格书），扣编码得 63 GB/s（协议层），再扣 MPS+ACK 得 47 GB/s（理论最大可用）。
+这些开销和平台有关。论文测的是 2018 年的 PCIe 3.0 网卡和服务器，结论可以用来理解开销从哪来，不能直接套到今天的 GPU 服务器上。一台机器到底能拿到多少，要测。CUDA 的 bandwidthTest 示例就是为测主机与设备之间的拷贝带宽写的[[12]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)。测出来的数先和同型号机器比，再和规格表比。
 
-**测实际**：用 `h2d_bench.py` 在真实节点上测 pinned 内存 H2D 拷贝带宽，记录微秒级时序和吞吐率。可分页内存会因为 CPU 分页翻译和 bounce buffer 复制而慢得多（约 21 GB/s vs 47 GB/s 的差异）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+### 定天花板的做法
 
-**定位等待**：对比 pinned 和可分页内存的性能，发现可分页多出的延迟来自两处：(1) CPU MMU 分页表翻译增加延迟，(2) GPU 不能直接访问可分页内存，需要中间 bounce buffer 暂存后再拷贝。这两个环节合起来可损失 55-60% 的吞吐。
+本篇的五步闭环从这里开始。定天花板时看三个数：
 
-**消除或隐藏**：申请 pinned 内存池（PyTorch `pin_memory=True` 或 CUDA `cudaHostAlloc`），避免分页开销，实现 1.8-2.2 倍加速 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+- 规格表上本机 PCIe 代数和宽度对应的每方向吞吐[[1]](https://en.wikipedia.org/wiki/PCI_Express)。
+- 用 `nvidia-smi -q` 看 GPU Link information 里的 Max 和 Current。Max 是这张卡在这套系统上能达到的代际和宽度，卡支持的代际比系统高时，报的是系统的代际[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)；Current 是当前的代际和宽度，GPU 空闲时可能降下来[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)，所以要在跑负载时看。`sudo lspci -vv` 里 GPU 那一项的 LnkCap 和 LnkSta 是同一组信息。负载下 Current 仍低于 Max，说明链路降速或降宽，这是硬件、插槽或 BIOS 的问题，改代码救不回来。
+- 同型号健康机器上，用 pinned 内存跑 bandwidthTest 得到的 H2D 和 D2H。
 
-**复测**：验证 pinned 内存加速后 H2D 是否达到 47 GB/s 的上限，如果还有距离要检查 (a) 是否在跨 NUMA 节点拷贝（会慢 20%），(b) PCIe 链路是否降宽了，(c) 多个 GPU 争夺同一 PCIe host bridge 导致竞争。确认 H2D 加速后，瓶颈应该转到计算或显存带宽。
+三个数里最小的那个，就是这台机器主机链路的天花板。后面每一章的“测实际”，都拿实测和它比。
 
-> 💡 **常见误区**
-> - **误：规格页的 GB/s 就是可用带宽。** 正：要扣编码、MPS 包头、ACK 往返，实测往往是峰值的 70%。
-> - **误：D2H 应该和 H2D 一样快。** 正：D2H 多一层往返确认，通常慢 5-15%。
-> - **误：可分页内存和 pinned 内存应该一样快。** 正：可分页内存涉及 CPU 分页翻译和 bounce buffer 复制，损失 30-40%。
+一个常见的误区是拿宣传里的“双向 128 GB/s”和单方向拷贝的实测比，得出“只跑到三分之一”的结论。现象是怎么调都追不上。原因是口径错了，一次 H2D 拷贝只用一个方向。改法是先统一口径：Gen5 x16 每方向 63.015 GB/s 已是编码后的上限，再和同型号机器的实测比。
 
-> 🔑 **本章要点**
-> - PCIe 规格与编码机制决定了链路峰值，Gen5 x16 单向 64 GB/s，扣编码和协议开销后实际可用 44-45 GB/s。
-> - H2D 和 D2H 的真实带宽由 PCIe 宽度、编码效率和 MPS 包头开销共同决定，降宽或分页内存都会导致吞吐腰斩。
-> - 本章消除的等待是：可分页内存的 bounce buffer 复制和 CPU 分页翻译延迟，用 pinned 内存可恢复 30-40% 的 H2D 吞吐。
+> 🔑 **本章要点**：PCIe 规格表的吞吐是每方向、已扣编码的值，Gen5 x16 为 63.015 GB/s，H100 的 HBM3 是它的 47.6 倍。协议层还要扣帧头、链路层头和约 8–10% 的流控确认。天花板取规格、LnkSta 和同型号实测三者中最小的那个。这一章是五步闭环的“定天花板”。
 
-# 第 2 章 · PCIe 拓扑与距离阶梯
+## 第 2 章 · 拓扑：topo -m 的六种连接与 NCCL 的 P2P 判定
 
-![8 卡 DGX 拓扑矩阵](assets/11-pcie-gdr/fig-02.svg)
+第 1 章算的是一条链路的天花板。一台 8 卡机器里，两张卡之间、卡和网卡之间走的路各不相同：有的只过一个 PCIe switch，有的要绕到 CPU，有的还要跨 socket。本章讲怎么读出每一对设备之间走哪条路，以及 NCCL 据此决定要不要用点对点（P2P）传输。
 
-## 2.1 六级距离与 NCCL 路由决策
+### topo -m 的图例：六种连接，按经过的部件分
 
-不是所有 GPU 对都能走同一条路。`nvidia-smi topo -m` 输出的 8×8 矩阵（以 8 卡服务器为例）里，每个格子记录了两块 GPU 之间的距离，这个值定义了数据在硬件层级的跳跃次数，直接影响 NCCL 的路由决策 [[2]](https://github.com/NVIDIA/nccl/blob/master/src/graph/paths.cc)[[9]](https://arxiv.org/abs/1903.04611)。距离等级从小到大：1 表示 GPU 间 NVLink 直连，10 表示单个 PCIe 平面内（PXB，不过 CPU），20+ 表示过 CPU 主桥（PHB），30+ 表示跨 NUMA socket（NODE），40+ 表示系统级（SYS）。
+`nvidia-smi topo -m` 打印所有 GPU 和网卡之间的连接矩阵，以及每张 GPU 的 CPU 和内存亲和性[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)。矩阵里填的不是距离数值，是一组符号，按路径上经过的部件区分[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)：
 
-![PCIe 编码与封装损耗级联](assets/11-pcie-gdr/fig-03.svg)
+- <b>NV#</b>：经过 # 条绑定在一起的 NVLink。
+- **PIX**：只经过一个 PCIe switch。
+- **PXB**：经过多个 PCIe switch，但不经过 PCIe Host Bridge。
+- **PHB**：经过 PCIe Host Bridge（通常就是 CPU）。
+- **NODE**：经过同一 NUMA 节点内多个 Host Bridge 之间的互连。
+- **SYS**：经过 NUMA 节点之间的 SMP 互连（如 QPI/UPI）。
 
-NCCL 的路由规则简洁但严格：距离≤10（NVLink 或 PXB）才开启 P2P 直传，超过 10 则强制经主存中转。这意味着距离为 10 的 GPU 对（典型的两个 NVSwitch 之间）可以用 P2P 但吞吐受限，距离为 20（跨 CPU 网桥）则完全绕不开主存。观察实际路由可用 `NCCL_DEBUG=TRACE` 环境变量运行程序，日志会显示每个 collective op（AllReduce、Broadcast）选择的传输路径 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。本篇代码 `sim_topo.py sample` 给出一个典型的 8 卡配置矩阵示例，其中 GPU 0-3 通过一个 NVSwitch（距离 1），GPU 4-7 通过另一个 NVSwitch，两组之间经 PCIe（距离 10）。
+从 PIX 到 SYS，路径上的部件越来越多。PIX 和 PXB 的流量留在 PCIe switch 里；从 PHB 开始，流量要进 CPU 的根复合体；到了 SYS，还要过 socket 之间的互连。后两种情况下，P2P 流量和 CPU 的内存访问争用同一批资源。
 
-## 2.2 拓扑识别与 P2P 可用性检查
+![topo -m 的六种符号：越往下，路径经过的部件越多](assets/11-pcie-gdr/fig-03.svg)
 
-两项命令直接操作拓扑。`nvidia-smi topo -m` 读出矩阵，行列对应 GPU 编号，距离小的配对是候选 P2P。`nvidia-smi topo -pm` 做物理可达性检查，答复某对 GPU 是否真的能走 P2P（有时因 ACS 限制或链路隔离，拓扑距离良好但物理不通）。两个命令输出不一致时，通常是 ACS（Access Control Services）作梗，这是 PCIe 安全特性，第 7 章会单独讲。
+### NCCL 用同一套符号决定要不要走 P2P
 
-实践中，DGX H100 8 卡的常见配置是两个 4 卡 NVSwitch 组件，组内距离 1，组间通 64 条 PCIe Gen5 x16 链路（是一条逻辑双向通道），距离记为 10。4 卡无 NVSwitch 的标准塔式服务器（常在公有云见到）最坏情况下所有 GPU 对距离都是 10 或更大，导致 AllReduce 等 collective op 无法用点对点加速，全部退回到基于主存的树形拓扑，吞吐被 CPU 侧 PCIe 聚合点（root complex）限制。本篇代码 `sim_topo.py parse` 可以分析给定的 topo 矩阵，输出距离分布、PXB 内的可用 P2P 配对列表，以及优化建议 [[2]](https://github.com/NVIDIA/nccl/blob/master/src/graph/paths.cc)。
+NCCL 的 P2P 传输直接用 CUDA 访问另一张卡的显存，走 NVLink 或 PCIe[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。环境变量 `NCCL_P2P_LEVEL` 定义了 NCCL 愿意用 P2P 的最大距离，取值就是上面的符号[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)：NVL 表示只在 NVLink 相连时用；PIX 表示在同一个 PCI switch 下用；PXB 表示经过多个 PCI switch 也用；PHB 表示在同一 NUMA 节点内用，流量会经过 CPU；SYS 表示跨 NUMA 节点也用。不设置时，NCCL 按架构和运行环境自己选一个值[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。
 
-## 2.3 机型与连接拓扑对比
+所以 NCCL 的选择是由拓扑决定的。一对卡在 topo -m 里是 SYS，而 NCCL 自选的上限没到 SYS，这对卡之间的数据就不走 P2P，改走经主机内存中转的传输。这时候“卡间拷贝慢”和链路带宽无关，是路径变了。
 
-主流的 GPU 服务器在 PCIe 拓扑上有三种典型设计。DGX H100 是 NVIDIA 官方旗舰，8 卡分为两组，每组 4 卡共享一个 NVSwitch，两个 NVSwitch 之间用 64 路 PCIe Gen5 x16 连接（这 64 条链路的带宽聚合为一条双向通道，单向等效 32 GB/s 左右），拓扑距离分布为大量 1（组内 NVLink）和 10（组间 PCIe）[[5]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)。DGX B200 新增了 NVLink 双向升级到 900 GB/s（H100 是 450 GB/s），PCIe 代际可能保持 Gen5 或按规划升级，但整体拓扑仍然是两个 NVSwitch。Grace Hopper 超级芯片打破了这个模式。它把 CPU 和 GPU 共封装到一块芯片，数据交换靠片内高速互联而不再经过 PCIe，拓扑距离的定义也相应改变（改为 CXL 或片内距离）[[10]](https://arxiv.org/abs/2408.11556)。
+网卡和 GPU 之间也有同样的判定，变量是 `NCCL_NET_GDR_LEVEL`，决定在什么距离下用 GPUDirect RDMA，第 5 章展开[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。
 
-标准的 4 卡或 8 卡 PCIe 塔式盘通常没有 NVSwitch，所有 GPU 直接挂到一个或两个 PCIe host bridge，配置相对简陋。多数厂商的 4 卡盘会把 GPU 分配到两个 bridge（可能跨 NUMA socket），导致同侧 GPU 距离 10，跨侧距离 20+。这种拓扑在 AllReduce 时很吃亏，因为必须经过主存中转，瓶颈被单个 socket 的 PCIe 聚合带宽（通常远小于单条链路的 64 GB/s）限制。如果再考虑跨 NUMA 拷贝的 UPI 争用，性能会进一步下滑。
+### 三条命令核对实际路径
 
-> 💡 **常见误区**
-> - **误：topo -m 矩阵的距离越小，同一对 GPU 的带宽越高。** 正：距离决定了是否走 P2P（≤10 开启），但同一距离级内的具体带宽还受链路宽度、拥塞和负载影响；10 距离的两个 GPU 可能都用 PCIe，但因枚举拓扑不同，一个是单独连接（63 GB/s），一个是三卡共享（21 GB/s）。
-> - **误：NCCL 自动选出最优路由。** 正：NCCL 按固定规则（距离≤10 用 P2P，否则用主存）选择，没有细粒度的负载感知；如果硬件配置异常（如 ACS 误开启）或拓扑特殊，需要手工 override 环境变量或更改 NCCL 配置。
+- **看连接类型**：`nvidia-smi topo -m`，记下每对 GPU、每个 GPU 与最近网卡之间的符号[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)。
+- **看 P2P 能不能用**：`nvidia-smi topo -p2p p` 打印 PCIe 上的 P2P 状态矩阵，`-p2p n` 看 NVLink；健康的 8 卡 PCIe 机器上，非对角线全是 OK[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
+- **看 NCCL 认出来的拓扑**：设置 `NCCL_TOPO_DUMP_FILE`，NCCL 会把探测到的拓扑写成 XML 文件[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)，和 topo -m 对照。
 
-> 🔑 **本章要点**
-> - 拓扑距离（topo -m 矩阵）分为六级，距离≤10 的 GPU 对支持 P2P 直传，NCCL AllReduce 等 op 会优先选择；距离>10 强制经主存中转，性能落到主存聚合带宽限制。
-> - 机型设计直接决定了可用的 P2P 配对数量和效率：DGX 系列有 NVSwitch 组件，两组间 P2P 受限但仍支持；标准 4 卡盘可能全无 NVSwitch，所有跨桥拷贝都经主存，AllReduce 吞吐显著下降。
-> - 本章消除的等待是：通过识别拓扑，选择支持 P2P 的计算分组，让 collective op 尽可能走点对点而非主存中转，减少主存争用。
+NCCL 通过 /sys 发现 GPU 和网卡的 PCI 拓扑。在容器或虚拟机里，/sys 没挂好或者暴露的是虚拟拓扑，NCCL 就会选出次优的路径[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。所以裸机上测得好、容器里变慢时，先比较两边 dump 出来的拓扑文件。
 
-# 第 3 章 · NUMA 跨域与绑核
+一个常见的误区是看到 topo -p2p 全是 OK，就认为 NCCL 一定在用 P2P。现象是 nccl-tests 的卡间带宽远低于预期。原因是 topo -p2p 只说明驱动认为可以访问，NCCL 还要按 NCCL_P2P_LEVEL 判断距离；另外 IOMMU 和 ACS 也会让 P2P 名义可用、实际变慢或出错（第 4、7 章）。改法是把 topo -m 的符号、NCCL dump 的拓扑和 nccl-tests 的结果放在一起看。
 
-![NUMA 跨域与绑核](assets/11-pcie-gdr/fig-04.svg)
+> 🔑 **本章要点**：topo -m 用 NV#、PIX、PXB、PHB、NODE、SYS 六种符号描述路径经过的部件，不是距离数值。NCCL_P2P_LEVEL 用同一套符号定义 P2P 的最大距离，超出就改走主机内存中转。核对路径用 topo -m、topo -p2p 和 NCCL_TOPO_DUMP_FILE 三件套。这一章是五步闭环的“定位等待”：先确认数据实际走哪条路。
 
-## 3.1 跨 NUMA 拷贝的延迟与带宽损失
+## 第 3 章 · NUMA：设备读远端内存时的折损与绑核
 
-CPU 在多 socket 系统中，每个 socket 是一个 NUMA 节点，节点内 DMA 操作（如 H2D 拷贝的读写指令发送）走本地内存控制器和 PCIe 通道，延迟与带宽最优。跨 socket DMA 则需经过 UPI（Ultra Path Interconnect，Intel 系统）或 GMI（Genoa Memory Interconnect，AMD EPYC）链路，这条链路带宽远小于节点内聚合，且引入额外往返延迟。根据 Neugebauer 等人的详尽实测，小包（<512 字节）跨 NUMA DMA 读延迟增加 20% 左右，大包（>1 MB）受 UPI/GMI 共享带宽影响更显著，可能下滑 30% 或以上 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。本篇代码 `h2d_bench.py` 和硬件规格文档 [[11]](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/understanding-memory.html) 提供了精确的基准数据。
+第 2 章的 NODE 和 SYS 两种连接都和 NUMA 有关。双路服务器上，每颗 CPU 带着自己的内存控制器和 PCIe 根复合体。GPU 或网卡挂在哪颗 CPU 下，它访问那颗 CPU 的内存就是本地，访问另一颗的就要过 socket 之间的互连[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。本章讲这种不对称有多大，以及怎么用绑核把它消掉。
 
-跨 socket DMA 读和写的性能差异值得注意。DMA 写（GPU 写回到 CPU 侧内存）往往快于读，因为写通常是异步 push 模式，不需等待数据返回；读则需要 CPU 侧从远端 NUMA 节点 fetch 数据，再通过 UPI 回传，增加了往返时间。在我们的 H2D 拷贝场景中，CPU 读取内存数据、通过 DMA 写到 GPU 显存，这个过程会经历 UPI 的读延迟，所以跨 NUMA H2D 特别容易变慢。本篇代码 `sim_pcie_bw.py` 中的 `topo` 命令可以模拟不同 NUMA 距离下的带宽表现 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+### 公开测量：小块 DMA 读受影响，写基本不受影响
 
-## 3.2 进程绑核与亲缘性
+Neugebauer 等人在双路系统上做过对照：主机缓冲区分别放在设备所在节点（本地）和另一个节点（远端），测 DMA 读写吞吐[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。结果是：
 
-CPU 亲缘性（affinity）不仅影响计算性能，也直接决定了 DMA 引擎的工作效率。DMA 操作由 CPU 发起指令，但最终在 PCIe 控制器执行，每个 socket 的 PCIe 控制器和 DMA 引擎都有对应的 NUMA 亲缘性。如果发起 DMA 的进程绑到 socket 0，但 PCIe 控制器更近 socket 1（因为 GPU 恰好连到 socket 1 的 host bridge），那么 CPU 指令需要跨 UPI 发送，潜伏期增加。相反，绑到 GPU 所在 socket 的 CPU 核心可以减少跨 socket 通信。
+- 64 字节的 DMA 读，远端比本地吞吐低 20%，从约 32 Gb/s 降到约 25 Gb/s[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+- 128 和 256 字节的读，差距降到 5-7%[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+- 512 字节的读，看不出差别[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
+- DMA 写的吞吐不受缓冲区在本地还是远端的影响[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
 
-实践中用 `numactl --cpunodebind=N --membind=N python your_script.py` 把进程绑到指定 NUMA 节点，其中 N 为节点号（从 0 开始）。`--cpunodebind` 限制进程运行的 CPU 核心，`--membind` 限制内存分配也在该节点，两者配合能确保数据局部性。检查实际分配和访问模式用 `numastat -c` 查每个进程的本地（local）vs 远程（remote）内存访问分布；remote 比率高说明存在跨 NUMA 流量 [[12]](https://man7.org/linux/man-pages/man8/numactl.8.html)。GPU 选择通常由 `CUDA_VISIBLE_DEVICES` 环境变量或显式 `torch.cuda.set_device()` 指定，两者配合就能精准控制 DMA 亲缘性。
+这组数字来自 2018 年的 PCIe 3.0 网卡平台，能说明的是规律：远端访问的代价集中在小块读上。H2D 拷贝里，是 GPU 的拷贝引擎从主机内存读数据，属于 DMA 读；D2H 是往主机内存写。GPU 拷贝通常是大块传输，单靠这组数字推不出今天平台上的折损，需要在本机测。
 
-## 3.3 完整案例：NUMA 感知 H2D 拷贝
+![远端 NUMA 的代价集中在小块读：64 字节降 20%，512 字节看不出差别](assets/11-pcie-gdr/fig-04.svg)
 
-应用五步闭环优化跨 NUMA H2D 拷贝。
+### 找到 GPU 所在的 NUMA 节点
 
-**定天花板**：查硬件规格，单 socket H2D 基准约 47 GB/s（来自前章的 PCIe Gen5 x16 pinned 内存），跨 socket 预期因 UPI 争用和 fetch 延迟下降 15-30%，保守估计 33-40 GB/s。[[13]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) 文档给出了推荐的 NUMA 亲缘性最佳实践。
+`nvidia-smi topo -cpu` 打印每张 GPU 的 CPU 亲和、内存亲和和 NUMA 节点号[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)；`topo -m` 的最后几列也有同样的信息。8 卡双路机器上，通常一半 GPU 挂在一颗 CPU 下，另一半挂在另一颗下，网卡也一样。两者都要记下来，因为数据加载进程、pinned 缓冲区、网卡和 GPU 最好都在同一个节点上。
 
-**测实际**：写简单的 H2D benchmark，分别从 CPU0（socket 0）和 CPU8（socket 1）运行相同的拷贝代码，用 `numactl --cpunodebind=N` 强制绑核。记录拷贝时间和计算吞吐率（字节 / 秒），对比两次运行。本篇代码 `h2d_bench.py` 支持这种对比 [[14]](https://pytorch.org/docs/stable/notes/cuda.html)。
+### 绑核：让进程和内存都留在 GPU 那一侧
 
-**定位等待**：对比结果应该显示远端（CPU8 运行）的吞吐显著低于近端（CPU0 运行）。根本原因是 DMA 读操作的 fetch 延迟和 UPI 回传，而不是 PCIe 本身的问题。进一步用 `perf` 或 `numastat` 确认 remote 内存访问比率，if 高于 10% 则 NUMA 争用是瓶颈。
+`numactl` 的两个参数分工不同。`--cpunodebind` 让命令只在指定节点的 CPU 上执行[[13]](https://man7.org/linux/man-pages/man8/numactl.8.html)；`--membind` 让内存只从指定节点分配，那个节点内存不够时分配直接失败[[13]](https://man7.org/linux/man-pages/man8/numactl.8.html)。每张卡一个进程的训练里，按 topo -cpu 的结果给每个 rank 绑到它那张卡所在的节点，数据加载的 worker 也跟着绑。pinned 缓冲区在哪个节点，取决于分配它的进程受什么内存策略约束，所以先绑再分配。
 
-**消除或隐藏**：有两条主要路径。路径一：绑核到 GPU 同 socket 的 CPU，比如 GPU 在 socket 1，就绑到 CPU8-15（假设每个 socket 8 核），让 DMA 读取和执行都在 socket 1 本地，消除 UPI 跨越。路径二：预分配 pinned 内存到 GPU 所在 socket 的 NUMA 节点，用 `torch.cuda.set_device()` 前先 `numactl --membind=N` 预分配；后续 H2D 拷贝虽然仍然要 fetch，但因内存已经本地化，减少了 remote 访问。两条路径可配合使用，效果最优。还可考虑用 NCCL 的 `NCCL_IB_SPLIT_DATA_ON_QPS` 等参数做本地分割和负载均衡。
+按五步闭环走一遍：
 
-**复测**：绑核后再次运行 benchmark，确认吞吐恢复到接近 47 GB/s 的单 socket 水平，remote memory 访问比率降到 <5%。如果还有距离，检查是否 GPU 端有其他瓶颈（比如显存带宽、计算密集度）。同时测试其他 socket 的组合（CPU 在 socket 0，GPU 在 socket 1，反向），验证绑核的一致性和普遍性。
+- **定天花板**：第 1 章得到的同型号 H2D 实测。
+- **测实际**：同一张卡，分别用 `numactl --cpunodebind=N --membind=N` 绑到本地节点和远端节点，跑 bandwidthTest 或本篇的拷贝基准，记录 H2D 和 D2H。
+- **定位等待**：远端明显低于本地，说明这台机器上 NUMA 折损显著；两者相同，说明瓶颈不在这里，回到第 1 章看链路。
+- **消除或隐藏**：在启动脚本里按卡绑核，并检查 DataLoader worker 是否继承了绑定。
+- **复测**：用 `numastat` 看进程的内存是否落在预期节点，再跑一遍拷贝基准。
 
-> 💡 **常见误区**
-> - **误：跨 NUMA 拷贝应该和本地拷贝一样快。** 正：UPI/GMI 是明显的窄口，小包延迟增加 20%，大包带宽下滑 15-30%，不是 CPU 超频能弥补的。
-> - **误：绑核到任意 CPU 都能提速。** 正：绑核要匹配 GPU 所在 socket；绑到远端 socket 可能更坏，因为引入跨 UPI 的指令延迟。
-> - **误：显存带宽是主瓶颈，CPU 侧 NUMA 无所谓。** 正：在 H2D 或 D2H 时，CPU 侧内存延迟和 UPI 拥塞往往是首要限制；优化 NUMA 局部性能消除跨 socket 往返，从而释放 PCIe 和显存的潜力。
+一个常见的误区是只绑 CPU、不管内存。现象是用了 `taskset` 或 `--cpunodebind`，拷贝带宽却没变化。原因是内存还按默认策略分配，pinned 缓冲区可能落在另一个节点。改法是同时加 `--membind`，或在分配 pinned 内存之前就把进程绑好，再用 numastat 确认。
 
-> 🔑 **本章要点**
-> - 跨 NUMA socket 的 DMA 读取需要经过 UPI/GMI 等系统互联链路，延迟和带宽显著不如节点内，小包延迟增加 20%，大包吞吐下滑 15-30%。
-> - CPU 亲缘性决定 DMA 引擎的工作节点；用 `numactl --cpunodebind --membind` 把进程和内存都绑到 GPU 所在 socket，可消除 UPI 往返，性能恢复到本地 PCIe 水平。
-> - 本章消除的等待是：跨 NUMA 的 fetch 延迟和 UPI 回传，通过绑核和内存本地化可恢复 15-30% 的 H2D 吞吐，且对 AllReduce 等 collective op 中经过多跳的数据也有加速效果。
+> 🔑 **本章要点**：远端 NUMA 的代价集中在小块 DMA 读上：公开测量里 64 字节读降 20%，512 字节读看不出差别，写不受影响。用 topo -cpu 找到每张卡的节点，用 numactl 同时绑 CPU 和内存，并在本机测本地和远端的拷贝带宽。这一章是五步闭环的“消除或隐藏”：用绑核消掉跨 socket 的折损。
 
-# 第 4 章 · Pinned 内存与 IOMMU
+## 第 4 章 · pinned 内存与 IOMMU：DMA 地址这一关
 
-![Pinned 内存加速对比](assets/11-pcie-gdr/fig-05.svg)
+第 3 章解决了内存放在哪个节点。本章看另一件事：设备做 DMA 时用的是什么地址，这个地址要不要翻译。pinned 内存决定主机页能不能被设备直接访问；IOMMU 决定设备发出的地址要不要再查一次表。两者都影响 H2D 的速度，IOMMU 还关系到 P2P 的正确性。
 
-## 4.1 可分页与 pinned 内存的 DMA 路径
+### pinned 内存：拷贝最快，但别滥用
 
-CPU 虚拟内存由 MMU（Memory Management Unit）通过分页机制管理，内存可按需分配、回收、交换到磁盘。当 GPU 发起 DMA 读取时，CPU 必须确保这些页面在物理内存中且不被回收或搬移，否则 DMA 会读到错误的地址或触发页面错误异常。传统做法是让 kernel 对每次 DMA 操作临时锁定相关页面，然后执行地址翻译（虚拟 → 物理），这个翻译可能引入 TLB miss 和缓存压力。此外，如果 DMA 目标的物理页面不连续或跨越多个 NUMA 节点，kernel 会自动启用 bounce buffer（中转缓冲），即先 DMA 到一个连续的内存区域，再由 CPU 拷贝到最终目标，这样就多出一倍的拷贝工作。
+CUDA Best Practices Guide 的说法很直接：页锁定（pinned）内存的主机与设备传输带宽最高，以 PCIe Gen3 x16 为例约 12 GB/s[[12]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)。pinned 内存用 `cudaHostAlloc()` 分配；已经分配好的内存可以用 `cudaHostRegister()` 就地锁页，不必另开缓冲区再拷一次[[12]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)。可分页内存的拷贝要先经驱动的中转缓冲，GPU-03（[GPU-03｜硬件｜CUDA 编程模型：线程层级、stream 与编译链](./03-cuda.md)）第 7 章讲过这条路径和公开测量。
 
-pinned（锁定）内存通过 `cudaMallocHost()` 或 PyTorch 的 `torch.pinned_memory()` 预先分配，kernel 会提前将其物理页面锁定、建立虚拟到物理的映射，并在 IOMMU 中创建直接映射表。后续 DMA 操作可以跳过翻译和 bounce buffer，直接寻址。根据 Neugebauer 等人的详细测量和我们的代码 `sim_pcie_bw.py pinned` 输出，使用 pinned 内存的 H2D 拷贝相比可分页内存快 1.8-2.2 倍 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)，在 PCIe Gen5 x16 上，pinned 内存 H2D 有效带宽可达 47 GB/s，而可分页内存仅 21 GB/s [[11]](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/understanding-memory.html)。加速的根本原因是消除了翻译延迟、bounce buffer 拷贝和页面锁定的开销。
+同一份文档也提醒了代价：pinned 内存是稀缺资源，用得过多会拖累整机性能，而且锁页本身比普通分配重得多[[12]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)。实践上的做法是预先分配一个固定大小的 pinned 池反复使用，例如 DataLoader 的 `pin_memory=True` 每个 batch 都从池里拿，而不是每步现分配、现释放。
 
-## 4.2 IOMMU 与 bounce buffer 的陷阱
+### IOMMU：设备地址也要翻译
 
-IOMMU（Input/Output Memory Management Unit）是一个硬件单元，负责 PCIe 设备的地址翻译，类似 CPU 的 MMU。现代服务器默认开启 IOMMU 防护（`iommu=on`，Translated 模式），每次 DMA 操作都要通过 IOMMU 的 TLB 查询虚拟地址映射，如果 TLB miss，会阻塞 DMA 直到页表遍历完成，引入 200-400 ns 的延迟。在高频访问模式下（如 AllReduce），TLB miss 的累积可以将 DMA 吞吐率降低 5-15% [[15]](https://docs.nvidia.com/cuda/gpudirect-rdma/)。
+大多数现代服务器在 PCIe 设备和主机之间放了一个 IOMMU。它翻译 PCIe 事务里的地址，用内部的 IO-TLB 缓存翻译结果；TLB 未命中时要走完整的页表遍历，事务就被拖慢[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。Neugebauer 等人在打开 IOMMU 的系统上测过：DMA 访问的范围超过 256KB 后，吞吐骤降，64 字节读降了近 70%，256 字节读降 30%，512 字节及以上没有变化[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。他们据此推断那台机器的 IO-TLB 只有 64 项（256KB ÷ 4KB）[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。和第 3 章一样，这组数说明的是规律，具体平台要实测。
 
-更严重的情况出现在 bounce buffer。当 DMA 目标物理地址不连续（比如跨 NUMA 分配）或虚拟地址空间碎片化时，IOMMU 无法建立单一连续映射，kernel 会触发 bounce buffer：先 DMA 到 kernel 维护的暂存区（通常在低地址内存），然后 CPU 再拷贝到最终目标。这意味着同一份数据要过 PCIe 两次（一次入、一次出），实际观察中 H2D 吞吐下降 30-40% [[16]](https://docs.kernel.org/arch/x86/iommu.html)。要检查 bounce buffer 是否活跃，可以在 dmesg 中查看 `swiotlb` 字样或用 `cat /proc/swiotlb` 查看统计。
+![IOMMU 打开、访问范围超过 256KB 后，小块 DMA 读吞吐骤降](assets/11-pcie-gdr/fig-05.svg)
 
-两种 IOMMU 模式的权衡：`iommu=pt`（Pass-Through 模式）跳过 IOMMU 翻译，DMA 直接使用物理地址，减少了 TLB 查询，但失去了 I/O 隔离保护，一个恶意设备可能读写任意内存；`iommu=off` 则彻底禁用 IOMMU，性能最快但隔离能力最弱。在可信的集群环境（如 HPC、训练集群），通常可以接受关闭 IOMMU 换取 5-10% 的性能收益。
+对 GPU 服务器，IOMMU 还有一个比性能更要紧的问题。CUDA 编程指南写明：在 Linux 上，CUDA 和驱动不支持开着 IOMMU 的裸机 PCIe P2P；裸机运行 Linux 时必须关闭 IOMMU，以免设备显存被静默破坏[[5]](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html)。虚拟机的情况相反，要开 IOMMU 并用 VFIO 驱动做 PCIe 直通[[5]](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html)。NCCL 的排障文档也说，这类问题的症状常常像框架或应用的 bug，不会报一个干净的 NCCL 错误[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
 
-## 4.3 检查与修复工作流
+### 检查和修改 IOMMU 模式
 
-应用五步闭环优化 pinned 内存和 IOMMU 配置。
+看当前模式：`cat /proc/cmdline` 看启动参数，`dmesg | grep -i -E "iommu|dmar|default domain"` 看内核日志。出现 `iommu: Default domain type: Translated` 和 `DMAR: IOMMU enabled`，说明是翻译模式，对裸机 P2P 是危险信号[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。NCCL 文档给的处理是：在受影响的裸机上避免翻译模式，关掉 GPU 路径上的 IOMMU 翻译[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
 
-**定天花板**：查询硬件规格和代码输出，单向 H2D 峰值基于 PCIe 代际，GenX x16 理论值在前章已列，减去编码和 ACK 开销后约 47 GB/s（对于 Gen5 pinned 内存）[[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。在没有 bounce buffer 且 IOMMU 优化的前提下，实测应该能达到这个水平。如果启用了 bounce buffer 或 IOMMU Translated 模式，预期下降 20-30%。
+内核参数里，`iommu=pt` 让 DMA 默认走直通模式，等价于 `iommu.passthrough=1`，即 DMA 默认绕过 IOMMU[[14]](https://docs.kernel.org/admin-guide/kernel-parameters.html)。改完重启，再用上面两条命令确认，然后跑一遍第 7 章的 P2P 校验。
 
-**测实际**：用 `h2d_bench.py` 在生产节点上运行，命令示例 `python3 h2d_bench.py --size 1G --pinned`，记录 pinned 模式下的 H2D 吞吐。然后同时运行 `check_node.sh`（本篇代码），它会检查 `/sys/kernel/iommu_groups`、`/proc/cmdline` 和 dmesg 中的 IOMMU 设置，输出 Translated/Pass-Through/Off 的当前状态。若看到 dmesg 中 `AMD-Vi: IOMMU` 或 `VT-d dmar` 的初始化消息，说明 IOMMU 被 kernel 加载了 [[16]](https://docs.kernel.org/arch/x86/iommu.html)。
+一个常见的误区是在裸机训练集群上照搬虚拟化环境的安全基线，默认打开 IOMMU 翻译模式。现象是 P2P 偶发数据错误或挂起，排查时像是框架 bug。原因是 CUDA 不支持裸机 IOMMU 下的 P2P。改法是裸机训练节点用直通模式或在 BIOS 里关闭 IOMMU，虚拟机节点保留 IOMMU 并用 VFIO 直通，两类节点分开管理。
 
-**定位等待**：对比天花板与实测。如果实测远低于预期（比如 32 GB/s 而非 44 GB/s），查看 dmesg 中是否有 bounce buffer 触发的迹象（`swiotlb buffer overflow` 或 DMA write failed 等）；如果看到则说明分配策略有问题。用 `cat /proc/swiotlb` 查看 bounce buffer 命中率。此外，用 `nvidia-smi nvtop` 或 DCGM 监测 GPU 显存带宽 [[17]](https://docs.nvidia.com/datacenter/dcgm/latest/)，if 显存侧未饱和则问题在 CPU 侧 DMA。如果 dmesg 看不到 swiotlb 消息但吞吐仍然低，很可能是 IOMMU Translated 模式的 TLB 压力。
+> 🔑 **本章要点**：pinned 内存传输带宽最高，但它是稀缺资源，锁页开销也重，应预分配后复用。IOMMU 的 IO-TLB 未命中会拖慢小块 DMA，公开测量里 64 字节读降近 70%。更关键的是正确性：Linux 裸机上 CUDA 不支持开 IOMMU 的 P2P，应改用 iommu=pt 或关闭 IOMMU。这一章是五步闭环的“消除或隐藏”：去掉 DMA 路径上多余的翻译。
 
-**消除或隐藏**：有三条并行的改进路径。（1）使用 pinned 内存分配：PyTorch 中用 `tensor.pin_memory()` 或显式 `torch.cuda.pinned_memory()` 创建，框架会自动向 kernel 请求页面锁定和 IOMMU 映射，通常能消除 bounce buffer。（2）优化 IOMMU 模式：如果生产集群是可信环境（比如私有的 HPC 集群），可在 `/etc/default/grub` 中修改启动参数，将 `GRUB_CMDLINE_LINUX` 改为包含 `iommu=pt` 或 `iommu=off`，然后 `sudo grub-mkconfig -o /boot/grub/grub.cfg` 重新生成 grub 配置，重启后生效 [[16]](https://docs.kernel.org/arch/x86/iommu.html)。（3）预先绑核和 NUMA 局部分配：结合第 3 章的绑核方法，在分配 pinned 内存时指定 NUMA 节点，减少页面不连续的概率。
+## 第 5 章 · GPUDirect RDMA：网卡直接读写显存
 
-**复测**：改动后重新运行 `h2d_bench.py --pinned` 和 `check_node.sh`，确认 IOMMU 参数和吞吐变化。预期：IOMMU 从 Translated 改为 Pass-Through 时，H2D 吞吐应增加 5-10%；使用 pinned 内存相比可分页应增加 40-80%（取决于原有 bounce buffer 频率）。同时检查 dmesg 是否出现 IOMMU 相关的错误（如 `fault reported`），if 有则说明硬件或驱动不稳定，需要更新固件或驱动。最后在实际训练任务中验证，比如单卡数据加载性能是否提升，减少了数据 stall 的频率。
+前四章讲的都是 GPU 和主机内存之间的路。跨机通信时，数据要从网卡进显存，或从显存发给网卡。如果中间先落一次主机内存，W_host 就会叠到 W_comm 上。本章讲 GPUDirect RDMA 怎么省掉这一跳，以及它对拓扑的要求。
 
-> 💡 **常见误区**
-> - **误：pinned 内存会导致内存碎片化。** 正：pinned 内存由 GPU driver 管理，使用 `cudaMallocHost()` 分配时 kernel 会确保物理连续性或建立直接 IOMMU 映射，反而避免了碎片问题。
-> - **误：IOMMU 关闭就能获得最高性能。** 正：关闭 IOMMU 可消除 TLB 查询开销，但隔离能力下降；在多租户或安全敏感场景需保留。可选择 Pass-Through 模式平衡性能与隔离。
-> - **误：bounce buffer 只影响小块数据。** 正：bounce buffer 受内存碎片化和跨 NUMA 分配影响，大块数据跨 NUMA 拷贝也容易触发，多次 PCIe 转移会显著降速。
+### 省掉的是哪一跳
 
-> 🔑 **本章要点**
-> - 可分页内存 DMA 需要 CPU 翻译和 bounce buffer 中转，H2D 吞吐仅 21 GB/s；pinned 内存提前锁定物理页、建立 IOMMU 直接映射，H2D 加速 1.8-2.2 倍，可达 47 GB/s。
-> - IOMMU 的 Translated 模式每次 DMA 都要查询 TLB，可能 miss 并阻塞 200-400 ns；Pass-Through 模式跳过翻译，性能快 5-10% 但隔离下降；可信集群可改为 Pass-Through 或 off。
-> - Bounce buffer 在分页不连续或跨 NUMA 时自动启用，导致 PCIe 双倍转移和 CPU 拷贝，H2D 吞吐下降 30-40%；使用 pinned 内存和优化分配可消除。
-> - 本章消除的等待是：内存翻译延迟、bounce buffer 中转和页面锁定开销；通过 pinned 内存和 IOMMU Pass-Through 配置，可恢复 40-80% 的 H2D 吞吐，释放后续 PCIe 和显存的潜力。
+没有 GPUDirect 时，GPU 的 DMA 引擎只能和 CPU 内存互相拷贝，网卡也只能把数据 DMA 到主机内存，两者之间必须在主机内存里放一个中转缓冲（bounce buffer）[[15]](https://docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf)。一条消息因此要过两次 PCIe，还要占一份主机内存带宽。
 
-# 第 5 章 · GPUDirect RDMA 与网卡直达
+GPUDirect RDMA 是 Kepler 架构和 CUDA 5.0 引入的技术，它用 PCI Express 的标准特性，在 GPU 和第三方设备之间开一条直接的数据通路，第三方设备可以是网卡、视频采集卡或存储适配器[[6]](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)。网卡的 DMA 引擎直接访问 GPU 暴露出来的显存地址，数据只过一次 PCIe。
 
-![GPUDirect RDMA / Storage 数据路径](assets/11-pcie-gdr/fig-06.svg)
+![GPUDirect RDMA：网卡直接读写显存，省掉主机内存里的中转](assets/11-pcie-gdr/fig-06.svg)
 
-## 5.1 传统网卡数据路径与 GPUDirect RDMA 绕过
+### 拓扑要求：最好只隔着 PCIe switch
 
-在分布式训练中，多个节点的 GPU 通过网络通信交换数据。传统数据路径是三跳式：网卡通过 DMA 接收数据到主机内存 → CPU 中断处理、触发内存拷贝 → 数据进入 GPU 显存。这样数据在 PCIe 总线上过了两次（主机内存入、GPU 显存出），而且需要 CPU 拷贝和上下文切换，总延迟包括网络 RTT、PCIe 总线竞争、CPU 缓存失效等，对小包通信（如 AllReduce）或高频操作压力很大。[[15]](https://docs.nvidia.com/cuda/gpudirect-rdma/) 特别在 AllReduce 或 AllGather 这样的频繁集合操作中，这种三层中介会形成连锁延迟和带宽浪费。
+GPUDirect RDMA 有多条限制，最重要的一条是两个设备必须在同一个上游 PCIe 根复合体下[[6]](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)。即使满足这一条，芯片组的缺陷也可能让它性能很差甚至不能工作[[6]](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)。官方文档按 GPU 和网卡之间的路径分了三种情况[[6]](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)：
 
-GPUDirect RDMA（Remote Direct Memory Access）让网卡直接 DMA 到 GPU 显存，绕过主机内存的中介。所需条件是网卡支持 P2P（点对点）能力，GPU 驱动公开了显存地址给网卡，IOMMU 配置允许 P2P 转移。启用后，NCCL（NVIDIA Collective Communications Library）会自动选择网卡-GPU 的直达路由，数据只过一次 PCIe，延迟从 300-500 ns（传统）降到 50-100 ns（直达）。根据 yuan 等人的实测，在典型分布式训练的 AllReduce 操作中，小包（<1 MB）性能提升 20-40%，接近 PCIe 峰值的大包改进较小（因已接近带宽屋顶），但整体通信效率显著提高 [[18]](https://arxiv.org/abs/2506.06472)。
+- 路径上只有 PCIe switch：最优，性能最好。
+- 经过一个 CPU：能工作，性能更差，某些处理器上 P2P 读带宽受到严重限制。
+- 跨过 QPI/HT 这类 socket 间互连：可能性能极差，甚至不能可靠工作。
 
-## 5.2 启用条件与检查
+这三种情况正好对应第 2 章 topo -m 里的 PIX/PXB、PHB 和 SYS。NCCL 用 `NCCL_NET_GDR_LEVEL` 决定在多远的距离上启用 GPUDirect RDMA，例如设为 PXB 表示 GPU 和网卡经过多级 PCI switch 时也用[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。选机型时要看每张 GPU 是否有一块和它同在一个 PCIe switch 下的网卡；GPU-13（[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)）和 GPU-17（[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md)）会从多卡和集群的角度再看这件事。
 
-GPUDirect RDMA 的启用需要满足多个条件。首先，网卡必须支持 P2P 能力，常见的有 Mellanox ConnectX-6/7（高端）、NVIDIA 自家的 BlueField SmartNIC、某些 Broadcom（原 Cavium）的高端卡。消费级或低端企业级网卡（如 Intel i40e、Broadcom bnx2x）不支持，即使接到 GPU 旁也无法直达。其次，GPU 端 NVIDIA 驱动需包含 GPUDirect RDMA 支持（通常在 450+ 版本以上），PyTorch 和 NCCL 也要编译启用了 RDMA 支持。最后，IOMMU 配置不能禁止 P2P：若 `iommu=on` 且 ACS（Access Control Services）启用，PCIe 根复杂体（root complex）的安全检查可能阻止设备间直达，需要关闭 ACS 或改用 `iommu=pt` [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
+### 软件条件与核对
 
-检查 GPUDirect RDMA 可用性的命令链。第一步：用 `nvidia-smi topo -pm` 查看拓扑矩阵，若网卡（通常标记为 X）与 GPU 在同一 PXB（PCIe Expansion Bus，距离 1-3），则物理上可达；若距离 10+（跨 Host Bridge）则需走主存中转，NCCL 会自动降级，无法利用 RDMA。第二步：用 `nvidia-smi -i 0 -q | grep -i p2p` 检查当前 GPU 是否启用了 P2P，output 应显示 `P2P Capable` 或类似状态。第三步：运行 NCCL 测试，`nccl-tests/build/all_reduce_perf -b 1K -e 1M -f 2`，用 `NCCL_DEBUG=INFO` 环境变量查看日志，应看到 `Using P2P` 或 `GDRDMA` 的字样；若没有，检查 dmesg 中 GPU driver 是否报 `failed to register peer access` 错误 [[19]](https://github.com/NVIDIA/nccl-tests)。
+硬件拓扑之外，还要满足软件条件。GPUDirect RDMA 需要兼容的网卡和驱动，并加载 `nvidia-peermem` 内核模块；这个模块随 CUDA 驱动发布，但每次开机都要用 `sudo modprobe nvidia-peermem` 加载，可以用 `lsmod | grep nvidia-peermem` 确认[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。较新的 Linux 内核配合开源版 NVIDIA 驱动时，也可以走 DMA-BUF，NCCL 会自动检测并启用，这时不需要 nvidia-peermem[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
 
-## 5.3 性能影响与故障排查
+按五步闭环核对：
 
-启用 GPUDirect RDMA 后，集合通信的性能变化取决于消息大小和拓扑。对于小包 AllReduce（如 32-512 字节），启用 RDMA 直达可将延迟从 500 ns 降到 150-200 ns，相对性能提升 20-40%；大包（>1 MB）因已接近 PCIe 带宽限制，改进有限，但仍可节省 CPU 拷贝开销。在实际分布式训练中，通信效率（数据吞吐 / 总训练时间）可能提升 5-15%，对于通信密集型任务（如参数服务器、梯度同步）效果更显著 [[20]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/performance_and_tuning.html)。 特别是 LLM 预训练中的 AllReduce 操作占总时间的 15-30%，优化通信能节省显著的端到端时间。
+- **定天花板**：网卡的线速和第 1 章的 PCIe 天花板，取小的那个。
+- **测实际**：跨两台机器跑 nccl-tests，记录大消息的 busbw。
+- **定位等待**：在 topo -m 里看每张 GPU 到它所用网卡的符号；确认 nvidia-peermem 已加载，或 DMA-BUF 路径可用。
+- **消除或隐藏**：调整 rank 与网卡的对应关系，让每张 GPU 用和它在同一 PCIe switch 下的网卡；补上内核模块。
+- **复测**：同一组 nccl-tests 再跑一遍，和改动前对比。
 
-若 NCCL 未自动启用 RDMA，故障排查的顺序为：（1）检查 dmesg，`sudo dmesg | grep -i "peer\|P2P\|GDRDMA\|IOMMU\|error"` 查看驱动是否报错；常见的有 `failed to establish p2p mapping` 或 `ACS source validation`，这些信息指向硬件或固件配置问题。（2）确认网卡与 GPU 的拓扑距离，`nvidia-smi topo -pm` 中距离 1-3 为同 PXB；若看不到网卡设备（可能显示为 Other/X），用 `lspci | grep -i net` 找到网卡 PCIe ID，再 grep nvidia-smi 输出以验证可见性。（3）检查 IOMMU 和 ACS 状态，`cat /proc/cmdline` 查看 IOMMU 参数，用本篇 `check_node.sh` 脚本读取 ACS 寄存器状态；若 ACS 启用且 IOMMU Translated 模式，改为 `iommu=pt` 后重启再测试，通常能激活 P2P。（4）确认 NCCL 版本和编译选项，有些旧版 NCCL 无法自动感知 GPUDirect，需显式传参 `NCCL_GPUDIRECT_CUTOFF=10000` 激活或升级库版本。（5）运行隔离测试 `nccl-tests` 验证，观察日志中 RDMA 路由的选择和延迟数据，确认直达已生效 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
+一个常见的误区是只确认网卡支持 RDMA，就认为 GPUDirect 已经生效。现象是跨机带宽比同类机器低一截，CPU 内存带宽占用也偏高。原因是 nvidia-peermem 没加载，或者 GPU 和网卡隔着 CPU 甚至 socket 互连，NCCL 按 NCCL_NET_GDR_LEVEL 退回了经主机内存中转的路径。改法是先查内核模块，再查 topo -m 里 GPU 到网卡的那一格。
 
-性能调优的进阶技巧包括负载均衡和分割。在有多条网卡或多个 GPU 时，NCCL 默认按拓扑距离贪心选路，可能某些网卡-GPU 对负载过重。可用 `NCCL_LAUNCH_MODE=GROUP` 和 `NCCL_SOCKET_IFNAME` 等环境变量手动指定网卡绑定，或用 `NCCL_IB_QPS_PER_CONNECTION` 增加 InfiniBand 连接数（对支持 RDMA 的网卡有效）。此外，`NCCL_IB_SPLIT_DATA_ON_QPS` 可在多条连接间分割数据，减少单条线路的拥塞。这些优化对超级计算和大规模分布式训练尤为重要，通常能进一步提升 5-10% 的吞吐 [[21]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。
+> 🔑 **本章要点**：GPUDirect RDMA 让网卡直接读写显存，省掉主机内存里的中转缓冲。它要求 GPU 和网卡在同一个根复合体下，路径上只有 PCIe switch 时最好，跨 socket 时可能极慢或不可靠。软件上要加载 nvidia-peermem 或走 DMA-BUF。这一章是五步闭环的“消除或隐藏”：把跨机通信路径上的 W_host 消掉。
 
-> 💡 **常见误区**
-> - **误：GPUDirect RDMA 只要网卡支持就能用。** 正：网卡、GPU、IOMMU、ACS 配置都要适配，任何一个环节错误都会降级到主存中转。
-> - **误：启用 GPUDirect 大包性能会翻倍。** 正：大包已接近 PCIe 带宽屋顶，直达的收益主要是消除 CPU 拷贝，相对提升 5-15%；小包受延迟改善更大（20-40%）。
-> - **误：关闭 ACS 就安全没问题了。** 正：ACS 是 PCIe 安全隔离机制，关闭会降低多租户隔离能力；在可信的私有集群可接受，多租户环境需谨慎。
+## 第 6 章 · GPUDirect Storage：存储直接写进显存
 
-> 🔑 **本章要点**
-> - 传统网卡数据路径需三跳（网卡→主机内存→CPU 拷贝→GPU），延迟 300-500 ns；GPUDirect RDMA 让网卡直达 GPU 显存，延迟降到 50-100 ns，小包性能提升 20-40%。
-> - 启用需满足：网卡支持 P2P、GPU 驱动包含 RDMA、拓扑同 PXB（距离 <4）、IOMMU 允许 P2P；任何条件不满足 NCCL 都会自动降级到主存中转。
-> - 检查命令链：`topo -pm` 看拓扑距离、`nvidia-smi -q | grep P2P` 看能力、dmesg 看驱动错误、`NCCL_DEBUG=INFO` 看路由选择；若不启用检查 ACS 和 IOMMU 配置。
-> - 本章消除的等待是：网络接收到显存的主机内存中介延迟和 CPU 拷贝开销；通过直达可减少 PCIe 单次转移，小包通信效率提升 20-40%，释放网卡和 GPU 的吞吐潜力，对通信密集型训练尤为关键。
+第 5 章把网卡和显存之间的中转省掉了。存储是另一条进显存的路：训练数据、checkpoint、推理时换入的权重，都要从 NVMe 或网络文件系统读进来。本章讲 GPUDirect Storage（GDS）省掉的是什么、什么情况下会悄悄退回老路，以及怎么核对。
 
-# 第 6 章 · GPUDirect Storage 与硬盘直达
+### 老路要绕一次 CPU 内存
 
-## 6.1 传统存储读取与 GDS 绕过
+GPU 的 DMA 引擎只能和 CPU 内存互相拷贝，存储控制器通常也不会把自己的内存暴露给别的 DMA 引擎，所以传统路径必须在 CPU 内存里放一个中转缓冲[[15]](https://docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf)。读一份 checkpoint，数据先从盘进页缓存或应用缓冲区，再由 GPU 拷贝进显存，主机内存带宽和 CPU 都被占用。
 
-GPU 训练的数据加载链路通常经过这样几个步骤：硬盘上的文件先被操作系统的 kernel buffer 缓存，然后通过 DMA 传到主机内存，最后 CPU 操作或触发另一次 PCIe DMA 把数据搬到显存。这样一条路上，数据被加载两次，一次进 kernel buffer，一次进显存，硬盘、主机内存、PCIe 都要消耗两份等效带宽。对于大型预训练数据集（如 1TB+ 的 Web 文本语料库）或模型检查点读写这样的高吞吐场景，硬盘顺序读带宽（10-20 GB/s）与 PCIe 的单向峰值（32-64 GB/s）都成为瓶颈，导致 GPU 利用率下降。理论上，一份数据经过两次 PCIe 传输，每次消耗 50 GB/s，等同于一根 x16 链路满载两倍的工作量，这是物理上不可能的。
+GDS 在显存和存储之间开一条直接的 DMA 通路，避开了经过 CPU 的中转缓冲；这条路能缓解系统带宽瓶颈，降低延迟和 CPU 负载[[16]](https://docs.nvidia.com/gpudirect-storage/overview-guide/index.html)。做法是让存储侧（NVMe 盘、网卡或 RAID 卡）的 DMA 引擎直接写 GPU 暴露出来的地址[[15]](https://docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf)。应用侧改用 cuFile API 读写，例如 `cuFileRead`、`cuFileWrite`，显存缓冲区可以先用 `cuFileBufRegister` 注册。
 
-GPUDirect Storage（GDS）让硬盘的数据直接 DMA 到 GPU 显存，省掉了 kernel buffer 这一跳和对应的 CPU 中介。使用时需要用 NVIDIA 的 cuFile 库替代标准 read()，库函数会把请求投送到 GDS 内核驱动，驱动协调 NVMe 控制器和 GPU 的 DMA 地址映射，设置好虚拟到物理的映射后硬盘控制器直接将数据写到显存的物理地址。从时间账的角度看，这消掉了 W_host 中的一部分：不再需要中转到主机内存、不再需要 kernel 的同步与缓冲管理开销，硬盘带宽得以直接服务 GPU 的计算。GDS 的适用条件是：文件要足够大（MB 以上）、访问模式要足够顺序且流式，这样 DMA 建立的协议握手开销才能被摊销到足够长的数据流里。随机访问、小文件读或碎片化的元数据操作不值得用 GDS，因为 DMA 的启动延迟（几微秒）会超过节省的主机内存传输时间。
+### 拓扑同样重要
 
-启用 GDS 需要三个条件：硬盘必须支持 GDS 协议（大多数 NVMe 支持，部分企业级 HDD 也可以），GPU 端需要 GDS 内核驱动（nvidia-driver 528 及以上，需单独启用 GDS 模块），应用端链接 cuFile 库。没有这些基础设施的集群中，GDS 不可用。检查方法是运行 `cuFile` 示例或用 DCGM 查询 GDS 状态 [[22]](https://docs.nvidia.com/gpudirect-storage/troubleshooting-guide/index.html)。
+设计指南特别提到，挂在同一个 PCIe switch 下的 GPU、网卡和存储设备之间，PCIe 带宽通常更高；GPU 和存储在同一个 switch 下时，GDS 最能缓解 CPU 一侧的带宽压力[[15]](https://docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf)。这和第 5 章 GPUDirect RDMA 的结论一致：路径上只有 PCIe switch 时最好。看机器时，把每张 GPU 和本地 NVMe 在 topo 树里的位置也记下来，`lspci -t` 可以打印 PCI 树。
 
-## 6.2 性能与成本权衡
+![用了 cuFile 不等于走了 GDS：条件不满足时会退回 POSIX 兼容模式](assets/11-pcie-gdr/fig-07.svg)
 
-硬盘读取的实测数据来自 Yuan 等人的工作 [[18]](https://arxiv.org/abs/2506.06472)。不使用 GDS 时，硬盘数据先进 kernel buffer（由操作系统的页面缓存管理），再通过 PCIe DMA 进显存。由于 kernel buffer 走标准 PageCache 机制，每次访问都需要 MMU 的虚拟地址翻译和可能的 bounce buffer 复制（跨 NUMA socket 或物理内存不连续时自动启用），导致实测吞吐约 10 GB/s，主要被 PCIe Gen4/Gen5 的单向带宽瓶颈（32-64 GB/s）和 DMA 往返确认开销限制。启用 GDS 后，硬盘直接 DMA 到显存物理地址，绕过了 kernel buffer 和 bounce buffer，吞吐只受限于硬盘芯片的读带宽和 GPU 端的 DMA 引擎队列深度。企业级 NVMe（如 Samsung PM1735 或 Intel Optane）的顺序读可达 14 GB/s，接近 PCIe Gen5 x16 的 64 GB/s 单向带宽上限。实际测试中 GDS 通常在 15-25 GB/s 范围，相比传统路径提升 1.5-2.5 倍，这个提升幅度在大规模数据集场景下能显著改善数据加载阶段的 GPU 利用率 [[23]](https://developer.nvidia.com/blog/gpudirect-storage/)。
+### 兼容模式：能跑，但没直达
 
-成本与复杂性方面，GDS 要求专用的内核驱动（nvidia-driver 528+）、GPU 端的 cuFile 库支持，以及应用层面的 API 替换。PyTorch DataLoader 标准库不支持 cuFile，需要集成 TorchData（NVIDIA 提供的实验支持包）或自行用 cuFile C API 包装一个 DataLoader。这对已有的成熟训练框架意味着增加依赖版本管理、测试覆盖与部署验证的复杂性。因此 GDS 的使用决策应当基于数据加载是否真正成为瓶颈：如果训练吞吐已经由计算（GPU 矩阵乘法）或通信（all-reduce）限制，数据加载加速不会改善端到端性能；如果数据集太小（几 GB）或访问模式太碎片化（大量小文件、随机偏移），GDS 的 DMA 建立与拆卸开销会抵消收益。检验方法是用 pytorch profiler 或自定义计时看数据加载耗时占总训练时间的比例 [[14]](https://pytorch.org/docs/stable/notes/cuda.html)，如果低于 10% 就没有引入 GDS 的必要。
+GDS 有一个兼容模式：条件不满足时，cuFile 调用退回普通的 POSIX 读写，经主机内存中转，程序照常运行，只是没有走直达。读托管内存或系统分配的内存时，GDS 也会走带内部 GPU/CPU 中转缓冲的兼容路径[[16]](https://docs.nvidia.com/gpudirect-storage/overview-guide/index.html)。所以“用了 cuFile”不等于“走了 GDS”，要核对：
 
-## 6.3 集成与故障排查
+- **装没装好**：运行 `gdscheck.py -p`，它也会显示 `allow_compat_mode` 是否为 true[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)。
+- **允不允许退回**：看 `/etc/cufile.json` 里的 `allow_compat_mode`[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)。环境变量 `CUFILE_FORCE_COMPAT_MODE` 会覆盖配置文件，强制走兼容模式，排障时可以拿它做对照组[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)。
+- **实际走的哪条路**：在 cufile.log 里找 `cufile IO mode: POSIX`，有这一行说明走了兼容路径[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)。
 
-GDS 的集成通常分两步。第一步是在存储节点或计算节点验证 GDS 基础设施：检查 nvidia-smi 输出中是否有 GDS 相关字段，运行 NVIDIA 提供的 gds_sample 程序验证一条读写通路，对比 GDS vs 标准 read() 的延迟和带宽。可以用这样的命令检查 GDS 驱动状态：`nvidia-smi -q` 的输出中看是否有 GPUDirect Storage 相关项，如果显示 Disabled，需要在内核启动参数中启用。第二步是在应用中用 cuFile 的 C API 或 Python wrapper 实现数据加载。最简单的改造是用 `cufileReadAsync()` 替换标准 `read()` 调用，然后在 GPU 上使用该数据前用 `cudaStreamSynchronize()` 同步。
+按五步闭环用：
 
-故障排查的常见问题包括：（1）GDS 驱动未装或版本过老，症状是 cuFile 调用返回 ENOSYS（不支持该操作）；（2）硬盘不支持 GDS 协议，需要检查硬盘型号与 NVIDIA 的兼容性列表 [[24]](https://docs.nvidia.com/gpudirect-storage/)，通常 NVMe 支持较好，某些企业级 SSD 和机械硬盘也可支持；（3）IOMMU Translated 模式（而非 Pass-Through）会让 GDS 的 DMA 经过额外虚拟地址翻译，吞吐会掉 20-30%，改法是把训练节点的 IOMMU 改成 `iommu=pt` 或 `iommu=off`，这与 GPU-GPU P2P 的配置一致；（4）如果 GPU 显存不足，cuFile 会自动 fallback 到标准系统调用，此时性能没有提升，需要减少单次读取的数据块大小或释放不用的显存；（5）网络挂载（如 NFS）的文件无法用 GDS，因为 GDS 需要直接访问设备驱动，只对本地存储有效。Yuan 等人的实验显示，在处理 1TB+ 的检查点文件和大规模语言模型微调任务时，GDS 的吞吐加速使总训练时间减少 15-25%，这个收益对于频繁存取模型的应用尤为显著 [[18]](https://arxiv.org/abs/2506.06472)。
+- **定天花板**：存储的读带宽和第 1 章的 PCIe 天花板，取小的那个。
+- **测实际**：用 GDS 自带的 gdsio 工具，或直接计时读 checkpoint。
+- **定位等待**：同一份读取，分别在 GDS 模式和强制兼容模式下跑，看差多少、CPU 占用差多少。
+- **消除或隐藏**：修好退回的原因，例如文件系统不支持或缓冲区类型不对。
+- **复测**：确认日志里不再出现 POSIX 模式。
 
-> 🔑 **本章要点**：GPUDirect Storage 让硬盘直接 DMA 到显存，省掉 kernel buffer 中转与 CPU 同步，在大文件顺序读场景可将数据加载吞吐从 10 GB/s 提升到 15-25 GB/s。使用前需验证硬盘与 GPU 的 GDS 协议支持、IOMMU 配置为直通模式、应用改造为 cuFile 调用。GDS 消掉的是时间账中 W_host 的存储中转部分。
+一个常见的误区是把数据加载慢一律归到存储上，直接上 GDS。现象是改造完成后，训练吞吐没有变化。原因是数据加载本来就和计算重叠得很好，或者瓶颈在解码、增强这些 CPU 处理上，GDS 只省掉了搬运。改法是先用 profiler 看 GPU 是否真的在等数据，等的是 I/O 还是 CPU 处理，再决定要不要改造。
 
-# 第 7 章 · ACS 与 P2P 限制
+> 🔑 **本章要点**：GDS 让存储侧的 DMA 引擎直接写显存，省掉 CPU 内存里的中转缓冲，GPU 和存储在同一 PCIe switch 下时收益最大。cuFile 在条件不满足时会退回 POSIX 兼容模式，要用 gdscheck、cufile.json 和 cufile.log 核对。这一章是五步闭环的“消除或隐藏”：消掉存储路径上的 W_host，并确认它真的被消掉了。
 
-## 7.1 ACS 的源校验与流量隔离
+## 第 7 章 · ACS：P2P 被绕到根复合体
 
-ACS（Access Control Services）是 PCIe switch 标准中的一组安全机制。设备之间的点对点请求（GPU 到 GPU 的读写、网卡到 GPU 的 DMA）通常可以在 switch 内部直接转发，不需要上走到 CPU 的根复合体。但当 ACS 的 Source Validation（SrcValid）位被启用时，switch 会强制所有点对点请求都经过根复合体，由根复合体检查请求的来源设备是否被允许访问目标设备，这是虚拟化和多租户隔离的必要条件。
+第 4 章讲了 IOMMU 让裸机 P2P 出错的情况。NCCL 排障文档把 P2P 的常见问题归到两个原因上：裸机的 IOMMU 设置，和 PCI 的访问控制服务 ACS[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。本章讲 ACS 做了什么、怎么查、怎么关，以及虚拟机里为什么不能关。
 
-在虚拟化场景中，ACS 确保一个虚拟机直通的 GPU 不能访问另一个虚拟机的设备，是 hypervisor 安全模型的重要一环。但在裸机训练集群中，ACS 只会带来坏处：NCCL 官方文档明确指出 ACS 导致所有 P2P 流量都要经过 CPU 根复合体做额外的检查与转发，GPU 间的点对点拷贝性能会断崖式下降 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。实际表现是 GPU-GPU 的 DMA 带宽从理论的 PCIe x16 单向 64 GB/s（Gen5）跌到 PCIe x8 或更低，取决于 PCIe 树的深度和 CPU 根复合体的处理能力。在极端情况下，启用 ACS 的机器上 P2P 甚至会卡死。
+### ACS 把 switch 内的 P2P 流量改道
 
-ACS 对网卡的影响同样严重。启用 ACS 时，网卡到 GPU 的 DMA 请求也要经根复合体重定向，这直接影响 GPUDirect RDMA 的性能，all-reduce 等点对点通信的延迟会增加 50% 以上。大厂的 DGX 系列和大多数企业级服务器在 BIOS 中已经对关键设备做了 IOMMU group 配置，把 GPU、NVSwitch、网卡等放在同一个 group，从而绕过 ACS 检查。但非标准化的机器或定制硬件可能没有这样的优化，需要逐一排查 [[25]](https://www.kernel.org/doc/html/latest/driver-api/pci/p2pdma.html)。
+没有 ACS 时，同一个 PCIe switch 下两张卡之间的读写可以在 switch 内部直接转发，这正是第 2 章 PIX、PXB 两种连接的好处。ACS 打开后，switch 会把所有 PCI 点对点流量重定向到 CPU 的根复合体，NCCL 文档的描述是这会造成显著的性能下降，甚至挂起[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
 
-## 7.2 检查与关闭
+换句话说，topo -m 上写着 PIX 的一对卡，实际走的是 PHB 那条路。topo -m 看的是物理连接，看不出 ACS 的改道；所以拓扑表看着正常、卡间带宽却低，或者 NCCL 在 P2P 阶段卡住，都要查 ACS。
 
-检查 ACS 状态的方法是读 PCIe 配置空间中 ACS 扩展能力的控制寄存器。用 root 权限运行 `sudo lspci -vvv`，找到 switch 或 root port 的条目，查看 ACSCtl 行。如果显示 `SrcValid+`，说明源校验被启用，P2P 流量会被拦截；`SrcValid-` 表示已关闭。`lspci` 的输出类似这样：`ACSCtl: SrcValid+ TransBlk- ReqRedir+ CmpltRedir+`，其中各位分别控制源校验、事务阻挡、请求重定向、完成重定向等。非 root 用户无法看到这一行 [[8]](https://man7.org/linux/man-pages/man8/lspci.8.html)。一个快速检查脚本可以这样做：在系统启动后立即查看 `sudo lspci -vvv | grep -B5 "ACSCtl.*SrcValid+" | head -20`，如果有输出就说明至少有一个 switch 启用了 ACS。
+![topo -m 看着正常、P2P 却慢或挂起：按这个顺序查 ACS](assets/11-pcie-gdr/fig-08.svg)
 
-关闭 ACS 的方法优先级为：（1）在 BIOS 中找到 ACS 相关选项并禁用（通常在“PCIe Settings“或”Security”菜单下），这是最安全最稳定的，重启后生效，不需要每次开机脚本维护。（2）如果 BIOS 没有选项或无法修改，用 kernel 参数 `pci=noacs` 启动系统，在 `/etc/default/grub` 中修改 GRUB_CMDLINE_LINUX 行加入该参数，然后 `sudo update-grub && reboot`，这会让内核忽略所有 PCIe 设备的 ACS 配置。（3）最后才是用 `setpci` 直接写寄存器，这需要知道 switch 或 root port 的 BUS:DEVICE.FUNCTION 号和 ACS 扩展能力的偏移地址 ECAP_ACS。命令形如 `sudo setpci -s BUS:DEV.FUNC ECAP_ACS+0x6.w=0` 来关闭所有 ACS 位，但这个改动只在当前会话有效，重启后失效，必须放进 `/etc/rc.local` 或 systemd 的开机服务脚本中以实现持久化 [[26]](https://man7.org/linux/man-pages/man8/setpci.8.html)。
+### 查和关：BIOS、setpci 两条路
 
-关闭 ACS 的安全代价是设备间的隔离能力显著减弱。一个故障或恶意的 GPU 可能能越权写入另一个 GPU 的显存或获取网卡的访问权限，这对多租户共享集群是不能接受的风险。因此 ACS 的关闭决策应该严格限制在信任的、单一用户或单一组织拥有的私有训练集群，生产级的多租户集群和公有云环境都不应该关闭 ACS。另外，NCCL 在虚拟机场景中提供了 ATS（Address Translation Services）的支持，设备（如网卡或 NVMe）可以缓存 IOMMU 的地址翻译结果，从而减少每次 DMA 操作都要经过根复合体查表的往返次数，这是虚拟化环境中缓解 ACS 性能损失的替代方案，但需要网卡驱动和 GPU 驱动都支持 ATS 才能启用 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
+检查方法是 `sudo lspci -vvv`，在每个 PCI bridge 的输出里找 ACSCtl 这一行；出现 `SrcValid+`，说明 ACS 可能开着[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
 
-## 7.3 性能对比与决策
+关闭有两条路[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)：
 
-ACS 对性能的影响取决于 PCIe 树的拓扑深度和 CPU 根复合体的处理能力。在拓扑最坏的情况下（设备距离根复合体最远），P2P 性能会损失 50% 到 80%。Li 等人的评测数据 [[9]](https://arxiv.org/abs/1903.04611) 显示，在一个标准双路 NUMA CPU 系统上启用 ACS 时，P2P DMA 的带宽从正常的 32 GB/s（PCIe x16 的一半，双向分时）跌到 12-16 GB/s，等于被强行降到了 PCIe x4 的等效水平。这个性能损失对多卡训练的影响巨大：all-reduce 操作的通信效率从正常的 80% 掉到 40%，导致训练的总耗时增加 50% 以上。相比之下，在 DGX H100 等超级计算机上，由于 NVSwitch 的存在和厂商在 BIOS 中精心配置的 IOMMU group，GPU 之间的 P2P 通常走 NVLink 高速路径而完全不经过 PCIe，从而 ACS 的影响被完全隔离，性能不受任何影响。
+- **BIOS**：有些系统可以在 BIOS 里关掉 IO 虚拟化或 VT-d，ACS 随之关闭。
+- **操作系统**：Broadcom PLX 的 switch 可以在系统里用 setpci 关，例如 `sudo setpci -s 03:00.0 ECAP_ACS+0x6.w=0000`，把 03:00.0 换成每个 PCI bridge 的总线号。这种改法每次重启后都要重做，所以要放进开机脚本。
 
-![ACS 与点对点隔离](assets/11-pcie-gdr/fig-07.svg)
+在 BIOS 里关 VT-d，IOMMU 也一起关了，对裸机 P2P 来说这正是第 4 章要的结果。
 
-决策框架是：（1）如果是官方认证的平台（DGX、云厂商实例），基本不用操心 ACS，供应商已经在出厂时优化与测试过了。（2）如果是定制服务器或白盒机型，先用 `sudo lspci -vvv | grep -B2 "ACSCtl.*SrcValid+" | head -10` 检查 ACS 状态，如果已启用且 BIOS 中找不到关闭选项，才考虑用内核参数或 setpci 关闭。（3）关闭前，务必用 `nvidia-smi topo -p2p` 对比启用 ACS 前后的 P2P 路由是否确实有改变，再用 NCCL-tests 的 all-reduce 跑一轮对标试验，量化实际通信性能的提升。（4）在多租户或云环境的集群中，要权衡隔离能力与性能：宁可接受 ACS 的性能损失也要保留设备间的隔离，除非能用 IOMMU group 和 SR-IOV 等虚拟化技术实现等价的隔离与控制。
+### 虚拟机里不能关
 
-> 🔑 **本章要点**：ACS（Access Control Services）在虚拟化中确保设备隔离，但在裸机训练集群中只会把 P2P 流量强制经过 CPU 根复合体，导致 GPU-GPU 和网卡-GPU 的点对点带宽损失 50% 以上。检查用 `lspci -vvv | grep ACSCtl`，关闭优先用 BIOS 选项或 `pci=noacs` 参数，最后才用 `setpci` 写寄存器。ACS 关闭会削弱设备隔离，仅在信任集群中考虑。本章消掉的是 P2P 流量被 ACS 拦截导致的等待。
+虚拟机依赖 ACS 才能工作，关闭 ACS 不是可选项[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。虚拟机里要拿到最好的性能，NCCL 文档给的办法是在网卡上打开 ATS[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。所以集群里裸机节点和虚拟机节点要分两套基线：裸机关 ACS、关 IOMMU 翻译；虚拟机保留 ACS 和 IOMMU，开 ATS，并接受卡间 P2P 走根复合体的代价。
 
-# 第 8 章 · PCIe 机型与超级芯片
+按五步闭环走一遍：
 
-## 8.1 主流 GPU 机器的 PCIe 配置
+- **定天花板**：第 1 章的 PCIe 天花板，或同型号机器上的卡间带宽实测。
+- **测实际**：NCCL 推荐用 nvbandwidth 测卡间带宽[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)；用 cuda-samples 里的 simpleP2P 查正确性，它每次传输后都校验数据，最后一行应是 Test passed[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。
+- **定位等待**：用 `NCCL_P2P_DISABLE` 或 `NCCL_P2P_LEVEL` 关掉或限制 P2P 再跑一次，对照结果，判断问题是否出在 P2P 传输上[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)；再用 lspci 查 ACSCtl。
+- **消除或隐藏**：裸机在 BIOS 或开机脚本里关 ACS；虚拟机开 ATS。
+- **复测**：重启后再查一遍 ACSCtl，确认开机脚本生效，再跑 nvbandwidth 和 simpleP2P。
 
-从 PCIe 拓扑与带宽的角度看，当前市场上的 GPU 服务器大致分为三类，它们的 GPU 间通信性能差异巨大。
+一个常见的误区是手动 setpci 关掉 ACS、测完带宽就算修好。现象是过几天机器重启后，同一台机器的 NCCL 作业又变慢或卡住。原因是 PLX switch 上的 setpci 改动不跨重启。改法是把关 ACS 写进开机脚本或改 BIOS，并把 ACSCtl 检查加到节点上线的巡检里。
 
-第一类是 NVIDIA DGX 系列超级计算机。DGX H100 搭载 8 块 H100 GPU，采用两个独立的 NVSwitch 子树：GPU 0-3 接一个 NVSwitch，GPU 4-7 接另一个 NVSwitch，两组 NVSwitch 再通过 PCIe 连接到一个共享的 host bridge [[5]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)。每个 GPU 都获得 PCIe Gen5 x16 的链接，但关键是 GPU 之间的通信走 NVLink，不走 PCIe。同一 NVSwitch 下的 GPU 对间距离为 1（最近），带宽可达 300+ GB/s；跨 NVSwitch 的 GPU 对走 PCIe 回程，距离 10 以上。这样的设计确保了裸机环境下单 NVSwitch 域内的 all-reduce 能达到线性加速。DGX 的另一个关键特性是设备都在同一 IOMMU group 中，ACS 被彻底关闭或绕过，GPU 和网卡之间可以走 GPUDirect RDMA 不经 CPU。
+> 🔑 **本章要点**：ACS 打开时，PCIe switch 把所有点对点流量改道到根复合体，造成显著降速甚至挂起，topo -m 上看不出来。用 lspci -vvv 找 SrcValid+，裸机在 BIOS 关 VT-d 或用 setpci 关，后者每次重启都要重做。虚拟机必须保留 ACS，改为开网卡 ATS。这一章是五步闭环的“定位等待”：找出拓扑表之外改变路径的那个开关。
 
-第二类是标准企业级服务器，如联想 SR670 V3、HPE ProLiant 等。这些机器通常配置 4 到 8 块 GPU，每个 GPU 分配独立的 PCIe x16 插槽或通过 switch 扩展。PCIe 总线采用 Gen5 或 Gen4，但没有 NVLink 或 NVSwitch，GPU 间通信全部走 PCIe。拓扑上，GPU 常常被放在多个 PCIe 平面（PXB）中，有些甚至跨越 CPU socket 的 NUMA 域。一个常见的配置是主板上有 3 个 x16 全速插槽和 1 到 2 个降速插槽（x8 或 x4）；或者用 PCIe switch 把多个 GPU 挂到一条主链路下，这会导致多个 GPU 共享带宽。这类机器上 GPU-GPU 的距离分布不规则，有的对可达 60 GB/s（同 PXB 且无 ACS），有的只能 10-20 GB/s（跨 NUMA 且有 IOMMU 翻译）。训练框架需要用 NCCL 的自适应路由来应对这种异构拓扑。
+## 第 8 章 · 两类机器：DGX H100 与 GH200 的主机链路
 
-第三类是超大规模集群中的节点，成本与功耗敏感，往往用 4 块 PCIe x8 或 x16 的 GPU 搭建最小化配置。这类机器没有 NVSwitch，GPU 间通信速率受 PCIe 宽度和拓扑限制最严重。一个 4 卡 x8 盘的理论峰值是 Gen5 32 GB/s（x8 单向），如果再有 IOMMU 翻译或 ACS 隔离，实际可用带宽会进一步下降到 20 GB/s 以下。这类机器适合做数据并行但不适合做张量并行，因为后者的通信粒度和频率都更高。[[27]](https://arxiv.org/abs/2408.14158) 的 Fire-Flyer 研究就基于这类成本敏感的配置，通过减少跨节点通信和增加 GPU 端本地计算来弥补单机通信性能的不足。
+前七章的方法对任何机器都适用。本章拿两台公开资料比较全的机器来练习：DGX H100 是 8 卡、双路 CPU 的典型训练服务器，GH200 把 CPU 和 GPU 放进同一个超级芯片。两者的主机链路差别很大，同一个 W_host 要用不同的眼光去看。
 
-![主流 GPU 机器 PCIe 配置对比](assets/11-pcie-gdr/fig-08.svg)
+### DGX H100：卡间走 NVSwitch，主机侧仍是 PCIe
 
-## 8.2 Grace Hopper 与片内互联
+DGX H100 用户指南列出的主要部件[[9]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)：
 
-NVIDIA Grace Hopper 是一个不同范式的尝试。Grace Hopper 将 CPU（Grace processor）和 GPU（Hopper）集成在同一个芯片上，取消了 PCIe 链路，改用 900 GB/s 的片内互联直连 CPU 和 GPU 的内存系统。每个 Hopper GPU 有 80 GB 的 HBM，而 Grace CPU 挂 [[28]](https://arxiv.org/abs/2303.15375) 128 GB 的 on-die HBM，两者通过一条超宽总线（称为 CXL-like memory fabric）以 360 GB/s 的速率相连。从 GPU 进程的视角，CPU 内存看起来就像本地内存，访问延迟从 PCIe 的 1-2 微秒压到不足 100 纳秒。
+- GPU：8 张 H100，显存合计 640 GB。
+- CPU：2 颗 Intel Xeon 8480C，PCIe Gen5，每颗 56 核。
+- NVSwitch：表格里这一栏写的是 4 个第四代 NVLink，提供 900 GB/s 的 GPU 间带宽。
+- 集群网络：4 个 OSFP 口，对应 8 块单口 ConnectX-7 InfiniBand 网卡。
+- 数据缓存盘：8 块 3.84 TB 的 NVMe U.2，组 RAID 0。
 
-这样设计的优势和劣势都很明显。优势是消除了 PCIe 延迟，GPU 访问 CPU 内存的带宽瓶颈彻底去掉了，理论 H2D（这里是 GPU→HBM）可以接近 360 GB/s 的峰值，是 PCIe Gen5 x16 的 5 倍以上。没有 IOMMU、没有 bounce buffer、没有 ACS 隔离的成本，数据移动时间基本忽略不计。劣势是 HBM 容量固定且有限，Grace Hopper 的片内 HBM 总容量只有 128 + 80 = 208 GB（有的版本 CPU 这边 96 GB），不能像传统服务器那样通过添加内存条来扩展。对超大模型或需要大 batch size 的推理任务，HBM 容量限制会很快成为新瓶颈。另外，Grace Hopper 强绑了 CPU 和 GPU，CPU 的选择直接影响 GPU 的使用体验，不像传统服务器那样 CPU 和 GPU 可以独立优化。
+网卡做成了网络模块，每个模块把 4 块 ConnectX-7 合成一个设备；模块装在一块 interposer 板上，这块板一端连 CPU，另一端连 GPU 托盘[[9]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)。
 
-从等待项的角度，Grace Hopper 彻底消掉了 W_host 中的链路部分（PCIe 延迟和带宽瓶颈），但引入了 HBM 容量约束。对于能装进 HBM 的工作集，Grace Hopper 可以达到比标准服务器快得多的性能；但一旦工作集超过容量，虚拟内存或分阶段搬运就会让 W_host 反弹回来。[[10]](https://arxiv.org/abs/2408.11556) 的测试显示，在存储访问模式随机或数据大小超过 HBM 时，Grace Hopper 的优势快速衰退。
+从 W_host 的角度读这张表：GPU 之间的流量走 NVSwitch，不占 PCIe；GPU 和 CPU 内存、网卡、NVMe 之间仍然走 PCIe，而且这些设备挂在两颗 CPU 之下。所以第 1 章的链路检查、第 3 章的 NUMA 绑核、第 5 章的 GPU 与网卡配对、第 6 章的 GDS 在这台机器上都要做。8 张卡、8 块网卡，数量上正好一一对应；每张卡实际用哪块网卡、中间隔着几级 switch，要用 topo -m 看，不要凭编号猜。
 
-## 8.3 选型建议与基准验证
+![同样是 W_host，DGX H100 和 GH200 的主机链路不同](assets/11-pcie-gdr/fig-09.svg)
 
-选择服务器时，首先要明确工作负载对 GPU 间通信的需求。如果训练模型涉及频繁的 all-reduce（如多卡数据并行）或 reduce-scatter（如 ZeRO 分片），优先选 DGX 或配 NVSwitch 的定制机器，即使成本更高。如果工作负载主要是前向计算，GPU 间通信很少，纯 PCIe 的标准服务器足够。如果数据量小且能完全装进 GPU 显存，Grace Hopper 的片内互联优势显著；但如果数据远大于 GPU 显存，Grace Hopper 反而会因 CPU HBM 有限而增加调度复杂度 [[4]](https://www.nvidia.com/en-us/data-center/h100/)。
+### GH200：CPU 和 GPU 之间换成了 NVLink-C2C
 
-选型后，部署前必须用本章及前面各章的工具跑一遍基准验证。具体流程是：（1）用 `nvidia-smi topo -m` 和 `nvidia-smi topo -p2p` 识别实际拓扑，记录各 GPU 对的距离与 P2P capability；（2）用 `python3 sim_topo.py parse` 解析拓扑矩阵，确认 PXB 分组和 NUMA 跨域情况；（3）用 `python3 h2d_bench.py` 测 pinned vs pageable H2D 带宽，应至少达到规格的 70%（Gen5 x16 应 > 30 GB/s）；（4）如果配有 GPUDirect RDMA，用 `ib_send_bw` 等网卡测试工具对比 RDMA 和 GPU P2P 的延迟，网卡应与 GPU 在同一 PXB；（5）跑 NCCL-tests 的 all-reduce 和 reduce-scatter，记录在不同卡数下的吞吐和扩展性，与官方 baseline 对标。如果实测数据与规格相差超过 20%，需要立即排查 BIOS 设置（PCIe 树配置、IOMMU 模式、ACS 开关）和系统配置（NUMA 绑核、中断亲和、驱动版本）。只有基准验证通过后，才能放心交付给用户开展训练任务的测试和部署。
+GH200 把 72 核的 Grace CPU 和 Hopper GPU 用 NVLink-C2C 连在一起[[10]](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)。厂商页面给出的数字是：一致性接口带宽 900 GB/s，比 PCIe Gen5 快 7 倍[[10]](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)。用第 1 章的表核对一下：Gen5 x16 编码后单向 63.015 GB/s，双向合计约 126 GB/s，900 ÷ 126 ≈ 7.1，和厂商的 7 倍对得上。由此推断 900 GB/s 是双向合计的口径，页面没有写明，和单向数字比要先折半。
 
-> 🔑 **本章要点**：GPU 服务器的 PCIe 架构决定了单机 GPU 间通信的天花板。DGX 系列用 NVSwitch 实现 300+ GB/s 的 GPU 间带宽，标准服务器依赖 PCIe（60 GB/s@Gen5 x16）加 IOMMU 和 ACS 的复杂配置，Grace Hopper 用 360 GB/s 片内互联代替 PCIe 但被 HBM 容量限制。选型要匹配工作负载的通信特征，部署前必须用 sim_topo.py、h2d_bench.py 和 NCCL-tests 验证实测性能与规格一致。本章消掉的是硬件选型不当导致的性能惊喜。
+差别不只在带宽。GH200 提供 CPU 和 GPU 之间一致的内存模型[[10]](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)，CPU 和 GPU 合计最多 624 GB 的快速内存[[10]](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)。在这种机器上，前几章讲的 pinned 缓冲、H2D 拷贝这一段的代价变小了，W_host 的大头会转到别处：网卡和存储怎么接、数据在 CPU 内存和显存之间怎么放。这些属于 GH200 自己的调优话题，本篇不展开。
 
-# 第 9 章 · 上线前核对清单与自测
+### 拿到一台新机器先做什么
 
-在部署 GPU 计算集群到生产环境前，需要系统地验证 PCIe 拓扑配置、内存访问性能和网卡集成是否按预期工作。这一章提供一份可执行的清单和自测题，帮助运维和用户快速定位配置问题，避免部署后才发现性能严重不达标。
+不管哪类机器，先把主机链路的账记清楚，再谈调优：
 
-## 9.1 部署前核对清单
+- **定天花板**：每张卡负载下的 PCIe 代际和宽度（nvidia-smi -q 的 Current），或 C2C 这类专用互连的厂商带宽，写清是单向还是双向。
+- **测实际**：bandwidthTest 测 H2D 和 D2H，nvbandwidth 测卡间，nccl-tests 测跨机。
+- **定位等待**：topo -m 记下每对卡、每张卡到最近网卡的符号；topo -cpu 记下每张卡的 NUMA 节点；查 IOMMU 模式和 ACSCtl。
+- **消除或隐藏**：按第 3 到 7 章逐项改：绑核、iommu=pt、关 ACS、加载 nvidia-peermem、确认 GDS 没有退回兼容模式。
+- **复测**：同一组基准再跑一遍，结果存档，作为这类机型的基线。
 
-> 📌 **上线前核对清单**：
-> - 【拓扑】运行 `nvidia-smi topo -m` 获取距离矩阵，用 `python3 sim_topo.py parse` 解析，确认各 GPU 对的距离级别（NVLink=1 或 PCIe=10+）和 P2P capability 状态。记录输出中的 PXB 分组和 NUMA 分布。
-> - 【PCIe 链路】用 `sudo lspci -vvv | grep -A2 "NVIDIA\|LnkSta"` 逐个检查 GPU 的 PCIe 代际和宽度。Gen5 x16 应显示为 `LnkSta: Speed 64GT/s, Width x16`；如果显示 x8、x4 或更低，检查 BIOS 中 PCIe 插槽配置和多 GPU 共享链路的设置。
-> - 【ACS 状态】用 `sudo lspci -vvv | grep -B5 "ACSCtl"` 查看各 PCIe 桥的 ACS 配置，确认是否 `SrcValid+`（启用）或 `SrcValid-`（关闭）。若启用且性能不达标，参考第 7 章的步骤尝试在 BIOS 中禁用或用 `pci=noacs` 内核参数。
-> - 【IOMMU 模式】运行 `cat /proc/cmdline` 查看启动参数中是否有 `iommu=pt` 或 `iommu=on`，用 `dmesg | grep -i iommu | head -5` 确认 IOMMU 是否被启用。若启用且 H2D 带宽低于预期，尝试改为 passthrough 或关闭。
-> - 【H2D 性能】运行 `python3 h2d_bench.py --size 1G --pinned` 测试 pinned 内存的 H2D 拷贝带宽。Gen5 x16 应达 44+ GB/s，Gen4 x16 应达 30+ GB/s。如低于这些值 20% 以上，逐个检查：① 是否用了可分页内存（应改 pinned）；② IOMMU 翻译是否启用（应改 passthrough）；③ PCIe 链路是否降速（应检查 BIOS）；④ 数据源和目标是否跨 NUMA socket（应用 numactl 绑核）。
-> - 【GPU 绑核】若系统是多 socket NUMA，用 `numactl -C <GPU_socket> python3 h2d_bench.py` 验证本地 NUMA socket 的 H2D 带宽与远程 socket 的差异。本地应比远程快 1.3 倍以上。
-> - 【P2P 测试】若拓扑中有 distance=1 的 GPU 对，用 `nvidia-smi topo -p2p` 逐对检查 P2P 能力，应为 Yes；若为 No，说明 IOMMU 或拓扑配置有问题。用 `python3 test_pcie_gdr.py` 运行内置的 P2P 测试。
-> - 【NCCL 路由】若使用 NCCL，运行 `NCCL_DEBUG=TRACE python3 nccl_allreduce_test.py` 捕获通信路由日志，确认是否选用了 P2P（距离近的对）或 RDMA（网卡直达），不要全部走主存中转。
-> - 【网卡与 GPU 位置】若配 GPUDirect RDMA，用 `lspci | grep -E "NVIDIA|Mellanox|Ethernet"` 确认网卡和 GPU 是否在同一个 PXB 子树中。用 `nvidia-smi topo -m` 里的网卡行距离 GPU 应 < 10；若 > 10 可能需要确认是否启用了 ACS 隔离。
-> - 【日志检查】启动一个短训练任务并运行 `dmesg | grep -i "xid\|timeout\|iommu"` 检查是否有 GPU Xid 错误、通信超时或 IOMMU 翻译错误的日志。清空日志后再跑一遍，确保新任务无异常。
+一个常见的误区是把整机厂商的出厂配置当成已经调好。现象是同一型号的两批机器，跨机带宽差了一截。原因是 BIOS 版本、内核参数或系统镜像不同，IOMMU、ACS 这类开关的状态跟着变了，topo -m 却完全一样。改法是把第 9 章的清单做成上线巡检，每台机器都跑，结果和同型号基线比。
 
-## 9.2 性能基线与瓶颈指标
+> 🔑 **本章要点**：DGX H100 的卡间流量走 NVSwitch，但 GPU 到 CPU 内存、网卡和 NVMe 仍走 PCIe，挂在两颗 CPU 之下，前七章的检查都要做。GH200 用 NVLink-C2C 代替 PCIe 连接 CPU 和 GPU，厂商口径 900 GB/s、7 倍于 Gen5，按双向合计算对得上。这一章是五步闭环的“定天花板”：先认清一台机器的主机链路由哪几段组成。
 
-根据前面各章的内容，以下是 PCIe 链路相关的性能基线。这些数据适用于配置正确、无故障的硬件和驱动。
+## 第 9 章 · 上线前核对清单与自测
 
-**H2D 拷贝带宽**：PCIe Gen5 x16 with pinned 内存应达 44+ GB/s，代码实测参考 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf) 和 code_outputs.md 的 sim_pcie_bw.py h2d 输出（47 GB/s）。PCIe Gen4 x16 应达 30+ GB/s。如果低于这些值 20% 以上，优先排查内存分页模式和 IOMMU 翻译。
+前八章沿五步闭环处理了主机链路上的等待：第 1 章定天花板，第 2、7 章定位数据实际走的路，第 3 到 6 章把 NUMA、IOMMU、主机中转缓冲这几类等待消除或隐藏，第 8 章拿两类机器练习。本章把这些压成一张上线前的核对清单，再配上代码练习和自测题。
 
-**GPU 间点对点带宽**：同一 NVSwitch 或 PXB 内的 GPU 对，距离为 1 的应达 300+ GB/s（NVLink4），距离为 10 的应达 60+ GB/s（PCIe Gen5 x16）。跨 NUMA socket 的 GPU 对带宽通常 8-15 GB/s，远低于 PXB 内的，这是正常的。
+### 📌 核对清单
 
-**小包延迟**：CPU 到 GPU 的 64 字节写入延迟在 NUMA 本地应 < 1 微秒，NUMA 远端应 1.2-1.5 微秒。跨 NUMA 超过 baseline 的 1.5 倍时，检查是否启用了 IOMMU 翻译或 ACS。
+| 检查项 | 怎样查 | 通过的标志 |
+|---|---|---|
+| 链路没有降速降宽 | 负载下用 nvidia-smi -q 对比 GPU Link 的 Max 和 Current，或 lspci 的 LnkCap 和 LnkSta；bandwidthTest 测 H2D、D2H（第 1 章） | 负载下 Current 等于 Max，实测和同型号机器一致 |
+| 拓扑记录在案 | nvidia-smi topo -m、topo -p2p p；NCCL_TOPO_DUMP_FILE 导出 NCCL 看到的拓扑（第 2 章） | 符号和机型手册一致，P2P 矩阵非对角线全是 OK |
+| 进程和内存绑在 GPU 那一侧 | topo -cpu 找节点，numactl 同时绑 CPU 和内存，numastat 核对（第 3 章） | 每个 rank 的内存落在它那张卡所在的节点 |
+| pinned 内存复用 | 查 DataLoader 的 pin_memory 和自定义缓冲的分配位置（第 4 章） | 缓冲预分配后反复使用，训练循环里没有现分配 |
+| 裸机 IOMMU 不在翻译模式 | cat /proc/cmdline；dmesg 里找 Default domain type（第 4 章） | 裸机是直通或关闭；虚拟机开 IOMMU 并用 VFIO |
+| ACS 状态符合节点类型 | sudo lspci -vvv 看 ACSCtl；重启后再查一次（第 7 章） | 裸机没有 SrcValid+；虚拟机保留 ACS、网卡开 ATS |
+| P2P 正确且够快 | simpleP2P 查正确性，nvbandwidth 测卡间带宽（第 7 章） | 最后一行 Test passed，带宽和同型号一致 |
+| GPUDirect RDMA 生效 | lsmod 查 nvidia-peermem 或确认 DMA-BUF；topo -m 看 GPU 到网卡的符号（第 5 章） | 模块已加载，每张卡用同一 PCIe switch 下的网卡 |
+| GDS 没有退回兼容模式 | gdscheck.py -p；cufile.json 的 allow_compat_mode；cufile.log（第 6 章） | 日志里没有 cufile IO mode: POSIX |
 
-**ACS 与 IOMMU 的单独影响**：无 ACS 且无 IOMMU 翻译的裸机系统，H2D 应接近 47 GB/s；启用仅 IOMMU 翻译时，应损失 10-15%（到 37-40 GB/s），参考第 4 章；启用 ACS 时额外损失 15-25%（到 33-37 GB/s）。两者同时启用时累加损失可达 35-40%（到 26-28 GB/s）。
+### 代码练习
 
-**跨 NUMA 小包**：当数据跨越 CPU socket 时，64 字节拷贝的带宽会从单 socket 的 44+ GB/s 跌到 10-15 GB/s，这是由 UPI/GMI 链路的拓扑和 IOMMU 翻译的成本决定的。这种情况下绑核和本地 NUMA 内存分配是必须的优化。
+zero-to-gpu/11-pcie-gdr/ 下有 sim_pcie_bw.py、sim_topo.py 和 test_pcie_gdr.py，只需 Python。这几个脚本是按简化模型写的，有几处和正文核实过的资料不符，跑的时候对照着看：
 
-## 9.3 故障排查与升级路径
+- `python3 sim_pcie_bw.py peak`：Gen5 x16 单向 64.0 GB/s 是编码前的数，编码后是第 1 章表里的 63.015 GB/s[[1]](https://en.wikipedia.org/wiki/PCI_Express)。
+- `python3 sim_pcie_bw.py h2d`：先扣编码得 63.0，这一步对；之后的 MPS 包头扣 17%、ACK 往返再扣 10%、得出 47.1 GB/s，是脚本自设的假设，没有出处。d2h 的“比 H2D 慢 9%”和 pinned 命令的 2.22 倍也一样。把它们当成练习“逐项扣减”的思路，实际数字用 bandwidthTest 测。
+- `python3 sim_pcie_bw.py topo` 和 `python3 sim_topo.py sample`：用 1、10、20 这样的距离数值表示拓扑，真实的 topo -m 填的是 NV#、PIX、PXB、PHB、NODE、SYS 这些符号（第 2 章）[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)。sample 里的“两个 NVSwitch 组之间走 PCIe”也和 DGX H100 不符，那台机器的卡间走 NVSwitch，900 GB/s（第 8 章）[[9]](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)。
+- `python3 test_pcie_gdr.py`：断言了“Gen4 用 8b/10b、编码效率 80%”，这是错的，PCIe 从 3.0 起就用 128b/130b[[1]](https://en.wikipedia.org/wiki/PCI_Express)。测试全过只说明代码和它自己的假设一致。
 
-如果 H2D 测得的带宽低于预期 20% 以上，按以下顺序排查和优化：
+### 自测题
 
-**第一步：确认内存类型**。运行 `python3 h2d_bench.py --pageable` 和 `--pinned` 分别测试可分页和 pinned 内存。如果 pinned 比 pageable 快不足 1.3 倍，说明应用没有用上 pinned 内存。改用 cuMemAllocHost（C/C++ 和 CUDA）或 torch.cuda.pinned_memory（PyTorch）分配内存。
+<b>1. 一张 Gen5 x16 的卡，H2D 的天花板怎么定？</b>
 
-**第二步：关闭不必要的 IOMMU**。查看 `/proc/cmdline` 中是否有 `iommu=on` 或 `intel_iommu=on`。若有且 H2D 损失 > 15%，尝试改为 `iommu=pt`（passthrough，仅部分设备翻译）或 `iommu=off`（完全关闭，仅在信任环境）。改完要重启生效。
+答：取三者中最小的：规格表的单向编码后带宽 63.015 GB/s[[1]](https://en.wikipedia.org/wiki/PCI_Express)，负载下 nvidia-smi -q 显示的 Current 代际和宽度对应的值（空闲时它可能降下来）[[3]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)，同型号机器上 bandwidthTest 的实测。规格还要再扣数据链路层的开销，公开测量里约 8% 到 10%[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)，所以不要拿 63 当目标。
 
-**第三步：检查 PCIe 链路配置**。用 `lspci -vvv | grep -A1 "NVIDIA" | grep LnkSta` 逐个确认 GPU 的 PCIe 代际和宽度。如果看到 x8、x4 或更低，检查 BIOS 中的 PCIe slot 配置，通常需要：① 调整 PCIe 插槽的优先级或共享模式；② 禁用不用的 GPU 插槽以避免带宽分享；③ 关闭集成显卡或网卡来释放 PCIe 资源。
+<b>2. topo -m 上两张卡是 SYS，NCCL 会怎么传？</b>
 
-**第四步：确认 NUMA 绑核**。用 `numactl -C <GPU_socket> python3 h2d_bench.py` 测跨 socket 数据移动。如果本地 socket 比远程快 < 1.2 倍，说明 CPU 和 GPU 没有正确绑到同一 socket，或操作系统没有尊重 NUMA 亲和性。用 `numactl --hardware` 查看 socket 布局，用 `numactl --cpunodebind --membind` 强制绑核。
+答：看 NCCL_P2P_LEVEL。它定义 NCCL 愿意用 P2P 的最大距离，没设时由 NCCL 按架构和环境自选[[4]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)。上限没到 SYS，这对卡之间就不走 P2P，改经主机内存中转。
 
-**第五步：处理 ACS 隔离**。若前四步都正常但 H2D 仍低于预期，用 `lspci -vvv | grep "ACSCtl.*SrcValid+"` 检查是否有启用的 ACS。若有，按第 7 章的步骤关闭：优先 BIOS，其次内核参数 `pci=noacs`，最后 setpci。关闭前先用 `nvidia-smi topo -p2p` 记录当前 P2P 状态，关闭后重新检测，性能应有 10-25% 的提升。
+<b>3. 只用 taskset 绑了 CPU，拷贝带宽没变，为什么？</b>
 
-完成上述排查后，再运行一轮完整的训练步骤（forward + backward + optimizer）并记录 W_host 的占比。用第 1 章的公式 T = T_compute + W_mem + W_host + W_comm + W_idle，计算 W_host 从优化前的百分比降到优化后的百分比。如果 W_host 仍占 10% 以上，瓶颈可能已转移到网络通信（W_comm）或多卡间的数据交换，这时需要参考 [GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)（多卡隔离与 all-reduce 优化）或 [GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)（张量并行通信优化）的方案。如果 W_host 已降到 5% 以下，说明单机链路已优化到位，后续优化应聚焦计算密度和分布式通信策略。
+答：内存还按默认策略分配，pinned 缓冲可能在另一个节点。要同时用 --membind 把内存绑到 GPU 所在节点[[13]](https://man7.org/linux/man-pages/man8/numactl.8.html)，并在分配缓冲之前绑好。公开测量里，远端节点的代价集中在小块 DMA 读：64 字节读降 20%，512 字节读看不出差别[[2]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)。
 
-> 📌 **自测题**（部署前必做）：
-> - **题 1：H2D 带宽**（3 分）。PCIe Gen5 x16 with pinned 内存的理论峰值是多少 GB/s？你的机器实测是多少？如果相差 20% 以上，最可能的原因是什么？（答：峰值 47 GB/s，参考 code_outputs.md 的 sim_pcie_bw.py h2d 输出；实测应提交 benchmark 结果；原因可能是 IOMMU 翻译、ACS 隔离、可分页内存或 PCIe 降速）
-> - **题 2：GPU 拓扑**（3 分）。运行 `nvidia-smi topo -m` 并用 `sim_topo.py parse` 解析，说明有多少个 NVLink 对（distance=1）和多少个 PCIe 对（distance=10 或以上）。这决定了 all-reduce 能否达到线性扩展。（答：交付 topo 矩阵和 parse 输出；指出 NVLink 对数与 PCIe 对数；说明 all-reduce 的路由策略是否会被迫用主存中转）
-> - **题 3：IOMMU 与 ACS**（3 分）。查看 `/proc/cmdline` 和 `lspci -vvv`，当前系统的 IOMMU 模式是什么？ACS 是否启用？如果 H2D 低于 40 GB/s，这两个因素各贡献多少性能损失？（答：提交 cmdline 和 lspci 输出；说明 IOMMU 模式（off/pt/on）和 ACS 状态；用第 4 章和第 7 章的损失模型估算，或用消融实验测量）
-> - **题 4：NUMA 亲和性**（3 分）。在本地 socket 和远程 socket 分别运行 `python3 h2d_bench.py --size 1G`，记录带宽。本地应比远程快多少倍？如果小于 1.2 倍，原因是什么？（答：提交两个测试结果；应快 1.3-1.5 倍；原因可能是 CPU 和 GPU 没有在同一 socket 或 IOMMU 的远端翻译成本被分摊）
-> - **题 5：NCCL 通信路由**（3 分）。运行 `NCCL_DEBUG=TRACE python3 -c "import torch.distributed as dist; dist.init_process_group('nccl'); ..."` 并捕获日志。NCCL 选择的通信算法是什么（ring/tree/etc）？是否使用了 P2P（path=P2P）或 RDMA（path=RDMA）？为什么？（答：提交 NCCL 日志片段；说明算法和路径选择；解释是否基于拓扑距离或设备能力）
-> - **题 6：故障恢复**（3 分）。假设 H2D 实测只有 25 GB/s（PCIe Gen5 x16），比理论的 47 GB/s 低 43%。按第 9.3 节的排查步骤，逐个验证可分页内存、IOMMU 模式、PCIe 链路宽度、NUMA 绑核、ACS 状态，说明哪一个或哪几个问题最可能导致这样的性能损失。（答：用消融法测试各因素单独的影响，给出排查报告，指出根因并提出修复方案）
+<b>4. 裸机训练节点为什么不能开 IOMMU 翻译模式？</b>
 
-瓶颈转移：一旦 W_host 优化完毕，GPU 等主机链路这一类等待被识别和消除或隐藏后，性能瓶颈将转移到多卡协调。垂直方向的扩展，在单机内增加 GPU 卡数或增加并行度，这受到 PCIe 总带宽和 GPU 间 all-reduce 效率的限制，由 [GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md) 的多卡隔离与通信优化负责。水平方向的扩展，跨越多个节点的分布式训练，这里 W_comm（节点间网络通信）和 W_idle（通信等待时间）成为新的等待项，由 [GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md) 的分布式优化和 [GPU-14｜单机｜性能分析与 Profiling](./14-profiling.md) 的集合通信算法负责。两条线都需要用本章确立的基准和排查方法来验证每一步的性能收益。
+答：CUDA 和驱动不支持开着 IOMMU 的裸机 PCIe P2P，可能静默破坏显存[[5]](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html)。症状常常像框架 bug[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)。裸机用 iommu=pt 或关闭 IOMMU；虚拟机相反，开 IOMMU 并用 VFIO 直通。
 
-> 🔑 **本章要点**：部署 GPU 集群前，必须用 sim_topo.py、h2d_bench.py 和 NCCL-tests 逐一验证 PCIe 拓扑、H2D 链路、IOMMU/ACS 配置和网卡集成是否按预期工作。核对清单涵盖 10 个检查点，性能基线参考 [[1]](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf) 和 [[9]](https://arxiv.org/abs/1903.04611) 的基准数据，给出了 Gen5 x16 应达 44+ GB/s、P2P 应达 60-300+ GB/s 等具体指标。故障排查按内存类型、IOMMU 模式、PCIe 链路、NUMA 绑核、ACS 状态的顺序逐步排除。排查参考 [[3]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)（NCCL 通信路由）和 [[16]](https://docs.kernel.org/arch/x86/iommu.html)（IOMMU 配置），找到根因后，W_host 应从初测的 15-25% 降到最终的 5% 以下。本章消掉的是部署后才发现的配置问题导致的性能时间账偏差。
+<b>5. topo -m 是 PIX，卡间带宽却很低，甚至 NCCL 挂起，先查什么？</b>
 
-# 参考文献
+答：查 ACS。ACS 打开时，switch 把所有点对点流量改道到根复合体，会显著降速甚至挂起[[8]](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)，而 topo -m 看不出这种改道。用 lspci -vvv 找 SrcValid+；用 NCCL_P2P_DISABLE 关掉 P2P 再跑一次做对照。
 
-按正文首次引用顺序编号，资料截至 2026 年 11 月初。
+<b>6. 应用改用了 cuFile，怎么确认真的走了 GDS？</b>
 
-[1] Neugebauer et al. Understanding PCIe performance for end host networking. SIGCOMM (2018) [www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)
+答：GDS 条件不满足时会退回 POSIX 兼容模式，程序照常运行。要查 gdscheck.py -p 的输出和 cufile.json 的 allow_compat_mode，并在 cufile.log 里确认没有 cufile IO mode: POSIX[[7]](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)。
 
-[2] NVIDIA. NCCL src/graph/paths.cc 源码 (2026) [github.com/NVIDIA/nccl/blob/master/src/graph/paths.cc](https://github.com/NVIDIA/nccl/blob/master/src/graph/paths.cc)
+### 下一步
 
-[3] NVIDIA. NCCL Troubleshooting: GPU Direct (2026) [docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)
+本篇处理的是一台机器里 GPU 和主机、网卡、存储之间的链路。这些路径理顺之后，下一个问题是同一台机器上的多个作业怎么分 GPU：MIG 把一张卡切成彼此隔离的实例，MPS 让多个进程共享一张卡。GPU-12（[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)）讲这两种共享方式和它们的隔离边界。
 
-[4] NVIDIA. H100 Tensor Core GPU 产品规格 (2023) [www.nvidia.com/en-us/data-center/h100/](https://www.nvidia.com/en-us/data-center/h100/)
+> 🔑 **本章要点**：上线前核对九项：链路速率、拓扑记录、NUMA 绑定、pinned 复用、IOMMU 模式、ACS 状态、P2P 正确性、GPUDirect RDMA、GDS 模式。代码练习里的 H2D 扣减比例、拓扑距离数值和 8b/10b 断言与资料不符，以正文为准。这一章是五步闭环的“复测”：每台机器按清单跑一遍，结果和同型号基线比。
 
-[5] NVIDIA. DGX H100/H200 User Guide: Introduction (2026) [docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)
+## 参考文献
 
-[6] Wikipedia. PCI Express 词条（汇总 PCI-SIG 各代规格） [en.wikipedia.org/wiki/PCI_Express](https://en.wikipedia.org/wiki/PCI_Express)
+按正文首次引用顺序编号，资料截至 2026 年 11 月中。
 
-[7] NVIDIA. nvidia-smi 文档 (2026) [docs.nvidia.com/deploy/nvidia-smi/index.html](https://docs.nvidia.com/deploy/nvidia-smi/index.html)
+[1] Wikipedia. PCI Express [en.wikipedia.org/wiki/PCI_Express](https://en.wikipedia.org/wiki/PCI_Express)
 
-[8] man7.org. lspci(8) [man7.org/linux/man-pages/man8/lspci.8.html](https://man7.org/linux/man-pages/man8/lspci.8.html)
+[2] Neugebauer et al. Understanding PCIe performance for end host networking. SIGCOMM 2018 [www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf](https://www.cl.cam.ac.uk/research/srg/netos/projects/pcie-bench/neugebauer2018understanding.pdf)
 
-[9] Li et al. Evaluating Modern GPU Interconnect: PCIe, NVLink, NV-SLI, NVSwitch and GPUDirect. IEEE TPDS (2019) [arxiv.org/abs/1903.04611](https://arxiv.org/abs/1903.04611)
+[3] NVIDIA. nvidia-smi documentation [docs.nvidia.com/deploy/nvidia-smi/index.html](https://docs.nvidia.com/deploy/nvidia-smi/index.html)
 
-[10] Fusco et al. Understanding Data Movement in Tightly Coupled Heterogeneous Systems: A Case Study with the Grace Hopper Superchip. arXiv (2024) [arxiv.org/abs/2408.11556](https://arxiv.org/abs/2408.11556)
+[4] NVIDIA. NCCL User Guide: Environment Variables [docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)
 
-[11] NVIDIA. CUDA Programming Guide 2.6 Unified and System Memory (2026) [docs.nvidia.com/cuda/cuda-programming-guide/02-basics/understanding-memory.html](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/understanding-memory.html)
+[5] NVIDIA. CUDA Programming Guide: Multi-GPU Systems [docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/multi-gpu-systems.html)
 
-[12] man7.org. numactl(8) [man7.org/linux/man-pages/man8/numactl.8.html](https://man7.org/linux/man-pages/man8/numactl.8.html)
+[6] NVIDIA. Developing a Linux Kernel Module using GPUDirect RDMA [docs.nvidia.com/cuda/gpudirect-rdma/index.html](https://docs.nvidia.com/cuda/gpudirect-rdma/index.html)
 
-[13] NVIDIA. CUDA C++ Best Practices Guide (2026) [docs.nvidia.com/cuda/cuda-c-best-practices-guide/](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)
+[7] NVIDIA. GPUDirect Storage Troubleshooting Guide [docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf](https://docs.nvidia.com/gpudirect-storage/pdf/troubleshooting-guide.pdf)
 
-[14] PyTorch. CUDA semantics (2026) [pytorch.org/docs/stable/notes/cuda.html](https://pytorch.org/docs/stable/notes/cuda.html)
+[8] NVIDIA. NCCL User Guide: Troubleshooting (GPU Direct) [docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/gpu_troubleshooting.html)
 
-[15] NVIDIA. Developing a Linux Kernel Module using GPUDirect RDMA (2026) [docs.nvidia.com/cuda/gpudirect-rdma/](https://docs.nvidia.com/cuda/gpudirect-rdma/)
+[9] NVIDIA. DGX H100/H200 User Guide: Introduction [docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html](https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html)
 
-[16] Linux Kernel Documentation. x86 IOMMU Support [docs.kernel.org/arch/x86/iommu.html](https://docs.kernel.org/arch/x86/iommu.html)
+[10] NVIDIA. GH200 Grace Hopper Superchip [www.nvidia.com/en-us/data-center/grace-hopper-superchip/](https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/)
 
-[17] NVIDIA. DCGM 文档 (2026) [docs.nvidia.com/datacenter/dcgm/latest/](https://docs.nvidia.com/datacenter/dcgm/latest/)
+[11] NVIDIA. Hopper Tuning Guide [docs.nvidia.com/cuda/hopper-tuning-guide/index.html](https://docs.nvidia.com/cuda/hopper-tuning-guide/index.html)
 
-[18] Yuan et al. Cost-Efficient LLM Training with Lifetime-Aware Tensor Offloading via GPUDirect Storage. arXiv (2025) [arxiv.org/abs/2506.06472](https://arxiv.org/abs/2506.06472)
+[12] NVIDIA. CUDA C++ Best Practices Guide [docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)
 
-[19] NVIDIA. nccl-tests 代码仓库 [github.com/NVIDIA/nccl-tests](https://github.com/NVIDIA/nccl-tests)
+[13] man7.org. numactl(8) [man7.org/linux/man-pages/man8/numactl.8.html](https://man7.org/linux/man-pages/man8/numactl.8.html)
 
-[20] NVIDIA. NCCL Performance and Tuning (2026) [docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/performance_and_tuning.html](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting/performance_and_tuning.html)
+[14] The Linux Kernel documentation. Kernel parameters [docs.kernel.org/admin-guide/kernel-parameters.html](https://docs.kernel.org/admin-guide/kernel-parameters.html)
 
-[21] NVIDIA. NCCL Environment Variables (2026) [docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)
+[15] NVIDIA. GPUDirect Storage Design Guide [docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf](https://docs.nvidia.com/gpudirect-storage/pdf/design-guide.pdf)
 
-[22] NVIDIA. GPUDirect Storage Troubleshooting Guide (2026) [docs.nvidia.com/gpudirect-storage/troubleshooting-guide/index.html](https://docs.nvidia.com/gpudirect-storage/troubleshooting-guide/index.html)
-
-[23] NVIDIA Technical Blog. GPUDirect Storage: A Direct Path Between Storage and GPU Memory (2019) [developer.nvidia.com/blog/gpudirect-storage/](https://developer.nvidia.com/blog/gpudirect-storage/)
-
-[24] NVIDIA. GPUDirect Storage 文档 (2026) [docs.nvidia.com/gpudirect-storage/](https://docs.nvidia.com/gpudirect-storage/)
-
-[25] Linux Kernel Documentation. PCI Peer-to-Peer DMA Support [www.kernel.org/doc/html/latest/driver-api/pci/p2pdma.html](https://www.kernel.org/doc/html/latest/driver-api/pci/p2pdma.html)
-
-[26] man7.org. setpci(8) [man7.org/linux/man-pages/man8/setpci.8.html](https://man7.org/linux/man-pages/man8/setpci.8.html)
-
-[27] An et al. Fire-Flyer AI-HPC: A Cost-Effective Software-Hardware Co-Design for Deep Learning. SC (2024) [arxiv.org/abs/2408.14158](https://arxiv.org/abs/2408.14158)
-
-[28] Sun et al. Demystifying CXL Memory with Genuine CXL-Ready Systems and Devices. MICRO (2023) [arxiv.org/abs/2303.15375](https://arxiv.org/abs/2303.15375)
+[16] NVIDIA. GPUDirect Storage Overview Guide [docs.nvidia.com/gpudirect-storage/overview-guide/index.html](https://docs.nvidia.com/gpudirect-storage/overview-guide/index.html)
 
 ---
 

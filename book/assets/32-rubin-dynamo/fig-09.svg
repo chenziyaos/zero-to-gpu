@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">DeepSeek-V3 解码每步：字节省下来以后，通信露了出来</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每卡 64 请求、上下文 4096、72 卡专家并行；主编估算，单位 ms</text>
+<text x="358" y="168" font-size="14" fill="#1F2329" text-anchor="end">GB300 读内存（FP8 权重 + BF16 KV）</text>
+<rect x="370" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="150" width="700" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="1078" y="168" font-size="13" fill="#646A73">  3.47</text>
+<text x="358" y="210" font-size="14" fill="#1F2329" text-anchor="end">Rubin 读内存（同上）</text>
+<rect x="370" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="192" width="290" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="668" y="210" font-size="13" fill="#646A73">  1.44</text>
+<text x="358" y="252" font-size="14" fill="#1F2329" text-anchor="end">Rubin 读内存（NVFP4 + FP8 KV）</text>
+<rect x="370" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="234" width="151" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="529" y="252" font-size="13" fill="#646A73">  0.75</text>
+<text x="358" y="294" font-size="14" fill="#1F2329" text-anchor="end">Rubin all-to-all</text>
+<rect x="370" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="276" width="87" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="465" y="294" font-size="13" fill="#646A73">  0.43</text>
+<text x="358" y="336" font-size="14" fill="#1F2329" text-anchor="end">Rubin FP8 计算</text>
+<rect x="370" y="318" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="318" width="54" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="432" y="336" font-size="13" fill="#646A73">  0.27</text>
+<rect x="40" y="374" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="403" font-size="15" fill="#1F2329">KV 占读取字节的 66%；量化后 all-to-all 约为读内存时间的 57%，能否重叠决定每步时间。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：DeepSeek-V3 配置与技术报告；NVIDIA 产品页；主编核算（假设见正文）</text>
+</svg>

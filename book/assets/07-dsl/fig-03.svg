@@ -1,39 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="780"
-     viewBox="-20 -20 1240 780">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="740" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Autotune 配置空间与 SMEM 过滤</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">288 个候选 → 128 通过 SMEM 检查 → 3-5 个有竞争力；FP16 存活率 44.4%</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="980" height="105" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:3" transform="translate(40, 165)"><rect x="0" y="0" width="6" height="105" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:3" transform="translate(442.5, 185.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="87.5"><tspan x="87.5" y="23.53"><tspan x="17.53" text-anchor="start">288 个候选配置</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(393, 225.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="137"><tspan x="137" y="15.295"><tspan x="-6.295" text-anchor="start">M×N×K {16,32,64}³ × 深度 {3,4,5} × warp {4,8}</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(530, 274)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 22"/></g>
-<g id="d2:1" transform="translate(521.5, 283.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 17 15"><g transform="translate(-521.5 -283.5)"><polygon points="524,286 530,296 536,286" fill="#3370FF" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="17" height="15"/></g>
-<g id="o2:4" transform="translate(312, 300)"><rect x="0" y="0" width="435" height="105" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:5" transform="translate(312, 300)"><rect x="0" y="0" width="6" height="105" fill="#34c724" stroke="#34c724" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:5" transform="translate(410, 320.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="120"><tspan x="120" y="23.53"><tspan x="26.04" text-anchor="start">128 通过 SMEM 检查</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(385.5, 360.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="144.5"><tspan x="144.5" y="15.295"><tspan x="3.305" text-anchor="start">2 × SMEM(A) + 2 × SMEM(B) ≤ 96 KB（H100）</tspan></tspan></text></g>
-<g id="c2:2" transform="translate(530, 409)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 22"/></g>
-<g id="d2:2" transform="translate(521.5, 418.5)"><defs><symbol id="svgicon-d2-2" viewBox="0 0 17 15"><g transform="translate(-521.5 -418.5)"><polygon points="524,421 530,431 536,421" fill="#3370FF" /></g></symbol></defs><use href="#svgicon-d2-2" x="0" y="0" width="17" height="15"/></g>
-<g id="o2:6" transform="translate(390, 435)"><rect x="0" y="0" width="280" height="105" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:7" transform="translate(390, 435)"><rect x="0" y="0" width="6" height="105" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:7" transform="translate(445, 455.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="85"><tspan x="85" y="23.53"><tspan x="17.23" text-anchor="start">3-5 个最优配置</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(426, 495.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="104"><tspan x="104" y="15.295"><tspan x="0" text-anchor="start">实测性能竞争力（缓存供生产复用）</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(40, 165)"><rect x="0" y="0" width="320" height="165" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:9" transform="translate(56, 176.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">过滤规则</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(56, 207.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">SMEM(A) = 128×32 × 2B = 8 KB</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(56, 229.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">SMEM(B) = 32×128 × 2B = 8 KB</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(56, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">双缓冲 × 2 + 同步开销 ≈ 67.6 KB</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(56, 273.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">256×256 块超限被过滤</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(40, 330)"><rect x="0" y="0" width="320" height="160" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:14" transform="translate(56, 341.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">实战三件事</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(56, 372.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">前置过滤：先按 dtype 与 SMEM 上限筛</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(56, 394.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">缓存结果：autotune 跑一次 数小时</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(56, 416.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">reset_to_zero：复用配置时清零累积</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 600)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:18" transform="translate(56, 609.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">扫描的成本</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(56, 643.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">Autotune 不是蛮力扫：先用硬件限制（SMEM 96 KB、寄存器 64K/线程、波次）砍掉 56% 配置；剩下少数实测；最优结果被缓存到内核表里</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(40, 701.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-07 代码输出（autotune sweep）</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 550" width="1200" height="550">
+<rect x="0" y="0" width="1200" height="550" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Triton 的一个程序实例：拿块号、成块读、成块算、成块写</text>
+<text x="40" y="92" font-size="14" fill="#646A73">矩阵乘里每个程序实例负责输出 C 的一块，沿 K 维循环累加</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">tl.program_id</text>
+<text x="56" y="211" font-size="14" fill="#646A73">知道自己是第几块</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">tl.load + mask</text>
+<text x="347" y="211" font-size="14" fill="#646A73">读 A、B 各一块，越界部分屏蔽</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">tl.dot</text>
+<text x="638" y="211" font-size="14" fill="#646A73">块级矩阵乘，累加到</text>
+<text x="638" y="234" font-size="14" fill="#646A73">accumulator</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">tl.store</text>
+<text x="929" y="211" font-size="14" fill="#646A73">把 C 的这一块写回</text>
+<rect x="40" y="294" width="548" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="326" font-size="18" fill="#1F2329" font-weight="bold">你决定</text>
+<text x="56" y="356" font-size="14" fill="#646A73">块大小、块的处理顺序（GROUP_SIZE_M）</text>
+<text x="56" y="379" font-size="14" fill="#646A73">候选配置和 autotune 的 key</text>
+<rect x="612" y="294" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="628" y="326" font-size="18" fill="#1F2329" font-weight="bold">编译器决定</text>
+<text x="628" y="356" font-size="14" fill="#646A73">块内线程分工、是否经共享内存</text>
+<text x="628" y="379" font-size="14" fill="#646A73">按目标架构选 Tensor Core 指令</text>
+<rect x="40" y="435" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="464" font-size="15" fill="#1F2329">autotune 的 key 一变，所有候选配置重测一遍；线上服务要离线调好常见形状。</text>
+<text x="40" y="526" font-size="12" fill="#646A73">来源：Triton 文档 Tutorial: Matrix Multiplication；Introduction</text>
 </svg>

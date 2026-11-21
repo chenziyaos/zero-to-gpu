@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470">
+<rect x="0" y="0" width="1200" height="470" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Hopper：乘加、搬运、同步三样都换成大粒度的异步操作</text>
+<text x="40" y="92" font-size="14" fill="#646A73">H100 SXM5：132 个 SM，每 SM 乘加速率是 A100 的 2 倍</text>
+<rect x="40" y="150" width="357" height="174" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">wgmma</text>
+<text x="56" y="211" font-size="14" fill="#646A73">warpgroup = 4 个连续 warp</text>
+<text x="56" y="234" font-size="14" fill="#646A73">m64nNk16，N 最大 256</text>
+<text x="56" y="257" font-size="14" fill="#646A73">一条是 m16n8k16 的 128 倍</text>
+<text x="56" y="280" font-size="14" fill="#646A73">操作数可取自共享内存</text>
+<text x="56" y="303" font-size="14" fill="#646A73">要求 sm_90a</text>
+<rect x="421" y="150" width="357" height="150" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="437" y="181" font-size="18" fill="#1F2329" font-weight="bold">TMA</text>
+<text x="437" y="211" font-size="14" fill="#646A73">一条指令搬整块</text>
+<text x="437" y="234" font-size="14" fill="#646A73">少量线程用满带宽</text>
+<text x="437" y="257" font-size="14" fill="#646A73">cp.async.bulk.tensor</text>
+<text x="437" y="280" font-size="14" fill="#646A73">集群内线程块互拷</text>
+<rect x="803" y="150" width="357" height="128" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="819" y="181" font-size="18" fill="#1F2329" font-weight="bold">同步与共享</text>
+<text x="819" y="211" font-size="14" fill="#646A73">异步事务屏障</text>
+<text x="819" y="234" font-size="14" fill="#646A73">线程块集群</text>
+<text x="819" y="257" font-size="14" fill="#646A73">分布式共享内存</text>
+<rect x="40" y="354" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="382" font-size="15" fill="#1F2329">稠密 FP16 约 989.5 TFLOPS（规格页 1979 为稀疏），带宽 3.35 TB/s，脊点约 295。</text>
+<text x="40" y="446" font-size="12" fill="#646A73">来源：NVIDIA Hopper 技术博客；PTX ISA（wgmma、cp.async.bulk.tensor）；CUTLASS 文档</text>
+</svg>

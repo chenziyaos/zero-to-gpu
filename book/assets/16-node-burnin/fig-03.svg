@@ -1,49 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="980"
-     viewBox="-20 -20 1240 980">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="940" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">8 卡 NVSwitch 拓扑与单链吞吐分布</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">环形排列 8 个 GPU，中间 NVSwitch；每条链路标注单向 GB/s</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(520, 440)"><rect x="0" y="0" width="160" height="80" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:3" transform="translate(576.5, 465.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="23.5"><tspan x="23.5" y="20.001"><tspan x="6.67" text-anchor="start">NVS</tspan></tspan></text></g>
-<g id="c3:1" transform="translate(600, 160)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 320 L 0 0"/></g>
-<g id="o3:3" transform="translate(558, 132)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:4" transform="translate(575, 149.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU0</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(585.5, 299.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">385</tspan></tspan></text></g>
-<g id="c3:2" transform="translate(600, 254)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 226 L 226 0"/></g>
-<g id="o3:4" transform="translate(784, 226)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:6" transform="translate(801, 243.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU1</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(698.5, 346.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">388</tspan></tspan></text></g>
-<g id="c3:3" transform="translate(600, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 320 0"/></g>
-<g id="o3:5" transform="translate(878, 452)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:8" transform="translate(895, 469.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU2</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(745.5, 459.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">380</tspan></tspan></text></g>
-<g id="c3:4" transform="translate(600, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 226 226"/></g>
-<g id="o3:6" transform="translate(784, 678)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:10" transform="translate(801, 695.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU3</tspan></tspan></text></g>
-<g id="a3:11" transform="translate(698.5, 572.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">385</tspan></tspan></text></g>
-<g id="c3:5" transform="translate(600, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 320"/></g>
-<g id="o3:7" transform="translate(558, 772)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:12" transform="translate(575, 789.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU4</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(585.5, 619.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">388</tspan></tspan></text></g>
-<g id="c3:6" transform="translate(374, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 226 0 L 0 226"/></g>
-<g id="o3:8" transform="translate(332, 678)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:14" transform="translate(349, 695.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU5</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(472.5, 572.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">385</tspan></tspan></text></g>
-<g id="c3:7" transform="translate(280, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 320 0 L 0 0"/></g>
-<g id="o3:9" transform="translate(238, 452)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:16" transform="translate(255, 469.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU6</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(425.5, 459.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">380</tspan></tspan></text></g>
-<g id="c3:8" transform="translate(374, 254)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 226 226 L 0 0"/></g>
-<g id="o3:10" transform="translate(332, 226)"><rect x="0" y="0" width="84" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:18" transform="translate(349, 243.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="16.471"><tspan x="5.945" text-anchor="start">GPU7</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(472.5, 346.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="14.5"><tspan x="14.5" y="14.118"><tspan x="3.88" text-anchor="start">388</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(40, 860)"><rect x="0" y="0" width="14" height="14" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:20" transform="translate(62, 856.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">≥ 360 GB/s（正常）</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(260, 860)"><rect x="0" y="0" width="14" height="14" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:21" transform="translate(282, 856.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">300-360 GB/s（警告）</tspan></tspan></text></g>
-<g id="o3:13" transform="translate(480, 860)"><rect x="0" y="0" width="14" height="14" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:22" transform="translate(502, 856.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">＜ 300 GB/s（故障）</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(40, 901.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：nvidia-smi topo；nccl-tests point-to-point</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+<rect x="0" y="0" width="1200" height="560" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">静态体检：只读状态，几秒钟排掉配置问题</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每一项都和机型的期望值比，不一致就先修</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">项目</text>
+<text x="290" y="166" font-size="14" fill="#1F2329" font-weight="bold">读哪里</text>
+<text x="710" y="166" font-size="14" fill="#1F2329" font-weight="bold">期望</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">持久模式</text>
+<text x="290" y="206" font-size="14" fill="#1F2329">nvidia-smi -q：Persistence Mode</text>
+<text x="710" y="206" font-size="14" fill="#1F2329">Enabled，和生产一致</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">ECC 计数</text>
+<text x="290" y="244" font-size="14" fill="#1F2329">volatile（本次加载）与 aggregate（终身）</text>
+<text x="710" y="244" font-size="14" fill="#1F2329">新机器全为零</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">行重映射</text>
+<text x="290" y="282" font-size="14" fill="#1F2329">Remapped Rows：pending</text>
+<text x="710" y="282" font-size="14" fill="#1F2329">No；Yes 要先重置再看</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">PCIe 链路</text>
+<text x="290" y="320" font-size="14" fill="#1F2329">GPU Link：代际与宽度</text>
+<text x="710" y="320" font-size="14" fill="#1F2329">当前值等于最大值</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">NVLink</text>
+<text x="290" y="358" font-size="14" fill="#1F2329">topo -m、nvlink -s</text>
+<text x="710" y="358" font-size="14" fill="#1F2329">卡间全是 NV#，链路全在线</text>
+<rect x="40" y="372" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="396" font-size="14" fill="#1F2329" font-weight="bold">Fabric</text>
+<text x="290" y="396" font-size="14" fill="#1F2329">nvidia-smi -q：Fabric State</text>
+<text x="710" y="396" font-size="14" fill="#1F2329">Completed，Status 为 Success</text>
+<rect x="40" y="446" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="475" font-size="15" fill="#1F2329">Fabric 注册失败的卡会失去 NVLink 点对点能力，卡仍能被列出来。</text>
+<text x="40" y="536" font-size="12" fill="#646A73">来源：NVIDIA nvidia-smi 文档；Fabric Manager User Guide；GPU Memory Error Management</text>
 </svg>

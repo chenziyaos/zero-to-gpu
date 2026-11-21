@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650">
+<rect x="0" y="0" width="1200" height="650" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">16384 卡的 ETTR 账：先改 checkpoint 阻塞，再改重启</text>
+<text x="40" y="92" font-size="14" fill="#646A73">MTTF 取 1.8 小时（模型外推）；损失按一阶模型 C/τ* + τ*/(2M) + R/M 估算</text>
+<rect x="320" y="139" width="14" height="14" rx="3" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="340" y="150" font-size="13" fill="#646A73">写和重算</text>
+<rect x="416" y="139" width="14" height="14" rx="3" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="436" y="150" font-size="13" fill="#646A73">重启</text>
+<text x="308" y="202" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">同步写 5 分钟，重启 5 分钟</text>
+<rect x="320" y="174" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="174" width="790" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="1118" y="189" font-size="13" fill="#646A73">30.4%</text>
+<rect x="320" y="200" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="200" width="120" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="448" y="215" font-size="13" fill="#646A73">4.6%</text>
+<text x="308" y="270" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">异步阻塞 5 秒，重启 5 分钟</text>
+<rect x="320" y="242" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="242" width="101" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="429" y="257" font-size="13" fill="#646A73">3.9%</text>
+<rect x="320" y="268" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="268" width="120" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="448" y="283" font-size="13" fill="#646A73">4.6%</text>
+<text x="308" y="338" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">异步阻塞 5 秒，重启 1 分钟</text>
+<rect x="320" y="310" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="310" width="101" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="429" y="325" font-size="13" fill="#646A73">3.9%</text>
+<rect x="320" y="336" width="790" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="336" width="24" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="352" y="351" font-size="13" fill="#646A73">0.93%</text>
+<text x="308" y="414" font-size="14" fill="#1F2329" text-anchor="end">同步 5 分钟</text>
+<rect x="320" y="396" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="396" width="455" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="783" y="414" font-size="13" fill="#646A73">  约 65%</text>
+<text x="308" y="456" font-size="14" fill="#1F2329" text-anchor="end">异步</text>
+<rect x="320" y="438" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="438" width="640" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="968" y="456" font-size="13" fill="#646A73">  约 91.5%</text>
+<text x="308" y="498" font-size="14" fill="#1F2329" text-anchor="end">异步加快速重启</text>
+<rect x="320" y="480" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="480" width="666" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="994" y="498" font-size="13" fill="#646A73">  约 95.2%</text>
+<rect x="40" y="536" width="1120" height="49" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="565" font-size="15" fill="#1F2329">未计入：故障到被发现的时间、慢节点、整体启停的功耗波动。数字用来排优先级，不是承诺值。</text>
+<text x="40" y="626" font-size="12" fill="#646A73">来源：Kokolis et al.（MTTF 外推、5 分钟假设）；MegaScale（第一阶段几秒）；5 秒、1 分钟为本篇假设</text>
+</svg>

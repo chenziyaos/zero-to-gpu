@@ -1,46 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="810"
-     viewBox="-20 -20 1240 810">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="770" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">W_host 三种模式时间账：eager / graph / compile</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">纵轴 μs；CPU 侧开销按 dispatcher / runtime / queue / guard 分解</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(100, 175)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 340"/></g>
-<g id="c2:2" transform="translate(100, 515)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1000 0"/></g>
-<g id="a2:3" transform="translate(83, 504.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="7"><tspan x="7" y="14.118"><tspan x="0.34" text-anchor="start">0</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(100, 515)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1000 0"/></g>
-<g id="a2:4" transform="translate(83, 436.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="7"><tspan x="7" y="14.118"><tspan x="0.34" text-anchor="start">2</tspan></tspan></text></g>
-<g id="c2:4" transform="translate(100, 447)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1000 0"/></g>
-<g id="a2:5" transform="translate(83, 334.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="7"><tspan x="7" y="14.118"><tspan x="0.34" text-anchor="start">5</tspan></tspan></text></g>
-<g id="c2:5" transform="translate(100, 345)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1000 0"/></g>
-<g id="a2:6" transform="translate(76, 164.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.68" text-anchor="start">10</tspan></tspan></text></g>
-<g id="c2:6" transform="translate(100, 175)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1000 0"/></g>
-<g id="a2:7" transform="translate(50, 150.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">μs</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(220, 260)"><rect x="0" y="0" width="100" height="255" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:8" transform="translate(328, 377.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">queue+sync 7.5</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(220, 226)"><rect x="0" y="0" width="100" height="34" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:9" transform="translate(328, 233.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">aten 1.0</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(220, 175)"><rect x="0" y="0" width="100" height="51" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:10" transform="translate(328, 191.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">dispatcher 1.5</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(246, 522.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="16.471"><tspan x="4.73" text-anchor="start">eager</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(235.5, 548.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="34.5"><tspan x="34.5" y="14.118"><tspan x="1.58" text-anchor="start">总计 10.0 μs</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(520, 219)"><rect x="0" y="0" width="100" height="296" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:13" transform="translate(628, 357.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">queue wait 8.7</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(520, 185)"><rect x="0" y="0" width="100" height="34" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:14" transform="translate(628, 192.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">replay 1.0</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(520, 175)"><rect x="0" y="0" width="100" height="10" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:15" transform="translate(628, 170.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">dispatch 0.3</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(546, 522.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="16.471"><tspan x="3.86" text-anchor="start">graph</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(535.5, 548.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="34.5"><tspan x="34.5" y="14.118"><tspan x="1.58" text-anchor="start">总计 10.0 μs</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(820, 182)"><rect x="0" y="0" width="100" height="333" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:18" transform="translate(928, 338.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">kernel disp 9.8</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(820, 175)"><rect x="0" y="0" width="100" height="7" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:19" transform="translate(928, 168.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">guard 0.2</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(838.5, 522.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="31.5"><tspan x="31.5" y="16.471"><tspan x="3.985" text-anchor="start">compile</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(835.5, 548.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="34.5"><tspan x="34.5" y="14.118"><tspan x="1.58" text-anchor="start">总计 10.0 μs</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 605)"><rect x="0" y="0" width="1120" height="106" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:22" transform="translate(56, 614.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">关键</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 648.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">三种模式 queue 同步开销都最大；compile 通过把 dispatcher 折叠成 kernel dispatch 降低层级，但 queue wait 不会因模式而消失，需要 CUDA</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(56, 672.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">Graph 解决</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(40, 731.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇第 1.3 节</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 410" width="1200" height="410">
+<rect x="0" y="0" width="1200" height="410" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">异步执行：CPU 排队就返回，不同步的计时只量到排队</text>
+<text x="40" y="92" font-size="14" fill="#646A73">示意图：同一设备按入队顺序执行</text>
+<text x="128" y="182" font-size="14" fill="#1F2329" text-anchor="end">CPU</text>
+<rect x="140" y="160" width="1020" height="34" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="140" y="163" width="102" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="191" y="182" font-size="12" fill="#245BDB" text-anchor="middle">发射 A</text>
+<rect x="242" y="163" width="102" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="293" y="182" font-size="12" fill="#245BDB" text-anchor="middle">发射 B</text>
+<rect x="344" y="163" width="102" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="395" y="182" font-size="12" fill="#245BDB" text-anchor="middle">发射 C</text>
+<rect x="446" y="163" width="102" height="28" rx="4" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="497" y="182" font-size="12" fill="#646A73" text-anchor="middle">返回</text>
+<text x="128" y="230" font-size="14" fill="#1F2329" text-anchor="end">GPU</text>
+<rect x="140" y="208" width="1020" height="34" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="242" y="211" width="306" height="28" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="395" y="230" font-size="12" fill="#2EA121" text-anchor="middle">执行 A</text>
+<rect x="548" y="211" width="306" height="28" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="701" y="230" font-size="12" fill="#2EA121" text-anchor="middle">执行 B</text>
+<rect x="854" y="211" width="306" height="28" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="1007" y="230" font-size="12" fill="#2EA121" text-anchor="middle">执行 C</text>
+<rect x="40" y="278" width="1120" height="73" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="307" font-size="15" fill="#1F2329">time.time() 在 CPU 返回时停表，量到的只是排队；用 torch.cuda.Event 计时，或计时前后 torch.cuda.synchronize()。调试时</text>
+<text x="56" y="331" font-size="15" fill="#1F2329">CUDA_LAUNCH_BLOCKING=1 让报错落在出问题的那一行。</text>
+<text x="40" y="386" font-size="12" fill="#646A73">来源：PyTorch, CUDA semantics（Asynchronous execution）</text>
 </svg>

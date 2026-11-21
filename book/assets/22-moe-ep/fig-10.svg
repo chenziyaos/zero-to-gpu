@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">MoE 层的时间账：先减字节，再重叠，再均衡</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每个 token、只算路由专家前向（us），按 FP8 稠密峰值和 IB 50 GB/s 估算，量级参考</text>
+<text x="288" y="168" font-size="14" fill="#1F2329" text-anchor="end">不去重，BF16，不重叠</text>
+<rect x="300" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="150" width="700" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="1008" y="168" font-size="13" fill="#646A73">  约 4.95</text>
+<text x="288" y="210" font-size="14" fill="#1F2329" text-anchor="end">节点受限 + FP8，MaxVio 0.72</text>
+<rect x="300" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="192" width="329" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="637" y="210" font-size="13" fill="#646A73">  约 2.33</text>
+<text x="288" y="252" font-size="14" fill="#1F2329" text-anchor="end">再均衡，MaxVio 0.04</text>
+<rect x="300" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="234" width="296" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="604" y="252" font-size="13" fill="#646A73">  约 2.09</text>
+<text x="288" y="294" font-size="14" fill="#1F2329" text-anchor="end">再重叠</text>
+<rect x="300" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="276" width="243" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="551" y="294" font-size="13" fill="#646A73">  约 1.72，由 IB 决定</text>
+<rect x="40" y="332" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="361" font-size="15" fill="#1F2329">整层还有注意力可用来盖通信，通信 kernel 也要占 SM；最终以 nsys 上 dispatch、GEMM、combine 三段谁暴露最多为准。</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：DeepSeek-V3 技术报告；Loss-Free Balancing 论文（MaxVio）；本篇推算</text>
+</svg>

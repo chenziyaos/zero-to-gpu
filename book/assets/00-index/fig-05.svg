@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="1200" height="580">
+<rect x="0" y="0" width="1200" height="580" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">脊点按数据类型看：BF16 到 Rubin 反而降了，FP8 一路升</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每卡、稠密；脊点 = 稠密峰值 ÷ HBM 带宽（FLOP/B）</text>
+<rect x="160" y="139" width="14" height="14" rx="3" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="180" y="150" font-size="13" fill="#646A73">A100</text>
+<rect x="234" y="139" width="14" height="14" rx="3" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="254" y="150" font-size="13" fill="#646A73">H100</text>
+<rect x="308" y="139" width="14" height="14" rx="3" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="328" y="150" font-size="13" fill="#646A73">GB300</text>
+<rect x="390" y="139" width="14" height="14" rx="3" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="410" y="150" font-size="13" fill="#646A73">Rubin</text>
+<text x="148" y="228" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">BF16</text>
+<rect x="160" y="174" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="174" width="213" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="381" y="189" font-size="13" fill="#646A73">201</text>
+<rect x="160" y="200" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="200" width="313" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="481" y="215" font-size="13" fill="#646A73">295</text>
+<rect x="160" y="226" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="226" width="331" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="499" y="241" font-size="13" fill="#646A73">312</text>
+<rect x="160" y="252" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="252" width="220" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="388" y="267" font-size="13" fill="#646A73">208</text>
+<text x="148" y="348" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">FP8</text>
+<rect x="160" y="294" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="294" width="3" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="171" y="309" font-size="13" fill="#646A73">0</text>
+<rect x="160" y="320" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="320" width="626" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="794" y="335" font-size="13" fill="#646A73">591</text>
+<rect x="160" y="346" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="346" width="662" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="830" y="361" font-size="13" fill="#646A73">625</text>
+<rect x="160" y="372" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="372" width="965" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="1133" y="387" font-size="13" fill="#646A73">911</text>
+<rect x="40" y="422" width="1120" height="49" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="451" font-size="15" fill="#1F2329">FP8 Tensor Core 从 Hopper 一代引入，A100 的 FP8 一栏记 0。</text>
+<rect x="40" y="472" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="501" font-size="15" fill="#1F2329">解码每读一个权重只做两三次运算，在每一代上都远低于脊点。</text>
+<text x="40" y="556" font-size="12" fill="#646A73">来源：NVIDIA A100 技术博客；H100、GB300 NVL72、Vera Rubin NVL72 产品页；主编换算</text>
+</svg>

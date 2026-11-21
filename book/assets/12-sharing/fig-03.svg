@@ -1,41 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="630"
-     viewBox="-20 -20 1240 630">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="590" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">MIG 放置顺序的影响：相同 profile 不同顺序导致失败或成功</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">显存 slice 共 8 份；放置是贪心的，已占位置不会挪动</tspan></tspan></text></g>
-<g id="a3:3" transform="translate(40, 136.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">❌ 失败：1g + 1g + 2g + 3g（顺序: 1g.5gb → 1g.5gb → 2g.10gb → 3g.20gb）</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 173)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:3" transform="translate(160, 173)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:4" transform="translate(206.5, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">2g</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(280, 173)"><rect x="0" y="0" width="116" height="60" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:5" transform="translate(326.5, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">1g</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(400, 173)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:6" transform="translate(520, 173)"><rect x="0" y="0" width="116" height="60" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:7" transform="translate(566.5, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">1g</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(640, 173)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:8" transform="translate(760, 173)"><rect x="0" y="0" width="116" height="60" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:9" transform="translate(806.5, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">1g</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(880, 173)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:11" transform="translate(1020, 192.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">2 个洞 → 3g 失败</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(40, 242.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">顺序：1g.5gb → 1g.5gb → 2g.10gb → 3g.20gb</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(40, 284.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">✓ 成功：3g + 2g + 1g + 1g（大 profile 先建）</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(40, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:11" transform="translate(160, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:14" transform="translate(206.5, 340.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">3g</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(280, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:13" transform="translate(400, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o3:14" transform="translate(520, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:15" transform="translate(566.5, 340.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">2g</tspan></tspan></text></g>
-<g id="o3:15" transform="translate(640, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:16" transform="translate(686.5, 340.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">1g</tspan></tspan></text></g>
-<g id="o3:16" transform="translate(760, 321)"><rect x="0" y="0" width="116" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:17" transform="translate(806.5, 340.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="11.5"><tspan x="11.5" y="16.471"><tspan x="3.19" text-anchor="start">1g</tspan></tspan></text></g>
-<g id="o3:17" transform="translate(880, 321)"><rect x="0" y="0" width="116" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:19" transform="translate(40, 390.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">顺序：3g.20gb → 2g.10gb → 1g.5gb → 1g.5gb（大 profile 先建）</tspan></tspan></text></g>
-<g id="o3:18" transform="translate(40, 441)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:20" transform="translate(56, 450.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">关键</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(56, 484.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">贪心放置 + 不挪动 → 必须先建大 profile 再建小的；否则小 profile 抢先占高位，剩下的洞小于大 profile 的需求</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(40, 551.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-12 code_outputs.md；NVIDIA MIG User Guide</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">MIG 的两级：GPU 实例拿显存和 SM，计算实例只分 SM</text>
+<text x="40" y="92" font-size="14" fill="#646A73">显存 slice 约为整卡显存资源的 1/8（含容量和带宽），SM slice 约为 MIG 模式下 SM 的 1/7</text>
+<rect x="40" y="140" width="548" height="150" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="171" font-size="18" fill="#1F2329" font-weight="bold">GPU 实例（GI）</text>
+<text x="56" y="201" font-size="14" fill="#646A73">若干显存 slice + 若干 SM slice + 引擎</text>
+<text x="56" y="224" font-size="14" fill="#646A73">专用的显存容量和带宽：显存 QoS</text>
+<text x="56" y="247" font-size="14" fill="#646A73">crossbar 端口、L2 bank、显存控制器独占</text>
+<text x="56" y="270" font-size="14" fill="#646A73">多租户之间用 GI 隔开</text>
+<rect x="612" y="140" width="548" height="150" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="628" y="171" font-size="18" fill="#1F2329" font-weight="bold">计算实例（CI）</text>
+<text x="628" y="201" font-size="14" fill="#646A73">GI 里的一部分 SM slice</text>
+<text x="628" y="224" font-size="14" fill="#646A73">与同一 GI 的其他 CI 共享显存和引擎</text>
+<text x="628" y="247" font-size="14" fill="#646A73">只隔离 SM</text>
+<text x="628" y="270" font-size="14" fill="#646A73">同一租户内部再细分时用</text>
+<rect x="40" y="326" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="355" font-size="15" fill="#1F2329">一张卡最多七个 GPU 实例。别的实例打满自己的缓存和带宽时，一个实例的 L2 分配和 DRAM 带宽不变。</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：NVIDIA Multi-Instance GPU User Guide, Concepts 与 Introduction</text>
 </svg>

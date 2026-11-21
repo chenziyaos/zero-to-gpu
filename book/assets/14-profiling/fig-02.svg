@@ -1,30 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="780"
-     viewBox="-20 -20 1240 780">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="740" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">GPU 性能分析的两层工具谱系</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">上层：时间线（低开销、全景）vs 下层：硬件计数器（十倍放大、单核深挖）</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 170)"><rect x="0" y="0" width="550" height="190" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">第一层 · Nsight Systems 时间线（1-5% 开销）</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">回答：GPU 和 CPU 在忙什么？什么时候空转？</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">输出：kern_sum、mem_time_sum、Host Sync/Launch/CPU 间隙表</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">行动：选热点核，定位异常间隙</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(56, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">结论示例：73.4% 忙、26.6% 空转（19.6% Host 间隙）</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(610, 170)"><rect x="0" y="0" width="550" height="190" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:8" transform="translate(626, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">第二层 · Nsight Compute 单核（重放 10-50 倍）</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(626, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">回答：这个核怎么这么慢？</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(626, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">输出：SM 占用、DRAM 利用、L1/L2、stall reason、Roofline 坐标</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(626, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">行动：五分类（MEM / LAUNCH / LATENCY / TENSOR / COMPUTE）</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(626, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">结论示例：GEMM 受计算限（SM 68.5%）、vector_add 受带宽限（78.9%）</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(40, 400)"><rect x="0" y="0" width="1120" height="170" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:13" transform="translate(56, 411.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">典型工作流</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(56, 442.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">1. nsys 全段扫描，找热点 kernel 和异常间隙</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(56, 464.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">2. 对热点 kernel 用 ncu 深挖硬件计数器</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(56, 486.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">3. 按五分类判瓶颈 → 对症优化 → 重测验证</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(56, 508.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">4. 全程 DCGM 常驻监控，防回归</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 600)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:18" transform="translate(56, 609.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">工具边界</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(56, 643.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">nsys 看"宏观时间线"（几 % 开销，适合秒/分钟级），ncu 看"微观单核"（10 倍开销，只针对一行 kernel）；两者互补不能互相替代</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(40, 701.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 code_outputs.md；NVIDIA Nsight 文档</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">四种工具各看一层：利用率只说明有没有 kernel 在跑</text>
+<text x="40" y="92" font-size="14" fill="#646A73">顺序从粗到细，开销从低到高</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">工具</text>
+<text x="312" y="166" font-size="14" fill="#1F2329" font-weight="bold">看什么</text>
+<text x="781" y="166" font-size="14" fill="#1F2329" font-weight="bold">回答的问题</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">nvidia-smi</text>
+<text x="312" y="206" font-size="14" fill="#1F2329">采样周期内有 kernel 执行的时间占比</text>
+<text x="781" y="206" font-size="14" fill="#1F2329">GPU 有没有空着</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">DCGM</text>
+<text x="312" y="244" font-size="14" fill="#1F2329">SM Activity、Tensor Activity、DRAM Activity</text>
+<text x="781" y="244" font-size="14" fill="#1F2329">GPU 在跑什么</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">Nsight Systems</text>
+<text x="312" y="282" font-size="14" fill="#1F2329">CPU 线程、CUDA API、kernel、拷贝、NVTX 的时间线</text>
+<text x="781" y="282" font-size="14" fill="#1F2329">时间花在哪里，哪里有空隙</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">PyTorch profiler</text>
+<text x="312" y="320" font-size="14" fill="#1F2329">按算子统计 CPU 和 CUDA 时间</text>
+<text x="781" y="320" font-size="14" fill="#1F2329">kernel 属于哪个算子</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">Nsight Compute</text>
+<text x="312" y="358" font-size="14" fill="#1F2329">单个 kernel 的硬件计数器</text>
+<text x="781" y="358" font-size="14" fill="#1F2329">这个核为什么慢</text>
+<rect x="40" y="408" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="437" font-size="15" fill="#1F2329">一个只占一个 SM 的小核一直在跑，nvidia-smi 的利用率也是满的。</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：nvidia-smi 文档；DCGM Feature Overview；Nsight Systems / Nsight Compute 文档；PyTorch profiler 文档</text>
 </svg>

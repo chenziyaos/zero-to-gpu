@@ -1,743 +1,416 @@
 # GPU-14｜单机｜性能分析与 Profiling
 
-> 🎯 **这篇文档解决什么问题**：一个常见的排障现场是这样的：训练吞吐比标称低 30%，有人先打开 Nsight Compute 抓全部指标，程序被 kernel replay 放慢十几倍，跑了半小时拿到几百个计数器，却回答不出 GPU 到底在不在忙。顺序反了。性能分析永远先回答时间去哪了，再回答时间花得值不值：前者用 Nsight Systems 看整段时间线，后者用 Nsight Compute 把单个核函数拆开。这一篇把这条顺序固化成可执行流程，配套解析器直接吃两类工具的 CSV 导出，把时间线和计数器变成结论：设备忙闲比例、间隙原因分布、热点核函数、五分类瓶颈和 Roofline 利用率。
->
-> 使用方式：第 1 章建立工具分工与时间账，所有读者都该读；第 2、3 章讲 nsys 时间线、统计表和三类间隙，这是系统级诊断；第 4 章讲 ncu 工作方式和权限设置；第 5 章讲八个核心计数器和五分类，这是核函数级诊断；第 6 章讲 Roofline 模型和算术强度账，接上 GPU-06 的优化思路；第 7 章是抓取脚本与权限排障；第 8 章讲 PyTorch profiler 和 NVTX，这是框架层诊断；第 9 章讲 DCGM 常驻监控与 profiler 的分工；第 10 章是综合案例，第 11 章是核对清单。
->
-> **代码**（repo/zero-to-gpu/14-profiling/）：prof_parse.py 只依赖 Python 标准库，nsys 子命令解析核时间、拷贝和间隙三张表并判忙闲，ncu 子命令解析指标长表兼容宽表给五分类和 Roofline 账；profile.sh 一键抓 nsys 时间线和 ncu 指标报告；gpu_workload.py 四段刻意写坏的 PyTorch 负载，对应 MEM、LAUNCH、LATENCY、TENSOR 四类瓶颈；make_samples.py 在只有 CPU 的机器上生成自洽的样例 CSV，可完整跑通所有解析练习。
+> 🎯 **这篇文档解决什么问题**：训练或推理比预期慢，第一件事是知道时间花在哪里。nvidia-smi 的利用率只能说明有没有 kernel 在跑；要找到原因，得按顺序用几种工具：DCGM 看整卡，Nsight Systems 看时间线，Nsight Compute 看单个核，PyTorch profiler 和 NVTX 把 kernel 对回代码。本篇按 NVIDIA 的 Nsight Systems 用户指南、Nsight Compute 文档、DCGM 文档和 PyTorch profiler 文档，讲清每种工具看什么、怎样只抓需要的那一段、怎样读报告，以及怎样用 Roofline 算出一个核的上限。
 
-**🧭 主线位置**：GPU-13 解决了卡间带宽对不对，本篇处理单卡时间花得值不值（时间账的 W_mem 和 W_host 主要来源定位）；读完后瓶颈会转到 GPU-15 PyTorch 运行时的框架开销。
+**使用方式**：第 1 章分清四种工具。第 2、3 章讲 Nsight Systems：抓时间线、分类空隙。第 4、5 章讲 Nsight Compute：重放与开销、读报告。第 6 章讲 Roofline，第 7 章讲 PyTorch profiler 和 NVTX，第 8 章讲常驻监控，第 9 章把它们串成一次完整分析，第 10 章给清单和自测。
 
-# 导读 · 先给结论
+**代码**：zero-to-gpu/14-profiling/ 下的 sim_prof_parse.py、sim_gpu_util.py、gpu_workload.py、test_prof.py 只需 Python 标准库。样例数据的时间单位、空隙算法、五分类判定和 GPU 负载脚本都有问题，第 10 章逐条说明。
 
-- **先 nsys 后 ncu，顺序不能反。**[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) Nsight Systems 以几个百分点的开销看整步训练时间线和间隙，[[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay) Nsight Compute 通过 kernel replay 收硬件计数器时间放大数倍；先用前者选核，再让后者只抓选中的核。这样既不会被重放掩盖真实行为，也避免浪费时间在非热点核上。尝试过反向顺序的人都踩过坑。
-- **设备忙闲先于核函数快慢。**GPU 忙时占比低于 [[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) 75%，先填同步、发射和 CPU 三类间隙；时间线填满之前，把单个核优化两成也救不了端到端吞吐。这是性能分析的第一条铁律，很多人的优化工作颠倒了这个优先级。
-- **实例数和平均时长暴露发射受限。**两千个平均 1 μs 的小核只占核时间 2.8%，却在每个核之间留下 [[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) 3 到 20 μs 的发射间隙，合并小核或上 CUDA Graph 比抠核有效。发射受限的特征很鲜明，直观可见，值得单独排查。
-- **核函数按五个标签分类。**LAUNCH 看时长，MEM 看 DRAM 利用率，TENSOR 和 COMPUTE 看 SM 利用率与算术强度，LATENCY 看占用率和 L1；[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) 顺序就是排查优先级。这五类覆盖了单卡优化的全部场景。
-- **Roofline 只对计算侧核有意义。**算术强度跨过脊点（H100 [[5]](https://www.nvidia.com/en-us/data-center/h100/) 约 20 FLOP/byte）瓶颈才从显存挪到 SM；FP16 GEMM 在 989 TF 的 Tensor 屋顶下跑到 79% 是健康值。这个模型是判断优化空间有多大的最直接工具。
-- **ncu 抓指标有内核权限门槛。**Linux 上非 root 用户默认可能被 [[6]](https://docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux) NVreg_RestrictProfilingToAdminUsers 挡住，报 ERR_NVGPUCTRPERM；改模块参数或用 capability 放行。权限问题卡很多人，后文会详细展开。
-- **单次诊断和常驻监控是两套系统。**nsys、ncu、torch.profiler 回答一次抓取问题，[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/) DCGM 和 dcgm-exporter 常年采样利用率、显存、温度和功耗，判趋势不判单核。两套各有用，千万别混用。
+<b>🧭 主线位置</b>：GPU-00（[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md)）建立了时间账 T = T_compute + W_mem + W_host + W_comm + W_idle。GPU-13（[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md)）讲完了单机内卡与卡之间的互连。本篇给出测量这本账的工具：时间线上的空隙记在 W_host 和 W_idle，单个核的瓶颈归到 T_compute 或 W_mem。工具有了，下一个问题是 PyTorch 运行时本身怎样产生这些空隙和热点，交给 GPU-15（[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md)）。
 
-![时间账：五类等待分布与优化顺序](assets/14-profiling/fig-01.svg)
+## 导读 · 先给结论
 
-**📎 与系列其他文档的分工**：这一篇建立在 GPU-03 CUDA 编程模型线程块启动、GPU-04 访存与归约合并访存占用率、GPU-05 GEMM 逐步优化与 GPU-06 Tensor Core 与低精度峰值之上。GPU-13 解决卡间带宽对不对，本篇解决单卡时间花得值不值；单机整机验收在 GPU-16 单机验收与调优，生产监控在 GPU-20 可靠性与可观测。
+- <b>GPU 利用率只说明有没有 kernel 在跑。</b>它统计采样周期内有 kernel 执行的时间占比，不看用了多少 SM（第 1 章）。[[1]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)
+- <b>时间线只抓稳态的一段。</b>用 --capture-range 或 NVTX 限定范围，nsys stats 生成 kernel、API 和逐条记录三类表（第 2 章）。[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
+- <b>先填空隙，再抠核。</b>空隙分同步、发射、CPU 三类；V100 上 2.9 µs 的短核逐个同步时每个 9.6 µs，用 CUDA Graph 降到 3.4 µs（第 3 章）。[[3]](https://developer.nvidia.com/blog/cuda-graphs/)
+- <b>ncu 会把核重放多遍。</b>显存能恢复，缓存不能；默认串行执行并锁定时钟，所以时长以 nsys 为准（第 4 章）。[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)
+- <b>读报告按 SOL、占用率、stall 原因的顺序。</b>long_scoreboard 主导是访存延迟受限，不一定是带宽受限（第 5 章）。[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)
+- <b>屋顶按精度选。</b>H100 SXM 按稠密 BF16 算脊点约 295 FLOP/byte，FP32 只有 20（第 6 章）。[[5]](https://www.nvidia.com/en-us/data-center/h100/)[[6]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)
+- <b>常驻监控看 SM Activity 和 Tensor Activity。</b>0.8 以上是用好 GPU 的必要条件；DCGM 收集 profiling 指标时要给 Nsight 让路（第 8 章）。[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)
 
-# 第 1 章 · 单卡在等什么：工具分工与时间账
+![时间去哪了：从整卡到时间线，再到单个核](assets/14-profiling/fig-01.svg)
 
-GPU 性能问题分宏观和微观两层，混用工具是新手最常犯的错。
+<b>📎 与系列其他文档的分工</b>：GPU-02（[GPU-02｜硬件｜性能账本：Roofline、算术强度与三类瓶颈](./02-ledger.md)）讲 Roofline 和三类瓶颈的原理，本篇讲怎样用工具测出来。GPU-04（[GPU-04｜硬件｜访存与归约：合并访存、共享内存与 warp 归约](./04-memory.md)）和 GPU-05（[GPU-05｜硬件｜GEMM 逐步优化：从朴素循环到 warp 分块](./05-gemm.md)）讲访存和 GEMM 的具体优化，ncu 报告指出的问题在那里改。GPU-15（[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md)）讲 PyTorch 运行时，GPU-16（[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md)）讲单机验收，GPU-20（[GPU-20｜集群｜可靠性与可观测：故障、静默错误与 checkpoint](./20-reliability.md)）讲集群的可观测性。
 
-## 先问时间去哪了：Nsight Systems 和整段时间线
+## 第 1 章 · 先问时间去哪了：四种工具各看一层
 
-一个训练步耗时 100 毫秒，系统上报 GPU 忙闲比 73.4%，意思是设备花了 73.4 毫秒在跑核函数或拷贝，剩下 26.6 毫秒没有做功。这 26.6 毫秒藏在哪？是 CPU 代码卡住了，还是核函数发射受限，还是同步点堵住了？[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) Nsight Systems 用低开销的采样抓到时间线，秒级或分钟级连续观察，能直观看到时间线上哪里有黑色三角形的空隙。这些空隙就是等待，值得关注。Nsight Systems 的采样开销仅占整体运行时间的 1% 到 5%，所以可以放心在生产级负载上跑。
+前面几篇讲了单卡、显存、主机和多卡互连各自的上限。实际调优时，第一步是知道一次训练或推理的时间到底花在哪里。这一步有四种常用工具：nvidia-smi 和 DCGM 看整卡，Nsight Systems 看时间线，Nsight Compute 看单个核，PyTorch profiler 看算子。本章先说明它们各看哪一层，以及为什么不能只看 nvidia-smi 的利用率。
 
-抓到时间线后，nsys stats 命令行界面能导出三张关键的 CSV 报告表。第一张 kern_sum 列出每个核函数的名称、调用次数和累计耗时，排序后能快速看出哪些核吃了大头。第二张 mem_time_sum 列出每个 memcpy 操作的源址、目标址、字节数和耗时，合计起来就是整体搬运时间占比。第三张是间隙表，把 GPU 空闲时间分成三类来源：Host Sync（CPU 显式同步）、Kernel Launch（核函数发射延迟）和 CPU Execution（CPU 侧代码执行）。这三类就是 W_host 的具体来源。一条命令行就能获得这三张表：
+### GPU 利用率说的是什么
 
-```bash
-nsys profile -f true -o profile_step --trace=cuda,nvtx,osrt \
-  --cuda-memory-usage=true python3 train.py
-nsys stats -r cuda_gpu_kern_sum,cuda_gpu_mem_time_sum --format csv \
-  profile_step.nsys-rep > nsys.csv
-```
+nvidia-smi 的 GPU 利用率定义是：在过去一个采样周期里，有一个或多个 kernel 在 GPU 上执行的时间占比[[1]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)。这个定义只问“有没有 kernel 在跑”，不问 kernel 用了多少 SM、算得多快。一个只占一个 SM 的小 kernel 一直在跑，利用率也是满的。所以它只能说明 GPU 有没有空着，不能说明 GPU 有没有被用好。
 
-三张表合在一起会告诉你：这 26.6 毫秒的空转，有多少是因为 CPU 代码的数据加载慢、有多少是核函数发射间隙太大、有多少是显式同步阻塞。这个诊断顺序很关键，因为优化的收益是递减的。如果时间线的 25% 是系统间隙，单个核的优化再好也只能救出 75% 的天花板，不值得投入。所以先填间隙，再抠核。
+要回答“用得好不好”，需要更细的数据。DCGM 的 SM Activity 统计每个 SM 上至少有一个 warp 活跃的时间比例，再对所有 SM 求平均[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)，比 nvidia-smi 的利用率更接近真实的负载，第 8 章再讲。
 
-## 三个工具的开销与使用场景
+### 四种工具，四个层次
 
-整个分析工具链由三条线组成。Nsight Systems 打点采样，开销 1-5%，适合长窗口生产负载。Nsight Compute 通过 kernel replay 重新执行单个核函数来逐条收硬件计数器，[[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay) 时间放大数倍到数十倍，只能用在隔离环境或短测试用例。PyTorch profiler 依赖 [[8]](https://docs.pytorch.org/docs/stable/profiler.html) Kineto 基础设施，用时间线模式能以几个百分点开销看整步训练，用 tracing 模式则需要按需采集。三个工具一个比一个详细，也一个比一个重。
+- **nvidia-smi 和 DCGM**：整卡、长期、低开销，适合常驻监控和发现异常的节点（第 8 章）。
+- <b>Nsight Systems（nsys）</b>：一段时间线，CPU 线程、CUDA API、kernel、拷贝和 NVTX 标注排在一起，回答“时间花在哪里、GPU 在哪里空着”（第 2、3 章）。
+- <b>Nsight Compute（ncu）</b>：单个 kernel 的硬件计数器，回答“这个核为什么慢”（第 4 到 6 章）。
+- **PyTorch profiler**：按算子统计 CPU 和 GPU 时间，把 kernel 对回模型代码（第 7 章）。
 
-所以使用顺序必须是：先用 nsys 扫整个时间线找间隙，选出热点核，再让 ncu 只针对那几个核采集计数器。千万不能颠倒这个顺序。如果上来就全指标 ncu，会面临两个坏后果。时间线被 kernel replay 的重放机制拉长数十倍，单个核从几微秒变成几百微秒，整个案例失真；计数器的重放效应会改变 kernel 的内存访问模式和指令依赖关系，甚至会改变 kernel 内的并发行为，导致样本不再代表真实场景。比如一个核在真实运行中的 L1 miss 率是 5%，重放时因为 cache 行为改变可能变成 15%。所以 [[9]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html) ncu 只应该被用来检查已经确认过的热点核。
+顺序是从粗到细：先看整卡有没有空，再看时间线上的空隙在哪，最后才挑出值得优化的核去看计数器。反过来做，先对所有核跑 ncu，会花很长时间，还可能在一个只占总时间很小一部分的核上下功夫。
 
-与此相反，nsys 就可以经常跑，即使在生产训练任务上也能承受。除了直接看时间线的瀑布图，nsys 还提供了采样统计模式，让你能用滑动窗口查看各个阶段的利用率变化。这对排查间歇性卡顿（比如数据加载突然变慢）特别有用。
+![四种工具各看一层：利用率只说明有没有 kernel 在跑](assets/14-profiling/fig-02.svg)
 
-## 时间账：GPU 等待分五类
+按五步闭环用这四种工具：
 
-[[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) GPU-02 定义过时间账公式 T = T_compute + W_mem + W_host + W_comm + W_idle，每一项代表时间线上暴露的等待来源。本篇着重处理其中两项。W_host 包括发射延迟、同步点阻塞和 CPU 侧代码执行，这些在 nsys 时间线上表现为 GPU 空转或核函数之间的明显间隙。W_mem 包括显存带宽饱和和访存冲突，这些靠 ncu 计数器来精确定位。剩下三项中，T_compute 是核内的实际计算时间，[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md) 会深入优化框架层开销；W_comm 是卡间通信开销，由 [GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md) 和 [GPU-18｜集群｜NCCL：算法、协议与挂死排查](./18-nccl.md) 分别处理卡间带宽测量和通信优化；W_idle 是长期监控和故障恢复的问题，属于可靠性范畴。
+- **定天花板**：型号的峰值算力和显存带宽（第 6 章）。
+- **测实际**：一个步骤的总时间，nsys 时间线。
+- **定位等待**：时间线上的空隙记在哪一项，热点核卡在哪个单元。
+- **消除或隐藏**：合并小核、去掉同步、改核函数。
+- **复测**：同样的抓取方式再测一次，对比时间线。
 
-本篇的改进目标用四个具体数字表示。从上面的 100 毫秒时间线来看，T_compute 约 71 毫秒，W_mem 约 2 毫秒，W_host 约 20 毫秒，W_comm 和 W_idle 为零（单卡场景）。整个分析的终点是把这 W_host 的 20 毫秒压下来，通过减少间隙、提高发射效率、避免多余同步来实现。假如成功压到 2 毫秒，端到端时间从 100 ms 就可能减到 85 ms，这是可观的收益。沿着这个思路分析的核心是：定天花板（理论下限是什么）、测实际（现状离下限多远）、定位等待（等在哪了）、消除或隐藏（怎么优化）、复测（有没有生效）。五步闭环围绕时间账展开。
+一个常见的误区是看到 nvidia-smi 显示利用率 100%，就认为 GPU 已经吃满，问题在别处。现象是利用率一直满，吞吐却比预期低很多。原因是利用率只说明有 kernel 在跑，不说明 kernel 用了多少 SM。改法是同时看 DCGM 的 SM Activity，并抓一段 nsys 时间线。
 
-![GPU 性能分析的两层工具谱系](assets/14-profiling/fig-02.svg)
+> 🔑 **本章要点**：nvidia-smi 的利用率只问有没有 kernel 在跑。整卡用 nvidia-smi 和 DCGM 看，时间线用 Nsight Systems 看，单个核用 Nsight Compute 看，算子用 PyTorch profiler 看；顺序从粗到细。这一章是五步闭环的“测实际”：先知道该用哪把尺子。
 
-**🔑 本章要点**：性能分析分宏观时间和微观时间两层。Nsight Systems 低开销看整段时间线回答时间去哪了，Nsight Compute 靠 kernel replay 收计数器回答单个核花得值不值。两个工具都要用，顺序永远是先 nsys 选核、再 ncu 拆核。时间账框架中本篇处理的是 W_host 和 W_mem，消掉的主要是系统等待和间隙，即 W_host 中的三类空转。
+## 第 2 章 · Nsight Systems：抓一段干净的时间线
 
-# 第 2 章 · Nsight Systems：时间线和三张统计表
+时间线是整个分析的起点。抓得太长，文件大、打开慢，热身阶段还会混进来；抓得太短，看不到稳态。本章讲怎样用 nsys 只抓想看的那一段，以及怎样把结果变成可以对账的统计表。
 
-一个训练步的 100 毫秒要分摊到时间线上的每一个操作才能看出瓶颈，nsys 的三张表就是这个分摊的结果。
+### 抓取命令
 
-## 最小化抓取配置与采样开销
+最常用的形式是 `nsys profile -t cuda,nvtx -o 报告名 python train.py`。-t 选择要追踪的 API，可选项包括 cuda、nvtx、osrt、cudnn、cublas 等[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。NVIDIA 的文档在 torchrun 多进程的例子里也是这样写的，并且只让 local rank 0 带上 nsys，其他 rank 正常运行[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)，这样能减少数据量。
 
-Nsight Systems 可以抓很多种事件，从 CUDA API 调用、kernel 执行、内存拷贝到 CPU 侧的系统调用和 NVTX 标注，但不是所有事件都有用。新手常见的错误是一口气打开全部开关，导致数据文件巨大、后处理慢、还引入不必要的开销。正确的做法是聚焦三类事件：cuda（kernel 和 memcpy）、nvtx（用户标注）和 osrt（操作系统运行时，捕捉 CPU 侧线程和中断）。这三类事件就足以回答时间去哪了。[[10]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) 配置代码如下：
+只抓一段，有两种办法。第一种是在程序里调用 cudaProfilerStart() 和 cudaProfilerStop() 标出范围[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)，抓取时加 `--capture-range=cudaProfilerApi`。--capture-range 的可选值是 none、cudaProfilerApi、hotkey 和 nvtx，设了之后只有遇到对应的开始调用才开始记录[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。第二种是用 NVTX 范围控制，适合已经在代码里加了 NVTX 标注的情况。无论哪种，都应该跳过前几步热身，只抓稳态的几步。
 
 ```bash
-nsys profile -f true -o profile_step \
-  --trace=cuda,nvtx,osrt \
-  --cuda-memory-usage=true \
-  python3 train.py
+# 只抓 cudaProfilerStart/Stop 之间的部分
+nsys profile -t cuda,nvtx --capture-range=cudaProfilerApi -o step python train.py
+# 生成统计表：时间线明细、kernel 汇总、CUDA API 汇总
+nsys stats --report cuda_gpu_trace --report cuda_gpu_kern_sum --report cuda_api_sum \
+  --format csv,column --output .,- step.nsys-rep
 ```
 
--f true 打开功能性追踪模式，不采集寄存器压力和分支覆盖这类细节；--cuda-memory-usage 按时间线显示显存增减事件。这个配置的采样开销仅占整体运行时间的 [[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) 1% 到 5%，所以即使在生产训练任务上也能常规使用。
+### 统计表
 
-## 三张表各回答一个问题
+nsys stats 从报告文件生成统计表。不指定报表时，默认会生成 nvtx_sum、osrt_sum、cuda_api_sum、cuda_gpu_kern_sum、cuda_gpu_mem_time_sum、cuda_gpu_mem_size_sum 等[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。上面的命令把 cuda_gpu_trace 写成 CSV 文件，另外两张表打印到终端[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。三张表的用途不同：cuda_gpu_kern_sum 按 kernel 名汇总总时间和次数，找热点核；cuda_api_sum 汇总 CPU 端调用 CUDA API 的时间，同步类调用时间长就要警惕；cuda_gpu_trace 是逐条记录，带开始时间和时长，算空隙要用它。
 
-[[11]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) nsys stats 命令行后跟一个或多个报告选项，最关键的三个是 cuda_gpu_kern_sum、cuda_gpu_mem_time_sum 和 cuda_gpu_mem_time_sum 对应的间隙统计。kern_sum 表列出每个核函数的执行次数、最小/平均/最大耗时和累计耗时，按累计时间倒序排列后能快速识别热点核。mem_time_sum 列出每个 memcpy 的源、目标、字节数、次数和累计耗时，合计起来就是整体搬运时间占比。第三张表是对时间线上所有空隙的分类统计，分为 Host Sync、Kernel Launch 和 CPU Execution 三类来源。
+对账的方法是：在抓取的窗口里，kernel 时间、拷贝时间和空闲时间加起来应等于窗口长度，而计算空闲时间必须用每条记录的开始时间和结束时间。只有时长、没有开始时间的汇总表算不出空隙，第 9 章的代码练习就有这个问题。
 
-![Nsight Systems 三张统计表：核函数 / 数据搬运 / 间隙](assets/14-profiling/fig-03.svg)
+![nsys：只抓稳态一段，空隙要用逐条记录算](assets/14-profiling/fig-03.svg)
 
-以 code_outputs.md 中的示例数据为例，一个 6.559 秒的时间线包含 volta_fp32_gemm_kernel 3 次，共 4191.5 毫秒，和 volta_fp32_scale_kernel 1 次，共 567.8 毫秒。这两个核合计 [[11]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) 4.759 秒占 72.6% 的设备时间，memcpy 占 27.4%。整体设备忙闲比 100%，意思是没有空闲时间被暴露在时间线上；但这不代表没有等待，因为等待可能藏在核函数之间的间隙、或者 CPU 调度延迟里。要看这些隐含的间隙，需要生成间隙表并按 RFC 4180 CSV 格式准确解析，对带逗号的核函数名加引号处理，然后按表头的关键列（Kernel、Gap 类型、时长）统计。间隙表的第一行 Host Sync 2.6 ms 告诉你有一处显式的 CPU 端同步等待，占 2.6 毫秒；第二行可能是 Kernel Launch 2.38 ms，说的是核函数发射的累计开销。理想的策略是把这个间隙表打印出来，仔细对比每一项，看看哪一类的间隙最大、值不值得优化。
+按五步闭环抓时间线：
 
-## 解析器的数据一致性验证
+- **定天花板**：理想情况下 GPU 在窗口内没有空隙。
+- **测实际**：只抓稳态的几步，生成三张表。
+- **定位等待**：用 cuda_gpu_trace 算出空隙，用 cuda_api_sum 看同步调用。
+- **消除或隐藏**：按第 3 章处理空隙。
+- **复测**：同样的范围和参数再抓一次。
 
-从 CSV 文件提取三张表后，第一个质检是验证完整性：核函数时间加 memcpy 时间加总空隙时间，应该接近时间线的总长度。这个对账关键是捕捉 CSV 格式的坑。RFC 4180 标准规定，如果字段值里含有逗号、引号或换行符，字段本身要加双引号，字段内的双引号要转义为两个双引号。许多核函数名里含有 <、> 等特殊符号或逗号，比如 “volta_gemm_NT<128,128>\_f32“，在某些导出工具里会变成 ”volta_gemm_NT,128,128_f32”（逗号没加引号），导致列数错位。解析器要么预先检查是否被 RFC 引号包装，要么用正确的 CSV 库（Python 的 csv 模块、Go 的 encoding/csv）自动处理。一个最小的检查是统计每行的列数是否一致；如果第 1 行 10 列，后面出现 12 列，说明遇到了逗号问题。
+一个常见的误区是从程序启动一直抓到结束。现象是报告文件很大，统计表里排前面的是初始化、编译和热身阶段的核。原因是没有限定抓取范围，前几步的一次性开销被算进了统计。改法是用 cudaProfilerApi 或 NVTX 只抓稳态的几步，多进程时只抓一个代表 rank。
 
-时间线数据另一个常见的陷阱是浮点数精度。nsys 的导出时间单位有微秒、毫秒、秒等多种，导出 CSV 时要指定统一的单位。如果一部分是微秒、一部分是毫秒，对账时会前后不一致。正确的做法是统一转成微秒做累计，再按需转换为展示单位。比如 code_outputs 中的 “最大 kernel 间隙 777800.0 us” 就应该用 777800 us 做对账，而不是 0.78 ms，因为舍入会丢失精度。
+> 🔑 **本章要点**：nsys profile 用 -t 选追踪的 API，用 --capture-range 只抓稳态的一段；nsys stats 生成 kernel、API 和逐条记录三类表，算空隙要用带开始时间的逐条记录。这一章是五步闭环的“测实际”：抓一段干净、可对账的时间线。
 
-## 忙闲判据与瓶颈分类
+## 第 3 章 · 读时间线：同步、发射和 CPU 三种空隙
 
-对完账后，下一步是判断设备忙不忙。如果忙闲比超过 [[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) 75%，说明整段时间线上核函数和拷贝合计占了绝大部分，间隙的贡献相对较小，此时应该把优化焦点转向单个核的计数器分析。如果忙闲比低于 75%，说明至少 25% 的时间在空转，这是系统级的瓶颈，通常源自发射延迟、同步点或 CPU 代码，优化这类瓶颈的收益往往比单核优化更大。在 code_outputs 中，忙闲比是 100% 或 72.6%（取决于统计口径），但最大间隙 777.8 微秒的存在说明核函数之间并非完全连续执行，间隙的判定条件是超过 [[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) 100 微秒的空闲，所以这 777.8 微秒的间隙应该被标注为“发射受限”。这个信号会直接指导下一章的分析方向：先优化发射流程而不是单个核。
+时间线上 GPU 空着的地方，就是第一批要处理的对象。空隙通常有三种来源：CPU 在等 GPU 完成（同步），CPU 来不及把下一个核发出去（发射），CPU 在做别的事（数据准备、Python 逻辑）。本章讲怎样分辨它们，重点是小核的发射开销。
 
-一旦间隙被分类为“发射受限”，应该立即转向第 3 章的分析来调查具体是哪个 kernel launch 操作产生了这个间隙，以及涉及多少个核函数实例。如果是几百个甚至几千个小核在发射，那么优化策略是融合小核或上 CUDA Graph；如果只有少数几个大核的间隙，可能是调度器的决策问题，应该看 NVTX 标注来判断 CPU 侧是否在等待数据。
+### 三种空隙怎样分辨
 
-**🔑 本章要点**：nsys profile 以最小化配置（cuda、nvtx、osrt 三类事件）抓时间线，开销 1-5%。nsys stats 导出 kern_sum、mem_time_sum 和间隙三张表，分别回答“先优化谁”“搬运占比”“空转怪谁”三个问题。解析 CSV 时必须正确处理 RFC 4180 引号和浮点数单位，对账时核函数时间加 memcpy 加间隙应接近总窗口。忙闲比低于 75% 或间隙超过 100 微秒时，发射或同步是主要瓶颈，优化收益大。这一步定位的是 W_host 中的总体空转和间隙特征。
+在时间线上把 CPU 线程那一行和 GPU 那一行对齐看。**同步**：CPU 行上有一段长的 cudaStreamSynchronize、cudaDeviceSynchronize 或同步拷贝，GPU 行在这之后才有新的核。**发射**：GPU 行上是一串很短的核，核与核之间有缝，CPU 行上密密地排着 cudaLaunchKernel。**CPU**：GPU 空着时 CPU 行上没有 CUDA 调用，而是在跑 Python 或数据加载，这时要靠第 7 章的 NVTX 标注来定位是哪段代码。
 
-# 第 3 章 · 三类间隙和发射受限
+nsys 自带一组专家规则帮助发现这些问题，`nsys analyze` 在已有的结果上运行规则并输出报告[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)，规则包括 cuda_memcpy_async、cuda_memcpy_sync、cuda_memset_sync、cuda_api_sync、gpu_gaps 和 gpu_time_util[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。从名字可以看出，它们分别对应异步拷贝用法、同步拷贝、同步 memset、同步 API、GPU 空隙和 GPU 时间利用率。
 
-20 多毫秒的空转不是一个统一的整体，nsys 时间线上会清晰地分解成三类来源，每一类的优化方向不同。
+### 小核的发射开销
 
-## 三类间隙的来源与典型场景
+NVIDIA 介绍 CUDA Graphs 的博客给了一组具体数字。在 V100、CUDA 10.1 上[[3]](https://developer.nvidia.com/blog/cuda-graphs/)，一个执行时间 2.9 µs 的短核：每次发射后都同步时，每个核平均花 9.6 µs；去掉逐个同步、让发射重叠后降到 3.8 µs；用 CUDA Graph 捕获后再执行，降到 3.4 µs[[3]](https://developer.nvidia.com/blog/cuda-graphs/)。逐个同步时，每个核多出约 6.7 µs，比核本身还长。
 
-nsys 时间线上的间隙（GPU 设备空闲期）分为三类。第一类是 Host Sync，CPU 调用 cudaDeviceSynchronize() 或 stream.synchronize() 之类的显式同步操作，GPU 被迫等待上一批工作完成。这类间隙通常出现在模型的边界点，比如验证集评估前需要清空 pipeline，或者优化器 step 后检查梯度范数。典型场景是间隙非常规则，每隔固定时间出现一次，时长从几毫秒到几十毫秒不等。第二类是 Kernel Launch，CPU 侧的核函数发射速度跟不上 GPU 侧消费速度，导致 GPU 频繁等待下一个核到来。这类间隙的特征是间隙时长从几微秒到几十微秒不等，但累计起来可能占好几毫秒。第三类是 CPU Execution，CPU 线程在运行用户代码（比如数据加载、特征处理），GPU 等在旁边。这类间隙通常时间最长，从几到几十毫秒，在 nsys 时间线上对应 CPU 线程的绿色条在动而 GPU 条停住。
+PyTorch 的博客解释了这在深度学习里为什么常见：强扩展到很多卡时，每个 GPU 操作只剩几微秒，框架提交工作的延迟就会让 GPU 利用率变低[[8]](https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/)；CPU 的发射开销在核与核之间留下明显的空隙[[8]](https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/)。同一篇博客报告，在 MLPerf 训练 v1.0 里，Mask R-CNN 用 272 块卡时 CUDA Graphs 带来 1.70 倍加速，BERT 用 4096 块卡时是 1.12 倍[[8]](https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/)。PyTorch 通过 torch.cuda.CUDAGraph 类和两个封装接口使用 CUDA Graphs[[8]](https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/)。抓带 CUDA Graph 的程序时，nsys 默认按整图记录，不展开图里的每个节点，这样开销更小[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。
 
-在 code_outputs.md 的案例中，Host Sync 是 2.6 毫秒，Kernel Launch 2.38 毫秒，CPU Execution 15.7 毫秒。CPU Execution 占了绝对的大头，这意味着数据加载或预处理的 Python 代码是主要瓶颈。按照这个优先级，应该先优化数据加载（可能通过增加 dataloader worker 数量或改变 batch 构造方式），再处理发射延迟，最后检查是否有多余的同步。
+![2.9 µs 的短核：逐个同步时每个 9.6 µs，CUDA Graph 降到 3.4 µs](assets/14-profiling/fig-04.svg)
 
-![三类 GPU 间隙的量化特征与诊断依据](assets/14-profiling/fig-04.svg)
+按五步闭环处理空隙：
 
-## 发射受限的量化判据
+- **定天花板**：GPU 在稳态窗口内连续工作。
+- **测实际**：时间线上空隙的总长度和分布。
+- **定位等待**：按 CPU 行上的调用分成同步、发射和 CPU 三类。
+- **消除或隐藏**：去掉不必要的同步；合并小核或用 CUDA Graph；把数据准备移到后台。
+- **复测**：空隙减少，步时间下降。
 
-发射受限（kernel launch latency bound）有一个明确的量化特征。[[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) 现代 GPU 驱动（CUDA 12.0+）的核函数发射延迟约 3-20 微秒，取决于驱动优化等级和 GPU 架构。如果一个 kernel 的平均执行时长也在 3-20 微秒的范围内，那么发射开销占比会很高，两者相加可能接近或超过 100 微秒，这就形成了明显的间隙。[[9]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html) 判据是：实例数不少于 1000，平均时长不超过 20 微秒。如果同时满足这两个条件，这个 kernel 就被认为是发射受限。在 code_outputs 中，volta_fp32_scale_kernel 被执行了 1 次且耗时 567.8 毫秒，明显不符合小核的特征；但如果转到一个 vector_add 的案例，假设它被调用 119 次，平均耗时 1 微秒，那么 119 × 1 μs = 119 μs 的总核时间加上 119 × 10 μs ≈ 1.19 ms 的发射总开销，合计 1.3 毫秒中有 1.19 毫秒是纯粹的发射间隙，这个比例就很不健康。
+一个常见的误区是看到空隙就去优化 kernel。现象是 kernel 变快了，步时间几乎不变。原因是时间花在核与核之间的空隙上，核本身变快只是让空隙占比更大。改法是先按 CPU 行上的调用判断空隙属于哪一类，发射受限时用 CUDA Graph 或合并小核。
 
-检测发射受限的第一步是观察 nsys 时间线的密度。在 Nsight Systems 图形界面或 JSON 导出中，如果看到很多很小的 kernel 条纹，相邻条纹之间都隔着可见的黑缝，且这些黑缝加起来超过总核时间的 10%，就高度可疑。更精确的方法是使用 kern_sum 表的最小值和最大值列：如果 min_kernel_duration 明显小于 [[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) 20 μs 而平均值也在 10 μs 左右，且实例数很高，就能确认发射受限的嫌疑。在真实场景中，vector_add 调用次数 119、平均耗时 1 μs 的情况是常见的，来自于小型的逐元素操作、激活函数或归约的首轮扫描。
+> 🔑 **本章要点**：时间线上的空隙分同步、发射和 CPU 三类，按 CPU 行上的调用区分，nsys analyze 的规则能帮忙找。小核的发射开销可能比核本身还长：V100 上 2.9 µs 的核逐个同步时每个 9.6 µs，用 CUDA Graph 降到 3.4 µs。这一章是五步闭环的“定位等待”：先填空隙，再抠核。
 
-## 修法三档与适用场景
+## 第 4 章 · Nsight Compute：重放、开销和权限
 
-一旦确认发射受限，修复方案有三档，按实施成本和收益排序。第一档是融合小核（kernel fusion）。把多个相邻的小 kernel 合并成一个大 kernel，不仅省了发射开销，还能改善 L1 缓存的局部性。这个方案对应用代码要求最小，仅需要改计算逻辑，不涉及 runtime 改动。比如一个“加载 → scale → 激活”的三核序列可以融合成一个，从 3 × 20 μs = 60 μs 的发射开销降到 20 μs。第二档是 CUDA Graph，把整个训练步的所有 kernel 和 memcpy 操作打包成一个 graph，一次性下发到 GPU，避免逐个发射。CUDA Graph 的开销是首次录制时的 graph capture 过程，后续每一步只需要 graph launch，发射时间从几毫秒降到几十微秒。这个方案对代码侵入性略大，需要改 forward/backward 逻辑来支持 graph 模式，但对于固定的计算图（如推理或完全无分支的训练）效果很好。第三档是减少往返，即增加 kernel 粒度或 batch 大小，使得单个 kernel 的 compute-to-launch 比例提高，发射开销相对摊薄。这个方案通常需要修改模型结构或数据流，成本最高，但通常会带来额外的 SM 利用率提升。
+时间线指出了热点核，下一步用 Nsight Compute 看这个核内部发生了什么。ncu 的数据来自硬件计数器，但一次运行收不齐所有计数器，所以它会把同一个核重放多次。理解重放，才能理解 ncu 为什么慢、结果为什么会和时间线上的时长对不上。
 
-## 用 NVTX 标注把间隙对回业务
+### 重放
 
-现在有了 nsys 时间线和三张表的定量数据，下一步是对这些间隙和 kernel 做业务级的标注，这样才能看出“这 15 毫秒的 CPU Execution 是数据加载还是梯度计算”。这就要用到 NVTX（NVIDIA Tools Extension）。NVTX 是一个轻量级的 API，允许用户在代码里插入带颜色和名称的区间标记。在 PyTorch 中，标注很简单：
+GPU 能同时收集的硬件计数器数量有限，软件插桩的计数器又会严重影响运行时间，所以不是所有指标都能在一次运行里收齐[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。默认的 kernel 重放把要收的指标分成若干遍：第一遍保存核能访问的全部显存，之后每一遍开始前把核写过的那部分恢复原样[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，让每一遍看到同样的数据。显存能恢复，但 L1、L2 这些缓存的内容不能[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，所以后面几遍可能因为缓存已经热了而更快。
+
+还有两种模式。application 重放把整个程序运行多次，每次收一遍，要求程序在 kernel 的执行顺序和分配上是确定的[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。range 重放捕获并重放一整段 API 调用和 kernel，不需要串行执行，适合那些必须并发运行的核[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。
+
+### 测出来的时长为什么不同
+
+ncu 的测量环境和实际运行不一样，主要有三点。第一点，ncu 默认把 kernel 串行执行，除非用专门的重放模式；nsys 不会串行[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，所以同一设备上并发的核在两个工具里时长可能不同。第二点，ncu 默认把 GPU 时钟限制在 boost 频率[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，可以用 `--clock-control base` 把核心和显存时钟锁在基础频率[[9]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)。第三点，`--cache-control all` 在每次重放前刷新所有缓存，结果最可复现[[9]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)。软件插桩的指标开销最大[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，收的指标越多，重放遍数越多。
+
+所以 ncu 只用来看指定的少数几个核。-k 按名字的正则过滤 kernel，-s 跳过前面若干次启动，-c 限制收集的次数[[9]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)；也可以用 --nvtx-include 只收某个 NVTX 范围里的核[[9]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)。不带 --set、--section、--metrics 时收 basic 集合，`--set full` 收全部节[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。
+
+```bash
+# 只看名字含 gemm 的核，跳过热身阶段的启动，收 1 次
+ncu -k regex:gemm -s 10 -c 1 --set full -o gemm_report python train.py
+```
+
+### 权限
+
+Linux 驱动 418.43 起，访问 GPU 性能计数器默认只允许管理员，普通用户会遇到 ERR_NVGPUCTRPERM[[10]](https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters)。可以用 sudo 运行，或者在 /etc/modprobe.d 下放一个 .conf 文件，写上 `options nvidia NVreg_RestrictProfilingToAdminUsers=0` 放开给普通用户[[10]](https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters)，改完可能要重启才生效[[10]](https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters)。在共享集群上放开前要评估安全要求，容器里还要看运行时是否给了相应的权限。
+
+![ncu 的重放：显存能恢复，缓存不能](assets/14-profiling/fig-05.svg)
+
+按五步闭环使用 ncu：
+
+- **定天花板**：这个核所在单元的理论峰值（第 5、6 章）。
+- **测实际**：用 -k、-s、-c 只收热点核的稳态启动。
+- **定位等待**：看是哪个单元、哪类 stall（第 5 章）。
+- **消除或隐藏**：按瓶颈改核函数或换实现。
+- **复测**：同样的过滤条件和时钟设置再收一次。
+
+一个常见的误区是拿 ncu 报告里的核时长和 nsys 时间线上的时长直接比，发现对不上就怀疑工具有问题。现象是 ncu 的时长偏长或偏短。原因是 ncu 串行执行、锁定时钟、可能刷新缓存，测量环境和实际运行不同。改法是时长以 nsys 为准，ncu 只用来看比例和瓶颈类型。
+
+> 🔑 **本章要点**：ncu 一次收不齐计数器，会把核重放多次：显存能恢复，缓存不能；默认串行执行并把时钟锁在 boost。用 -k、-s、-c 或 NVTX 过滤只收热点核；普通用户遇到 ERR_NVGPUCTRPERM 要改驱动参数。这一章是五步闭环的“测实际”：用对方式收计数器。
+
+## 第 5 章 · 读 ncu 报告：SOL、占用率和 stall 原因
+
+ncu 的报告分成很多节，初看信息很多。读的顺序可以固定下来：先看 Speed Of Light 判断核离哪个单元的上限最近，再看占用率判断能不能藏住延迟，最后看 warp 在等什么。本章按这个顺序走一遍。
+
+### 第一眼：Speed Of Light
+
+GPU Speed Of Light Throughput 节给出计算和访存两类资源的吞吐，每个单元都表示成实际吞吐占理论最大值的百分比，并列出各个子指标，指出贡献最大的那一个[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。读法很直接：计算一侧的百分比高，就去看 Compute Workload Analysis 节，它给出每条执行管线的利用率和每周期指令数[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)；访存一侧的百分比高，就去看 Memory Workload Analysis 节，访存可能因为硬件单元满负荷、单元之间的带宽用尽，或者访存指令的发射达到上限而成为瓶颈[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。两侧都不高，说明核既没有算满也没有搬满，问题多半在延迟，要往下看占用率和 stall。
+
+### 第二眼：占用率
+
+占用率是每个 SM 上活跃 warp 数和最多可驻留 warp 数之比[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。ncu 文档的说法很准确：占用率高不一定性能高，但占用率低一定削弱藏延迟的能力[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。所以不要把占用率当成越高越好的目标，它只是一个前提：两侧吞吐都不高、占用率又低时，提高占用率（减少每线程寄存器、调整共享内存和 block 大小）才是方向。
+
+### 第三眼：warp 在等什么
+
+Warp State Statistics 节描述 warp 能否发射下一条指令的各种状态[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)，最大的几项 stall 原因就是核的主要矛盾。常见的两类：
+
+- **long_scoreboard**：warp 在等一次 L1TEX 操作（local、global、surface、texture）的结果[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。它占主导时，核是访存延迟受限，不一定是带宽受限；带宽没满时，应优先用指令级并行、循环展开或流水线来藏延迟[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。
+- **math_pipe_throttle**：所有活跃 warp 的下一条指令都要用同一条已经满负荷的计算管线。它占主导时，核通常是计算管线受限[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。
+
+![读 ncu 报告：SOL、占用率、stall 原因](assets/14-profiling/fig-06.svg)
+
+按五步闭环读一份报告：
+
+- **定天花板**：SOL 里各单元的理论最大值。
+- **测实际**：各单元的百分比、占用率、stall 分布。
+- **定位等待**：离上限最近的单元，或者排第一的 stall 原因。
+- **消除或隐藏**：访存受限减少数据搬运，延迟受限增加并行度，计算受限换更合适的指令或精度。
+- **复测**：同样的过滤条件再收一次，看瓶颈是否转移。
+
+一个常见的误区是看到 long_scoreboard 排在最前，就断定核受显存带宽限制，开始压缩数据。现象是数据量减少了，核却没有变快。原因是 long_scoreboard 说明 warp 在等访存结果，这可能是延迟问题，带宽并没有用满。改法是先看 SOL 的访存百分比：带宽没满时，用循环展开、预取或增加并行度去藏延迟。
+
+> 🔑 **本章要点**：读 ncu 报告按三步：SOL 看离哪个单元的上限最近，占用率看能不能藏延迟（高不一定好，低一定吃亏），stall 原因看 warp 在等什么。long_scoreboard 主导是访存延迟受限，不一定是带宽受限。这一章是五步闭环的“定位等待”：把一个慢核归到具体的单元。
+
+## 第 6 章 · Roofline：先算清这个核的上限
+
+ncu 告诉你核跑到了上限的百分之几，但上限本身取决于核的算术强度。Roofline 模型把峰值算力、显存带宽和算术强度放进一张图，用来判断一个核该算满还是该搬满。本章用 H100 SXM 的规格算出两条屋顶的交点，再看两个典型的核落在哪里。
+
+### 模型
+
+Roofline 是 Williams、Waterman 和 Patterson 在 2008 年提出的可视化性能模型[[6]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)。核的可达性能等于两个值中较小的一个：峰值算力，以及算术强度乘以显存带宽。算术强度是计算量和访存量之比[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。两条线的交点叫脊点，是带宽边界和峰值算力边界相交的位置[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)：算术强度低于脊点的核受带宽限制，高于脊点的受算力限制。ncu 的 SOL 节可以直接画出这个核的 Roofline 图[[4]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。
+
+### H100 SXM 的脊点
+
+H100 SXM 的规格表里，FP32 是 67 TFLOPS，BF16 Tensor Core 是 1,979 TFLOPS，显存带宽 3.35 TB/s[[5]](https://www.nvidia.com/en-us/data-center/h100/)。BF16 这一项带星号，表示是稀疏情况下的数字[[5]](https://www.nvidia.com/en-us/data-center/h100/)，稠密计算按一半即约 989 TFLOPS 算。由此得到两个脊点：
+
+- BF16 Tensor Core：989 TFLOPS ÷ 3.35 TB/s ≈ 295 FLOP/byte。
+- FP32：67 TFLOPS ÷ 3.35 TB/s = 20 FLOP/byte。
+
+同一张卡，用不同精度和单元时脊点差了十几倍。判断一个核受什么限制，先要确定它用的是哪一档算力。
+
+### 两个典型的核
+
+向量加法 c = a + b，每个元素读两个 float、写一个 float，共 12 字节，做 1 次加法，算术强度约 0.083 FLOP/byte，远低于任何一档脊点，只能受带宽限制。对这种核，优化的目标是让显存带宽接近上限，而不是提高算力利用率。
+
+BF16 的 N×N 方阵乘法，理想情况下计算量 2N³，读写三个矩阵各一次共 3N² × 2 字节，算术强度是 N/3。N = 4096 时约 1365 FLOP/byte，远高于 295，应该受算力限制。实测核的算术强度通常比理想值低，因为分块不能完全复用数据，ncu 的 Roofline 图给出的是实测值。
+
+![H100 SXM 的两个脊点：BF16 约 295，FP32 是 20 FLOP/byte](assets/14-profiling/fig-07.svg)
+
+按五步闭环用 Roofline：
+
+- **定天花板**：按核用的精度选峰值算力，算出脊点。
+- **测实际**：ncu 给出的实测算术强度和性能。
+- **定位等待**：核在脊点左侧还是右侧，离屋顶有多远。
+- **消除或隐藏**：左侧的核减少访存或提高复用，右侧的核提高算力利用率。
+- **复测**：看点是向屋顶靠近，还是向右移动。
+
+一个常见的误区是用 BF16 Tensor Core 的峰值去评价一个 FP32 的核。现象是算出来的算力利用率只有个位数百分比，于是认为核写得很差。原因是 FP32 核用不到 Tensor Core 的那一档算力，H100 上它的峰值是 67 TFLOPS。改法是按核实际使用的精度和执行单元选屋顶，并且只用稠密峰值。
+
+> 🔑 **本章要点**：Roofline 的上限是 min（峰值算力， 算术强度 × 带宽）。H100 SXM 按稠密 BF16 算脊点约 295 FLOP/byte，FP32 只有 20 FLOP/byte。向量加法约 0.083 FLOP/byte，只能追带宽；4096 方阵 BF16 GEMM 理想值约 1365，该追算力。这一章是五步闭环的“定天花板”：先算对上限，再谈利用率。
+
+## 第 7 章 · PyTorch profiler 和 NVTX：把 kernel 对回代码
+
+nsys 和 ncu 看到的是 kernel 名，比如一串模板展开后的 GEMM 名字，很难直接对应到模型里的哪一层。PyTorch profiler 按算子统计时间，NVTX 在时间线上标出代码段，两者都是为了把 GPU 上的事件对回代码。
+
+### PyTorch profiler
+
+torch.profiler 通过 CUPTI 追踪 GPU 上的 CUDA kernel[[11]](https://docs.pytorch.org/docs/main/profiler.html)。训练循环很长时，全程追踪既慢，生成的文件也很大[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)，所以要用 schedule 只记录几步。schedule 的参数是 wait、warmup、active、repeat、skip_first 等[[11]](https://docs.pytorch.org/docs/main/profiler.html)：先跳过 skip_first 步，再等 wait 步，然后热身 warmup 步，接着正式记录 active 步，再从 wait 开始下一轮[[11]](https://docs.pytorch.org/docs/main/profiler.html)。每一步结束时调用 prof.step() 通知 profiler[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)。
 
 ```python
-import torch.utils.cuda.profiler as profiler
-
-# 标注数据加载阶段
-torch.cuda.nvtx.range_push("dataload")
-batch = dataloader.get_batch()
-torch.cuda.nvtx.range_pop()
-
-# 标注前向计算
-torch.cuda.nvtx.range_push("forward")
-output = model(batch)
-torch.cuda.nvtx.range_pop()
-
-# 标注反向计算
-torch.cuda.nvtx.range_push("backward")
-loss.backward()
-torch.cuda.nvtx.range_pop()
-
-# 标注优化器步骤
-torch.cuda.nvtx.range_push("optimizer_step")
-optimizer.step()
-torch.cuda.nvtx.range_pop()
-```
-
-完成标注后，再用 nsys 抓一遍，时间线上就会出现标记了 dataload、forward、backward 的彩色区间，这样可以直观看出这 15.7 毫秒的 CPU Execution 到底是数据加载慢（dataload 段长）还是前向预处理慢（forward 段前的 CPU 占比高）。如果 dataload 段就占了 10 毫秒，那优化方向就是增加 dataloader 的 num_worker 或改批构造逻辑；如果是 forward 段前有 5 毫秒的 CPU 处理（比如张量转移、格式转换），那就是在看应该卸载到 GPU 还是并流处理。
-
-**🔑 本章要点**：间隙分 Host Sync（显式同步）、Kernel Launch（发射延迟）、CPU Execution（CPU 代码）三类。发射受限的判据是实例数 >=1000 且平均耗时 <=20 微秒。修法按融合小核、上 CUDA Graph、减少往返三档走，收益递减但成本递增。用 NVTX 在 nsys 时间线上标注业务阶段（dataload、forward、backward、optimizer），能把定量的间隙对应到定性的瓶颈。这决定了 W_host 的三个具体消除方向。
-
-# 第 4 章 · Nsight Compute：重放、节和权限
-
-ncu 抓一次指标不是让核函数正常跑一遍顺便读数。GPU 性能计数器是一组硬件资源，硬件上计数器在 SM 内的通道有限，单次通过只能并行采其中一小部分。[[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay) ncu 默认把每个核函数重放多遍，每遍激活一组计数器组合，最后拼成完整报告。副作用有三个。第一个是墙上时间成倍增加；在 code_outputs 中两个 volta_fp32_gemm 核若全采 full section，计数器分组数量会导致大概需要 30 倍重放，原本 4.2 秒的运行会膨胀到两分多钟，变成完全无法接受。第二个是核函数带随机性或副作用时每遍看到不同数据，导致计数器和中间结果都不稳定。第三个是有状态的核可能因为重放次数改变结果，比如一个全局计数器累加 30 次，行为会被彻底改变，甚至可能溢出或崩溃。
-
-## 只抓热点核的重放策略
-
-生产环境的规矩是先在 nsys 里选出前三热点，再用 --launch-skip 和 --launch-count 只抓目标核的少数几次，指标列表显式指定而不是用 full 全集。[[12]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html) 命令示例：
-
-```bash
-ncu --section ComputeWorkloadAnalysis \
-  --metrics sm__throughput,gpu__compute_memory_throughput \
-  --launch-skip 0 \
-  --launch-count 3 \
-  /path/to/your_app
-```
-
---launch-skip 跳过前 N 个 kernel 实例，--launch-count 只采后 M 个，这样可以避免采预热期的数据。如果已知热点是第五个 volta_fp32_gemm_1 而且有一百个实例，改成 --launch-skip 4 --launch-count 3 就只给第 5、6、7 个采计数器。这样原本要跑 100 遍（100 个实例 × full section 导致的 30 倍重放），现在只要跑 3 遍（3 个实例 × 同样的 30 倍重放），时间从两分多钟降到三四秒。
-
-[[13]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#sections) ncu 的 section 体系把指标按 ComputeWorkloadAnalysis、MemoryWorkloadAnalysis、SchedulerStats、Occupancy 等专题组织，每个 section 打包十几到二十个计数器并给解读结论。命令行 --section 选专题会自动展开该专题包含的全部计数器，也可以 --metrics 直接点名具体指标规避不需要的计数器。比如只关心算术强度和 DRAM 利用率，--metrics sm\_\_throughput,gpu\_\_compute_memory_throughput 就足够了，会把重放次数从 30 倍压到 5 倍左右。选什么 section 取决于假设：如果猜测是计算侧有问题，ComputeWorkloadAnalysis 就够；如果是访存，MemoryWorkloadAnalysis 就够。
-
-## 计数器、指标和比率三层
-
-ncu 报告里三层东西要分清。第一层是计数器，硬件直接数出来的事件，如 dram\_\_bytes.sum 统计进出 HBM 的总字节、sm\_\_inst_executed_pipe_tensor.sum 统计 Tensor 管线执行过的指令条数。这些都是原始的硬件事件计数。[[14]](https://docs.nvidia.com/nsight-compute/MetricsStructuredRef/) 第二层是指标，计数器按时长、周期或峰值归一后的量，如 gpu\_\_time_duration.sum 是原始时长，sm\_\_throughput.avg.pct_of_peak_sustained_elapsed 是占可持续峰值的平均百分比。后缀 avg.pct_of_peak_sustained_elapsed 这一串里，avg 表示对所有活跃周期求平均，pct_of_peak_sustained 表示归一到可持续峰值的百分比。第三层是比率，多个指标再做除法，如算术强度 = FLOP / 字节。
-
-关键是理解后缀的含义。sum、avg、max 是跨实例聚合方式，一个 kernel 有多次调用时，sum 是全部求和，avg 是平均，max 是最大。per_cycle_active 和 per_second_active 只在流水线活跃时计时，不活跃的周期被忽略，分母不同不能直接比。pct_of_peak_sustained 用的分母是可持续峰值而不是 boost 瞬态峰值。H100 FP32 计算的可持续峰值是 67 TFLOP/s，瞬态 boost 可能到 80 TFLOP/s，因此一个核偶尔跑到 100% 以上的 boost 区间不奇怪，但长期平均贴着 90% 以上才算管线打满。
-
-[[15]](https://docs.nvidia.com/cuda/hopper-tuning-guide/) [[16]](https://docs.nvidia.com/cuda/blackwell-tuning-guide/) Hopper 和 Blackwell 的调优指南分别给出本代计数器的解读差异：Blackwell 起部分 Tensor 管线计数器改名，跨代比较报告时先查官方指标映射表。Section 体系的价值在于把相关计数器打包成有解读结论的一页，Compute Workload Analysis 页直接给出 warp 因什么停顿（Pipe Throttle 管线拥堵、Exec Dependency 执行依赖、Memory Dependency 内存依赖），不用自己从原始计数器推导。在 code_outputs 的样例中 volta_fp32_gemm_1 的 stall reason 排序显示 MemDep 45.6%、LG Throttle 12.5%、ExecDep 8.7%，这三个信息合起来说明主要在等内存数据返回，其次是 Load/Store 单元拥堵（内存系统的下游堆积），再次是执行依赖（寄存器或其他资源冒泡）。
-
-> 💡 **常见误区**：用 ncu full 采完整报告，结果两千个小核的程序被拖慢十几倍，半小时还没出结果。或者 kernel 里有状态（全局计数器、随机数生成器），每次重放改变结果，导致可能溢出或数据不一致。还有的人看到 ERR_NVGPUCTRPERM 后盲目 sudo，权限问题应该系统级改 modprobe 或用 setcap。
-
-## Linux 权限与两种开放方案
-
-Linux 驱动默认可能禁止非特权用户读性能计数器。[[6]](https://docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux) ncu 此时报 ERR_NVGPUCTRPERM，提示权限不足。开关是内核模块参数 NVreg_RestrictProfilingToAdminUsers，RHEL 系发行版默认 1，Debian 系多为 0。放开有两条路。第一种方式是系统级改 modprobe 配置把参数设为 0 并重载 nvidia 模块。具体做法是编辑 /etc/modprobe.d/nvidia.conf 或创建新文件，加入一行 options nvidia NVreg_RestrictProfilingToAdminUsers=0，然后运行 sudo modprobe nvidia -r 卸载驱动、sudo modprobe nvidia 重载。这要求 root 权限但一次配置全局生效，之后所有用户都能抓计数器。缺点是需要重启驱动、可能中断在线任务。
-
-第二种方式是保留限制、用 setcap 给 ncu 二进制加 CAP_SYS_ADMIN 等精细权限，这样不用改系统配置。具体做法是找到 ncu 二进制位置（通常在 /usr/local/cuda/bin/ncu），运行 sudo setcap cap_sys_admin=ep /path/to/ncu，之后普通用户运行 ncu 会有足够权限读计数器。缺点是逐个配置，如果 ncu 更新了路径还要重新配。
-
-容器里还要额外配置。/proc/driver/nvidia 必须对容器可见，通常通过 docker run --device /dev/nvidia0 或 Kubernetes 里配置 nvidia.com/gpu 资源来实现。容器必须以对应 capability 启动，可以用 docker run --cap-add=SYS_ADMIN 或 Kubernetes 的 capabilities 字段。检查环境是否就绪的方式是编写 check_profiling.sh，它把 nvidia-smi 能见性、驱动参数、容器 capability 查一遍，并推荐对应修复命令。
-
-**🔑 本章要点**：ncu 靠 kernel replay 把单个核重放多遍拼计数器，代价是墙上时间倍增、数据改变、有状态核失效，因此只抓 nsys 选出的少数热点核，用 --launch-skip 和 --launch-count 限制重放次数。报告分计数器（硬件事件）、指标（归一化）、比率（多指标除法）三层，百分比基数用可持续峰值，非 boost 瞬态。非 root 抓不到计数器时先查 NVreg_RestrictProfilingToAdminUsers 和容器 capability，不要盲目 sudo，可用 setcap 精细授权。这是精确定位 W_mem 和核内计算路径的基础工具。
-
-# 第 5 章 · 八个计数器和五分类
-
-完整指标表有几百项，日常判断只需要八个，按回答的问题分四组，覆盖时间去哪了、带宽用了多少、核有没有被充分利用、能算多少浮点数。这一章把这八个指标串成一条决策树，按排查成本从低到高逐一判断，最后给出五个瓶颈标签：LAUNCH（发射受限）、MEM（内存驱动）、TENSOR（计算侧但有 Tensor）、COMPUTE（计算侧纯 ALU）、LATENCY（延迟受限）。这五个标签对应五种优化策略，是之后选择调优方向的关键。
-
-## 八个指标分四组
-
-时间组只有一个：gpu\_\_time_duration.sum，原始执行时长。它是一切比率的分母，也是判断小核的直接证据。在 code_outputs 中 volta_fp32_gemm 耗时 400 多毫秒，volta_fp32_scale 只有 1 微秒，单个核的耗时决定了优化该核的投资回报率。如果一个核只跑 1 微秒，即使能优化 50%，省下 500 纳秒，对整体吞吐的贡献微乎其微；反之一个 400 毫秒的核即使只优化 1%，也能省 4 毫秒。
-
-吞吐组有三个：[[14]](https://docs.nvidia.com/nsight-compute/MetricsStructuredRef/) sm\_\_throughput 的平均峰值占比看 SM 整体忙不忙。如果 sm\_\_throughput 平均只有 20% 的峰值，说明 SM 三分之四的时间在空闲，必然有掩盖不了的延迟或发射不上的指令。gpu\_\_compute_memory_throughput 看进出 HBM 的数据吞吐，是决定内存受限阈值的关键指标。一个核即使访问内存也要看访问量，小数据量即使访问频繁，总 HBM 吞吐也很低，不会被 HBM 带宽限制。l1tex\_\_throughput 在非合并访存时显著偏高，指向高随机访问或 sector 浪费，可能说明缓存效率很低。
-
-占用组是 sm\_\_warps_active 占理论峰值的百分比，回答有没有足够 warp 掩盖延迟。H100 每个 SM 最多 2048 个活跃 warp，算上四个 warp 调度器的轮转能力，理论上一个 warp stall 时可以让其他三个 warp 继续执行。[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) 如果活跃 warp 太少，延迟掩盖不足，管线会空闲等待数据返回。低占用率本身不是问题，关键是是否能隐藏所有延迟；如果 50% 占用率就能隐藏，那就够用，没必要追到 100%。
-
-记账组三个：sm\_\_inst_executed_pipe_fma.sum 给 FMA 指令条数，每条计 2 FLOP（因为 a\*b+c 是两个浮点操作）；sm\_\_inst_executed_pipe_tensor.sum 给 Tensor warp 指令条数，每条按所执行的 mma 指令形状计 FLOP（一个 16×16×16 的 mma.bf16 指令是 16×16×16×2 = 8192 FLOP）；gpu\_\_dram\_\_bytes.sum 给进出 HBM 的字节总数。后两组凑齐才能算出算术强度（总 FLOP / 总字节），判出是受计算限制还是带宽限制。
-
-## 五步决策树与阈值
-
-![五分类决策树：核函数诊断的优先级顺序](assets/14-profiling/fig-05.svg)
-
-配套解析器把分类固化成一棵决策树，顺序本身就是排查成本从低到高。第一步看单次时长，不到 5 微秒直接判 LAUNCH，单核优化毫无意义，应该融合小核或上 CUDA Graph。在 code_outputs 的样例里 volta_fp32_scale 虽然被执行了，但只要其时长 <5 us 就该标为 LAUNCH 而非 MEM 或 COMPUTE。LAUNCH 类核需要改变调用策略，改进点是核外的融合和图优化。
-
-第二步看 DRAM 利用率，达到 60% 判 MEM。优化方向是减访存、提数据复用、重分块。DRAM 利用率高意味着 HBM 是关键资源，每个周期都在忙着运数据。code_outputs 中 volta_fp32_scale 的 DRAM 利用率 78.9% 远高于 60%，即使占用率不足也要首先考虑访存优化。如果通过 tiling 或共享内存把冗余访问消掉，可以从 HBM 带宽竞争转向 L1/L2 缓存，进而转向计算约束。[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) 对于 MEM 类核，常见改法是增加数据复用倍数（比如一个 N×N matmul 改成 tile 后每个 HBM 字节被多倍使用）或减少访问频率（比如从 DRAM 改到共享内存读写）。
-
-第三步看 SM 利用率，达到 60% 且有 Tensor 指令判 TENSOR，否则判 COMPUTE。code_outputs 中 volta_fp32_gemm_1 的 SOL-Compute 68.5% 高于 60%，属于 Tensor 一族，优化方向是核对 Tensor Core 覆盖率、loop 展开和混合精度。TENSOR 和 COMPUTE 的分野在于是否用了硬件加速单元。对于 TENSOR，SM 利用率限制因素通常是 Tensor Core 忙碌度、数据依赖或 L2 缓存。如果 SM 利用率 90% 以上还有 Tensor 指令，说明 Tensor Core 本身已经是热点，改进空间在 L2 缓存配置或混精度策略。对于纯 COMPUTE（只有 FMA），改进点是指令混合（是否有浮点类型或操作交错）和管线停顿。
-
-[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html) 第四步是 Roofline 账。高 SM 没打满但算术强度超过脊点（H100 约 20 FLOP/byte），说明活在计算侧却没喂饱。这类核的特征是理论上有能力做更多计算，但实际吞吐受限于流水线，可能是指令依赖、寄存器压力或内存延迟掩盖不足。查流水线停顿和 warp 级指令混合是改进方向。如果算术强度低于脊点，说明已经被 HBM 带宽限制了，再优化计算侧收益有限。code_outputs 显示 volta_fp32_gemm_1 SOL-Memory 28.3%，说明 HBM 有余量，SM 利用率才是主要障碍。
-
-第五步是占用率和延迟。占用率低于一半且 L1 繁忙，典型是随机访存，判 LATENCY 并查 sector 浪费；只是占用率低则查块大小、每线程寄存器数和同步密度。LATENCY 核通常来自散列表查询、树遍历或不规则访存，需要大量 warp 等待内存返回。优化方向是提前加载（prefetch）、批量访存或改数据结构。[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) [[15]](https://docs.nvidia.com/cuda/hopper-tuning-guide/) 这些阈值是公开调优指南的经验起点，不是物理常数。每一代 GPU 的延迟掩盖需求不同，Blackwell 的改进让更低的占用率也能达到满吞吐，这时候要查对应代的调优指南。
-
-> 💡 **常见误区**：用占用率当分数追。占用率衡量的是能掩盖延迟的 warp 余量，不是效率；寄存器用得多的核占用率低，但只要延迟被掩盖，吞吐可以更高。或者把 DRAM 利用率高就判为“内存驱动”而忽略了可能的无效流量：一个随机 gather 可能有高 L1 但低 DRAM 利用率，说明大量请求在缓存层浪费了 sector。
-
-## 占用率与 DRAM 利用率的真实含义
-
-[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) Best Practices Guide 明确把占用率定位为延迟隐藏的手段，非终极目标。调优应从最小需要占用率开始，不从 100% 作为标准。占用率 70% 如能隐藏全部延迟则已够用。关键指标是 issue efficiency，即发出去的指令数占理论峰值的比例，而不是 warp 个数。一个有大量依赖的低占用率核可能有高 issue efficiency，因为每个 warp 都在忙；反之一个有大量空闲 warp 的高占用率核可能 issue efficiency 很低。
-
-DRAM 利用率也不能凭单一数字判断。code_outputs 的案例中 volta_fp32_scale 虽然 DRAM 利用率 78.9%，但 HBM 总吞吐只有 1-2 GB/s，远低于 H100 的 3.35 TB/s；说明真正的数据读写量很小，高百分比是在一个小基数上。同时要看是否有 L1/L2 的高失效率，那可能说明数据工作集超出缓存容量。
-
-**🔑 本章要点**：八个指标分时间、吞吐、占用、记账四组，覆盖时间、数据流、并行度、计算量四个维度。分类按 LAUNCH（<5 us）、MEM（DRAM >60%）、TENSOR（SM >60% 有 Tensor）、COMPUTE（SM >60% 无 Tensor）、LATENCY（占用 <50%）的顺序走，阈值是经验起点。占用率只是隐藏延迟的手段，DRAM 高也可能是无效流量。这决定了 W_mem 的具体表现：HBM 带宽饱和 vs L1/L2 浪费 vs 延迟掩盖不足。
-
-# 第 6 章 · Roofline 模型和算术强度账
-
-**性能瓶颈**的本质是：核函数要么受显存带宽限制，要么受 SM 算力限制，很少两者都饱和。Roofline 模型是一把标尺，用算术强度（FLOP/byte）把核函数映射到一条分段线性曲线上，立即读出该核处于“带宽屋顶”还是“算力屋顶”。这回答了“这个核到底还能快多少”的终极问题。
-
-## 两个屋顶和一个脊点
-
-Roofline 模型由 Berkeley 提出 [[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)。设计思路很简单：定义核函数的算术强度 I = （总 FLOP 数） / （内存字节数），再在坐标系上绘制两条曲线：**带宽屋顶**是一条水平线，对应显存带宽的上限；**算力屋顶**是一条水平线，对应 SM 的最大吞吐。这两条线在高算术强度处相交，交点称为**脊点**（Roofline ridge）。
-
-脊点的含义是：**算术强度超过脊点时，带宽屋顶失效，瓶颈转向算力；算术强度低于脊点时，算力屋顶失效，瓶颈是带宽**。从公式推导：脊点 = （算力屋顶） / （带宽屋顶） FLOP/byte。
-
-对于 H100 SXM，[[5]](https://www.nvidia.com/en-us/data-center/h100/) 给出规格：
-
-| 性能指标 | 值 |
-|-|-|
-| FP32 算力屋顶 | 67 TFLOP/s（稠密运算，所有 132 SM 各 1 FP32 单元） |
-| Tensor Core BF16/FP16 算力屋顶 | 989 TFLOP/s（稠密矩阵乘法） |
-| 显存带宽 | 3.35 TB/s（HBM3）[[15]](https://docs.nvidia.com/cuda/hopper-tuning-guide/) |
-
-对于 FP32 运算，脊点 = 67 TFLOP/s ÷ 3.35 TB/s = **20 FLOP/byte**。对于 Tensor Core BF16/FP16，脊点 = 989 TFLOP/s ÷ 3.35 TB/s = **295 FLOP/byte**。这是片外内存访问的有效脊点，因为片上缓存能大幅降低 HBM 流量。
-
-关键认知：**脊点是核函数优化投入产出比的转折点**。低于脊点，优化带宽瓶颈（增加数据重用率、减少全局内存访问）。超过脊点，优化算力瓶颈（增加并行度、隐藏 latency）。选错方向意味着白费力气。
-
-## H100 的三个核样例
-
-现在用三个真实核作为具体例子，看它们如何分布在 Roofline 坐标系上。所有数据来自 [[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay)。
-
-**样例 1：vector_add（带宽侧）**
-
-代码是简单的逐元素相加：每个线程读两个 float（8 字节），写一个 float（4 字节），共 12 字节 I/O、8 个 FLOP。算术强度 I 等于 8 除以 12 等于 0.67 FLOP/byte。这远低于脊点 20。本篇 code_outputs.md 的测试表明吞吐达 2800 GB/s（接近带宽屋顶），但算力利用率仅 15.3%。结论：**这是带宽瓶颈，代码已经充分利用了显存带宽，优化空间在于减少 I/O 或增加计算**。
-
-**样例 2：SGEMM FP32（带宽侧）**
-
-单精度矩阵乘 C 等于 A 乘以 B，矩阵大小 4096×4096。为满足缓存利用，每个线程使用 BlockSharedMemory 重用两个数据块。理论算术强度约 I 等于（2 乘以 4096 乘以 4096）除以（3 乘以 4096 乘以 4 乘以 sizeof(float)）约等于 5.33 FLOP/byte。这低于脊点 20，预测带宽瓶颈。本篇 code_outputs.md 的实测数据显示：吞吐 2246 GB/s（占显存带宽 67%）、算力占用 68.5%、但实际只利用带宽的 28.3%。**这是计算瓶颈**，SM 无法充分利用现有的显存吞吐。优化方向是增加 ILP（指令级并行）或用 Tensor Core 提升算力。
-
-**样例 3：BF16 GEMM with Tensor Core（算力侧）**
-
-相同矩阵大小（4096×4096）用 Tensor Core 指令计算。算术强度高达约 I ≈ 1365 FLOP/byte（最小内存流量下：写回 1×4096×4096×2 字节输出），远超脊点 295，预测算力瓶颈。实测显示**吞吐达 989 TFLOP/s 的七到八成**，仅需约 340 GB/s 显存带宽（占 HBM3 的 10%）。核函数达到了 Tensor Core 屋顶的 79% 利用率。
-
-三个样例教会我们：Roofline 是一个快速判断的工具，不需要读懂 stall reason，先看算术强度就知道优化向哪里走。
-
-![H100 Roofline 模型与三个样例核](assets/14-profiling/fig-06.svg)
-
-## 三个常见的坑
-
-**第一个坑：字节分母选错**
-
-计算算术强度时，分母中的“字节”容易混淆。有人用 dram\_\_bytes（所有访问显存的字节数）；有人只算 l2\_\_bytes（通过 L2 的字节数）；还有人混算 L2 和 HBM。后果是算术强度虚高或虚低。正确做法：[[14]](https://docs.nvidia.com/nsight-compute/MetricsStructuredRef/) 规定 **分母用“主存（HBM）访问的字节数”**。因为这是硬约束，缓存命中能加快核运行，但不能减少“显存带宽的消耗”。即使命中了 L1/L2，字节仍然要从 HBM 往返一次（体现为功耗），这是瓶颈定位的正确参照。
-
-> 💡 **常见误区**：用 dram\_\_bytes 算出 I = 50 FLOP/byte，声称超过脊点应该受算力限制，却没发现实测只跑到 15% 算力。根源是 L2 缓存命中率 98%，实际 HBM 访问只有 2 GB/s，真实算术强度 I = 0.5 FLOP/byte，远低于脊点。这个错误导致优化方向完全相反。
-
-**第二个坑：屋顶参数选错**
-
-H100 有多条屋顶：FP32 用 89.1 TFLOP/s，FP16 Tensor 用 1456 TFLOP/s，还有 TF32（混合精度）也有专属屋顶。选错屋顶会导致脊点错误。例如一个 FP8 量化的核，如果用 Tensor Core 并行化，应该用 Tensor FP8 屋顶而不是 FP32。稀疏矩阵乘法也有专属屋顶 [[13]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#sections)，NVIDIA 在 Hopper 引入了稀疏张量核，吞吐翻倍但也改变了脊点位置。
-
-**第三个坑：单核视角遗漏整窗**
-
-Roofline 分析单个核函数的效率。但 GPU 上常常并行跑多个核。此时 Roofline 无法解释为什么 GPU-Util 100% 但 SM 活跃度只有 5%。根源是小任务占用的 SM 太少，大量硬件闲置。这需要搭配第 1 章的时间线分析。Roofline 说明“这个核跑得有多快”，时间线说明“GPU 上一共在干什么”。两者配合才能定位整机瓶颈。
-
-## 跨卡对比：Roofline 随硬件变化
-
-不同 GPU 的 Roofline 长相完全不同。A100 的 FP32 脊点约 78 FLOP/byte（算力 312 TFLOP/s、带宽 2 TB/s）。B200 的脊点约 10 FLOP/byte（算力 20 TFLOP/s[[18]](https://www.nvidia.com/en-us/data-center/dgx-b200/)、带宽 10.6 TB/s）。B200 的设计用大带宽换小算力，定位是异构计算（CPU 主导）。[[16]](https://docs.nvidia.com/cuda/blackwell-tuning-guide/) 给出的调优指南也会改变：向量运算在 B200 上反而变成算力侧了。
-
-实践中的做法：拿到新卡，先用 `nvidia-smi` 和 DCGM 抓住硬件指标，算出脊点，再用样例核测试两条屋顶的实际值。往往会发现实测小于理论值（因为访存冲突、指令分发延迟），这是 Roofline 的后续调整。
-
-🔑 **本章要点**：Roofline 用算术强度把核函数分到带宽屋顶或算力屋顶。H100 的 FP32 脊点约 20 FLOP/byte，Tensor BF16/FP16 脊点约 295 FLOP/byte。三个样例表明：vector_add 强度 0.67、SGEMM 强度 5.33 都低于脊点，后者计算不足；BF16 GEMM 强度 1365 超脊点，达 79% Tensor 屋顶。字节分母、屋顶参数和单核视角都是常见坑。换卡只需换屋顶参数，脊点随之改变。这确定了 W_mem 的理论下界。
-
-# 第 7 章 · 抓取脚本、四段负载和环境体检
-
-前六章讲了工具和模型。这一章落地：把 nsys、ncu、分析脚本串起来成一个自动化流程，不需要人工参与就能完整抓取数据、解析瓶颈、生成报告。同时解决“没有 GPU 的时候怎么训练思维”的问题，用自洽的样例 CSV 数据让所有人都能练习完整分析。
-
-## profile.sh：固化标准流程
-
-核心思想是把第 2、4 章讲的两轮采集写成 shell 脚本，消除手工命令的变异。profile.sh 在 repo/zero-to-gpu/14-profiling/ 中，调用方式是：
-
-```bash
-bash profile.sh all
-bash profile.sh launch      # 只抓发射受限段
-bash profile.sh mem         # 只抓带宽侧段
-```
-
-脚本内部的逻辑是：
-
-**第一步：检查依赖**。验证 nsys、ncu、python3 都已安装，CUDA_VISIBLE_DEVICES 是否设置，当前用户是否有 profiling 权限（第 4 章讲的 perf 事件）。如果缺少权限，脚本输出友好的诊断信息和修复命令，例如 `echo 0 | sudo tee /proc/sys/kernel/perf_event_paranoid`。
-
-**第二步：分段抓取**。profile.sh 调用 gpu_workload.py 中的四个函数生成四段负载（下一节详述），每段独立传给 nsys。采集选项固定为 [[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)：`--sample=cpu --sample-overhead-memory=all --trace cuda,nvtx --output report.nsys-rep`。这避免了人工调参导致的不一致。nsys 输出的 .nsys-rep 二进制文件用 `nsys stats` 导出为 CSV。
-
-**第三步：失败保留日志**。如果某轮采集失败（例如因为 Xid 错误、device hang、权限拒绝），脚本不会删除中间数据，而是把错误信息存到 `profile_<seg>_error.log`。用户可以继续排查而不必从头开始。成功的采集会在 `profile_<seg>.ok` 创建一个标记文件。
-
-**第四步：指标列表最小化**。ncu 的完整指标库有 400+ 个计数器，全部读取会导致单核运行 100+ 次，耗时数小时。profile.sh 用 [[12]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html) 的 `--metrics gpu__compute_sm_occupancy,dram__bytes,l2__bytes,...` 指定仅采集第 5 章的八个核心计数器，这样单核 3-5 次就完成。完整指标表保存在 code_outputs.md 供参考，用户若要探索其他计数器可自行编辑 ncu 命令。
-
-## gpu_workload.py：四段负载对应四类瓶颈
-
-每个优化问题都对应一类等待。profile.sh 调用 gpu_workload.py 中的四个函数模拟四种典型场景，让用户能有针对性地测试：
-
-**mem segment：显存带宽瓶颈**。内核是 `vector_add`（逐元素相加），每个线程读两个输入、写一个输出，内存访问密集但计算稀疏。这类核会在带宽屋顶卡住，算力利用率低。用这段数据验证是否真的受带宽限制。
-
-**launch segment：发射受限**。内核是小的核函数，每个线程块只有 32 个线程，重复发射 10000 次。这类核的特点是核间隙很大（典型 100 微秒以上），不同核之间没有依赖，无法充分并行利用 SM。时间线上会看到大量空白区间。用这段数据验证 GPU 是否在空转。
-
-**latency segment：内存延迟瓶颈**。内核是 `reduce` 操作（全局求和），计算依赖链很长，无法隐藏 HBM 访问延迟。这类核的特点是占用率很低（因为等待内存），却很难优化（无法增加并行度）。用这段数据验证是否卡在内存延迟而不是带宽。
-
-**tensor segment：计算侧优化**。内核是 Tensor Core 矩阵乘（FP16 GEMM），充分利用了 Tensor Core 和片上缓存。这类核的特点是算力利用率高（超过 60%），是优秀核的样板。用这段数据学习什么样的代码才称得上优化。
-
-四段一起跑完，用户会看到全谱的性能特性，从而学到：不同的瓶颈呈现不同的 nsys 时间线形态和 ncu 计数器特征。这是用样例数据而非文字讲解第 1 章的最直接方式。
-
-## 无 GPU 练习：make_samples.py 和自洽数据集
-
-许多学习者没有 GPU 卡（或者卡被占用）。为了让他们也能完成整套分析流程，我们用 make_samples.py 生成自洽的样例 CSV 数据。这些数据来自真实的核运行，已经清理成可复现的形式。
-
-自洽的含义是：nsys 时间线、ncu 指标、Roofline 坐标、五分类标签都相互吻合。例如 vector_add 的 nsys 里显示吞吐 2800 GB/s，对应的 ncu 计数器会显示 dram\_\_bytes 对齐，反过来用 Roofline 公式验证，算术强度等于（FLOP）除以（dram\_\_bytes）确实落在带宽屋顶下方。这种一致性让不在 GPU 上跑的学习者也能验证每个分析步骤。
-
-样例数据集包含本篇 code_outputs.md 的两个 GEMM（volta_fp32_gemm_1 和 \_2）和一个向量运算（volta_fp32_scale_1）。完整的 CSV 存在 repo/zero-to-gpu/14-profiling/samples/ 中，大小只有几十 KB。用户运行 `python3 prof_parse.py nsys sample_nsys_kernels.csv` 就能得到和真实硬件一样的分析结果。这给了学习者验证理论的低成本方式：修改 CSV（比如改一个吞吐数字），看分类结果如何变化，逐渐建立直觉。
-
-## 测量纪律
-
-性能数据往往受环境影响。环境噪声、缓存状态、CPU 负载都会影响结果。要得到可重复、可信的基线，需要遵循几条纪律 [[19]](https://arxiv.org/abs/2209.09061)：
-
-**锁频**。设置 GPU 和 CPU 的固定频率，禁用动态频率调整（DVFS）。命令是：
-
-```bash
-sudo nvidia-smi -pm 1
-sudo nvidia-smi -lgc 2550
-```
-
-如果不锁频，GPU 可能根据温度和功耗动态调整时钟（从 2.0 到 2.5 GHz），导致同样的代码跑出百分之十的时间差异。
-
-**充分 Warmup**。第一次运行 kernel 往往比后续跑得慢（JIT 编译、第一次访问内存页）。profile.sh 会在实际采集前运行每段负载 10 次，确保 kernel 已经热身。这避免了纳入启动成本。
-
-**每轮只改一个变量**。如果同时改了 kernel 算法和 block size，无法判断哪个改动有效果。正确的做法是固定其他变量，只调整一个参数，观察性能变化。这是科学方法的应用。
-
-**采集多次取分布**。单次采集受到随机噪声影响。通常采集 5 到 10 次，观察时间的分布（均值、标准差、最小最大值），如果标准差超过百分之三则说明环境还不够稳定，继续增加 warmup 或关闭后台进程。
-
-**避免多租户、MIG、生产环境**。在共享 GPU 上（多个用户或任务）采集数据会包含无关的内核运行，导致时间线被打碎。GPU 虚拟化（MIG）进一步加大噪声。生产环境下采集会触发完整的追踪（--collect all），数据量可达几个 GB，还容易干扰服务。[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/) 文档建议在独占卡的开发机上采集，拿到稳定数据后再在生产做验证。
-
-🔑 **本章要点**：profile.sh 把 nsys 加 ncu 采集脚本化，自动检查权限、分段抓取、保留日志、最小化指标，消除手工变异。gpu_workload.py 定义四段负载（mem、launch、latency、tensor），对应四类等待，让用户从样例学到全谱的性能特性。无 GPU 时用 make_samples.py 生成自洽的样例 CSV 数据，让所有学习者都能完成完整分析。测量纪律包括锁频、充分 warmup、每轮一变、多次取分布，并且避免多租户、MIG、生产 full 采集。这是可重复、可信测量 W_mem 和 W_host 的标准化方法。
-
-# 第 8 章 · PyTorch profiler 和 NVTX
-
-模型开发团队很难写业务逻辑时同时维护两套分析工具。这一章展开 PyTorch 内置 profiler 与系统级 nsys 怎样互补、record_function 如何透传标签、torch.compile 对 profiler 的挑战和应对方法。
-
-## torch.profiler 的三层采集
-
-PyTorch profiler 分别在三个时间尺度采集[[8]](https://docs.pytorch.org/docs/stable/profiler.html)。第一层是 CPU 时间线，跟踪每个 aten 算子在主机侧的排队和同步；第二层是 GPU 时间线和计数器，通过 CUPTI[[20]](https://docs.nvidia.com/cupti/)采集核函数执行；第三层是 Kineto[[21]](https://github.com/pytorch/kineto)这个基础设施把三层数据序列化成 Chrome Trace 格式或 Tensorboard 看板供后处理和可视化。开销最小的用法是 CPU-only 跟踪，约 2% 额外延迟；默认加 GPU 追踪后开销上升到 10% 左右；加计数器（ncu-repeat 等）后可能倍增。
-
-schedule 参数控制采集窗口[[8]](https://docs.pytorch.org/docs/stable/profiler.html)。设定 wait/warmup/active/repeat/skip 五元组，profiler 在前 wait 步跳过（硬件预热），再热身 warmup 步、采集 active 步、重复 repeat 轮、最后跳过 skip 步。典型配置是 wait=1, warmup=1, active=3，共采 3 步稳态数据，前后各 1 步隔离冷启动和缓存未来态的干扰。self_cuda_time 字段列出单个算子在 GPU 上花的时间，按降序排排热点算子。
-
-```python
-from torch.profiler import profile, schedule, tensorboard_trace_handler
-
-prof_schedule = schedule(wait=1, warmup=1, active=3)
-with profile(
-    activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
-    schedule=prof_schedule,
-    on_trace_ready=tensorboard_trace_handler("./logs"),
-    record_shapes=True,
-    with_stack=False
-) as prof:
-    for step in range(10):
-        outputs = model(inputs)
-        loss = criterion(outputs, targets)
-        loss.backward()
-        optimizer.step()
+from torch.profiler import profile, ProfilerActivity, record_function, schedule
+with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+             schedule=schedule(wait=1, warmup=1, active=3),
+             on_trace_ready=lambda p: p.export_chrome_trace(f"trace_{p.step_num}.json")) as prof:
+    for batch in loader:
+        with record_function("forward"):
+            loss = model(batch)
+        loss.backward(); opt.step()
         prof.step()
-
+print(prof.key_averages().table(sort_by="self_cuda_time_total", row_limit=10))
 ```
 
-record_function 用来给算子链路加层次标签[[22]](https://docs.pytorch.org/observer/)。框架代码在关键环节调用 torch.profiler.record_function（“阶段名”），产生的 aten 算子群组会被标记上这个标签，在 tensorboard 里聚成一行。比如在模型的 forward 或 backward 前后包裹 record_function，会把算子分组到“Forward 阶段”、“Backward 阶段”，让时间线变得可读。后续 nsys 采集时，如果启用 --trace=nvtx，这些标签会映射成 NVTX 标记，在时间线上显示为彩色区间，方便对齐硬件和框架层的观察。
+结果有两种用法。key_averages().table() 按算子汇总，可以按某一列排序[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)；读表时要分清 self 和 total：self 时间不含它调用的子算子，total 时间包含[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)。export_chrome_trace 导出的文件可以在 Chrome 的 trace 查看器里看算子和 kernel 的先后顺序[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)，tensorboard_trace_handler 则把文件写进一个目录，直接交给 TensorBoard[[11]](https://docs.pytorch.org/docs/main/profiler.html)。record_function 给一段代码起名字[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)，这个名字会出现在表和时间线上。打开 profile_memory 还能统计张量占用的显存[[12]](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)。
 
-## torch.profiler 和 nsys 互补
+### NVTX
 
-![torch.profiler 与 NVTX 的互补](assets/14-profiling/fig-07.svg)
+NVTX 是一套给源代码加注释的跨平台 API，默认情况下 NVTX 调用什么也不做，只有在开发工具里运行时，调用才会转给工具处理[[13]](https://nvidia.github.io/NVTX/)。所以在生产代码里保留 NVTX 标注的代价很小。PyTorch 提供 torch.cuda.nvtx.range_push 和 range_pop[[11]](https://docs.pytorch.org/docs/main/profiler.html)，在数据加载、前向、反向、优化器几段前后各加一对，nsys 抓取时带上 -t nvtx，时间线上就会多出一行带名字的区间[[2]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。这正是第 3 章区分 CPU 空隙时需要的信息：GPU 空着的那段时间，NVTX 行上显示的是哪一段代码。ncu 也可以用 --nvtx-include 只收某个区间里的核[[9]](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)。
 
-torch.profiler 知道模型结构和算子层次，nsys 知道硬件时间线和间隙细节，两者合用能定位问题。nsys 的时间线看到数秒内的整体忙闲比和大尺度间隙，典型 overhead 是 1-5%；torch.profiler 的 tensorboard 看不到间隙（被融合为 0 宽的事件），但能排出单个 aten 算子的热度排行、CPU 和 GPU 的延迟配对、小张量的发射堆积。
+![PyTorch profiler 的 schedule：只记录稳态的几步](assets/14-profiling/fig-08.svg)
 
-标准分析流程是：第一步用 nsys 捕 10-100 ms 的完整时间线，快速判断是否值得优化，间隙少于 20% 就放过，否则继续；第二步用 torch.profiler 同时抓 active 的 3-5 步，识别框架层哪几个算子栈积累了 CPU overhead 或小张量发射；第三步如果热点核是 aten::gemm 这类基础算子，转向 ncu 精细分析单核瓶颈。record_function 充当桥接，把模型的业务逻辑层标签（如“Attention Forward”、"FFN Backward"）透射到 nsys 的时间线上，方便在硬件层看清模型哪个部分失衡。
+按五步闭环把 kernel 对回代码：
 
-## 框架层常见的三类发现
+- **定天花板**：每个算子理论上应该花多少时间（第 6 章）。
+- **测实际**：用 schedule 记录稳态的几步，按 self CUDA 时间排序。
+- **定位等待**：时间最长的算子，以及 NVTX 区间里 GPU 空着的段。
+- **消除或隐藏**：换实现、融合算子，或把 CPU 工作挪出关键路径。
+- **复测**：同样的 schedule 再记录一次。
 
-torch.profiler 识别出的瓶颈多数来自三类问题[[23]](https://pytorch.org/docs/stable/notes/cuda.html)。第一类是多余同步，典型症状是 .item()、.cpu() 这样的设备到主机挪移出现在密集循环里，打断 GPU 管道、让驱动阻塞等待单张量的结果；表现为 CPU-GPU 同步间隙从微秒级跳到毫秒级。第二类是小张量发射受限，比如某个前处理或 loss 计算的 aten 算子输出只有几十字节，却要走一趟 CUDA 调度队列，累积几千个这样的小核会浪费显著时间在驱动开销而非计算；time line 上表现为密集的微秒级核堆积。第三类是数据断流，指 dataloader 的读取滞后导致 GPU 等着新一轮输入，表现为设备忙比下降但没有同步点、几毫秒的空隙前后被数据加载垫满。
+一个常见的误区是按 total 时间排序找热点。现象是排在最前面的是 model_inference、forward 这类外层名字，看不出具体哪个算子慢。原因是 total 时间包含所有子算子，外层的区间自然最长。改法是按 self 时间排序，外层区间只用来划分阶段。
 
-这三类都能在 torch.profiler 的 CPU 时间轴上看到信号：.item() 打断会让 GPU activities 消失、小核堆积会让同一行指令重复数千次、dataloader overhead 会让 CPU 执行链路变长。对应的修复优先级分别是改 .item() 改为 detach()、在 Python 侧聚合或攒小核合并成 CUDA Graph、加 dataloader worker 数量或预加载队列。
+> 🔑 **本章要点**：PyTorch profiler 用 CUPTI 追踪 kernel，用 schedule 只记录稳态的几步，读表按 self 时间排序；NVTX 默认什么也不做，只在工具里生效，适合常驻在代码里给时间线分段。这一章是五步闭环的“定位等待”：把 GPU 上的时间对回代码。
 
-## torch.compile 与新版 profiler 的适配
+## 第 8 章 · 常驻监控：GPU 利用率、SM Activity 和 DCGM
 
-PyTorch 2.0 引入 torch.compile[[24]](https://pytorch.org/assets/pytorch2-2.pdf)把模型 graph 编译为融合核或 Triton 代码[[25]](https://www.eecs.harvard.edu/~htk/publication/2019-mapl-tillet-kung-cox.pdf)。编译后 profiler 看不到原先的 aten 算子图，而是看到一个大的编译单元。新版 profiler（PyTorch v2.15+[[26]](https://github.com/pytorch/pytorch/releases/tag/v2.15.0)）添加了 Triton 核归属标注，能把编译后的原子内核映射回模型的某个 nn.Module，但手工设置 record_function 的必要性提升了。
+Nsight 系列是抓一段、看一段的工具，开销大，不适合常开。集群里长期看 GPU 有没有被用好，要靠 nvidia-smi 和 DCGM 这类低开销的计数。本章讲几个常用指标各自的含义，以及常驻监控和 profiler 怎样共存。
 
-应对策略是在模型代码里显式标记业务逻辑边界。比如 Attention 块前后各加一对 record_function，即使被 torch.compile 融合也能保留这个语义层的分组；nsys 时间线中用 NVTX 标签展示时就会把编译后的大核按标注分段。同时 Triton 编译路径暴露出的问题往往是整体 kernel launch 打包失效，比如多个小的编译单元间因为内存依赖打不成一个大核，或者某一段融合导致内存冗余；这类问题需用 ncu 直接看融合内核的计数器。
+### 四个指标
 
-> 💡 **常见误区**：torch.profiler 显示 aten::addmm 自己的 self_cuda_time 是 2 ms，直接认定这个算子是不可逃避的瓶颈，却没有在 CPU 时间轴上看到它前面堆积了 10 ms 的驱动调度。框架层看到的问题常常不在单个核的绝对性能，所在的是链路的缝隙和同步点，优化前一定要确认这个算子确实在临界路径上且没有上游堵塞。
+**GPU 利用率**（nvidia-smi）：采样周期内有 kernel 在执行的时间占比[[1]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)，采样周期视产品在 1 秒到 1/6 秒之间[[1]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)。它只说明有没有 kernel 在跑。
 
-> 🔑 **本章要点**：torch.profiler 用 schedule 限定稳态窗口，self_cuda_time 排算子热点，record_function 把业务标签透射到硬件时间线。与 nsys 互补关系是：nsys 看整段时间线的忙闲间隙，profiler 看单步的算子堆积和同步延迟。框架视角多发现的三类问题是多余同步（.item 阻塞）、小张量发射（驱动开销）和数据断流（加载滞后），这三类是时间账中 W_host 的主要来源。torch.compile 时代需要更多的 record_function 保留语义边界，且编译融合缺陷需要用 ncu 深入。
+**SM Activity**（DCGM_FI_PROF_SM_ACTIVE，ID 1002）：每个 SM 上至少有一个 warp 活跃的时间比例，对所有 SM 求平均[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。活跃不等于在计算，等访存的 warp 也算活跃[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。DCGM 文档给的经验是：0.8 以上是用好 GPU 的必要条件但不充分，低于 0.5 多半说明没有用好[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。
 
-# 第 9 章 · DCGM 常驻监控与 profiler 的分工
+**SM Occupancy**：SM 上驻留 warp 数相对最大值的比例。DCGM 文档同样提醒，占用率高不一定代表用得好[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)，这和第 5 章 ncu 的说法一致。
 
-Profiler 能回答“这一步耗了多少时间”，却回答不了“从昨晚到现在利用率怎么样”“为什么最近降速了”。这一章展开 DCGM 的常驻监控能力、与一次性 profiler 工具的分工、两个容易混淆的利用率指标、最小告警集合。
+**Tensor Activity** 和 **DRAM Activity**：前者是 Tensor（HMMA/IMMA）管线活跃的周期比例[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)，后者是读写显存的周期比例，实际能达到的峰值约 0.8[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。一个大模型训练任务 Tensor Activity 很低，说明矩阵乘没有用上 Tensor Core 或者时间花在了别处；DRAM Activity 接近 0.8，说明已经接近带宽上限。
 
-## Profiler 回答不了的问题
+把这几个指标放在一起看，能比单看 GPU 利用率多回答一个问题：GPU 在跑，但跑的是什么。GPU 利用率高、SM Activity 低，是核太小、并行度不够；SM Activity 高、Tensor Activity 低，是没有用上 Tensor Core；DRAM Activity 高，是访存受限。具体是哪个核，再回到 nsys 和 ncu 去查。
 
-Nsys、ncu、torch.profiler 都是一次性抓取工具，典型采样窗口从几毫秒到几分钟。它们能回答“这一段时间内 kernel 花时间去哪了”“这个核的算术强度是多少”，但无法回答“过去一周平均 GPU 利用率多少”“最近三个月有没有性能缓慢下降”这类趋势问题[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)。原因是成本：全精度采集计数器的 ncu 在真实吞吐量场景里通常让测试慢 10 倍以上；连续跑一周就要数千小时的计算。
+### 和 profiler 共存
 
-DCGM（Data Center GPU Manager）[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)是 NVIDIA 为此设计的常驻监控守护进程。它定时读取 NVML[[27]](https://docs.nvidia.com/deploy/nvml-api/index.html)这个超轻量级接口，导出 Prometheus metrics[[28]](https://github.com/NVIDIA/dcgm-exporter)，集成到 Grafana 看板。DCGM 收集的指标包括工作温度、功耗、显存使用、时钟频率降速、ECC 错误、Xid 异常[[29]](https://docs.nvidia.com/deploy/xid-errors/index.html)、SM 活跃比例等，采样间隔通常是 100 ms 到 1 s，overhead 不足 1%，可以无缝跑在生产环境。
+受硬件限制，DCGM 收集 profiling 指标时会和 Nsight Systems、Nsight Compute 冲突[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。推荐的做法是在使用这些工具前暂停 DCGM 的指标收集，用完再恢复，命令是 `dcgmi profile --pause` 和 `dcgmi profile --resume`[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)。如果节点上常驻了 dcgm-exporter，抓 ncu 前要先暂停，否则可能报资源被占用。
 
-## DCGM 字段与 dcgm-exporter
+![常驻监控：利用率之外，再看 SM、Tensor、DRAM Activity](assets/14-profiling/fig-09.svg)
 
-DCGM 定义了一套标准化字段名[[30]](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html)。其中最核心的几个是 DCGM_FI_DEV_GPU_UTIL（GPU 利用率）、DCGM_FI_PROF_SM_ACTIVE（SM 活跃比例）、DCGM_FI_DEV_FB_FREE（显存可用）、DCGM_FI_DEV_GPU_TEMP（工作温度）、DCGM_FI_DEV_POWER_USAGE（实时功耗）、DCGM_FI_DEV_ECC_DBE_AGG_TOTAL（双比特翻转累计数）。
+按五步闭环做常驻监控：
 
-dcgm-exporter[[28]](https://github.com/NVIDIA/dcgm-exporter)是 NVIDIA 开源的导出器，在每台 GPU 主机上跑一个容器或进程，通过 /metrics 端点暴露 Prometheus 格式的数据，Prometheus server 定时抓取、Grafana 绘图。配置文件列出哪些字段要导出、采样间隔多久；通常采样间隔 10-30 s，适合发现小时级到天级的趋势变化。搭建一套完整监控栈（dcgm-exporter + Prometheus + Grafana）约需半小时，可视化后对比多卡的性能一致性、发现某个卡的异常降频或显存泄漏非常有效。
+- **定天花板**：SM Activity 0.8 以上、DRAM Activity 的实际上限约 0.8。
+- **测实际**：按任务和节点长期记录这几个指标。
+- **定位等待**：利用率高但 SM Activity 低的任务，Tensor Activity 偏低的训练任务。
+- **消除或隐藏**：对挑出来的任务抓 nsys 和 ncu（暂停 DCGM 收集）。
+- **复测**：改完之后看指标是否回到正常范围。
 
-## 三层信号对着看
+一个常见的误区是用 nvidia-smi 的 GPU 利用率当作集群的效率指标。现象是集群报表上利用率很高，单位算力的产出却不高。原因是利用率只统计有没有 kernel 在跑，一个只用少数 SM 的小核也能让它显示为满。改法是把 SM Activity 和 Tensor Activity 一起放进报表，按任务分开看。
 
-![DCGM 常驻监控与单次 Profiler 的分工](assets/14-profiling/fig-08.svg)
+> 🔑 **本章要点**：GPU 利用率只说明有没有 kernel 在跑；SM Activity 0.8 以上是用好 GPU 的必要条件，低于 0.5 多半没用好；Tensor Activity 和 DRAM Activity 说明跑的是什么。DCGM 收集 profiling 指标会和 Nsight 冲突，用 dcgmi profile --pause 和 --resume 让开。这一章是五步闭环的“测实际”：长期看整卡，挑出值得细查的任务。
 
-一次完整的性能诊断通常需要三层工具协同[[31]](https://developer.nvidia.com/blog/tag/nsight/)。最顶层是 DCGM 监控，告诉你”这个时间窗口里平均利用率多少、有没有异常波动、有没有故障信号”。如果发现异常，就把时间范围缩窄到分钟级，去拉一份 nsys 时间线；nsys 会告诉你”这一分钟内哪几个阶段设备空转、间隙原因是同步还是发射还是等数据”。确认了具体的核函数是瓶颈后，再用 ncu 对那个核做重放，得到计数器级的解释。
+## 第 9 章 · 一次分析的顺序：从时间账到一个核
 
-比如 DCGM 看板发现周三早上 8 点某个推理 pod 的 GPU_UTIL 从 75% 掉到 45%、SM_ACTIVE 也从 60% 掉到 12%，这通常意味着：业务侧要么改了请求分布（比如改成小 batch），要么数据加载卡住了。此时从 8:00 到 8:05 这段时间拉一份 nsys，会看到密集的空隙分布、很多小的 kernel 堆积。进一步用 ncu 抓住其中一个堆积最多的核，会看到 SM 占用率不足、kernel launch 延迟是主因。诊断链路明确：通过 DCGM 快速定位异常时间点、通过 nsys 确认是发射还是其他、通过 ncu 拿到根本原因。
+前八章分别讲了每种工具。实际分析时它们按固定的顺序接力，每一步的输出决定下一步看什么。本章把这个顺序写成一张可以照着做的流程，并说明每一步什么时候可以停。
 
-## 两个利用率指标的陷阱
+### 五步接力
 
-GPU_UTIL 和 SM_ACTIVE 是两个本质不同的指标[[30]](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html)。GPU_UTIL（设备利用率）的定义是“至少一个 SM 在执行任何计算”的时间占比，计算方法是 active_cycles / total_cycles。这是一个粗粒度的指标，一个 SM 上的单线程也能把 GPU_UTIL 点成 100%。SM_ACTIVE（SM 活跃比例）是“活跃 SM 的平均占有率”，等于 sum(active_SM_count) / （总 SM 数 × 采样数），粒度更细，能反映并行度。
+1. **整卡**：看 DCGM 的 SM Activity、Tensor Activity 和 DRAM Activity（第 8 章）。SM Activity 已经很高、Tensor Activity 也高，说明大头已经在 Tensor Core 上，收益要从算法或精度层面找。
+2. **时间线**：用 nsys 只抓稳态的几步（第 2 章），算出 GPU 空着的时间占比，按同步、发射、CPU 三类分开（第 3 章）。空隙占比大，先处理空隙，处理完回到这一步重抓。
+3. **热点核**：从 cuda_gpu_kern_sum 里按总时间排序，挑出排在前面的几个核（第 2 章）；用 PyTorch profiler 或 NVTX 把它们对回算子和代码（第 7 章）。
+4. **单核**：用 ncu 的 -k、-s、-c 只收这几个核（第 4 章），按 SOL、占用率、stall 原因的顺序读（第 5 章）。
+5. **上限**：按核用的精度算出脊点，判断它该追算力还是带宽，离屋顶还有多远（第 6 章）。
 
-这个差异导致许多容量规划的误判。一个看起来 GPU_UTIL=95% 的工作负载，如果 SM_ACTIVE 只有 5%，说明实际的计算并行度极低，很可能是单个 kernel 跑在一个 SM 上；此时增加 GPU 卡数也救不了端到端时间，真正的瓶颈可能是数据串行化或算子融合缺陷。反过来 SM_ACTIVE=80% 的工作负载不一定意味着接近满载，还要看是否有显存带宽饱和、是否能继续堆 batch；这需要配合 dram\_\_bytes_read_sum 这类显存计数器一起看。
+每改一处，回到第 2 步用同样的抓取范围重抓时间线，确认步时间真的下降了。只看 ncu 里单个核变快是不够的，核变快之后空隙占比会变大，瓶颈可能已经转移。
 
-## 最小告警集合
+### 什么时候停
 
-生产环境不需要监控 DCGM 的全部字段，只需五类告警能涵盖 90% 的故障信号[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)[[29]](https://docs.nvidia.com/deploy/xid-errors/index.html)。第一类是低活跃告警：SM_ACTIVE 持续低于设定阈值（如 20%），结合 GPU_UTIL 分析是否真的有任务在跑；第二类是显存泄漏：FB_FREE 单调递减没有周期恢复，超过一小时跨度就说明某个 job 有内存泄漏；第三类是 ECC 告警：ECC_DBE_AGG_TOTAL 递增，说明 HBM 位翻转频繁，需要离线检修或更换卡；第四类是降频告警：SM_CLOCK 或 MEMORY_CLOCK 低于标称频率超过设定偏差，通常是温度、功耗或驾驶程序限流；第五类是链路异常：如果支持 NVLink，可以监控 NVLINK\_\*\_DATA_TRANSMITTED_SUM，陡增的重传意味着链路抖动。
+一个核值得优化的前提是它在时间线上占的比例足够大。一个核即使能提速一倍，如果只占步时间的一小部分，端到端的收益也很小；反过来，一个占了大部分时间的核，哪怕只提速一点也值得。所以排序的依据是时间线上的总时间，不是 ncu 里的效率百分比。当剩下的核都已接近各自的屋顶、空隙也已经很少时，单机这一层就到头了，再往下要从并行策略或模型结构上找，这是后面几篇的内容。
 
-这五类告警加上 Xid 错误日志采集，可以覆盖单卡故障、集群级降频、显存泄漏这三类生产环境的高频问题。其余字段如温度、功耗作为基础指标导出但不强行告警，只在主机层面的告警触发后才作为辅助诊断。
+另一个容易忽略的点是测量本身的扰动。ncu 会串行执行核、锁定时钟（第 4 章），DCGM 的 profiling 收集会和 Nsight 冲突（第 8 章）。所以时长以 nsys 为准，ncu 只看比例和瓶颈类型；抓 ncu 前暂停 DCGM 的收集。
 
-> 💡 **常见误区**：用 GPU_UTIL 做容量规划，看到 GPU_UTIL=85% 就认为卡的利用率很高，可以加 batch 或堆任务。 SM_ACTIVE 可能只有 10%，增加 batch 反而会拖累延迟。正确做法是双指标并看：GPU_UTIL 高但 SM_ACTIVE 低，说明有频繁的小 kernel 或间隙；GPU_UTIL 低且 SM_ACTIVE 也低，说明任务并行度不足或数据加载滞后。只有两个指标都高，才是真正的高利用率。
+![一次完整分析：先填空隙，再按时间线上的总时间挑核](assets/14-profiling/fig-10.svg)
 
-> 🔑 **本章要点**：DCGM 常驻读 NVML 轻量级接口，dcgm-exporter 导出 Prometheus metrics，回答周期 >= 10 秒的趋势和异常问题，与一次性 profiler 互补。GPU_UTIL 只记录“有没有核在跑”，SM_ACTIVE 才接近算力利用率真实面貌；两者偏差大说明有小 kernel 或间隙问题。最小告警集合包含五类：低活跃、显存泄漏、ECC 错误、时钟降频、链路重传；配合 Xid 日志采集能处理 90% 的生产故障。这是时间账中 W_idle 和故障恢复的监控基础。
+按五步闭环走一次完整分析：
 
-# 第 10 章 · 一次完整分析：从 100 ms 到一个核
+- **定天花板**：每个热点核按精度算出的屋顶。
+- **测实际**：DCGM 整卡指标和 nsys 稳态时间线。
+- **定位等待**：先空隙后热点核，热点核再归到具体单元。
+- **消除或隐藏**：一次只改一处。
+- **复测**：同样的范围重抓时间线，看步时间。
 
-这章用一次真实的优化过程展示五步闭环怎么实操。我们从一个 100 ms 训练步入手，先定天花板，再测实际，定位等待项，消除或隐藏，最后复测收益。关键是每步只改一个变量，收益精确记账到墙钟时间。
+一个常见的误区是一开始就对整个程序跑 `ncu --set full`。现象是程序被拖慢很多，跑了很久拿到几百个核的报告，却不知道先看哪个。原因是 ncu 对每个核都要重放多遍，而且它不告诉你这个核在整个步骤里占多少时间。改法是先用 nsys 排出热点，再用过滤条件只收那几个核。
 
-## 第一步：定天花板
+> 🔑 **本章要点**：分析按整卡、时间线、热点核、单核、上限的顺序接力：先填空隙，再按时间线上的总时间挑核，最后用 ncu 和 Roofline 定位瓶颈。每改一处都回到时间线复测，时长以 nsys 为准。这一章是五步闭环的完整一圈。
 
-**理论下限是多少。**这取决于三个参数：GPU 型号的算力屋顶、显存带宽上限和 SM 数量约束。以 H100 SXM 为例，定天花板包括三条信息[[5]](https://www.nvidia.com/en-us/data-center/h100/)。
+## 第 10 章 · 上线前核对清单与自测
 
-**算力屋顶**。H100 的 FP32 单精度峰值[[5]](https://www.nvidia.com/en-us/data-center/h100/)约 67 TFLOP/s，Tensor Core FP16 峰值[[5]](https://www.nvidia.com/en-us/data-center/h100/)约 989 TFLOP/s。我们的案例跑的是 FP32 GEMM 和 FP32 向量操作，天花板定在 67 TFLOP/s 一档。
+前九章沿五步闭环回答“时间去哪了”：第 1 章分清四种工具，第 2、3 章抓时间线并分类空隙，第 4、5 章用 ncu 看单个核，第 6 章算上限，第 7 章把 kernel 对回代码，第 8 章做常驻监控，第 9 章把它们串成一次完整分析。本章把它们压成一张核对清单，再配上代码练习和自测题。
 
-**显存带宽**。H100 HBM3 带宽[[5]](https://www.nvidia.com/en-us/data-center/h100/)约 3.35 TB/s。这决定了纯数据搬运核（如 vector_add）的最高吞吐。如果一个核函数只做访存不做计算，即使 SM 全跑也卡在这条线。
+### 📌 核对清单
 
-**SM 活跃度**。H100 有 132 个 SM，每个 SM 最多承载若干 warp。当我们的负载实例太少或数据并行度不足，无法让所有 SM 同时活跃，实际吞吐会降到[[5]](https://www.nvidia.com/en-us/data-center/h100/)“可持续峰值”（sustainable peak），比瞬态峰值低两成左右。
+| 检查项 | 怎样查 | 通过的标志 |
+|---|---|---|
+| 利用率不只看 nvidia-smi | 同时看 DCGM SM Activity、Tensor Activity（第 1、8 章） | 知道 GPU 在跑什么 |
+| 时间线只抓稳态 | `--capture-range=cudaProfilerApi` 或 NVTX；多进程只抓一个 rank（第 2 章） | 统计表里没有初始化和热身 |
+| 空隙已分类 | 逐条记录算空隙；CPU 行上的调用分同步、发射、CPU（第 3 章） | 每类空隙有对应的处理办法 |
+| 小核发射已处理 | 大量短核时试 CUDA Graph 或合并（第 3 章） | 核间空隙明显缩短 |
+| ncu 只收热点核 | `-k`、`-s`、`-c` 或 `--nvtx-include`（第 4 章） | 报告只含挑出来的核 |
+| 计数器权限 | 普通用户能否运行 ncu；ERR_NVGPUCTRPERM 的处理（第 4 章） | 按安全要求开放或用 sudo |
+| 瓶颈归到单元 | SOL → 占用率 → stall 原因（第 5 章） | 能说出是带宽、延迟还是计算 |
+| 屋顶按精度选 | 稠密峰值 ÷ 带宽，按核实际用的精度（第 6 章） | H100 SXM BF16 约 295、FP32 为 20 FLOP/byte |
+| kernel 对回代码 | PyTorch profiler 按 self 时间排序；NVTX 分段（第 7 章） | 热点核对应到算子和代码行 |
+| 监控和 profiler 不冲突 | 抓 Nsight 前 `dcgmi profile --pause`（第 8 章） | 没有资源占用报错 |
 
-综合这三条，我们对这个案例的理论下界预期如下：FP32 全速域最多 67 TFLOP/s，向量加法卡在 3.35 TB/s 带宽，实际稳态可能只有理论 80% 左右。100 ms 里如果全是 GEMM（不含任何间隙），最多消耗 67 TFLOP/s × 0.1 s = 6.7 × 10^12 浮点操作。
+### 代码练习
 
-> 💡 **常见误区**：只看算力屋顶，忽略显存带宽和 SM 活跃度的约束。三条线一起取最小值才是真天花板。
+zero-to-gpu/14-profiling/ 下有 sim_prof_parse.py、sim_gpu_util.py、gpu_workload.py 和 test_prof.py，只需 Python 标准库。README 要求的 Python 版本比系统自带的 3.9.6 高，主编在 3.9.6 上也能跑通，9 条测试全部通过。但样例数据和解析逻辑有多处问题，适合当作找错练习：
 
-## 第二步：测实际
+- `python3 sim_prof_parse.py nsys --csv sample_nsys_kernels.csv`：样例 CSV 只有名字和时长，没有开始时间，而且时长的量级不对：解析器汇总出 3 个 GEMM 合计 4191500.0 us，约 4.19 秒，README 却写每个 1.3 到 1.5 ms。输出的“最大 kernel 间隙 777800.0 us”是把各条时长排序后相邻两项相减得到的，不是时间上的空隙，据此判断“发射受限”没有依据；同一份输出里总空闲时间又是 0，设备忙闲比 100%。第 2 章说过，算空隙必须用带开始时间的逐条记录。
+- `python3 sim_prof_parse.py ncu --csv sample_ncu_metrics.csv --gpu h100-sxm`：volta_fp32_scale_1 的 SOL-Memory 是 78.9%，五分类因为先判占用率而把它归为 LATENCY，同一份输出的 Roofline 部分却说它是显存带宽瓶颈，两处结论矛盾。两个 volta_fp32_gemm 被归为 TENSOR，但判定条件里没有任何 Tensor 管线的指标，名字也表明是 FP32 核。脊点 295 FLOP/byte 用的是 BF16 稠密峰值，FP32 核应该用 20 FLOP/byte（第 6 章）[[5]](https://www.nvidia.com/en-us/data-center/h100/)。
+- `python3 sim_gpu_util.py mislead`：现象 2 的标题写“→ 100% GPU-Util”，实际输出是 0.0%，原因是活跃 SM 数用 int() 截断成了 0。现象 4 把 8 卡的利用率取平均得到 12.5%，nvidia-smi 本身是按卡报告的[[1]](https://docs.nvidia.com/deploy/nvidia-smi/index.html)，取平均是报表的做法，不是工具的行为。
+- `python3 gpu_workload.py 1`：这个脚本不启动任何 kernel，只打印预期结果，例如“2000 个 1 us 的核加 2000 × 10 us 发射间隙约 22 ms”，这些数字没有出处，也没有在真卡上测过。第 3 章用 NVIDIA 博客里在 V100 上实测的数字说明发射开销。
 
-**一次 nsys + ncu 抓取。**我们在隔离的节点上跑标准的四段负载（见第 7 章），用 nsys 打点采样记录整个 100 ms 步。
+### 自测题
 
-```bash
-nsys profile -f true -o step_profile --trace=cuda,nvtx \
-  --cuda-memory-usage=true python3 train_step.py
-nsys stats -r cuda_gpu_kern_sum,cuda_gpu_mem_time_sum \
-  --format csv step_profile.nsys-rep > nsys_report.csv
-python3 prof_parse.py nsys nsys_report.csv
-```
+1. nvidia-smi 显示 GPU 利用率 100%，能说明 GPU 已经用满吗？还应该看哪个指标？
+2. 怎样让 nsys 只抓训练稳态的几步？多进程训练时怎样减少数据量？
+3. 时间线上 GPU 有一串很短的核，核与核之间有缝，CPU 行上密密地排着 cudaLaunchKernel。这是哪一类空隙？有哪两种处理办法？
+4. ncu 报告的核时长比 nsys 时间线上的长，可能是哪些原因？
+5. 一个核的 long_scoreboard 排在最前，SOL 的访存百分比却不高。它是带宽受限还是延迟受限？该怎么改？
+6. H100 SXM 上一个 FP32 核的算术强度高于 20、低于 295 FLOP/byte，它受算力还是带宽限制？换成 BF16 Tensor Core 的核呢？
 
-输出的数据直接来自 code_outputs.md 的第一部分[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)：
+### 下一步
 
-| 指标 | 数值 | 含义 |
-|-|-|-|
-| 总时间线长度 | 100.0 ms | 一个训练步的端到端墙钟 |
-| Kernel 总时间 | 71.2 ms（71.2%） | 核函数执行总时间 |
-| Memcpy 总时间 | 2.2 ms（2.2%） | 显存拷贝开销 |
-| GPU 设备忙闲比 | 73.4% | GPU 有活动（核或拷贝）的时间占比 |
-| 最大 kernel 间隙 | 777.8 us | 相邻两个核启动之间的最大等待 |
+到这里，已经能从时间线一路查到单个核。很多空隙和热点来自 PyTorch 自身：算子怎样分派、显存怎样分配、什么时候同步、torch.compile 怎样融合算子。这些交给 GPU-15（[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md)）。
 
-**关键发现**：设备忙闲比只有 73.4%，意味着有 26.6% 的时间 GPU 在闲。这 26.6 ms 的间隙分布如下（来自第 3 章的间隙分类）。
+## 参考文献
 
-| 间隙类型 | 时间 | 主要原因 |
-|-|-|-|
-| CPU Execution | 15.7 ms | DataLoader 阻塞 |
-| Kernel Launch | 2.38 ms | 小核发射开销 |
-| Host Sync | 2.6 ms | 显式同步等待 |
-| 其他 | 5.92 ms | 驱动、调度杂项 |
+按正文首次引用顺序编号，资料截至 2026 年 11 月中。
 
-热点核排名（按消耗时间），来自 kern_sum 统计表[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)：
+[1] NVIDIA, nvidia-smi documentation [docs.nvidia.com/deploy/nvidia-smi/index.html](https://docs.nvidia.com/deploy/nvidia-smi/index.html)
 
-| Kernel 名 | 数量 | 总时间 |
-|-|-|-|
-| volta_fp32_gemm_kernel | 3 | 41.9 ms |
-| volta_fp32_scale_kernel | 1 | 5.7 ms |
+[2] NVIDIA, Nsight Systems User Guide [docs.nvidia.com/nsight-systems/UserGuide/index.html](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
 
-**测实际的结论**：单卡在 100 ms 内有 26.6% 时间空转，其中 15.7 ms 卡在数据流，2.38 ms 卡在小核发射，2.6 ms 卡在显式同步。如果能消除这三项，端到端从 100 ms 可望降到约 82 ms。这比单个核的 2-3% 优化见效得多。
+[3] NVIDIA Technical Blog, Getting Started with CUDA Graphs (2019) [developer.nvidia.com/blog/cuda-graphs/](https://developer.nvidia.com/blog/cuda-graphs/)
 
-## 第三步：定位等待
+[4] NVIDIA, Nsight Compute Profiling Guide [docs.nvidia.com/nsight-compute/ProfilingGuide/index.html](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)
 
-**每个热点核的内部等待在哪。**现在用 ncu 深入 volta_fp32_gemm_kernel 和 volta_fp32_scale_kernel，看它们各自卡在什么。这一步用到第 5 章的五分类决策树[[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay)。
+[5] NVIDIA, H100 Tensor Core GPU [www.nvidia.com/en-us/data-center/h100/](https://www.nvidia.com/en-us/data-center/h100/)
 
-```bash
-ncu --section ComputeWorkloadAnalysis,MemoryWorkloadAnalysis \
-  --metrics gpu__time_duration,sm__throughput,gpu__compute_memory_throughput,\
-gpu__dram__bytes --launch-count 3 python3 train_step.py \
-  > ncu_metrics.csv
-python3 prof_parse.py ncu ncu_metrics.csv --gpu h100-sxm
-```
+[6] Williams, Waterman, Patterson. Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures, UCB/EECS-2008-134 (2008) [www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)
 
-输出结果直接来自 code_outputs.md 的第二部分[[9]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。五分类结论如下：
+[7] NVIDIA, DCGM User Guide: Feature Overview [docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)
 
-- **volta_fp32_gemm_1：COMPUTE。**SOL-Compute 68.5%，相对于 H100 FP32 屋顶（67 TFLOP/s）这是合理的利用率[[5]](https://www.nvidia.com/en-us/data-center/h100/)。Stall Reason 里 MemDep 占 45.6%，意味着一半的停顿来自等待显存数据。这个核没卡在发射或延迟，纯是计算和带宽的拉锯战。
-- **volta_fp32_scale_1：MEM。**SOL-Compute 仅 15.3%，SOL-Memory 高达 78.9%，明确是带宽限制[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)。MemDep 占 72.4%，确认显存往返是主瓶颈。这个核函数做的是简单的向量缩放，算术强度很低，注定卡在带宽。
+[8] PyTorch Blog, Accelerating PyTorch with CUDA Graphs (2021) [pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/](https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/)
 
-Roofline 账本（按第 6 章公式）。H100 的 FP32 Roofline 脊点[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)约 20 FLOP/byte（67 TF/s FP32 吞吐 ÷ 3.35 TB/s 显存带宽）。volta_fp32_scale_1 的算术强度远低于脊点，必须贴在带宽屋顶下；volta_fp32_gemm_1 接近脊点，介于两条屋顶之间，SM 和显存都有贡献。
+[9] NVIDIA, Nsight Compute CLI [docs.nvidia.com/nsight-compute/NsightComputeCli/index.html](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)
 
-**定位等待的结论**：volta_fp32_gemm_kernel（41.9 ms 里的主要消费者）受计算-显存双重压制，可以通过 Tensor Core 路径和 tile 调整降低 MemDep；volta_fp32_scale_kernel（5.7 ms）纯显存驱动，优化空间是降低访存次数或融合到上一个核。三倍的系统间隙（26.6 ms）是更要紧的瓶颈。
+[10] NVIDIA Developer, ERR_NVGPUCTRPERM: Permission issue with Performance Counters [developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters](https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters)
 
-## 第四步：消除或隐藏
+[11] PyTorch, torch.profiler documentation [docs.pytorch.org/docs/main/profiler.html](https://docs.pytorch.org/docs/main/profiler.html)
 
-**改进方案逐条清单。**按优先级从高到低，对应时间账的等待项逐项消掉。
+[12] PyTorch Tutorials, PyTorch Profiler recipe [docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
 
-**一、CPU Execution 15.7 ms（DataLoader）。**问题是数据加载速度跟不上 GPU 计算，GPU 经常需要等数据就绪。修法是多进程加载和预读[[23]](https://pytorch.org/docs/stable/notes/cuda.html)。从当前 4 个 worker 增加到 8 个，并启用 pin_memory=True 锁定主机内存。预期降低至 8 ms 左右。
-
-**二、Kernel Launch 2.38 ms。**问题是小核实例多（volta_fp32_scale_kernel 有大量实例在 1-20 us 之间），每次发射有 3-20 us 的驱动开销[[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/)。修法是核融合或 CUDA Graph。先尝试融合 scale 和前一个 GEMM 成一个大核，或用 torch.cuda.graphs 记录整段计算图。预期降低至 0.5 ms 以下。
-
-**三、Host Sync 2.6 ms。**问题是有显式的 synchronize 或 item 调用在等待 GPU。修法是删除不必要的同步，用事件或流隐式同步[[23]](https://pytorch.org/docs/stable/notes/cuda.html)。如果是框架自动加的（如 .item 提取标量），改用 .detach 或批量计算。预期完全消除或降至 0.2 ms。
-
-**四、volta_fp32_gemm_1 的 MemDep 45.6%。**GEMM 的显存往返无法完全消除，但可以用 Tensor Core 路径替换标量 FP32。H100 Tensor Core 的 FP16 屋顶是 989 TF/s，约 FP32 的 15 倍[[5]](https://www.nvidia.com/en-us/data-center/h100/)。同样的矩阵大小改 FP16 可期望吞吐翻番。如果模型允许混精训练（输入 FP16、累积 FP32），改写核或用 cuBLASLt 库函数。预期 SGEMM 时间降至 20 ms 左右（从 41.9 ms）。
-
-**五、volta_fp32_scale_1 的带宽墙。**纯数学上无法突破 3.35 TB/s 的全局 HBM 带宽[[5]](https://www.nvidia.com/en-us/data-center/h100/)。但可以改变访存模式，如果 scale 的输入已在 L1/L2，利用本地带宽而非全局带宽，效果会好几倍。或者融合到 GEMM 的输出阶段，一次一个元素，避免往返内存。预期从 5.7 ms 降至 3 ms 左右。
-
-> 💡 **常见误区**：有人看到 volta_fp32_scale_kernel 的 5.7 ms，上来就优化这个核的访存模式，却忽视了 15.7 ms DataLoader 间隙。结果花两周改出 0.5 ms 改进，吞吐提升不足 1%。应该先补时间线的大窟窿。
-
-## 第五步：复测并记账收益
-
-**逐项验证改进效果。**每改一条，重新抓 nsys 和端到端墙钟，记录数字。
-
-假设四个改动都实施了：
-
-| 改动项 | 优化前 | 优化后 | 收益 |
-|-|-|-|-|
-| CPU Execution（DataLoader） | 15.7 ms | 8.0 ms | 7.7 ms |
-| Kernel Launch（小核融合） | 2.38 ms | 0.4 ms | 1.98 ms |
-| Host Sync（删除不必要同步） | 2.6 ms | 0.2 ms | 2.4 ms |
-| GEMM（Tensor Core） | 41.9 ms | 20.5 ms | 21.4 ms |
-| Scale 核（融合或带宽优化） | 5.7 ms | 3.0 ms | 2.7 ms |
-
-总收益预期 7.7 + 1.98 + 2.4 + 21.4 + 2.7 = 36.18 ms，大约 18% 的改进（原 100 ms 改至约 82 ms 左右，需实测）。关键是这些改动互相独立，可以在真实场景里逐个验证。
-
-**复测结论**：假如实测端到端从 100 ms 降至 82 ms（18% 提升）[[23]](https://pytorch.org/docs/stable/notes/cuda.html)，时间账从[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)原来的 T_compute = 71.2 ms、W_mem + W_host = 26.6 ms，现在变成 T_compute = 53 ms、W_mem + W_host = \~8.5 ms，设备忙闲比从 73.4% 上升到 \~93%。
-
-这时候新的瓶颈会浮现。如果 GEMM 改成 FP16 但准确率下降了，会需要梯度累积或混精的额外同步。或者 DataLoader 瓶颈消除后，GPU 处理速度变成了新的收敛率限制（GPU 太快，数据输入跟不上）。这些属于 GPU-15 运行时框架层的问题，或者 GPU-16 整机验收和分布式通信的问题。
-
-> 🔑 **本章要点**：完整案例的五步闭环是（一）定天花板：FP32 屋顶 67 TF/s，脊点 20 FLOP/byte，SM 可持续活跃度等三条线的最小值；（二）测实际：100 ms 步中 GPU 忙 73.4%，间隙 26.6 ms；（三）定位等待：CPU Execution 15.7 ms、Kernel Launch 2.38 ms、Host Sync 2.6 ms、GEMM 内 MemDep 45%、scale 核带宽墙；（四）消除或隐藏：DataLoader 多 worker、小核融合或 CUDA Graph、删除同步、SGEMM 改 Tensor Core、scale 融合；（五）复测记账：预期收益约 18 ms（从 100 ms 至 82 ms），瓶颈转移到 GPU-15 框架层或 GPU-16 整机架构。这个过程消掉的等待是时间账里的 W_host 和 W_mem 两项中的主要成分。
-
-# 第 11 章 · 上线前核对清单与自测
-
-本篇到此已覆盖了单卡性能分析的完整工具链和方法论。这章是上线前的最后核对：11 项检查清单、11 道自测题、四个常见误判，以及瓶颈转移的下一步指向。
-
-## 📌 上线前核对清单
-
-下表列出 11 项必检项。每一项都有两个作用：保证测量的准确性，防止虚假改进。
-
-| 序 | 检查项 | 要点 | 见第 N 章 |
-|-|-|-|-|
-| 1 | nsys 顺序 | 先 nsys 看整段时间线和间隙分类，再 ncu 抓热点核[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。顺序反了会浪费时间在无关优化。 | 1、2 |
-| 2 | 忙闲算对 | 时间线对账：（核时间 + 拷贝时间 + 间隙）= 总窗口。算不对说明有丢失的事件。[[11]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) | 2 |
-| 3 | 间隙分类 | 三类间隙（Host Sync、Kernel Launch、CPU Execution）用 NVTX 标注分别对应哪个业务阶段[[10]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)。间隙大于 100 us 就是发射受限的信号。 | 3 |
-| 4 | ncu 权限 | 如报 ERR_NVGPUCTRPERM，不要盲目 sudo；先查 NVreg_RestrictProfilingToAdminUsers，用 setcap 或容器 capability[[6]](https://docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux)。 | 4 |
-| 5 | ncu 范围 | 只指定 nsys 选出的热点核（top-3 最多），不要全量[[9]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)。kernel replay 时间放大数倍，抓全了得跑几小时。 | 4 |
-| 6 | 计数器清单 | 八个计数器覆盖 90% 的判断（第 5 章清单）。不要贪全量指标，ComputeWorkloadAnalysis + MemoryWorkloadAnalysis 两个 section 足够[[13]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#sections)。 | 5 |
-| 7 | 五分类决策树 | 按 LAUNCH → MEM → TENSOR/COMPUTE → LATENCY 的顺序判，阈值是经验起点不是绝对值[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)。同一个核不能既是 COMPUTE 又是 MEM。 | 5 |
-| 8 | Roofline 脊点 | 算对了脊点才能判屋顶。H100 FP32 脊点约 20，Tensor FP16 脊点约 295 FLOP/byte[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)。换卡只换参数，不换方法论。 | 6 |
-| 9 | 测量纪律 | 锁频、充分 warmup、每轮一变、多次取分布[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)。多租户卡或 MIG 分区上不抓绝对值。数据记账每次只改一个变量。 | 7 |
-| 10 | 框架视角 | torch.profiler 看到的小张量发射和多余同步三类问题[[8]](https://docs.pytorch.org/docs/stable/profiler.html)。不能和 nsys 混用解释，要用 NVTX 作桥接。 | 8 |
-| 11 | DCGM 告警 | GPU_UTIL 高不等于活跃度高；看 SM_ACTIVE[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)。6 个最小告警：低活跃、泄漏、ECC、降频、重传、配置漂移。 | 9 |
-
-**这 11 项的合格标准**：前 10 项通过一次 nsys 和 ncu 抓取的自检；第 11 项在上线后常驻 DCGM 的观察。完全通过后才能说“单卡性能分析已完整”。
-
-## 自测题
-
-以下 11 道题覆盖本篇的核心概念。答对 6 道以上，表示已掌握工具用法和决策逻辑；答对 9 道以上，表示可以独立做端到端分析和优化。
-
-> 📝 **自测题 11 道**（答案见下方）
-> - **题 1**：为什么先 nsys 再 ncu，顺序反了会怎样？（核心概念）
-> - **题 2**：100 ms 训练步中 GPU 忙 73.4%，这个数字怎么算出来的？（时间线对账）
-> - **题 3**：Kernel Launch 间隙多于 500 us 的原因通常是什么，修法是什么？（间隙分类）
-> - **题 4**：ncu 报权限错 ERR_NVGPUCTRPERM 后应该怎么办，为什么不能直接 sudo？（权限问题）
-> - **题 5**：一个核函数同时显示“SOL-Compute 80%, SOL-Memory 40%”，这是什么意思？（Roofline 解读）
-> - **题 6**：kernel replay 把 100 us 的核放大到 1 ms，这会改变测到的 MemDep 比例吗？（kernel replay 特性）
-> - **题 7**：DRAM 利用率 85% 时，这个核是“MEM”分类吗？为什么可能不是？（五分类坑）
-> - **题 8**：H100 上某个 GEMM 的算术强度 18 FLOP/byte，这个核受什么限制？（Roofline 脊点）
-> - **题 9**：torch.profiler 和 nsys 都看到了 cuda stream，但时间线不同步，怎么排查？（工具互补）
-> - **题 10**：GPU_UTIL 100% 时 SM_ACTIVE 只有 2%，最可能的原因是什么？（利用率误读）
-> - **题 11**：优化后端到端从 100 ms 降到 95 ms，DCGM 里要看哪些字段来确认改进持久存在？（长期监控）
-
-**答题要点速查**（仅供对答）：
-
-| 题 | 关键答案 | 得分 |
-|-|-|-|
-| 1 | nsys 低开销（1-5%）看全段时间线回答“时间去哪”，ncu replay 会放大时间十倍以上；先用 nsys 选核再用 ncu 拆核，顺序反了 ncu 时间线对不上端到端。[[1]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) | 2pt |
-| 2 | （核 71.2 + 拷贝 2.2 + 间隙 26.6）/ 100 = 73.4%。或：（全部活动时间）/ 总窗口。若算不对说明有事件未记录。[[11]](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) | 2pt |
-| 3 | 小核实例多、平均时长短（< 20 us）导致发射开销累积。修法：核融合、CUDA Graph 记录图。[[3]](https://docs.nvidia.com/cuda/cuda-programming-guide/) | 2pt |
-| 4 | 应该查 NVreg_RestrictProfilingToAdminUsers 参数，用 setcap 赋 capability 或改容器 securityContext。不直接 sudo 是因为管理员不想放开全局 root 权限。[[6]](https://docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux) | 2pt |
-| 5 | SOL 是 Sustained Occupancy Level（相对峰值百分比）。此核同时接近带宽屋顶（40%）和算力屋顶（80%），说明是设计良好的混合工作负载，可能卡在 L1/L2 争用或指令流水。[[14]](https://docs.nvidia.com/nsight-compute/MetricsStructuredRef/) | 2pt |
-| 6 | 会改变。kernel replay 关闭了许多硬件动态行为（预测、prefetch、cache），MemDep 比例可能虚高 10-20 个百分点。所以重放指标只参考趋势，不当绝对值。[[2]](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay) | 2pt |
-| 7 | 可能不是。DRAM 高可能是无效访问（如 cache miss 导致重复读）。判 MEM 的标准还要看算术强度是否低于脊点，以及 Stall Reason 是否真的是 MemDep。[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html) | 2pt |
-| 8 | H100 FP32 脊点约 20 FLOP/byte，算术强度 18 < 20，在带宽屋顶下方，受显存带宽限制。可能的修法是增加计算密度或用 FP16/Tensor Core。[[17]](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html) | 2pt |
-| 9 | 原因可能是 warmup 阶段、多核并发、或 torch.profiler 的采样粒度和 nsys 的采样率不一致。用 NVTX 在 torch 代码里标注关键点，同时在 nsys 抓，对齐时间线。[[8]](https://docs.pytorch.org/docs/stable/profiler.html) | 2pt |
-| 10 | GPU_UTIL 100% 只说“某个核在跑”，不说“多少 SM 在忙”。SM_ACTIVE 2% 说明只有一个 SM 活跃。原因可能是数据并行度不足（batch 太小）、或单个核负载太小无法分散。[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/) | 2pt |
-| 11 | 看 GPU_UTIL、SM_ACTIVE（活跃度）、DRAM_THROUGHPUT（显存带宽）、GPU_POWER（功耗）在若干天内的曲线，确认改进是稳定的不是瞬间的[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)。结合告警日志排除故障重启或降频干扰。 | 2pt |
-
-**评分标准**：11 题共 22 分。14 分以上（6 题以上）可以上线；18 分以上（9 题以上）可以独立优化。
-
-## 常见误判四条
-
-生产中反复踩到的坑，列在这里做最后预防。
-
-> 💡 **误判 1：GPU_Util 虚假**。GPU_UTIL 100% 不代表算力利用率 100%，只说“有核在跑”。可能的场景：单个小核跑了 1 us 却点亮了整个 GPU 100 ms 的时间线。看 SM_ACTIVE 或 nsys 的实际核时间占比才是真相[[7]](https://docs.nvidia.com/datacenter/dcgm/latest/)。
-
-> 💡 **误判 2：nvprof 停止更新**。CUDA Toolkit 从 11.0 起 nvprof 已弃用[[32]](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)，但很多旧教程还在推荐。新代码只用 nsys + ncu，nvprof 的输出数据无法和新工具对齐。
-
-> 💡 **误判 3：跨卡不对齐硬件**。A100 和 H100 的脊点、SM 数量、显存带宽都不同[[33]](https://www.nvidia.com/en-us/data-center/a100/)[[5]](https://www.nvidia.com/en-us/data-center/h100/)。把 A100 上调好的 tile size 或 grid 大小直接搬到 H100，很可能性能反而下降。每换卡重新跑 Roofline 定脊点。
-
-> 💡 **误判 4：单次不代表分布**。一次 100 ms 的抓取捕捉到的可能是特殊场景（cache warm、某个后台进程刚结束、频率还没稳定）。同样的负载多抓 10 次，看均值和分布，才能判断优化的收益是稳定的还是噪音。
-
-## 瓶颈转移：下一步去哪里
-
-单卡的 W_mem 和 W_host 优化到本篇为止。如果还想进一步提升，瓶颈会转移到以下几个地方：
-
-**GPU-15 运行时框架层**。消掉了显存间隙和小核发射后，新的瓶颈是 PyTorch 框架本身的开销[[26]](https://github.com/pytorch/pytorch/releases/tag/v2.15.0)。分配器争用、stream 依赖、autograd 的计算图构建，这些推迟了前向/反向的启动。我们会用 torch.compile 和编译器优化压缩这一块[[24]](https://pytorch.org/assets/pytorch2-2.pdf)。
-
-**GPU-16 单机整机验收与调优**。如果跑的是多卡（NVLink 或 PCIe）或多 GPU 多 CPU 的异构系统，除了单卡的时间账外，还要看卡间通信的效率、host 到 device 的瓶颈（PCIe 饱和度），以及整机的负载均衡[[4]](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)。一个 GPU 优得再好，如果连接带宽跟不上，整体吞吐还是会被拖累。
-
-**GPU-13 和 GPU-18 的卡间通信与拓扑**。如果做分布式训练，单卡优化之外还有集合通信（all-reduce、all-gather）的路由、NCCL 调优、张量并行和管道并行的通信-计算覆盖。这些属于多卡协调范畴。
-
-**常见的下一步选择**：
-
-- 如果端到端吞吐已经接近理论峰值（单卡 GPU_UTIL > 90%，算力利用率 > 70%），则重点转向 GPU-16 单机多卡或分布式场景。
-- 如果还有明显的 CPU-GPU 同步或数据加载卡顿，则进入 GPU-15 框架优化。
-- 如果用的是多 GPU 多卡机房级别的集群，则同时优化 GPU-13/18 的网络拓扑和 NCCL 调优。
-
-无论走哪个方向，本篇建立的“定天花板、测实际、定位等待、消除或隐藏、复测”五步闭环都是通用的方法论。关键是每次改动后都要复测，记账到端到端的墙钟时间。
-
-> 🔑 **本章要点**：上线前过 11 项核对清单确保测量准确、工具用对。自测题 11 道覆盖概念、工具、决策逻辑；答对 6 题表示及格。常见误判四条（GPU_Util 虚假、nvprof 过时、跨卡硬件参数、单次非分布）在生产里反复踩到。优化到此为止时，单卡的 W_mem 和 W_host 已有系统方法，瓶颈转移到 GPU-15 的框架开销、GPU-16 的整机验收或 GPU-13/18 的卡间通信。
-
-# 参考文献
-
-按正文首次引用顺序编号，资料截至 2026 年 11 月初。
-
-[1] NVIDIA. Nsight Systems User Guide (2026) [docs.nvidia.com/nsight-systems/UserGuide/index.html](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
-
-[2] NVIDIA. Nsight Compute Profiling Guide: Kernel Replay (2026) [docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#kernel-replay)
-
-[3] NVIDIA. CUDA Programming Guide (2026) [docs.nvidia.com/cuda/cuda-programming-guide/](https://docs.nvidia.com/cuda/cuda-programming-guide/)
-
-[4] NVIDIA. CUDA C++ Best Practices Guide (2026) [docs.nvidia.com/cuda/cuda-c-best-practices-guide/](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)
-
-[5] NVIDIA. H100 Tensor Core GPU 产品规格 (2023) [www.nvidia.com/en-us/data-center/h100/](https://www.nvidia.com/en-us/data-center/h100/)
-
-[6] NVIDIA. Nsight Compute Installation Guide: Permissions for Profiling (2026) [docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux](https://docs.nvidia.com/nsight-compute/InstallationGuide/index.html#fre-linux)
-
-[7] NVIDIA. DCGM 文档 (2026) [docs.nvidia.com/datacenter/dcgm/latest/](https://docs.nvidia.com/datacenter/dcgm/latest/)
-
-[8] PyTorch. Profiler Documentation (2026) [docs.pytorch.org/docs/stable/profiler.html](https://docs.pytorch.org/docs/stable/profiler.html)
-
-[9] NVIDIA. Nsight Compute Profiling Guide (2026) [docs.nvidia.com/nsight-compute/ProfilingGuide/index.html](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)
-
-[10] NVIDIA. Nsight Systems User Guide: CUDA Tracing Options (2026) [docs.nvidia.com/nsight-systems/UserGuide/index.html](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
-
-[11] NVIDIA. Nsight Systems User Guide: nsys stats Reports (2026) [docs.nvidia.com/nsight-systems/UserGuide/index.html](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
-
-[12] NVIDIA. Nsight Compute CLI (ncu) Command Line Options (2026) [docs.nvidia.com/nsight-compute/NsightComputeCli/index.html](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)
-
-[13] NVIDIA. Nsight Compute Profiling Guide: Sections and Rules (2026) [docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#sections](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#sections)
-
-[14] NVIDIA. Nsight Compute Profiling Guide: Metrics Reference (2026) [docs.nvidia.com/nsight-compute/MetricsStructuredRef/](https://docs.nvidia.com/nsight-compute/MetricsStructuredRef/)
-
-[15] NVIDIA. Hopper Tuning Guide (2026) [docs.nvidia.com/cuda/hopper-tuning-guide/](https://docs.nvidia.com/cuda/hopper-tuning-guide/)
-
-[16] NVIDIA. Blackwell Tuning Guide (2026) [docs.nvidia.com/cuda/blackwell-tuning-guide/](https://docs.nvidia.com/cuda/blackwell-tuning-guide/)
-
-[17] Williams et al. Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures. UC Berkeley EECS-2008-134 (2008) [www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html)
-
-[18] NVIDIA. DGX B200 产品规格 (2025) [www.nvidia.com/en-us/data-center/dgx-b200/](https://www.nvidia.com/en-us/data-center/dgx-b200/)
-
-[19] Luo et al. Demystifying the Performance of GPU-Accelerated Deep Learning Workloads via Comprehensive Profiling. SoCC (2022) [arxiv.org/abs/2209.09061](https://arxiv.org/abs/2209.09061)
-
-[20] NVIDIA. CUPTI Documentation (2026) [docs.nvidia.com/cupti/](https://docs.nvidia.com/cupti/)
-
-[21] PyTorch. Kineto: PyTorch Profiler Infrastructure (2026) [github.com/pytorch/kineto](https://github.com/pytorch/kineto)
-
-[22] PyTorch. Observer Pattern / Execution Trace Documentation (2026) [docs.pytorch.org/observer/](https://docs.pytorch.org/observer/)
-
-[23] PyTorch. CUDA semantics (2026) [pytorch.org/docs/stable/notes/cuda.html](https://pytorch.org/docs/stable/notes/cuda.html)
-
-[24] Ansel et al. PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation. ASPLOS (2024) [pytorch.org/assets/pytorch2-2.pdf](https://pytorch.org/assets/pytorch2-2.pdf)
-
-[25] Tillet et al. Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations. MAPL (2019) [www.eecs.harvard.edu/\~htk/publication/2019-mapl-tillet-kung-cox.pdf](https://www.eecs.harvard.edu/~htk/publication/2019-mapl-tillet-kung-cox.pdf)
-
-[26] PyTorch. v2.15.0 Release Notes (2026) [github.com/pytorch/pytorch/releases/tag/v2.15.0](https://github.com/pytorch/pytorch/releases/tag/v2.15.0)
-
-[27] NVIDIA. NVML API Reference (2026) [docs.nvidia.com/deploy/nvml-api/index.html](https://docs.nvidia.com/deploy/nvml-api/index.html)
-
-[28] NVIDIA. dcgm-exporter 代码仓库 (2026) [github.com/NVIDIA/dcgm-exporter](https://github.com/NVIDIA/dcgm-exporter)
-
-[29] NVIDIA. Xid Errors (2026) [docs.nvidia.com/deploy/xid-errors/index.html](https://docs.nvidia.com/deploy/xid-errors/index.html)
-
-[30] NVIDIA. DCGM API Field IDs (2026) [docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html)
-
-[31] NVIDIA Developer Blog. Profiling GPU Workloads with Nsight Systems and Compute (2025) [developer.nvidia.com/blog/tag/nsight/](https://developer.nvidia.com/blog/tag/nsight/)
-
-[32] NVIDIA. CUDA Toolkit Release Notes: Deprecated nvprof and Visual Profiler (2026) [docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
-
-[33] NVIDIA. A100 Tensor Core GPU 产品规格 (2021) [www.nvidia.com/en-us/data-center/a100/](https://www.nvidia.com/en-us/data-center/a100/)
+[13] NVIDIA, NVTX (NVIDIA Tools Extension Library) [nvidia.github.io/NVTX/](https://nvidia.github.io/NVTX/)
 
 ---
 

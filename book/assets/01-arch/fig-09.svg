@@ -1,41 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="527"
-     viewBox="-20 -20 1240 527">
-<g id="o6:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="487" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a6:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Hopper TMA：异步专用引擎，搬运不占 compute</tspan></tspan></text></g>
-<g id="a6:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">TMA 是硬件 DMA 引擎，不与 compute 争执行单元；搬运延迟被计算掩盖</tspan></tspan></text></g>
-<g id="o6:2" transform="translate(40, 128)"><rect x="0" y="0" width="1120" height="46" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="o6:3" transform="translate(40, 128)"><rect x="0" y="0" width="4" height="46" fill="#3370ff" stroke="none" stroke-width="0" rx="2" ry="2"/></g>
-<g id="a6:3" transform="translate(60, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">本篇要怎么用：</tspan></tspan></text></g>
-<g id="a6:4" transform="translate(181.6, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">本篇第 6-7 章的 GEMM 排程：TMA 分批把 128×128 tile 搬到 SMEM，就是这个机制</tspan></tspan></text></g>
-<g id="o6:4" transform="translate(40, 198)"><rect x="0" y="0" width="548" height="225" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o6:5" transform="translate(384.8, 218)"><rect x="0" y="0" width="183.2" height="24" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a6:5" transform="translate(400.9, 220.082)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="75.5"><tspan x="75.5" y="14.118"><tspan x="-0.155" text-anchor="start">搬运与 compute 争执行单元</tspan></tspan></text></g>
-<g id="a6:6" transform="translate(60, 214.97)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="23.53"><tspan x="0" text-anchor="start">✗ Ampere 及之前</tspan></tspan></text></g>
-<g id="a6:7" transform="translate(60, 246.3055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">线程搬运</tspan></tspan></text></g>
-<g id="c6:1" transform="translate(60, 283)"><path fill="none" stroke="#f54a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:8" transform="translate(60, 300.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">HBM→SMEM</tspan></tspan></text></g>
-<g id="a6:9" transform="translate(340, 300.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="228"><tspan x="228" y="16.471"><tspan x="52.05" text-anchor="start">线程执行 (LDG / CP.ASYNC)</tspan></tspan></text></g>
-<g id="c6:2" transform="translate(60, 331)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:10" transform="translate(60, 338.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">问题</tspan></tspan></text></g>
-<g id="a6:11" transform="translate(447, 338.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="121"><tspan x="121" y="16.471"><tspan x="23.33" text-anchor="start">占用 warp 槽位</tspan></tspan></text></g>
-<g id="c6:3" transform="translate(60, 369)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:12" transform="translate(60, 376.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">问题</tspan></tspan></text></g>
-<g id="a6:13" transform="translate(418, 376.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="150"><tspan x="150" y="16.471"><tspan x="26.73" text-anchor="start">与 compute 争发射</tspan></tspan></text></g>
-<g id="o6:6" transform="translate(612, 198)"><rect x="0" y="0" width="548" height="225" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o6:7" transform="translate(1041.7, 218)"><rect x="0" y="0" width="98.3" height="24" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a6:14" transform="translate(1054.8, 220.082)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="14.118"><tspan x="0" text-anchor="start">搬运独占引擎</tspan></tspan></text></g>
-<g id="a6:15" transform="translate(632, 214.97)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="23.53"><tspan x="0" text-anchor="start">✓ Hopper TMA</tspan></tspan></text></g>
-<g id="a6:16" transform="translate(632, 246.3055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">硬件 DMA</tspan></tspan></text></g>
-<g id="c6:4" transform="translate(632, 283)"><path fill="none" stroke="#34c724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:17" transform="translate(632, 300.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">HBM→SMEM</tspan></tspan></text></g>
-<g id="a6:18" transform="translate(1025, 300.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="115"><tspan x="115" y="16.471"><tspan x="26.16" text-anchor="start">TMA 专用硬件</tspan></tspan></text></g>
-<g id="c6:5" transform="translate(632, 331)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:19" transform="translate(632, 338.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">优势</tspan></tspan></text></g>
-<g id="a6:20" transform="translate(1030, 338.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="110"><tspan x="110" y="16.471"><tspan x="17.91" text-anchor="start">不占 compute</tspan></tspan></text></g>
-<g id="c6:6" transform="translate(632, 369)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 508 0"/></g>
-<g id="a6:21" transform="translate(632, 376.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">优势</tspan></tspan></text></g>
-<g id="a6:22" transform="translate(971, 376.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="169"><tspan x="169" y="16.471"><tspan x="31.13" text-anchor="start">一个线程触发大批 tile</tspan></tspan></text></g>
-<g id="a6:23" transform="translate(40, 448.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA Colfax Research CUTLASS TMA Tutorial、Hopper Tuning Guide</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">块数刚跨过整波，利用率上限从 100% 掉到 54.2%</text>
+<text x="40" y="92" font-size="14" fill="#646A73">A100 108 个 SM，256×128 分块每 SM 一块，一波 108 块；M = 2304</text>
+<text x="188" y="168" font-size="14" fill="#1F2329" text-anchor="end">N = 1408</text>
+<rect x="200" y="150" width="688" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="200" y="150" width="631" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="839" y="168" font-size="13" fill="#646A73">91.7%  99 块，1 波</text>
+<text x="188" y="210" font-size="14" fill="#1F2329" text-anchor="end">N = 1536</text>
+<rect x="200" y="192" width="688" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="200" y="192" width="688" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="896" y="210" font-size="13" fill="#646A73">100.0%  108 块，正好 1 波</text>
+<text x="188" y="252" font-size="14" fill="#1F2329" text-anchor="end">N = 1664</text>
+<rect x="200" y="234" width="688" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="200" y="234" width="373" height="26" rx="4" fill="#F54A45" stroke="#F54A45" stroke-width="1"/>
+<text x="581" y="252" font-size="13" fill="#646A73">54.2%  117 块，2 波，第 2 波只有 9 块</text>
+<text x="188" y="294" font-size="14" fill="#1F2329" text-anchor="end">N = 3072</text>
+<rect x="200" y="276" width="688" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="200" y="276" width="688" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="896" y="294" font-size="13" fill="#646A73">100.0%  216 块，正好 2 波</text>
+<text x="188" y="336" font-size="14" fill="#1F2329" text-anchor="end">N = 3200</text>
+<rect x="200" y="318" width="688" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="200" y="318" width="477" height="26" rx="4" fill="#F54A45" stroke="#F54A45" stroke-width="1"/>
+<text x="685" y="336" font-size="13" fill="#646A73">69.4%  225 块，3 波，第 3 波只有 9 块</text>
+<rect x="40" y="380" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="409" font-size="15" fill="#1F2329">利用率上限 = 块数 ÷（波数 × 108）。NVIDIA 实测 N 从 1536 加到 1544，第 2 波只用到 9/108 的 SM，耗时接近翻倍。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：NVIDIA Matrix Multiplication Background User Guide；本篇 sim_wave.py 输出</text>
 </svg>

@@ -1,40 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="710"
-     viewBox="-20 -20 1240 710">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="670" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">PD 分离架构用专门的卡组分离 Prefill 与 Decode，吞吐提升 6-9 倍</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">混合架构的卡都处于 40-50% 利用率；分离后 prefill 卡 95%、decode 卡 90%</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 190)"><rect x="0" y="0" width="545" height="300" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:3" transform="translate(275.5, 203.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="16.471"><tspan x="8.5" text-anchor="start">吞吐对比</tspan></tspan></text></g>
-<g id="a3:4" transform="translate(60, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">混合架构</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(180, 270)"><rect x="0" y="0" width="41" height="40" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:5" transform="translate(231, 280.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">1400 tok/s</tspan></tspan></text></g>
-<g id="a3:6" transform="translate(60, 378.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">PD 分离</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(180, 370)"><rect x="0" y="0" width="250" height="40" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:7" transform="translate(440, 380.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">8500 tok/s</tspan></tspan></text></g>
-<g id="a3:8" transform="translate(267.5, 456.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="44.5"><tspan x="44.5" y="18.824"><tspan x="6.645" text-anchor="start">提升 6.1×</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(615, 190)"><rect x="0" y="0" width="545" height="300" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:9" transform="translate(822, 203.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="66"><tspan x="66" y="16.471"><tspan x="14.485" text-anchor="start">GPU 利用率对比</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(635, 460.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">分类 →</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(705, 340)"><rect x="0" y="0" width="90" height="90" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:11" transform="translate(733, 317.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="14.118"><tspan x="4.14" text-anchor="start">50%</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(738, 433.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="12"><tspan x="12" y="14.118"><tspan x="0" text-anchor="start">混合</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(734.5, 455.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15.5"><tspan x="15.5" y="14.118"><tspan x="-0.89" text-anchor="start">Prefill</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(815, 349)"><rect x="0" y="0" width="90" height="81" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:14" transform="translate(843, 326.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="14.118"><tspan x="4.14" text-anchor="start">45%</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(848, 433.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="12"><tspan x="12" y="14.118"><tspan x="0" text-anchor="start">混合</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(839, 455.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="21"><tspan x="21" y="14.118"><tspan x="-0.05" text-anchor="start">Decode</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(925, 259)"><rect x="0" y="0" width="90" height="171" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:17" transform="translate(953, 236.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="14.118"><tspan x="4.14" text-anchor="start">95%</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(958, 433.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="12"><tspan x="12" y="14.118"><tspan x="0" text-anchor="start">分离</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(954.5, 455.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15.5"><tspan x="15.5" y="14.118"><tspan x="-0.89" text-anchor="start">Prefill</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(1035, 268)"><rect x="0" y="0" width="90" height="162" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:20" transform="translate(1063, 245.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="14.118"><tspan x="4.14" text-anchor="start">90%</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(1068, 433.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="12"><tspan x="12" y="14.118"><tspan x="0" text-anchor="start">分离</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(1059, 455.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="21"><tspan x="21" y="14.118"><tspan x="-0.05" text-anchor="start">Decode</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(40, 530)"><rect x="0" y="0" width="1120" height="82" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:23" transform="translate(56, 539.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">分离红利</tspan></tspan></text></g>
-<g id="a3:24" transform="translate(56, 573.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">混合部署下 Prefill 抢 Decode 算力，整体 40-50%；PD 分离各干各的，prefill 卡 95% · decode 卡 90%，吞吐 6-9×</tspan></tspan></text></g>
-<g id="a3:25" transform="translate(40, 631.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：DistServe 论文表 4</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 530" width="1200" height="530">
+<rect x="0" y="0" width="1200" height="530" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">预填充与解码分离：一次 KV 传输，换掉两段持续的干扰</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Llama 3 70B、4096 token 请求、张量并行 8 的量级估算</text>
+<rect x="40" y="150" width="344" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">预填充实例</text>
+<text x="56" y="211" font-size="14" fill="#646A73">算提示词，约 73.1 ms（峰值）</text>
+<polyline points="390,191 422,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="412,185 422,191 412,197" fill="#8F959E"/>
+<rect x="428" y="150" width="344" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="457" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="457" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="476" y="181" font-size="18" fill="#1F2329" font-weight="bold">KV 传输</text>
+<text x="444" y="211" font-size="14" fill="#646A73">每卡 167.8 MB</text>
+<polyline points="778,191 810,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="800,185 810,191 800,197" fill="#8F959E"/>
+<rect x="816" y="150" width="344" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="845" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="845" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="864" y="181" font-size="18" fill="#1F2329" font-weight="bold">解码实例</text>
+<text x="832" y="211" font-size="14" fill="#646A73">大批、大显存，按 TPOT 调</text>
+<rect x="40" y="272" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="298" font-size="14" fill="#1F2329" font-weight="bold">链路</text>
+<text x="468" y="298" font-size="14" fill="#1F2329" font-weight="bold">带宽</text>
+<text x="724" y="298" font-size="14" fill="#1F2329" font-weight="bold">每卡传输</text>
+<text x="948" y="298" font-size="14" fill="#1F2329" font-weight="bold">占预填充</text>
+<rect x="40" y="314" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="337" font-size="14" fill="#1F2329" font-weight="bold">400 Gb/s 网卡</text>
+<text x="468" y="337" font-size="14" fill="#1F2329">50 GB/s</text>
+<text x="724" y="337" font-size="14" fill="#1F2329">约 3.36 ms</text>
+<text x="948" y="337" font-size="14" fill="#1F2329">约 4.6%</text>
+<rect x="40" y="352" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="375" font-size="14" fill="#1F2329" font-weight="bold">NVLink，单向按一半</text>
+<text x="468" y="375" font-size="14" fill="#1F2329">450 GB/s</text>
+<text x="724" y="375" font-size="14" fill="#1F2329">约 0.37 ms</text>
+<text x="948" y="375" font-size="14" fill="#1F2329">不到 1%</text>
+<rect x="40" y="420" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="448" font-size="15" fill="#1F2329">DistServe：OPT-175B 的 KV 传输占总延迟不到 0.1%，95% 以上请求小于 30 ms；请求率 7.4 倍或 SLO 收紧 12.6 倍。</text>
+<text x="40" y="506" font-size="12" fill="#646A73">来源：DistServe；Splitwise；Mooncake；ConnectX-7 数据表；H100 产品页；本篇推算</text>
 </svg>

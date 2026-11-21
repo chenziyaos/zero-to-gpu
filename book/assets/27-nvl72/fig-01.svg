@@ -1,40 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="840"
-     viewBox="-20 -20 1240 840">
-<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="800" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">NVLink 单域宽度：HGX-8 → NVL72，9× 跨越</tspan></tspan></text></g>
-<g id="a1:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">左：HGX-8 单机 8 GPU 共享 NVSwitch；中：NVL72 整柜 72 GPU 共享 Fabric；右：跨柜仍走 IB</tspan></tspan></text></g>
-<g id="o1:2" transform="translate(40, 190)"><rect x="0" y="0" width="360" height="220" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:3" transform="translate(162, 203.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="18.824"><tspan x="11.48" text-anchor="start">HGX H100-8</tspan></tspan></text></g>
-<g id="a1:4" transform="translate(162, 233.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="14.118"><tspan x="2.045" text-anchor="start">8 GPU / 单 NVSwitch</tspan></tspan></text></g>
-<g id="a1:5" transform="translate(145.5, 274.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="74.5"><tspan x="74.5" y="15.295"><tspan x="14.525" text-anchor="start">NVLink 900 GB/s 链</tspan></tspan></text></g>
-<g id="a1:6" transform="translate(160.5, 303.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="59.5"><tspan x="59.5" y="18.824"><tspan x="12.925" text-anchor="start">~5 TB/s 聚合</tspan></tspan></text></g>
-<g id="o1:3" transform="translate(420, 190)"><rect x="0" y="0" width="360" height="220" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:7" transform="translate(539.5, 203.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="60.5"><tspan x="60.5" y="18.824"><tspan x="13.09" text-anchor="start">NVL72 (1 柜)</tspan></tspan></text></g>
-<g id="a1:8" transform="translate(503, 233.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="97"><tspan x="97" y="14.118"><tspan x="3.155" text-anchor="start">72 GPU / 18 tray + 9 NVSwitch tray</tspan></tspan></text></g>
-<g id="a1:9" transform="translate(529, 274.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="71"><tspan x="71" y="15.295"><tspan x="13.345" text-anchor="start">NVLink 1.8 TB/s 链</tspan></tspan></text></g>
-<g id="a1:10" transform="translate(535, 303.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="65"><tspan x="65" y="18.824"><tspan x="13.705" text-anchor="start">130 TB/s 聚合</tspan></tspan></text></g>
-<g id="o1:4" transform="translate(800, 190)"><rect x="0" y="0" width="360" height="220" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:11" transform="translate(910.5, 203.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="69.5"><tspan x="69.5" y="18.824"><tspan x="13.915" text-anchor="start">跨柜 (IB/RoCE)</tspan></tspan></text></g>
-<g id="a1:12" transform="translate(956, 233.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="0" text-anchor="start">无限节点</tspan></tspan></text></g>
-<g id="a1:13" transform="translate(904, 274.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="76"><tspan x="76" y="15.295"><tspan x="16.705" text-anchor="start">IB HDR 200 GB/s 链</tspan></tspan></text></g>
-<g id="a1:14" transform="translate(914, 303.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="66"><tspan x="66" y="18.824"><tspan x="13.97" text-anchor="start">~50 GB/s 实际</tspan></tspan></text></g>
-<g id="a1:15" transform="translate(40, 453.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">关键跨域数字</tspan></tspan></text></g>
-<g id="o1:5" transform="translate(40, 504)"><rect x="0" y="0" width="270" height="110" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:16" transform="translate(133.5, 522.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="41.5"><tspan x="41.5" y="15.295"><tspan x="7.855" text-anchor="start">GPU 数 9×</tspan></tspan></text></g>
-<g id="a1:17" transform="translate(144, 557.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="31"><tspan x="31" y="16.471"><tspan x="8.43" text-anchor="start">8 → 72</tspan></tspan></text></g>
-<g id="o1:6" transform="translate(330, 504)"><rect x="0" y="0" width="270" height="110" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:18" transform="translate(415, 522.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="50"><tspan x="50" y="15.295"><tspan x="8.355" text-anchor="start">聚合带宽 26×</tspan></tspan></text></g>
-<g id="a1:19" transform="translate(409, 557.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="56"><tspan x="56" y="16.471"><tspan x="12.395" text-anchor="start">5 → 130 TB/s</tspan></tspan></text></g>
-<g id="o1:7" transform="translate(620, 504)"><rect x="0" y="0" width="270" height="110" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:20" transform="translate(699, 522.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="56"><tspan x="56" y="15.295"><tspan x="10.165" text-anchor="start">与 IB 差 2600×</tspan></tspan></text></g>
-<g id="a1:21" transform="translate(672.5, 557.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="82.5"><tspan x="82.5" y="16.471"><tspan x="16.72" text-anchor="start">130 TB/s vs 50 GB/s</tspan></tspan></text></g>
-<g id="o1:8" transform="translate(910, 504)"><rect x="0" y="0" width="270" height="110" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:22" transform="translate(1002.5, 522.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="42.5"><tspan x="42.5" y="15.295"><tspan x="7.815" text-anchor="start">TP 上限 9×</tspan></tspan></text></g>
-<g id="a1:23" transform="translate(929.5, 557.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="115.5"><tspan x="115.5" y="16.471"><tspan x="23.565" text-anchor="start">8 → 72（GPU-21 物理边界）</tspan></tspan></text></g>
-<g id="o1:9" transform="translate(40, 654)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:24" transform="translate(56, 663.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">意义</tspan></tspan></text></g>
-<g id="a1:25" transform="translate(56, 697.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">NVL72 把 GPU-21 的"TP ≤ 8 物理上限"改写成"TP ≤ 72"；ZeRO-3 跨机分片从必选变为可选；MoE EP 跨机 all-to-all 从 150 µs 降到 5 µs</tspan></tspan></text></g>
-<g id="a1:26" transform="translate(40, 761.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA NVL72 Reference Architecture 2025</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">NVLink 域从 8 卡扩到 72 卡：TP 的墙打穿了，网络和故障域还在</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇各章的位置</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">TP=8 的墙</text>
+<text x="56" y="211" font-size="14" fill="#646A73">Hopper 域 8 卡（第 1 章）</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">NVL72 机柜</text>
+<text x="347" y="211" font-size="14" fill="#646A73">72 GPU，每卡 1.8 TB/s（第 2、</text>
+<text x="347" y="234" font-size="14" fill="#646A73">3 章）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">重算账</text>
+<text x="638" y="211" font-size="14" fill="#646A73">TP 通信、每卡算力（第 4、5 章）</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">重排并行</text>
+<text x="929" y="211" font-size="14" fill="#646A73">TP、EP、PP、DP（第 6 到 8 章）</text>
+<rect x="40" y="284" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">变了</text>
+<text x="56" y="346" font-size="14" fill="#646A73">TP、EP 可以过 8</text>
+<text x="56" y="369" font-size="14" fill="#646A73">C2C 连 CPU 内存</text>
+<rect x="421" y="284" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="437" y="316" font-size="18" fill="#1F2329" font-weight="bold">没变</text>
+<text x="437" y="346" font-size="14" fill="#646A73">机柜之间仍是网络</text>
+<text x="437" y="369" font-size="14" fill="#646A73">解码仍受 HBM 带宽限制</text>
+<rect x="803" y="284" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="819" y="316" font-size="18" fill="#1F2329" font-weight="bold">时间账</text>
+<text x="819" y="346" font-size="14" fill="#646A73">W_comm 挪到 NVLink</text>
+<text x="819" y="369" font-size="14" fill="#646A73">W_idle 随故障域变大</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：GB200 NVL72 规格页；NVIDIA 技术博客；NVLink 规格表；Llama 3；DeepSeek-V3</text>
 </svg>

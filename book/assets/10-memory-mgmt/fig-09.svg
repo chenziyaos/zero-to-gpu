@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 410" width="1200" height="410">
+<rect x="0" y="0" width="1200" height="410" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">激活重算：选择性重算省七成，全量重算省得最多但多花三到四成时间</text>
+<text x="40" y="92" font-size="14" fill="#646A73">同一配置（s=2048、b=1、h=4096、a=32、32 层，不做张量并行）的激活显存，单位 GB</text>
+<text x="298" y="168" font-size="14" fill="#1F2329" text-anchor="end">不重算 · sbh(34+5as/h)·L</text>
+<rect x="310" y="150" width="617" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="310" y="150" width="617" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="935" y="168" font-size="13" fill="#646A73">30.6 GB</text>
+<text x="298" y="210" font-size="14" fill="#1F2329" text-anchor="end">选择性重算 · 34sbhL</text>
+<rect x="310" y="192" width="617" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="310" y="192" width="184" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="502" y="210" font-size="13" fill="#646A73">9.13 GB  省 70.2%</text>
+<text x="298" y="252" font-size="14" fill="#1F2329" text-anchor="end">全量重算 · 2sbhL</text>
+<rect x="310" y="234" width="617" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="310" y="234" width="11" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="329" y="252" font-size="13" fill="#646A73">0.537 GB  计算时间多 30% 到 40%</text>
+<rect x="40" y="300" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="329" font-size="15" fill="#1F2329">选择性重算只重算注意力分数、softmax 这类激活大、计算少的部分：论文中 GPT-3 省 70% 激活，只多 2.7% FLOPs。</text>
+<text x="40" y="386" font-size="12" fill="#646A73">来源：Korthikanti et al., Reducing Activation Recomputation in Large Transformer Models；数值为本文按论文公式推算</text>
+</svg>

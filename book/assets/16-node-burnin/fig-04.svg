@@ -1,26 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="790"
-     viewBox="-20 -20 1240 790">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="750" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">PCIe 与 GPU-Host 互通速度</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">GPU H2D / D2H 四条路径实测带宽与比例合格线</tspan></tspan></text></g>
-<g id="a3:3" transform="translate(40, 191.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">H2D pinned</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(220, 175)"><rect x="0" y="0" width="569" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:4" transform="translate(801, 191.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">26 GB/s</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(40, 267.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">H2D pageable</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(220, 251)"><rect x="0" y="0" width="284" height="56" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:6" transform="translate(516, 267.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">13 GB/s</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(40, 343.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">D2H pinned</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(220, 327)"><rect x="0" y="0" width="569" height="56" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:8" transform="translate(801, 343.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">26 GB/s</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(40, 419.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">D2H pageable</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(220, 403)"><rect x="0" y="0" width="284" height="56" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:10" transform="translate(516, 419.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">13 GB/s</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(40, 509)"><rect x="0" y="0" width="1120" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:11" transform="translate(60, 528.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">PCIe Gen5 x16 理论 64 GB/s；pinned ≈ pageable 1.9×；50% 比例为合格线</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(40, 609)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:12" transform="translate(56, 618.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">判读要点</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(56, 652.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">pinned 内存是 H2D/D2H 的必要条件；验收时若实测低于理论 70%（45 GB/s），需要检查 NUMA 亲和、 ACS 与 PCIe bifurcation 配置</tspan></tspan></text></g>
-<g id="a3:14" transform="translate(40, 711.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 code_outputs.md；nvidia-smi 监控</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">DCGM 诊断四级：一级只查软件，三级起才有压测</text>
+<text x="40" y="92" font-size="14" fill="#646A73">8 卡 Hopper 系统上的耗时上限</text>
+<text x="228" y="168" font-size="14" fill="#1F2329" text-anchor="end">r1（Short）</text>
+<rect x="240" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="150" width="4" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="252" y="168" font-size="13" fill="#646A73">  2.5 秒</text>
+<text x="228" y="210" font-size="14" fill="#1F2329" text-anchor="end">r2（Medium）</text>
+<rect x="240" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="192" width="54" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="302" y="210" font-size="13" fill="#646A73">  10.5 分钟</text>
+<text x="228" y="252" font-size="14" fill="#1F2329" text-anchor="end">r3（Long）</text>
+<rect x="240" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="234" width="181" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="429" y="252" font-size="13" fill="#646A73">  35 分钟</text>
+<text x="228" y="294" font-size="14" fill="#1F2329" text-anchor="end">r4（Extra Long）</text>
+<rect x="240" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="276" width="700" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="948" y="294" font-size="13" fill="#646A73">  2.25 小时</text>
+<rect x="40" y="332" width="548" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="363" font-size="18" fill="#1F2329" font-weight="bold">用途</text>
+<text x="56" y="393" font-size="14" fill="#646A73">r1：作业前就绪检查</text>
+<text x="56" y="416" font-size="14" fill="#646A73">r2：作业失败后的收尾检查</text>
+<text x="56" y="439" font-size="14" fill="#646A73">r3、r4：管理员事后排查、新机验收</text>
+<rect x="612" y="332" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="363" font-size="18" fill="#1F2329" font-weight="bold">不负责</text>
+<text x="628" y="393" font-size="14" fill="#646A73">不做全面硬件诊断</text>
+<text x="628" y="416" font-size="14" fill="#646A73">不主动修复</text>
+<text x="628" y="439" font-size="14" fill="#646A73">不替代现场诊断工具和 RMA 流程</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：NVIDIA DCGM Diagnostics（Run Levels and Tests）</text>
 </svg>

@@ -1,32 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="860"
-     viewBox="-20 -20 1240 860">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="820" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Tiresias 精准调度：两种算法与实测效果</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">无需精确知道作业时长也能逼近 SJF（最短作业优先）；Gittins 与 LAS 两种算法</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 170)"><rect x="0" y="0" width="540" height="160" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">算法 1 · Gittins Index</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">核心思想：根据"已运行时长 + 历史分布"估计剩余时间</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">优势：数学上最优、无需预测</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">劣势：分布外作业不稳定</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(620, 170)"><rect x="0" y="0" width="540" height="160" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:7" transform="translate(636, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">算法 2 · LAS（Least Attained Service）</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(636, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">核心思想：优先运行"已用时间最少"的作业</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(636, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">优势：简单、无需分布假设</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(636, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">劣势：长作业被无限期 delay</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(40, 388.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">LAS</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(260, 370)"><rect x="0" y="0" width="560" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:12" transform="translate(832, 389.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">平均 JCT 加速 2.4×</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(40, 472.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">Gittins</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(260, 454)"><rect x="0" y="0" width="653" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:14" transform="translate(925, 473.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">平均 JCT 加速 2.8×</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(40, 556.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">FIFO（基线）</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(260, 538)"><rect x="0" y="0" width="233" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:16" transform="translate(505, 557.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">基线 1.0×</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(40, 652)"><rect x="0" y="0" width="1120" height="106" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:17" transform="translate(56, 661.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">结论</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(56, 695.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">Tiresias 的启示：调度收益主要来自"让小作业先完成"；LAS 是工业实现友好选择，Gittins 在分布稳定时可再多 17%；两者都比 FIFO 减少 60%+ 平均排</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(56, 719.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">队时间</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(40, 781.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Tiresias (NSDI 2019) 论文</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 530" width="1200" height="530">
+<rect x="0" y="0" width="1200" height="530" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">逐个放 Pod：两个作业各占一半，8 张卡全部空转</text>
+<text x="40" y="92" font-size="14" fill="#646A73">剩 8 张空卡分在两台机器；作业 A、B 各要 2 个 Pod、每个 Pod 4 张卡</text>
+<rect x="40" y="150" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">逐个放 Pod</text>
+<text x="56" y="211" font-size="14" fill="#646A73">机器 1：A 的 Pod 占 4 卡</text>
+<text x="56" y="234" font-size="14" fill="#646A73">机器 2：B 的 Pod 占 4 卡</text>
+<text x="56" y="257" font-size="14" fill="#646A73">A、B 各等 4 卡，互相不释放</text>
+<rect x="612" y="150" width="548" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="628" y="181" font-size="18" fill="#1F2329" font-weight="bold">gang 整组放</text>
+<text x="628" y="211" font-size="14" fill="#646A73">A 的 2 个 Pod 一起放，占 8 卡</text>
+<text x="628" y="234" font-size="14" fill="#646A73">B 一个 Pod 都不放，排队</text>
+<text x="628" y="257" font-size="14" fill="#646A73">A 跑完释放，B 再整组放</text>
+<rect x="40" y="308" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="334" font-size="14" fill="#1F2329" font-weight="bold">实现</text>
+<text x="288" y="334" font-size="14" fill="#1F2329" font-weight="bold">机制</text>
+<rect x="40" y="350" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="373" font-size="14" fill="#1F2329" font-weight="bold">Volcano</text>
+<text x="288" y="373" font-size="14" fill="#1F2329">PodGroup 的 minMember 凑不齐，一个 Pod 都不调度</text>
+<rect x="40" y="388" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="411" font-size="14" fill="#1F2329" font-weight="bold">Kueue</text>
+<text x="288" y="411" font-size="14" fill="#1F2329">waitForPodsReady 超时未全部就绪就驱逐重排；blockAdmission 顺序准入</text>
+<rect x="40" y="426" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="449" font-size="14" fill="#1F2329" font-weight="bold">Kubernetes</text>
+<text x="288" y="449" font-size="14" fill="#1F2329">v1.37 原生 gang 为 Beta、默认关闭；凑不齐 minCount 一个都不绑定</text>
+<text x="40" y="506" font-size="12" fill="#646A73">来源：Kueue 文档（All-or-nothing with ready Pods）；Volcano PodGroup 文档；Kubernetes Gang Scheduling 文档</text>
 </svg>

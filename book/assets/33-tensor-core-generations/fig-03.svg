@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420">
+<rect x="0" y="0" width="1200" height="420" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Volta 的主循环：搬运和乘加由同一批线程发出</text>
+<text x="40" y="92" font-size="14" fill="#646A73">wmma kernel 的一轮 K 循环；灰色是搬运，蓝色是乘加</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">全局内存</text>
+<text x="56" y="211" font-size="14" fill="#646A73">线程 load 到寄存器</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">共享内存</text>
+<text x="347" y="211" font-size="14" fill="#646A73">线程 store，再同步</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">fragment</text>
+<text x="638" y="211" font-size="14" fill="#646A73">wmma.load 装进寄存器</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">wmma.mma</text>
+<text x="929" y="211" font-size="14" fill="#646A73">m16n16k16，4096 次乘加</text>
+<rect x="40" y="262" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="290" font-size="15" fill="#1F2329">V100 每 SM 每时钟 512 次乘加：每 8 个时钟要发一条 m16n16k16，搬运指令插在中间。</text>
+<rect x="40" y="312" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="340" font-size="15" fill="#1F2329">mma.sync.m8n8k4 从 sm_70 就有，PTX 文档提醒它在其他架构上性能可能大幅下降。</text>
+<text x="40" y="396" font-size="12" fill="#646A73">来源：V100 白皮书；PTX ISA（wmma、mma 各节）；主编估算</text>
+</svg>

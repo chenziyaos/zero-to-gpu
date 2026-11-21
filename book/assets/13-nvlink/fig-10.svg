@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500">
+<rect x="0" y="0" width="1200" height="500" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">NVLink 域：8 卡、72 卡、最多 256 卡</text>
+<text x="40" y="92" font-size="14" fill="#646A73">域的聚合带宽用来比规模，估算通信时间用每卡每方向带宽</text>
+<rect x="320" y="139" width="14" height="14" rx="3" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="340" y="150" font-size="13" fill="#646A73">域的聚合带宽（TB/s）</text>
+<text x="308" y="189" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">HGX H100 · 8 卡</text>
+<rect x="320" y="174" width="760" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="174" width="25" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="353" y="189" font-size="13" fill="#646A73">7.2 TB/s</text>
+<text x="308" y="231" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">H100 + NVLink Switch · 256 卡</text>
+<rect x="320" y="216" width="760" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="216" width="203" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="531" y="231" font-size="13" fill="#646A73">57.6 TB/s</text>
+<text x="308" y="273" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">NVLink 5 NVL72 · 72 卡</text>
+<rect x="320" y="258" width="760" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="258" width="457" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="785" y="273" font-size="13" fill="#646A73">130 TB/s</text>
+<text x="308" y="315" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">NVLink 6 NVL72（初步）</text>
+<rect x="320" y="300" width="760" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="320" y="300" width="760" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="1088" y="315" font-size="13" fill="#646A73">216 TB/s</text>
+<rect x="40" y="360" width="1120" height="73" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="389" font-size="15" fill="#1F2329">每卡视角：H100 900 GB/s，NVLink 5 是 1,800 GB/s，都是双向合计。NVLink Switch System 是 32 个节点、2:1 收敛的胖树，57.6 TB/s 指</text>
+<text x="56" y="413" font-size="15" fill="#1F2329">all-to-all 带宽。</text>
+<text x="40" y="476" font-size="12" fill="#646A73">来源：NVIDIA NVLink 产品页；GB300 NVL72 产品页；Hopper Architecture In-Depth</text>
+</svg>

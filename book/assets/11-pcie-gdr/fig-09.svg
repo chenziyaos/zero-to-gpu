@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540">
+<rect x="0" y="0" width="1200" height="540" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">同样是 W_host，DGX H100 和 GH200 的主机链路不同</text>
+<text x="40" y="92" font-size="14" fill="#646A73">两台机器的公开部件，以及前几章的检查在它们上面是否还适用</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold"></text>
+<text x="276" y="166" font-size="14" fill="#1F2329" font-weight="bold">DGX H100</text>
+<text x="724" y="166" font-size="14" fill="#1F2329" font-weight="bold">GH200</text>
+<rect x="40" y="182" width="1120" height="60" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">GPU 与 CPU</text>
+<text x="276" y="206" font-size="14" fill="#1F2329">8 张 H100（显存合计 640 GB），2 颗 Xeon 8480C，每颗 56</text>
+<text x="276" y="228" font-size="14" fill="#1F2329">核</text>
+<text x="724" y="206" font-size="14" fill="#1F2329">1 颗 72 核 Grace CPU + 1 颗 Hopper GPU</text>
+<rect x="40" y="242" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="266" font-size="14" fill="#1F2329" font-weight="bold">CPU 到 GPU</text>
+<text x="276" y="266" font-size="14" fill="#1F2329">PCIe Gen5，设备挂在两颗 CPU 之下</text>
+<text x="724" y="266" font-size="14" fill="#1F2329">NVLink-C2C，900 GB/s，厂商口径是 Gen5 的 7 倍</text>
+<rect x="40" y="280" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="304" font-size="14" fill="#1F2329" font-weight="bold">卡间</text>
+<text x="276" y="304" font-size="14" fill="#1F2329">NVSwitch 一栏：4 × 第四代 NVLink，GPU 间 900 GB/s</text>
+<text x="724" y="304" font-size="14" fill="#1F2329">单颗 GPU，本篇不涉及</text>
+<rect x="40" y="318" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="342" font-size="14" fill="#1F2329" font-weight="bold">网卡与存储</text>
+<text x="276" y="342" font-size="14" fill="#1F2329">8 块 ConnectX-7；8 块 3.84 TB NVMe 数据缓存盘</text>
+<text x="724" y="342" font-size="14" fill="#1F2329">本篇不展开</text>
+<rect x="40" y="356" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="380" font-size="14" fill="#1F2329" font-weight="bold">前几章的检查</text>
+<text x="276" y="380" font-size="14" fill="#1F2329">NUMA 绑核、IOMMU、ACS、GPUDirect、GDS 都要做</text>
+<text x="724" y="380" font-size="14" fill="#1F2329">CPU 与 GPU 一致内存，H2D 拷贝这段代价变小</text>
+<rect x="40" y="430" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="459" font-size="15" fill="#1F2329">900 ÷ (2 × 63.015) ≈ 7.1，和厂商的 7 倍对得上，由此推断 C2C 的 900 GB/s 是双向合计；和单向数字比要先折半。</text>
+<text x="40" y="516" font-size="12" fill="#646A73">来源：NVIDIA DGX H100/H200 User Guide（Introduction）；NVIDIA GH200 Grace Hopper Superchip 产品页</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430">
+<rect x="0" y="0" width="1200" height="430" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">按时间线上的问题选方案，一次只加一项</text>
+<text x="40" y="92" font-size="14" fill="#646A73">reduce-overhead 本身就用 CUDA graphs；手写 CUDA Graph 也能包住编译后的模块</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">时间线上看到的</text>
+<text x="417" y="166" font-size="14" fill="#1F2329" font-weight="bold">优先尝试</text>
+<text x="807" y="166" font-size="14" fill="#1F2329" font-weight="bold">前提</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">每步末尾有空隙，CPU 在同步</text>
+<text x="417" y="206" font-size="14" fill="#1F2329">去掉 .item() 等同步点</text>
+<text x="807" y="206" font-size="14" fill="#1F2329">日志和指标可以延后取</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">拷贝和计算串行</text>
+<text x="417" y="244" font-size="14" fill="#1F2329">拷贝流、pin_memory、non_blocking</text>
+<text x="807" y="244" font-size="14" fill="#1F2329">跨流张量 record_stream</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">大量短核，核间有缝</text>
+<text x="417" y="282" font-size="14" fill="#1F2329">CUDA Graphs 或 reduce-overhead</text>
+<text x="807" y="282" font-size="14" fill="#1F2329">静态形状、无同步、无 CPU 逻辑</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">逐元素算子多，访存占比高</text>
+<text x="417" y="320" font-size="14" fill="#1F2329">torch.compile 默认模式</text>
+<text x="807" y="320" font-size="14" fill="#1F2329">graph break 少，形状稳定</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">核都很长，几乎没有空隙</text>
+<text x="417" y="358" font-size="14" fill="#1F2329">留在 eager，去优化单个核</text>
+<text x="807" y="358" font-size="14" fill="#1F2329">见 GPU-14 第 5、6 章</text>
+<text x="40" y="406" font-size="12" fill="#646A73">来源：本篇第 2 到 8 章；torch.compile 文档；PyTorch CUDA semantics</text>
+</svg>

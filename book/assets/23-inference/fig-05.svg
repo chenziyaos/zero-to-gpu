@@ -1,54 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="890"
-     viewBox="-20 -20 1240 890">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="850" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">PagedAttention 分页机制将显存利用率从 60% 提升到 90%</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">静态分配预分配碎片浪费；动态分页按需分配高效重用</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 190)"><rect x="0" y="0" width="545" height="260" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:3" transform="translate(273, 200.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="39"><tspan x="39" y="17.648"><tspan x="9" text-anchor="start">静态分配</tspan></tspan></text></g>
-<g id="a3:4" transform="translate(207.5, 227.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="104.5"><tspan x="104.5" y="14.118"><tspan x="0.775" text-anchor="start">预分配 60 GB · 实际用 36 GB（60%）</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(80, 270)"><rect x="0" y="0" width="255" height="36" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:5" transform="translate(163.5, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="43.5"><tspan x="43.5" y="15.295"><tspan x="10.795" text-anchor="start">已用 36 GB</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(335, 270)"><rect x="0" y="0" width="170" height="36" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:6" transform="translate(347.5, 279.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="27.5"><tspan x="27.5" y="14.118"><tspan x="7.06" text-anchor="start">浪费 24</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(100, 315.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 预留 60 GB 支持 batch 64, seq 16K</tspan></tspan></text></g>
-<g id="a3:8" transform="translate(100, 341.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 实际均匀分布，仅用 36 GB</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(100, 367.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 剩余 24 GB 保留应对峰值</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(100, 395.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">问题：预分配全部页，短请求不满</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(615, 190)"><rect x="0" y="0" width="545" height="260" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:11" transform="translate(768.5, 200.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="119.5"><tspan x="119.5" y="17.648"><tspan x="17.08" text-anchor="start">动态分页（PagedAttention）</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(783.5, 227.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="104.5"><tspan x="104.5" y="14.118"><tspan x="0.775" text-anchor="start">预分配 60 GB · 实际用 54 GB（90%）</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(655, 270)"><rect x="0" y="0" width="380" height="36" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:13" transform="translate(801.5, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="43.5"><tspan x="43.5" y="15.295"><tspan x="10.795" text-anchor="start">已用 54 GB</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(1035, 270)"><rect x="0" y="0" width="60" height="36" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:14" transform="translate(1046, 279.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="19"><tspan x="19" y="14.118"><tspan x="5.71" text-anchor="start">6 GB</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(675, 315.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 请求 A 用 36 GB，完成 → 请求 E 重用</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(675, 341.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 保留工作集 ＜10% 碎片</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(675, 367.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 容纳 1.5 倍的并发请求</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(675, 395.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">优势：按需分配，完成后释放重用</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(40, 490)"><rect x="0" y="0" width="1120" height="41" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:19" transform="translate(52, 499.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">指标</tspan></tspan></text></g>
-<g id="a3:20" transform="translate(280, 499.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">静态分配</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(726, 499.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">动态分页</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(40, 531)"><rect x="0" y="0" width="1120" height="37" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:22" transform="translate(52, 538.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">利用率</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(280, 538.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">60%</tspan></tspan></text></g>
-<g id="a3:24" transform="translate(726, 538.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">90% (+50%)</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(40, 568)"><rect x="0" y="0" width="1120" height="37" fill="#f5f6f7" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:25" transform="translate(52, 575.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">支持并发</tspan></tspan></text></g>
-<g id="a3:26" transform="translate(280, 575.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">~40 请求</tspan></tspan></text></g>
-<g id="a3:27" transform="translate(726, 575.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">~60 请求 (+50%)</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(40, 605)"><rect x="0" y="0" width="1120" height="37" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:28" transform="translate(52, 612.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">等待</tspan></tspan></text></g>
-<g id="a3:29" transform="translate(280, 612.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">高（排队）</tspan></tspan></text></g>
-<g id="a3:30" transform="translate(726, 612.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">低（立即调度）</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(40, 642)"><rect x="0" y="0" width="1120" height="37" fill="#f5f6f7" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:31" transform="translate(52, 649.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">显存浪费</tspan></tspan></text></g>
-<g id="a3:32" transform="translate(280, 649.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">24 GB (40%)</tspan></tspan></text></g>
-<g id="a3:33" transform="translate(726, 649.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">6 GB (10%)</tspan></tspan></text></g>
-<g id="o3:13" transform="translate(40, 709)"><rect x="0" y="0" width="1120" height="82" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:34" transform="translate(56, 718.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本质</tspan></tspan></text></g>
-<g id="a3:35" transform="translate(56, 752.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">虚拟内存思想：把 KV cache 拆成小页，按需分配/释放，复用率从 60% → 90%</tspan></tspan></text></g>
-<g id="a3:36" transform="translate(40, 811.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：vLLM PagedAttention 论文[1]</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">攒批摊薄权重，摊不薄 KV：长上下文时每步时间跟着批大小涨</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Llama 3 70B、8 张 H100 SXM，TPOT 下限 =（每卡权重 + 批内每卡 KV）÷ 3.35 TB/s（ms）</text>
+<text x="248" y="168" font-size="14" fill="#1F2329" text-anchor="end">批 1</text>
+<rect x="260" y="150" width="640" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="260" y="150" width="147" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="415" y="168" font-size="13" fill="#646A73">  约 5.27 ms</text>
+<text x="248" y="210" font-size="14" fill="#1F2329" text-anchor="end">批 88，2048 token</text>
+<rect x="260" y="192" width="640" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="260" y="192" width="209" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="477" y="210" font-size="13" fill="#646A73">  约 7.47 ms，8 卡约 11780 token/s</text>
+<text x="248" y="252" font-size="14" fill="#1F2329" text-anchor="end">批 88，16384 token</text>
+<rect x="260" y="234" width="640" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="260" y="234" width="640" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="908" y="252" font-size="13" fill="#646A73">  约 22.90 ms，8 卡约 3843 token/s</text>
+<rect x="40" y="300" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="326" font-size="14" fill="#1F2329" font-weight="bold">配置</text>
+<text x="437" y="326" font-size="14" fill="#1F2329" font-weight="bold">每卡权重</text>
+<text x="682" y="326" font-size="14" fill="#1F2329" font-weight="bold">每卡 KV</text>
+<text x="927" y="326" font-size="14" fill="#1F2329" font-weight="bold">合计</text>
+<rect x="40" y="342" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="366" font-size="14" fill="#1F2329" font-weight="bold">批 1</text>
+<text x="437" y="366" font-size="14" fill="#1F2329">17.65 GB</text>
+<text x="682" y="366" font-size="14" fill="#1F2329">可忽略</text>
+<text x="927" y="366" font-size="14" fill="#1F2329">17.65 GB</text>
+<rect x="40" y="380" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="404" font-size="14" fill="#1F2329" font-weight="bold">批 88，2048 token</text>
+<text x="437" y="404" font-size="14" fill="#1F2329">17.65 GB</text>
+<text x="682" y="404" font-size="14" fill="#1F2329">7.38 GB</text>
+<text x="927" y="404" font-size="14" fill="#1F2329">25.03 GB</text>
+<rect x="40" y="418" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="442" font-size="14" fill="#1F2329" font-weight="bold">批 88，16384 token</text>
+<text x="437" y="442" font-size="14" fill="#1F2329">17.65 GB</text>
+<text x="682" y="442" font-size="14" fill="#1F2329">59.06 GB</text>
+<text x="927" y="442" font-size="14" fill="#1F2329">76.71 GB</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：H100 产品页；本篇第 3、4 章推算（不含 all-reduce 和启动开销）</text>
 </svg>

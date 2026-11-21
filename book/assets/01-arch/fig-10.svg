@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">换到 Blackwell，每个 SM 要藏的在途字节约翻一倍</text>
+<text x="40" y="92" font-size="14" fill="#646A73">在途字节 = 带宽 × 延迟；延迟沿用 H100 的约 274 ns 作假设，按 SM 数平摊</text>
+<text x="358" y="168" font-size="14" fill="#1F2329" text-anchor="end">H100 每 SM 在途 KB</text>
+<rect x="370" y="150" width="684" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="150" width="347" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="725" y="168" font-size="13" fill="#646A73">6.8</text>
+<text x="358" y="210" font-size="14" fill="#1F2329" text-anchor="end">Blackwell Ultra 每 SM 在途 KB</text>
+<rect x="370" y="192" width="684" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="192" width="684" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="1062" y="210" font-size="13" fill="#646A73">13.4  约 2 倍</text>
+<text x="358" y="286" font-size="14" fill="#1F2329" text-anchor="end">H100 每 SM 在途 float4 条数</text>
+<rect x="370" y="268" width="600" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="268" width="304" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="682" y="286" font-size="13" fill="#646A73">435</text>
+<text x="358" y="328" font-size="14" fill="#1F2329" text-anchor="end">Blackwell Ultra 每 SM 在途 float4</text>
+<rect x="370" y="310" width="600" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="310" width="600" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="978" y="328" font-size="13" fill="#646A73">857  约占 2048 线程的 42%</text>
+<rect x="40" y="372" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="401" font-size="15" fill="#1F2329">同样的并行度在新卡上吃不满带宽：要么每个线程多发几条互不依赖的加载，要么把整块搬运交给 cp.async、TMA。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：NVIDIA Blackwell Ultra 技术博客对照表、Luo et al. 2024 Hopper 微基准；数值为本章 9.2 节的算式结果</text>
+</svg>

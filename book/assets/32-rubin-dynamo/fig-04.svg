@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">NVFP4：每 16 个值共用一个 FP8 缩放，平均每值 4.5 位</text>
+<text x="40" y="92" font-size="14" fill="#646A73">两级缩放：微块级 E4M3 + 张量级 FP32</text>
+<rect x="40" y="150" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">格式</text>
+<text x="56" y="211" font-size="14" fill="#646A73">每值 4 位 + 每 16 值 1 个 E4M3</text>
+<text x="56" y="234" font-size="14" fill="#646A73">每张量 1 个 FP32</text>
+<rect x="421" y="150" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="437" y="181" font-size="18" fill="#1F2329" font-weight="bold">省多少</text>
+<text x="437" y="211" font-size="14" fill="#646A73">比 FP16 约 3.56 倍</text>
+<text x="437" y="234" font-size="14" fill="#646A73">比 FP8 约 1.78 倍</text>
+<rect x="803" y="150" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="819" y="181" font-size="18" fill="#1F2329" font-weight="bold">DeepSeek-V3 每卡权重</text>
+<text x="819" y="211" font-size="14" fill="#646A73">FP8 约 9.32 GB</text>
+<text x="819" y="234" font-size="14" fill="#646A73">NVFP4 约 5.24 GB（72 卡）</text>
+<rect x="40" y="284" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="313" font-size="15" fill="#1F2329">厂商报告：DeepSeek-R1-0528 从 FP8 训练后量化到 NVFP4，精度下降不超过 1%。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：NVIDIA 技术博客 Introducing NVFP4；DeepSeek-V3 技术报告；主编核算</text>
+</svg>

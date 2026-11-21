@@ -1,59 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="880"
-     viewBox="-20 -20 1240 880">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="840" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">MIG 硬件分区 vs 时间分片：隔离与灵活性的权衡</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">左：MIG 物理隔离，各占 1/7 算力与独占显存；右：时间分片，多个 Pod 轮流用整张卡</tspan></tspan></text></g>
-<g id="a3:3" transform="translate(40, 141.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">MIG 硬件分区（4 × 3g.24gb）</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 190)"><rect x="0" y="0" width="540" height="70" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:4" transform="translate(60, 204.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">MIG 0: 3g.24gb（1/7 算力）</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(60, 227.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">独占显存；硬隔离</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(40, 270)"><rect x="0" y="0" width="540" height="70" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:6" transform="translate(60, 284.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">MIG 1: 3g.24gb（1/7 算力）</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(60, 307.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">独占显存；硬隔离</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(40, 350)"><rect x="0" y="0" width="540" height="70" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:8" transform="translate(60, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">MIG 2: 3g.24gb（1/7 算力）</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(60, 387.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">独占显存；硬隔离</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(40, 430)"><rect x="0" y="0" width="540" height="70" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:10" transform="translate(60, 444.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">MIG 3: 3g.24gb（1/7 算力）</tspan></tspan></text></g>
-<g id="a3:11" transform="translate(60, 467.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">独占显存；硬隔离</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(241.5, 508.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="68.5"><tspan x="68.5" y="15.295"><tspan x="16.825" text-anchor="start">✓ 隔离强（硬件）</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(620, 141.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">时间分片（MPS）</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(620, 190)"><rect x="0" y="0" width="540" height="70" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:14" transform="translate(790, 211.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="100"><tspan x="100" y="16.471"><tspan x="20.79" text-anchor="start">GPU（4 个 Pod 轮流用）</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(624, 280)"><rect x="0" y="0" width="127" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:15" transform="translate(663.5, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="24.5"><tspan x="24.5" y="15.295"><tspan x="5.5" text-anchor="start">Pod-A</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(759, 280)"><rect x="0" y="0" width="127" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:16" transform="translate(797.5, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="24.5"><tspan x="24.5" y="15.295"><tspan x="5.24" text-anchor="start">Pod-B</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(894, 280)"><rect x="0" y="0" width="127" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:17" transform="translate(933.5, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="24.5"><tspan x="24.5" y="15.295"><tspan x="5.4" text-anchor="start">Pod-C</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(1029, 280)"><rect x="0" y="0" width="127" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:18" transform="translate(1067.5, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="24.5"><tspan x="24.5" y="15.295"><tspan x="5.025" text-anchor="start">Pod-D</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(796, 368.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="94"><tspan x="94" y="15.295"><tspan x="19.875" text-anchor="start">✗ 隔离弱（共享） ✓ 灵活</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(40, 550)"><rect x="0" y="0" width="1120" height="42" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:20" transform="translate(52, 559.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">维度</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(372, 559.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">MIG</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(772, 559.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">时间分片</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(40, 592)"><rect x="0" y="0" width="1120" height="38" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:23" transform="translate(52, 599.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">粒度</tspan></tspan></text></g>
-<g id="a3:24" transform="translate(372, 599.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">固定</tspan></tspan></text></g>
-<g id="a3:25" transform="translate(772, 599.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">任意</tspan></tspan></text></g>
-<g id="o3:13" transform="translate(40, 630)"><rect x="0" y="0" width="1120" height="38" fill="#f5f6f7" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:26" transform="translate(52, 637.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">吞吐</tspan></tspan></text></g>
-<g id="a3:27" transform="translate(372, 637.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">1/7</tspan></tspan></text></g>
-<g id="a3:28" transform="translate(772, 637.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">~1</tspan></tspan></text></g>
-<g id="o3:14" transform="translate(40, 668)"><rect x="0" y="0" width="1120" height="38" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:29" transform="translate(52, 675.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">延迟</tspan></tspan></text></g>
-<g id="a3:30" transform="translate(372, 675.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">小</tspan></tspan></text></g>
-<g id="a3:31" transform="translate(772, 675.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">大</tspan></tspan></text></g>
-<g id="o3:15" transform="translate(40, 706)"><rect x="0" y="0" width="1120" height="38" fill="#f5f6f7" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:32" transform="translate(52, 713.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">SLA 保证</tspan></tspan></text></g>
-<g id="a3:33" transform="translate(372, 713.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">✓ 硬</tspan></tspan></text></g>
-<g id="a3:34" transform="translate(772, 713.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">✗ 软</tspan></tspan></text></g>
-<g id="o3:16" transform="translate(40, 744)"><rect x="0" y="0" width="1120" height="38" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a3:35" transform="translate(52, 751.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">适用场景</tspan></tspan></text></g>
-<g id="a3:36" transform="translate(372, 751.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">多租户+SLA</tspan></tspan></text></g>
-<g id="a3:37" transform="translate(772, 751.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">单租户灵活</tspan></tspan></text></g>
-<g id="a3:38" transform="translate(40, 801.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA MIG Guide；本篇 outline</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">坏卡：调度器只让新 Pod 避开，已分配的 Pod 要主动处理</text>
+<text x="40" y="92" font-size="14" fill="#646A73">设备插件经 ListAndWatch 通知 kubelet；allocatable 减少，capacity 不变</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">发现</text>
+<text x="56" y="211" font-size="14" fill="#646A73">插件上报、DCGM 告警</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">隔离</text>
+<text x="347" y="211" font-size="14" fill="#646A73">污点或 cordon</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">排空</text>
+<text x="638" y="211" font-size="14" fill="#646A73">从 checkpoint 迁走</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">验收</text>
+<text x="929" y="211" font-size="14" fill="#646A73">诊断、烧机后放回</text>
+<rect x="40" y="262" width="548" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="293" font-size="18" fill="#1F2329" font-weight="bold">Kubernetes 能看到</text>
+<text x="56" y="323" font-size="14" fill="#646A73">allocatable 减少，新 Pod 不再分到</text>
+<text x="56" y="346" font-size="14" fill="#646A73">allocatedResourcesStatus（v1.36 Beta 默认开）</text>
+<text x="56" y="369" font-size="14" fill="#646A73">PodResources 列出在用设备</text>
+<rect x="612" y="262" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="293" font-size="18" fill="#1F2329" font-weight="bold">要自己处理</text>
+<text x="628" y="323" font-size="14" fill="#646A73">已分到坏卡的 Pod 仍绑在坏卡上</text>
+<text x="628" y="346" font-size="14" fill="#646A73">告警要分清硬件和程序错误</text>
+<text x="628" y="369" font-size="14" fill="#646A73">修好的卡验收后才放回</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：Kubernetes 文档（Device Plugins）；NVIDIA GPU Operator 文档；dcgm-exporter README</text>
 </svg>

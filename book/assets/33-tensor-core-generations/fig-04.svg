@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">T4：位宽减半，吞吐翻倍；带宽低，脊点反而更高</text>
+<text x="40" y="92" font-size="14" fill="#646A73">T4 规格页的 Tensor 峰值；单位 TFLOPS 或 TOPS</text>
+<text x="148" y="168" font-size="14" fill="#1F2329" text-anchor="end">FP16</text>
+<rect x="160" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="150" width="175" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="343" y="168" font-size="13" fill="#646A73">  65</text>
+<text x="148" y="210" font-size="14" fill="#1F2329" text-anchor="end">INT8</text>
+<rect x="160" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="192" width="350" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="518" y="210" font-size="13" fill="#646A73">  130</text>
+<text x="148" y="252" font-size="14" fill="#1F2329" text-anchor="end">INT4</text>
+<rect x="160" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="234" width="700" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="868" y="252" font-size="13" fill="#646A73">  260</text>
+<rect x="40" y="290" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="319" font-size="15" fill="#1F2329">FP16 脊点：T4 约 65 ÷ 0.32 ≈ 203 FLOP/B，V100 约 125 ÷ 0.9 ≈ 139。</text>
+<rect x="40" y="340" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="369" font-size="15" fill="#1F2329">m16n8k8、INT8 的 m8n8k16 和 ldmatrix 都要求 sm_75。</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：NVIDIA Tesla T4 产品页；Turing 白皮书；主编核算</text>
+</svg>

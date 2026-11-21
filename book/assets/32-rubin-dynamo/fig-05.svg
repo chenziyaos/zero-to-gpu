@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">计算密集的 prefill 和带宽密集的解码，分到两种卡上</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Rubin CPX 的公开数字按新闻稿口径，稀疏或稠密未注明</text>
+<rect x="40" y="150" width="548" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">prefill：Rubin CPX</text>
+<text x="56" y="211" font-size="14" fill="#646A73">NVFP4 最高 30 petaflops</text>
+<text x="56" y="234" font-size="14" fill="#646A73">128GB GDDR7，注意力为 GB300 NVL72 的 3 倍</text>
+<rect x="612" y="150" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="628" y="181" font-size="18" fill="#1F2329" font-weight="bold">解码：Rubin GPU</text>
+<text x="628" y="211" font-size="14" fill="#646A73">288 GB HBM4，19.2 TB/s</text>
+<text x="628" y="234" font-size="14" fill="#646A73">放下所有在解码请求的 KV</text>
+<rect x="40" y="284" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="313" font-size="15" fill="#1F2329">两池之间用 NIXL 传 KV，Planner 按 SLA 调两类卡的比例；CPX 预计 2026 年底上市。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：NVIDIA 新闻稿 Rubin CPX（2025-09-09）；Dynamo、NIXL README</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Dynamo 在引擎之上，接住单卡以外的等待</text>
+<text x="40" y="92" font-size="14" fill="#646A73">组件与对应的时间账项</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">组件</text>
+<text x="332" y="176" font-size="14" fill="#1F2329" font-weight="bold">做什么</text>
+<text x="864" y="176" font-size="14" fill="#1F2329" font-weight="bold">压小的等待</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">分离式 prefill/解码</text>
+<text x="332" y="216" font-size="14" fill="#1F2329">两段放进可各自扩缩的 GPU 池</text>
+<text x="864" y="216" font-size="14" fill="#1F2329">W_idle</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">KV 感知路由</text>
+<text x="332" y="254" font-size="14" fill="#1F2329">按 worker 负载和 KV 重叠派请求</text>
+<text x="864" y="254" font-size="14" fill="#1F2329">重复 prefill</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">Planner</text>
+<text x="332" y="292" font-size="14" fill="#1F2329">按 SLA 分析负载、定池的大小</text>
+<text x="864" y="292" font-size="14" fill="#1F2329">W_idle</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">NIXL</text>
+<text x="332" y="330" font-size="14" fill="#1F2329">点对点传 KV，跨 GPU、CPU 与存储</text>
+<text x="864" y="330" font-size="14" fill="#1F2329">W_comm</text>
+<rect x="40" y="374" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="403" font-size="15" fill="#1F2329">公开倍数前提各异：30 倍（GB200 NVL72 上的 R1）、7 倍（对比无 Dynamo 的 B200）、2 倍 TTFT（Qwen3-Coder 480B）。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：NVIDIA Dynamo 新闻稿（2025-03-18）与 GitHub README；NIXL README</text>
+</svg>

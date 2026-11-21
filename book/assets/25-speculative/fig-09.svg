@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">批变大，加速缩水：EAGLE 在批大小 24 时降到 0.93x</text>
+<text x="40" y="92" font-size="14" fill="#646A73">吞吐相对不开投机采样的倍数；H100、LLaMA-Instruct 3.1 8B、MT-Bench、SGLang</text>
+<text x="228" y="168" font-size="14" fill="#1F2329" text-anchor="end">EAGLE，批 2</text>
+<rect x="240" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="150" width="541" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="789" y="168" font-size="13" fill="#646A73">  1.40x</text>
+<text x="228" y="210" font-size="14" fill="#1F2329" text-anchor="end">EAGLE，批 24</text>
+<rect x="240" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="192" width="360" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="608" y="210" font-size="13" fill="#646A73">  0.93x</text>
+<text x="228" y="252" font-size="14" fill="#1F2329" text-anchor="end">EAGLE-3，批 2</text>
+<rect x="240" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="234" width="700" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="948" y="252" font-size="13" fill="#646A73">  1.81x</text>
+<text x="228" y="294" font-size="14" fill="#1F2329" text-anchor="end">EAGLE-3，批 64</text>
+<rect x="240" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="276" width="534" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="782" y="294" font-size="13" fill="#646A73">  1.38x</text>
+<rect x="40" y="332" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="361" font-size="15" fill="#1F2329">A100 + vLLM（表 5）：EAGLE-3 从批 2 的 1.75x 降到批 56 的 1.01x，EAGLE 在批 56 只有 0.71x。</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：EAGLE-3 论文表 3（SGLang 团队测试）</text>
+</svg>

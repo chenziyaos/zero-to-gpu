@@ -1,51 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="710"
-     viewBox="-20 -20 1240 710">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="670" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">FP32 分块的共享内存账：双缓冲到 128×256×16 顶到 48 KB 默认上限</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">每块写 A、B tile 的字节数 (BM×BK + BK×BN) × 4 B；H100 每 SM 228 KB，Block 默认 48 KB，显式申请可到 227 KB</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 160)"><rect x="0" y="0" width="270" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:3" transform="translate(132, 177.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="43"><tspan x="43" y="20.001"><tspan x="0.925" text-anchor="start">64×64×8</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(40, 220)"><rect x="0" y="0" width="270" height="180" fill="#ffffff" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:4" transform="translate(60, 236.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">单缓冲</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(235, 231.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="55"><tspan x="55" y="20.001"><tspan x="12.7" text-anchor="start">4 KiB</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(60, 286.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">双缓冲</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(235, 281.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="55"><tspan x="55" y="20.001"><tspan x="12.7" text-anchor="start">8 KiB</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(60, 336.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">默认上限内</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(232, 331.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="58"><tspan x="58" y="20.001"><tspan x="9.99" text-anchor="start">green</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(326, 160)"><rect x="0" y="0" width="270" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:10" transform="translate(406.5, 177.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="54.5"><tspan x="54.5" y="20.001"><tspan x="2.395" text-anchor="start">128×128×8</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(326, 220)"><rect x="0" y="0" width="270" height="180" fill="#ffffff" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:11" transform="translate(346, 236.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">单缓冲</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(521, 231.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="55"><tspan x="55" y="20.001"><tspan x="12.7" text-anchor="start">8 KiB</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(346, 286.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">双缓冲</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(509, 281.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="67"><tspan x="67" y="20.001"><tspan x="14.67" text-anchor="start">16 KiB</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(346, 336.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">默认上限内</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(518, 331.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="58"><tspan x="58" y="20.001"><tspan x="9.99" text-anchor="start">green</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(612, 160)"><rect x="0" y="0" width="270" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:17" transform="translate(692.5, 177.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="54.5"><tspan x="54.5" y="20.001"><tspan x="2.395" text-anchor="start">256×128×8</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(612, 220)"><rect x="0" y="0" width="270" height="180" fill="#ffffff" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:18" transform="translate(632, 236.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">单缓冲</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(795, 231.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="67"><tspan x="67" y="20.001"><tspan x="14.67" text-anchor="start">12 KiB</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(632, 286.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">双缓冲</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(795, 281.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="67"><tspan x="67" y="20.001"><tspan x="14.67" text-anchor="start">24 KiB</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(632, 336.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">默认上限内</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(804, 331.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="end" dominant-baseline="alphabetic" x="58"><tspan x="58" y="20.001"><tspan x="9.99" text-anchor="start">green</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(898, 160)"><rect x="0" y="0" width="270" height="60" fill="#ff8800" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:24" transform="translate(972.5, 177.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="60.5"><tspan x="60.5" y="20.001"><tspan x="3.38" text-anchor="start">128×256×16</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(898, 220)"><rect x="0" y="0" width="270" height="180" fill="#ffffff" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:25" transform="translate(918, 236.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">单缓冲</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(1081, 231.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="end" dominant-baseline="alphabetic" x="67"><tspan x="67" y="20.001"><tspan x="14.67" text-anchor="start">24 KiB</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(918, 286.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">双缓冲</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(1081, 281.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="end" dominant-baseline="alphabetic" x="67"><tspan x="67" y="20.001"><tspan x="14.67" text-anchor="start">48 KiB</tspan></tspan></text></g>
-<g id="a2:29" transform="translate(918, 336.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">顶到 48 KB</tspan></tspan></text></g>
-<g id="a2:30" transform="translate(1114, 331.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="end" dominant-baseline="alphabetic" x="34"><tspan x="34" y="20.001"><tspan x="5.97" text-anchor="start">red</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 430)"><rect x="0" y="0" width="1120" height="64" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:31" transform="translate(60, 438.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">默认上限 48 KB 是安全的，但只够 128×256×16 双缓冲</tspan></tspan></text></g>
-<g id="a2:32" transform="translate(60, 462.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">更大块需要显式 cudaFuncSetAttribute 开启 opt-in，最多 227 KB（H100）</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(40, 522)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:33" transform="translate(56, 531.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本篇第 6 章</tspan></tspan></text></g>
-<g id="a2:34" transform="translate(56, 565.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">本篇块大小由 (BM×BK + BK×BN) × 4 B 决定；共享内存是稀缺资源，按 K 维切分能保留更多块</tspan></tspan></text></g>
-<g id="a2:35" transform="translate(40, 631.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 sim_occupancy.py；NVIDIA Hopper 调优指南</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">调参挑参数，改结构才能跨过天花板</text>
+<text x="40" y="92" font-size="14" fill="#646A73">一次调参的流程；参数解决不了的差额回到代码结构</text>
+<rect x="40" y="150" width="189" height="108" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">限定合法空间</text>
+<text x="56" y="211" font-size="14" fill="#646A73">形状、向量化、共享内存、</text>
+<text x="56" y="234" font-size="14" fill="#646A73">寄存器四类约束</text>
+<polyline points="235,204 267,204" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,198 267,204 257,210" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="108" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">逐个实测</text>
+<text x="289" y="211" font-size="14" fill="#646A73">预热、多次计时取中位数，</text>
+<text x="289" y="234" font-size="14" fill="#646A73">同测 cuBLAS</text>
+<polyline points="468,204 500,204" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,198 500,204 490,210" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="108" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">ncu 看前几名</text>
+<text x="522" y="211" font-size="14" fill="#646A73">差额落在验收表哪一行</text>
+<polyline points="700,204 732,204" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,198 732,204 722,210" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="108" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">改结构</text>
+<text x="754" y="211" font-size="14" fill="#646A73">冲突、流水、warp 分块</text>
+<polyline points="933,204 965,204" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,198 965,204 955,210" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="108" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">按卡和尺寸</text>
+<text x="1019" y="207" font-size="18" fill="#1F2329" font-weight="bold">固化</text>
+<text x="987" y="237" font-size="14" fill="#646A73">换卡或换尺寸区间重调</text>
+<rect x="40" y="298" width="548" height="82" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="329" font-size="18" fill="#1F2329" font-weight="bold">调参能拿到的</text>
+<text x="56" y="359" font-size="14" fill="#646A73">Boehm A6000：约 400 组合法配置，78.4% → 84.8%（相对 cuBLAS）</text>
+<rect x="612" y="298" width="548" height="82" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="628" y="329" font-size="18" fill="#1F2329" font-weight="bold">改结构才能拿到的</text>
+<text x="628" y="359" font-size="14" fill="#646A73">warp 分块 84.8% → 93.7%；换 Tensor Core 路径是另一个量级</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：Boehm, How to Optimize a CUDA Matmul Kernel；Triton 矩阵乘教程；CUTLASS Profiler 文档</text>
 </svg>

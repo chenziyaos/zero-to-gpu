@@ -1,43 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="940"
-     viewBox="-20 -20 1240 940">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="900" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">MPS 三层架构：控制 daemon、server、客户端与故障域</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">蓝色虚线：命名管道通信；红色实线：故障共担边界</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(440, 165)"><rect x="0" y="0" width="320" height="70" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:3" transform="translate(506.5, 176.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="93.5"><tspan x="93.5" y="16.471"><tspan x="7.895" text-anchor="start">nvidia-cuda-mps-control</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(507, 202.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="93"><tspan x="93" y="14.118"><tspan x="2.1" text-anchor="start">监听命名管道，按 UID 隔离客户端</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(440, 285)"><rect x="0" y="0" width="320" height="84" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:5" transform="translate(502, 297.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="98"><tspan x="98" y="17.648"><tspan x="9.57" text-anchor="start">nvidia-cuda-mps-server</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(518.5, 324.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="81.5"><tspan x="81.5" y="14.118"><tspan x="1.865" text-anchor="start">同 UID 客户端共享一个 server</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(561, 344.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="39"><tspan x="39" y="14.118"><tspan x="9" text-anchor="start">故障域边界</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(600, 235)"><path fill="none" stroke="#3370ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 46"/></g>
-<g id="o2:4" transform="translate(80, 425)"><rect x="0" y="0" width="220" height="84" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:8" transform="translate(123.5, 443.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="66.5"><tspan x="66.5" y="15.295"><tspan x="10.405" text-anchor="start">App A · UID 1000</tspan></tspan></text></g>
-<g id="c2:2" transform="translate(190, 369)"><path fill="none" stroke="#3370ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 410 0 L 0 52"/></g>
-<g id="o2:5" transform="translate(340, 425)"><rect x="0" y="0" width="220" height="84" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:9" transform="translate(383.5, 443.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="66.5"><tspan x="66.5" y="15.295"><tspan x="10.145" text-anchor="start">App B · UID 1000</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(450, 369)"><path fill="none" stroke="#3370ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 150 0 L 0 52"/></g>
-<g id="o2:6" transform="translate(600, 425)"><rect x="0" y="0" width="220" height="84" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:10" transform="translate(643, 443.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="67"><tspan x="67" y="15.295"><tspan x="10.805" text-anchor="start">App C · UID 1000</tspan></tspan></text></g>
-<g id="c2:4" transform="translate(600, 369)"><path fill="none" stroke="#3370ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 110 52"/></g>
-<g id="o2:7" transform="translate(860, 425)"><rect x="0" y="0" width="220" height="84" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:11" transform="translate(903, 443.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="67"><tspan x="67" y="15.295"><tspan x="10.43" text-anchor="start">App D · UID 2000</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(935, 470.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="35"><tspan x="35" y="14.118"><tspan x="0.21" text-anchor="start">(独立 server)</tspan></tspan></text></g>
-<g id="c2:5" transform="translate(600, 369)"><path fill="none" stroke="#3370ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 370 52"/></g>
-<g id="c2:6" transform="translate(220, 509)"><path fill="none" stroke="#f54a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 36"/></g>
-<g id="o2:8" transform="translate(80, 545)"><rect x="0" y="0" width="280" height="72" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:13" transform="translate(145.5, 557.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="74.5"><tspan x="74.5" y="15.295"><tspan x="13.805" text-anchor="start">故障域：同一 server</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(150.5, 582.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="69.5"><tspan x="69.5" y="14.118"><tspan x="0.41" text-anchor="start">任一 clients 故障影响其他</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(40, 657)"><rect x="0" y="0" width="1130" height="70" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:15" transform="translate(400.5, 681.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="204.5"><tspan x="204.5" y="17.648"><tspan x="40.95" text-anchor="start">GPU（132 SM / HBM / 拷贝引擎 共享，无隔离）</tspan></tspan></text></g>
-<g id="c2:7" transform="translate(190, 509)"><path fill="none" stroke="#ffba6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 144"/></g>
-<g id="c2:8" transform="translate(450, 509)"><path fill="none" stroke="#ffba6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 144"/></g>
-<g id="c2:9" transform="translate(710, 509)"><path fill="none" stroke="#ffba6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 144"/></g>
-<g id="c2:10" transform="translate(970, 509)"><path fill="none" stroke="#ffba6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 144"/></g>
-<g id="o2:10" transform="translate(40, 757)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:16" transform="translate(56, 766.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">故障域</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(56, 800.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">同 UID 客户端通过同一 MPS server 共享 GPU context，节省启动开销；但任一客户端故障会影响同 server 所有客户端，故生产环境按 UID 隔离 tenant</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(40, 861.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA MPS Architecture</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540">
+<rect x="0" y="0" width="1200" height="540" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">MIG 上线流程：Hopper 起重启后要重建</text>
+<text x="40" y="92" font-size="14" fill="#646A73">开 MIG、建实例、交给程序；A100 与 H100 在重置和持久性上不同</text>
+<rect x="40" y="140" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="69" cy="165" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="69" y="170" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="171" font-size="18" fill="#1F2329" font-weight="bold">停守护进程</text>
+<text x="56" y="201" font-size="14" fill="#646A73">停掉 DCGM 等持有驱动</text>
+<text x="56" y="224" font-size="14" fill="#646A73">句柄的进程</text>
+<polyline points="235,192 267,192" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,186 267,192 257,198" fill="#8F959E"/>
+<rect x="273" y="140" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="165" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="170" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="171" font-size="18" fill="#1F2329" font-weight="bold">开 MIG</text>
+<text x="289" y="201" font-size="14" fill="#646A73">nvidia-smi -i ＜卡＞</text>
+<text x="289" y="224" font-size="14" fill="#646A73">-mig 1</text>
+<polyline points="468,192 500,192" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,186 500,192 490,198" fill="#8F959E"/>
+<rect x="506" y="140" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="535" cy="165" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="535" y="170" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="171" font-size="18" fill="#1F2329" font-weight="bold">建 GI 和 CI</text>
+<text x="522" y="201" font-size="14" fill="#646A73">nvidia-smi mig -cgi</text>
+<text x="522" y="224" font-size="14" fill="#646A73">＜profile＞ -C</text>
+<polyline points="700,192 732,192" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,186 732,192 722,198" fill="#8F959E"/>
+<rect x="738" y="140" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="767" cy="165" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="767" y="170" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="171" font-size="18" fill="#1F2329" font-weight="bold">核对</text>
+<text x="754" y="201" font-size="14" fill="#646A73">nvidia-smi -L 看</text>
+<text x="754" y="224" font-size="14" fill="#646A73">MIG 设备和 UUID</text>
+<polyline points="933,192 965,192" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,186 965,192 955,198" fill="#8F959E"/>
+<rect x="971" y="140" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="165" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="170" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="171" font-size="18" fill="#1F2329" font-weight="bold">交给程序</text>
+<text x="987" y="201" font-size="14" fill="#646A73">CUDA_VISIBLE_DEVICES</text>
+<text x="987" y="224" font-size="14" fill="#646A73">写 CI 的 UUID</text>
+<rect x="40" y="284" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">A100、A30</text>
+<text x="56" y="346" font-size="14" fill="#646A73">开 MIG 要重置 GPU</text>
+<text x="56" y="369" font-size="14" fill="#646A73">模式记在 InfoROM，重启后保留</text>
+<rect x="612" y="284" width="548" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="316" font-size="18" fill="#1F2329" font-weight="bold">Hopper 及以后</text>
+<text x="628" y="346" font-size="14" fill="#646A73">开 MIG 不需要重置</text>
+<text x="628" y="369" font-size="14" fill="#646A73">驱动重新加载或重启后 MIG 关闭</text>
+<rect x="40" y="425" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="454" font-size="15" fill="#1F2329">R570 起一个进程可跨多个 GI，每个 GI 只枚举一个 CI；所有卡合计最多 64 个 MIG 实例；跨 GI 不支持 CUDA IPC。</text>
+<text x="40" y="516" font-size="12" fill="#646A73">来源：NVIDIA Multi-Instance GPU User Guide, Getting Started with MIG、Deployment Considerations、MIG Device Names</text>
 </svg>

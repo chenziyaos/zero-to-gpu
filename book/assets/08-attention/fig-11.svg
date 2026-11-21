@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430">
+<rect x="0" y="0" width="1200" height="430" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">选注意力 kernel：先确认实际跑的是谁，再按场景换</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每一行都要在目标卡、目标形状上实测</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">场景</text>
+<text x="354" y="166" font-size="14" fill="#1F2329" font-weight="bold">先试</text>
+<text x="770" y="166" font-size="14" fill="#1F2329" font-weight="bold">核对</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">标准因果注意力</text>
+<text x="354" y="206" font-size="14" fill="#1F2329">SDPA + sdpa_kernel 锁定</text>
+<text x="770" y="206" font-size="14" fill="#1F2329">有没有退回 C++ 实现</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">H100 训练</text>
+<text x="354" y="244" font-size="14" fill="#1F2329">FlashAttention-3</text>
+<text x="770" y="244" font-size="14" fill="#1F2329">实测利用率</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">B200 训练</text>
+<text x="354" y="282" font-size="14" fill="#1F2329">FlashAttention-4 或 cuDNN</text>
+<text x="770" y="282" font-size="14" fill="#1F2329">目标形状上对比</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">自定义掩码、偏置</text>
+<text x="354" y="320" font-size="14" fill="#1F2329">FlexAttention</text>
+<text x="770" y="320" font-size="14" fill="#1F2329">与最快实现的差距</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">推理 decode</text>
+<text x="354" y="358" font-size="14" fill="#1F2329">沿 KV 切分的 kernel</text>
+<text x="770" y="358" font-size="14" fill="#1F2329">达到的带宽</text>
+<text x="40" y="406" font-size="12" fill="#646A73">来源：PyTorch SDPA 文档；PyTorch Blog FlexAttention；FlashAttention-3、FlashAttention-4 论文；Flash-Decoding 博客</text>
+</svg>

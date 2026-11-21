@@ -1,76 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="1020"
-     viewBox="-20 -20 1240 1020">
-<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="980" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">NVL72 柜内布局：18 compute tray + 9 NVSwitch tray + 铜背板</tspan></tspan></text></g>
-<g id="a1:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">42U 标准机柜；~120-150 kW；液冷；5000+ 根铜缆替代 IB 线柜</tspan></tspan></text></g>
-<g id="o1:2" transform="translate(70, 190)"><rect x="0" y="0" width="280" height="560" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:3" transform="translate(125.5, 196.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="84.5"><tspan x="84.5" y="15.295"><tspan x="17.205" text-anchor="start">NVL72 机柜（侧视图）</tspan></tspan></text></g>
-<g id="o1:3" transform="translate(90, 230)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:4" transform="translate(172.5, 230.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="37.5"><tspan x="37.5" y="14.118"><tspan x="-3.55" text-anchor="start">compute ×1-3</tspan></tspan></text></g>
-<g id="o1:4" transform="translate(90, 254)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:5" transform="translate(90, 278)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:6" transform="translate(90, 302)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:5" transform="translate(172.5, 302.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="37.5"><tspan x="37.5" y="14.118"><tspan x="-3.55" text-anchor="start">compute ×4-6</tspan></tspan></text></g>
-<g id="o1:7" transform="translate(90, 326)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:8" transform="translate(90, 350)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:9" transform="translate(90, 374)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:6" transform="translate(172.5, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="37.5"><tspan x="37.5" y="14.118"><tspan x="-3.55" text-anchor="start">compute ×7-9</tspan></tspan></text></g>
-<g id="o1:10" transform="translate(90, 398)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:11" transform="translate(90, 422)"><rect x="0" y="0" width="240" height="22" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:12" transform="translate(90, 466)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:7" transform="translate(169.5, 466.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="14.118"><tspan x="-2.22" text-anchor="start">NVSwitch ×1-3</tspan></tspan></text></g>
-<g id="o1:13" transform="translate(90, 490)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:14" transform="translate(90, 514)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:15" transform="translate(90, 538)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:8" transform="translate(169.5, 538.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="14.118"><tspan x="-2.22" text-anchor="start">NVSwitch ×4-6</tspan></tspan></text></g>
-<g id="o1:16" transform="translate(90, 562)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:17" transform="translate(90, 586)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:18" transform="translate(90, 610)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:9" transform="translate(169.5, 610.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="14.118"><tspan x="-2.22" text-anchor="start">NVSwitch ×7-9</tspan></tspan></text></g>
-<g id="o1:19" transform="translate(90, 634)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:20" transform="translate(90, 658)"><rect x="0" y="0" width="240" height="22" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:21" transform="translate(90, 702)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:10" transform="translate(191.5, 702.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="18.5"><tspan x="18.5" y="14.118"><tspan x="0.04" text-anchor="start">c10-12</tspan></tspan></text></g>
-<g id="o1:22" transform="translate(90, 726)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:23" transform="translate(90, 750)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:24" transform="translate(90, 774)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:11" transform="translate(191.5, 774.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="18.5"><tspan x="18.5" y="14.118"><tspan x="0.04" text-anchor="start">c13-15</tspan></tspan></text></g>
-<g id="o1:25" transform="translate(90, 798)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:26" transform="translate(90, 822)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:27" transform="translate(90, 846)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:12" transform="translate(191.5, 846.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="18.5"><tspan x="18.5" y="14.118"><tspan x="0.04" text-anchor="start">c16-18</tspan></tspan></text></g>
-<g id="o1:28" transform="translate(90, 870)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="o1:29" transform="translate(90, 894)"><rect x="0" y="0" width="240" height="22" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a1:13" transform="translate(159, 439.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="51"><tspan x="51" y="14.118"><tspan x="6.63" text-anchor="start">↑ compute ×9</tspan></tspan></text></g>
-<g id="a1:14" transform="translate(155.5, 675.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="54.5"><tspan x="54.5" y="14.118"><tspan x="7.94" text-anchor="start">↑ NVSwitch ×9</tspan></tspan></text></g>
-<g id="o1:30" transform="translate(380, 190)"><rect x="0" y="0" width="720" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:15" transform="translate(396, 196.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">compute tray</tspan></tspan></text></g>
-<g id="a1:16" transform="translate(396, 217.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">18 个 × 4 superchip = 72 superchip</tspan></tspan></text></g>
-<g id="o1:31" transform="translate(380, 246)"><rect x="0" y="0" width="720" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:17" transform="translate(396, 252.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">GPU 总数</tspan></tspan></text></g>
-<g id="a1:18" transform="translate(396, 273.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">144 B300 (72 活跃 + 72 备用）</tspan></tspan></text></g>
-<g id="o1:32" transform="translate(380, 302)"><rect x="0" y="0" width="720" height="50" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:19" transform="translate(396, 308.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">NVSwitch tray</tspan></tspan></text></g>
-<g id="a1:20" transform="translate(396, 329.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">9 个 × 6 芯片</tspan></tspan></text></g>
-<g id="o1:33" transform="translate(380, 358)"><rect x="0" y="0" width="720" height="50" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:21" transform="translate(396, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Fabric 聚合</tspan></tspan></text></g>
-<g id="a1:22" transform="translate(396, 385.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">130 TB/s 全互联</tspan></tspan></text></g>
-<g id="o1:34" transform="translate(380, 414)"><rect x="0" y="0" width="720" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:23" transform="translate(396, 420.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">铜背板（midplane）</tspan></tspan></text></g>
-<g id="a1:24" transform="translate(396, 441.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">5000+ 根铜缆</tspan></tspan></text></g>
-<g id="o1:35" transform="translate(380, 470)"><rect x="0" y="0" width="720" height="50" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:25" transform="translate(396, 476.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">功耗</tspan></tspan></text></g>
-<g id="a1:26" transform="translate(396, 497.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">~120-150 kW / 柜</tspan></tspan></text></g>
-<g id="o1:36" transform="translate(380, 526)"><rect x="0" y="0" width="720" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:27" transform="translate(396, 532.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">散热</tspan></tspan></text></g>
-<g id="a1:28" transform="translate(396, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">液冷（CPU+GPU+Switch 三级）</tspan></tspan></text></g>
-<g id="o1:37" transform="translate(380, 582)"><rect x="0" y="0" width="720" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:29" transform="translate(396, 588.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">替代 IB</tspan></tspan></text></g>
-<g id="a1:30" transform="translate(396, 609.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">省约 20 kW / 柜（第三方估算）</tspan></tspan></text></g>
-<g id="o1:38" transform="translate(40, 780)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:31" transform="translate(56, 789.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本质</tspan></tspan></text></g>
-<g id="a1:32" transform="translate(56, 823.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">NVL72 = 一个 NVLink 域 = 一个 cache consistent 池；对工程侧 = TP/EP 上限推到 72 + MoE 跨卡 all-to-all 不上 IB</tspan></tspan></text></g>
-<g id="a1:33" transform="translate(40, 941.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA NVL72 Reference Architecture</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">C2C 比 PCIe Gen5 宽 7 倍，LPDDR5X 比 HBM 慢约 31.25 倍</text>
+<text x="40" y="92" font-size="14" fill="#646A73">一个 GB200 superchip：1 颗 Grace + 2 张 Blackwell</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">部件</text>
+<text x="345" y="176" font-size="14" fill="#1F2329" font-weight="bold">容量</text>
+<text x="612" y="176" font-size="14" fill="#1F2329" font-weight="bold">带宽</text>
+<text x="879" y="176" font-size="14" fill="#1F2329" font-weight="bold">角色</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">HBM3E（两张 GPU）</text>
+<text x="345" y="216" font-size="14" fill="#1F2329">372 GB</text>
+<text x="612" y="216" font-size="14" fill="#1F2329">16 TB/s</text>
+<text x="879" y="216" font-size="14" fill="#1F2329">活跃数据</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">LPDDR5X（Grace）</text>
+<text x="345" y="254" font-size="14" fill="#1F2329">最多 480 GB</text>
+<text x="612" y="254" font-size="14" fill="#1F2329">最多 512 GB/s</text>
+<text x="879" y="254" font-size="14" fill="#1F2329">停放层</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">NVLink-C2C</text>
+<text x="345" y="292" font-size="14" fill="#1F2329"></text>
+<text x="612" y="292" font-size="14" fill="#1F2329">900 GB/s 双向</text>
+<text x="879" y="292" font-size="14" fill="#1F2329">CPU 与 GPU 一致互连</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">对照：PCIe Gen5</text>
+<text x="345" y="330" font-size="14" fill="#1F2329"></text>
+<text x="612" y="330" font-size="14" fill="#1F2329">128 GB/s 双向</text>
+<text x="879" y="330" font-size="14" fill="#1F2329">H100 服务器</text>
+<rect x="40" y="374" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="403" font-size="15" fill="#1F2329">整柜 13.4 TB HBM + 17 TB LPDDR5X = 30.4 TB，博客称 30 TB 统一内存；统一地址不等于同样的带宽。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：GB200 NVL72 规格页；NVIDIA 技术博客；GH200 规格页</text>
 </svg>
