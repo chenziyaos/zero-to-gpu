@@ -4,7 +4,7 @@
 
 **使用方式**：第 1 章讲 CUDA 程序依赖的几层和启动时的初始化开销。第 2 到 4 章讲版本栈：三种兼容、前向兼容包、容器。第 5 到 7 章讲 Xid：怎么读、应用类的 13 和 31、显存类错误。第 8 章讲 DCGM 诊断，第 9 章给清单和自测。
 
-**代码**：zero-to-gpu/09-driver/ 下的 sim_compat.py、sim_xid.py、test_driver.py 只需 Python，check_node.sh 需要 GPU 节点。sim_xid.py 在 Python 3.9.6 上导入即报错，在 3.14 上能跑；兼容类型命名、两组版本组合和 Xid 日志格式与 NVIDIA 文档不符，第 9 章逐条说明。
+**代码**：zero-to-gpu/09-driver/ 下的 sim_compat.py、sim_xid.py、test_driver.py 只需 Python，check_node.sh 需要 GPU 节点。兼容类型命名、两组版本组合和 Xid 日志格式与 NVIDIA 文档不符，第 9 章逐条说明。
 
 <b>🧭 主线位置</b>：GPU-00（[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md)）建立了时间账 T = T_compute + W_mem + W_host + W_comm + W_idle。GPU-01 到 GPU-08 处理的都是 kernel 跑起来以后的等待，GPU-08（[GPU-08｜硬件｜注意力内核](./08-attention.md)）讲完了注意力内核。本篇进入系统层，处理 W_idle 里最贵的一类：环境不配套导致作业起不来，GPU 故障导致作业中断、节点下线。环境稳定之后，下一个问题是作业内部的显存分配，交给 GPU-10（[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)）。
 
@@ -373,7 +373,7 @@ dcgmi diag 用 -r 指定级别，高级别包含低级别的全部测试[[11]](h
 
 ### 代码练习
 
-zero-to-gpu/09-driver/ 下有 sim_compat.py、sim_xid.py、test_driver.py 和 check_node.sh。先说运行环境：README 写的是 Python 3.10 及以上，但在系统自带的 Python 3.9.6 上，test_driver.py 一导入 sim_xid.py 就报 `NameError: name 'Tuple' is not defined`，原因是 sim_xid.py 用了 Tuple 却没有导入。主编在 Python 3.14 上能跑通，11 条测试全部通过。下面的输出都来自 3.14。模拟器的规则有几处和正文核实过的文档不符：
+zero-to-gpu/09-driver/ 下有 sim_compat.py、sim_xid.py、test_driver.py 和 check_node.sh。README 写的是 Python 3.10 及以上，在系统自带的 Python 3.9.6 上也能跑，11 条测试全部通过。模拟器的规则有几处和正文核实过的文档不符：
 
 - `python3 sim_compat.py jumps`：把驱动不低于运行时的组合都标成 forward（前向兼容）。按 NVIDIA 的定义，驱动更新是向后兼容；前向兼容专指跨主版本、需要兼容包的情况[[2]](https://docs.nvidia.com/deploy/cuda-compatibility/why-cuda-compatibility.html)。
 - 同一命令里 “R515 + libcudart 11.8” 被标成“同大版本前向兼容”。这是次版本兼容（CUDA 11.x 要求 450 到 525 之间的驱动）[[3]](https://docs.nvidia.com/deploy/cuda-compatibility/minor-version-compatibility.html)，而且不能用 PTX JIT，模拟器没有提示这个限制。
@@ -413,7 +413,7 @@ test_driver.py 全部通过，只说明代码和它自己的规则一致。
 
 环境对上、故障能处置之后，作业才算真正在 GPU 上稳定运行。接下来的等待发生在作业内部：显存怎么分配、碎片怎么来、OOM 之后怎么办。GPU-10（[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)）讲显存管理。
 
-> 🔑 **本章要点**：上线前核对九项：版本记录、持久化、兼容类型、前向兼容矩阵、容器约束、Xid 采集与处置、应用类 Xid 调试、显存错误分级、恢复后诊断。代码练习里的兼容类型命名、R515 与 R550 两个组合、Xid 日志格式与 Python 版本要求和文档不符，以正文为准。这一章是五步闭环的“复测”：每次升级驱动、换镜像或处置 Xid 后，按清单重跑。
+> 🔑 **本章要点**：上线前核对九项：版本记录、持久化、兼容类型、前向兼容矩阵、容器约束、Xid 采集与处置、应用类 Xid 调试、显存错误分级、恢复后诊断。代码练习里的兼容类型命名、R515 与 R550 两个组合、Xid 日志格式和文档不符，以正文为准。这一章是五步闭环的“复测”：每次升级驱动、换镜像或处置 Xid 后，按清单重跑。
 
 ## 参考文献
 
