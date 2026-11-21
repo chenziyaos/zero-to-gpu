@@ -1,37 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="700"
-     viewBox="-20 -20 1240 700">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="660" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">MoE 在等什么：时间账拆解</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">纵轴：耗时占比；横轴：通信、计算、等待分解</tspan></tspan></text></g>
-<g id="a3:3" transform="translate(40, 165.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">单次前向通过的时间分解（总 ~5-7 ms）</tspan></tspan></text></g>
-<g id="d3:1" transform="translate(39.5, 219.5)"><defs><symbol id="svgicon-d3-1" viewBox="0 0 5 57"><g transform="translate(-39.5 -219.5)"><rect x="40" y="220" width="4" height="56" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1" /></g></symbol></defs><use href="#svgicon-d3-1" x="0" y="0" width="5" height="57"/></g>
-<g id="o3:2" transform="translate(44, 220)"><rect x="0" y="0" width="599" height="56" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:4" transform="translate(316.5, 230.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="26.5"><tspan x="26.5" y="15.295"><tspan x="6.755" text-anchor="start">GEMM</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(321, 251.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="22"><tspan x="22" y="14.118"><tspan x="0.76" text-anchor="start">5000 µs</tspan></tspan></text></g>
-<g id="d3:2" transform="translate(642.5, 219.5)"><defs><symbol id="svgicon-d3-2" viewBox="0 0 5 57"><g transform="translate(-642.5 -219.5)"><rect x="643" y="220" width="4" height="56" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1" /></g></symbol></defs><use href="#svgicon-d3-2" x="0" y="0" width="5" height="57"/></g>
-<g id="o3:3" transform="translate(647, 220)"><rect x="0" y="0" width="479" height="56" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:6" transform="translate(828, 230.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="15.295"><tspan x="12.5" text-anchor="start">等最慢（不均）</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(864, 251.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="22"><tspan x="22" y="14.118"><tspan x="0.76" text-anchor="start">4000 µs</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(40, 350)"><rect x="0" y="0" width="268" height="130" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:8" transform="translate(122.5, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="51.5"><tspan x="51.5" y="15.295"><tspan x="9.395" text-anchor="start">Expert GEMM</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(127.5, 390.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="46.5"><tspan x="46.5" y="23.53"><tspan x="9.04" text-anchor="start">5000 µs</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(161.5, 429.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="12.5"><tspan x="12.5" y="14.118"><tspan x="0.315" text-anchor="start">98%</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(326, 350)"><rect x="0" y="0" width="268" height="130" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:11" transform="translate(427, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="33"><tspan x="33" y="15.295"><tspan x="5.155" text-anchor="start">Dispatch</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(427, 390.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="33"><tspan x="33" y="23.53"><tspan x="7.34" text-anchor="start">10 µs</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(445, 429.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15"><tspan x="15" y="14.118"><tspan x="0.145" text-anchor="start">＜1%</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(612, 350)"><rect x="0" y="0" width="268" height="130" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:14" transform="translate(712, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="34"><tspan x="34" y="15.295"><tspan x="5.295" text-anchor="start">Combine</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(713, 390.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="33"><tspan x="33" y="23.53"><tspan x="7.34" text-anchor="start">10 µs</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(731, 429.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15"><tspan x="15" y="14.118"><tspan x="0.145" text-anchor="start">＜1%</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(898, 350)"><rect x="0" y="0" width="268" height="130" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:17" transform="translate(974, 364.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="15.295"><tspan x="12.5" text-anchor="start">等最慢（不均）</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(991.5, 390.47)"><text font-size="20" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="23.53"><tspan x="8.14" text-anchor="start">2-4 ms</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(999.5, 429.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="32.5"><tspan x="32.5" y="14.118"><tspan x="1.56" text-anchor="start">50% GEMM</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(40, 520)"><rect x="0" y="0" width="1120" height="82" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:20" transform="translate(56, 529.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">关键</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(56, 563.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">计算主导：GEMM 98%；通信微小：dispatch+combine ＜1%；不均损失最大：等最慢 2-4ms ≈ 50% GEMM 时间</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(40, 621.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 sim_a2a.py 与 sim_imbalance.py 输出</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">MoE：省下计算，多出 all-to-all 和等最忙的专家</text>
+<text x="40" y="92" font-size="14" fill="#646A73">先减字节，再重叠，再均衡；推理时靠冗余专家</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">路由</text>
+<text x="56" y="211" font-size="14" fill="#646A73">每个 token 选 k 个专家</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">dispatch</text>
+<text x="347" y="211" font-size="14" fill="#646A73">all-to-all 发出（第 2 到 5</text>
+<text x="347" y="234" font-size="14" fill="#646A73">章）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">专家计算</text>
+<text x="638" y="211" font-size="14" fill="#646A73">等最忙的专家（第 6 到 8 章）</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">combine</text>
+<text x="929" y="211" font-size="14" fill="#646A73">all-to-all 收回</text>
+<rect x="40" y="284" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">T_compute 变小</text>
+<text x="56" y="346" font-size="14" fill="#646A73">DeepSeek-V3：671B 中激活 37B</text>
+<text x="56" y="369" font-size="14" fill="#646A73">Mixtral：47B 中激活 13B</text>
+<rect x="421" y="284" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="437" y="316" font-size="18" fill="#1F2329" font-weight="bold">W_comm 多出 all-to-all</text>
+<text x="437" y="346" font-size="14" fill="#646A73">节点受限路由 + FP8 dispatch</text>
+<text x="437" y="369" font-size="14" fill="#646A73">DualPipe 重叠，20 个 SM</text>
+<rect x="803" y="284" width="357" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="819" y="316" font-size="18" fill="#1F2329" font-weight="bold">W_idle 多出等专家</text>
+<text x="819" y="346" font-size="14" fill="#646A73">训练：偏置均衡</text>
+<text x="819" y="369" font-size="14" fill="#646A73">推理：冗余专家 + EPLB</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：DeepSeek-V3 技术报告；Switch Transformer；MegaBlocks；Loss-Free Balancing；EPLB</text>
 </svg>

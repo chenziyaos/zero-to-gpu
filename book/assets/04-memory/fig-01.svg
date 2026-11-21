@@ -1,56 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="720"
-     viewBox="-20 -20 1240 720">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="680" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">GPU 访存层级：容量、延迟与搬运粒度</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">从外向内：容量递减、延迟递增、粒度多样；本篇聚焦 32 字节 sector 与 bank 冲突</tspan></tspan></text></g>
-<g id="a2:3" transform="translate(209, 121.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="39"><tspan x="39" y="16.471"><tspan x="11" text-anchor="start">层级</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(276, 121.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">容量</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(496, 121.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">延迟</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(716, 121.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">搬运粒度</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 150)"><rect x="0" y="0" width="208" height="60" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:7" transform="translate(56, 168.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">HBM</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(260, 150)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:8" transform="translate(276, 168.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">80 GB</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(480, 150)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:9" transform="translate(496, 168.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">479 cy</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(700, 150)"><rect x="0" y="0" width="308" height="60" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:10" transform="translate(716, 168.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">32 B sector</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(40, 222)"><rect x="0" y="0" width="208" height="60" fill="#fff5eb" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:11" transform="translate(56, 240.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L2 Cache</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(260, 222)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:12" transform="translate(276, 240.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">50–96 MB</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(480, 222)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:13" transform="translate(496, 240.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">200 cy</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(700, 222)"><rect x="0" y="0" width="308" height="60" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:14" transform="translate(716, 240.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">128 B line</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 294)"><rect x="0" y="0" width="208" height="60" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:15" transform="translate(56, 312.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L1 Cache</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(260, 294)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:16" transform="translate(276, 312.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">32–128 KB</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(480, 294)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:17" transform="translate(496, 312.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">100 cy</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(700, 294)"><rect x="0" y="0" width="308" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:18" transform="translate(716, 312.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">128 B line</tspan></tspan></text></g>
-<g id="o2:14" transform="translate(40, 366)"><rect x="0" y="0" width="208" height="60" fill="#f0fbef" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:19" transform="translate(56, 384.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">Shared Mem</tspan></tspan></text></g>
-<g id="o2:15" transform="translate(260, 366)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:20" transform="translate(276, 384.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">192 KB</tspan></tspan></text></g>
-<g id="o2:16" transform="translate(480, 366)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:21" transform="translate(496, 384.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">29 cy</tspan></tspan></text></g>
-<g id="o2:17" transform="translate(700, 366)"><rect x="0" y="0" width="308" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:22" transform="translate(716, 384.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">32 bank</tspan></tspan></text></g>
-<g id="o2:18" transform="translate(40, 438)"><rect x="0" y="0" width="208" height="60" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:23" transform="translate(56, 456.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">Registers</tspan></tspan></text></g>
-<g id="o2:19" transform="translate(260, 438)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:24" transform="translate(276, 456.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">256 KB</tspan></tspan></text></g>
-<g id="o2:20" transform="translate(480, 438)"><rect x="0" y="0" width="208" height="60" fill="#ffffff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:25" transform="translate(496, 456.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">1 cy</tspan></tspan></text></g>
-<g id="o2:21" transform="translate(700, 438)"><rect x="0" y="0" width="308" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:26" transform="translate(716, 456.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">no conflict</tspan></tspan></text></g>
-<g id="o2:22" transform="translate(40, 534)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:27" transform="translate(56, 543.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本篇要把数据搬近</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(56, 577.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">距离 SM 越近，容量越小延迟越低；本篇第 1-4 章就是要把数据尽量放近（寄存器/L1/SMEM），同时让搬运按 32 B sector 粒度合并</tspan></tspan></text></g>
-<g id="a2:29" transform="translate(40, 641.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA CUDA 编程指南 5.3；Luo et al. (2024) H800 延迟测量</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470">
+<rect x="0" y="0" width="1200" height="470" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">访存层级：延迟差一个数量级，搬运粒度各不相同</text>
+<text x="40" y="92" font-size="14" fill="#646A73">H800 PCIe 上的实测延迟（时钟周期）和 H100 的容量；粒度一列是本篇要算的东西</text>
+<rect x="40" y="130" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="156" font-size="14" fill="#1F2329" font-weight="bold">层级</text>
+<text x="231" y="156" font-size="14" fill="#1F2329" font-weight="bold">H800 延迟（周期）</text>
+<text x="455" y="156" font-size="14" fill="#1F2329" font-weight="bold">H100 容量</text>
+<text x="702" y="156" font-size="14" fill="#1F2329" font-weight="bold">搬运粒度</text>
+<rect x="40" y="172" width="1120" height="38" rx="0" fill="#FEF1F1" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="196" font-size="14" fill="#1F2329" font-weight="bold">全局内存（HBM）</text>
+<text x="231" y="196" font-size="14" fill="#1F2329">478.8</text>
+<text x="455" y="196" font-size="14" fill="#1F2329">80 GB（SXM）</text>
+<text x="702" y="196" font-size="14" fill="#1F2329">32 字节事务（sector）</text>
+<rect x="40" y="210" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="234" font-size="14" fill="#1F2329" font-weight="bold">L2 缓存</text>
+<text x="231" y="234" font-size="14" fill="#1F2329">263.0</text>
+<text x="455" y="234" font-size="14" fill="#1F2329">50 MB，全卡共享</text>
+<text x="702" y="234" font-size="14" fill="#1F2329">128 字节缓存行 = 4 个 sector</text>
+<rect x="40" y="248" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="272" font-size="14" fill="#1F2329" font-weight="bold">L1 缓存</text>
+<text x="231" y="272" font-size="14" fill="#1F2329">40.7</text>
+<text x="455" y="272" font-size="14" fill="#1F2329">与共享内存共用每 SM 的片上存储</text>
+<text x="702" y="272" font-size="14" fill="#1F2329">128 字节缓存行</text>
+<rect x="40" y="286" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="310" font-size="14" fill="#1F2329" font-weight="bold">共享内存</text>
+<text x="231" y="310" font-size="14" fill="#1F2329">29.0</text>
+<text x="455" y="310" font-size="14" fill="#1F2329">每 SM 最多 228 KB</text>
+<text x="702" y="310" font-size="14" fill="#1F2329">32 个 bank，每 bank 每周期 32 位</text>
+<rect x="40" y="354" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="383" font-size="15" fill="#1F2329">延迟可以靠更多在途请求藏住（GPU-01），带宽藏不住：多搬的每个 sector 都实打实占用带宽。</text>
+<text x="40" y="446" font-size="12" fill="#646A73">来源：Luo et al. 2024 表 IV；NVIDIA Hopper Tuning Guide；CUDA Programming Guide</text>
 </svg>

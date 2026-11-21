@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">这一代主要压小解码的 W_mem 和单卡以外的 W_idle</text>
+<text x="40" y="92" font-size="14" fill="#646A73">时间账五项与本篇各章</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">账项</text>
+<text x="304" y="176" font-size="14" fill="#1F2329" font-weight="bold">这一代的变化</text>
+<text x="983" y="176" font-size="14" fill="#1F2329" font-weight="bold">章</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">W_mem</text>
+<text x="304" y="216" font-size="14" fill="#1F2329">HBM 2.40 倍；NVFP4 权重、FP8/FP4 KV</text>
+<text x="983" y="216" font-size="14" fill="#1F2329">2、3、5</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">T_compute</text>
+<text x="304" y="254" font-size="14" fill="#1F2329">FP8 稠密 3.50 倍，主要给 prefill；CPX</text>
+<text x="983" y="254" font-size="14" fill="#1F2329">2、4</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">W_comm</text>
+<text x="304" y="292" font-size="14" fill="#1F2329">NVLink 6 单卡 3 TB/s；DeepEP；NIXL</text>
+<text x="983" y="292" font-size="14" fill="#1F2329">5、6、8</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">W_idle</text>
+<text x="304" y="330" font-size="14" fill="#1F2329">分离部署、KV 感知路由、Planner</text>
+<text x="983" y="330" font-size="14" fill="#1F2329">6、7</text>
+<rect x="40" y="344" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="368" font-size="14" fill="#1F2329" font-weight="bold">W_host</text>
+<text x="304" y="368" font-size="14" fill="#1F2329">Vera CPU 机柜给 Agent 环境</text>
+<text x="983" y="368" font-size="14" fill="#1F2329">7</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：本篇第 1 到 8 章所引规格与文档；主编归纳</text>
+</svg>

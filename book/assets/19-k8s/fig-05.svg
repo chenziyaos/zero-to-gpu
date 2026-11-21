@@ -1,36 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="800"
-     viewBox="-20 -20 1240 800">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="760" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">PAI 集群万卡规模：多卡作业排队时间比单卡长 100 倍</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">碎片与 gang scheduling 等待导致多卡作业 P90 排队延迟达 2.3 小时</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 165)"><rect x="0" y="0" width="540" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:3" transform="translate(56, 176.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">PAI 集群</tspan></tspan></text></g>
-<g id="a3:4" transform="translate(56, 207.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">6000+ GPU</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(56, 229.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">支持 GPU 共享</tspan></tspan></text></g>
-<g id="a3:6" transform="translate(56, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">多卡占比 45%</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(620, 165)"><rect x="0" y="0" width="540" height="140" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:7" transform="translate(636, 176.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">关键指标</tspan></tspan></text></g>
-<g id="a3:8" transform="translate(636, 207.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">单卡排队中位数 ＜ 100 s</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(636, 229.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">多卡排队中位数 ＞ 1000 s</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(636, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">多卡 P90 排队时间：8286 s</tspan></tspan></text></g>
-<g id="a3:11" transform="translate(40, 354.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Single-GPU 中位</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(220, 340)"><rect x="0" y="0" width="354" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:12" transform="translate(586, 354.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">100 seconds</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(40, 422.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Multi-GPU 中位</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(220, 408)"><rect x="0" y="0" width="531" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:14" transform="translate(763, 422.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">1000 seconds</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(40, 490.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Multi-GPU P90</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(220, 476)"><rect x="0" y="0" width="694" height="50" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:16" transform="translate(926, 490.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">8286 seconds（2.3 小时）</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(40, 584)"><rect x="0" y="0" width="550" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:17" transform="translate(56, 595.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">参考数据</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(56, 626.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· Philly（Microsoft）：碎片 50%，多卡排队 1 小时</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(56, 648.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· PAI（阿里）：多卡 P90 排队 8286 秒 ≈ 2.3 小时</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(630, 584)"><rect x="0" y="0" width="550" height="110" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:20" transform="translate(646, 595.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">根本原因</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(646, 626.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">1. 碎片：小作业独占，多卡作业找不到连续空槽</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(646, 648.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">2. Gang scheduling：部分 Pod 分配失败，整个作业被卡</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(40, 721.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：MLaaS in the Wild；PAI trace</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 550" width="1200" height="550">
+<rect x="0" y="0" width="1200" height="550" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">拓扑感知分三层：NVSwitch 机内全互联，要管的是 NUMA 和跨机</text>
+<text x="40" y="92" font-size="14" fill="#646A73">配套代码把 H100 8 卡建成双环，与 DGX H100 的 4 个 NVSwitch 不符</text>
+<rect x="40" y="150" width="357" height="150" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">机内 GPU 之间</text>
+<text x="56" y="211" font-size="14" fill="#646A73">4 个 NVSwitch</text>
+<text x="56" y="234" font-size="14" fill="#646A73">900 GB/s GPU 间带宽</text>
+<text x="56" y="257" font-size="14" fill="#646A73">任意两卡一跳相连</text>
+<text x="56" y="280" font-size="14" fill="#646A73">挑哪几张卡差别不大</text>
+<rect x="421" y="150" width="357" height="150" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="437" y="181" font-size="18" fill="#1F2329" font-weight="bold">节点内 NUMA</text>
+<text x="437" y="211" font-size="14" fill="#646A73">Topology Manager</text>
+<text x="437" y="234" font-size="14" fill="#646A73">默认 none 不对齐</text>
+<text x="437" y="257" font-size="14" fill="#646A73">single-numa-node 不满足就拒</text>
+<text x="437" y="280" font-size="14" fill="#646A73">超过 8 个 NUMA 默认不启用</text>
+<rect x="803" y="150" width="357" height="150" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="819" y="181" font-size="18" fill="#1F2329" font-weight="bold">跨机</text>
+<text x="819" y="211" font-size="14" fill="#646A73">同机架带宽更好</text>
+<text x="819" y="234" font-size="14" fill="#646A73">Kueue required-topology</text>
+<text x="819" y="257" font-size="14" fill="#646A73">Llama 3 聚合层 1:7</text>
+<text x="819" y="280" font-size="14" fill="#646A73">调度器按拓扑优化</text>
+<text x="268" y="359" font-size="14" fill="#1F2329" text-anchor="end">8 卡作业平均利用率</text>
+<rect x="280" y="340" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="280" y="340" width="398" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="686" y="359" font-size="13" fill="#646A73">56.9%</text>
+<text x="268" y="401" font-size="14" fill="#1F2329" text-anchor="end">16 卡作业平均利用率</text>
+<rect x="280" y="382" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="280" y="382" width="240" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="528" y="401" font-size="13" fill="#646A73">34.3%</text>
+<rect x="40" y="438" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="467" font-size="15" fill="#1F2329">Philly 的建议：训练作业跑得久，用排队时间换局部性。</text>
+<text x="40" y="526" font-size="12" fill="#646A73">来源：DGX H100 用户指南；Kubernetes Topology Manager 文档；Kueue TAS 文档；Llama 3 论文；Philly 论文</text>
 </svg>

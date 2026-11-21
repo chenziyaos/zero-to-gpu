@@ -1,37 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="770"
-     viewBox="-20 -20 1240 770">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="730" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Nsight Systems 三张统计表：核函数 / 数据搬运 / 间隙</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">左中右三列；每张表回答一个诊断问题</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 170)"><rect x="0" y="0" width="360" height="200" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">表 1 · kern_sum（核函数）</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Kernel: volta_fp32_gemm_kern (3 次, 4191 ms</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">)</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Kernel: volta_fp32_scale_ker (1 次, 568 ms)</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(56, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">回答：哪个 kernel 最耗时？</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(56, 322.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">→ 找到热点核（gemm），进 ncu 深挖</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(420, 170)"><rect x="0" y="0" width="360" height="200" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:10" transform="translate(436, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">表 2 · mem_time_sum（搬运）</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(436, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">H2D: 1.8 GB, 120 ms</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(436, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">D2H: 0.9 GB, 60 ms</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(436, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">回答：数据搬运占多少时间？</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(436, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">→ 搬运 180 ms 占总时 27.4%，可优化</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(800, 170)"><rect x="0" y="0" width="360" height="200" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:16" transform="translate(816, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">表 3 · 间隙分类（留空 ＞ 100 μs）</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(816, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Host Sync: 42 次, 均 15.5 μs</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(816, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Kernel Launch: 150 次, 均 8.2 μs</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(816, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">CPU Exec: 35 次, 均 5.1 μs</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(816, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">回答：GPU 有多少时间空转？</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(816, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">→ 合计 2.1 ms（19.6%），用 CUDA Graph 合并</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 410)"><rect x="0" y="0" width="1120" height="140" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:22" transform="translate(56, 421.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">三表联用的诊断流程</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 452.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">1. kern_sum 找出吞噬时间最多的 kernel</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(56, 474.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">2. mem_time_sum 检查数据搬运是否合理（H2D/D2H 是否必要 / 能否 pinned / overlap）</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(56, 496.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">3. 间隙分类判定 GPU 忙闲与发射受限特征（间隙 ＞ 100 μs 且实例数 ＞ 10 → 合并小核或用 CUDA Graph）</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(40, 590)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:26" transform="translate(56, 599.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">判读要点</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(56, 633.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">三张表是 nsys 的"体检报告"：核函数时间分布看热点，搬运看 IO，间隙看等待；任何一张异常即要深挖</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(40, 691.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 code_outputs.md nsys_time_analysis 示例</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">nsys：只抓稳态一段，空隙要用逐条记录算</text>
+<text x="40" y="92" font-size="14" fill="#646A73">--capture-range 限定范围；nsys stats 生成三类表</text>
+<rect x="40" y="150" width="344" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">限定范围</text>
+<text x="56" y="211" font-size="14" fill="#646A73">cudaProfilerStart/Stop 或 NVTX；只抓一个</text>
+<text x="56" y="234" font-size="14" fill="#646A73">rank</text>
+<polyline points="390,202 422,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="412,196 422,202 412,208" fill="#8F959E"/>
+<rect x="428" y="150" width="344" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="457" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="457" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="476" y="181" font-size="18" fill="#1F2329" font-weight="bold">抓取</text>
+<text x="444" y="211" font-size="14" fill="#646A73">nsys profile -t cuda,nvtx</text>
+<text x="444" y="234" font-size="14" fill="#646A73">--capture-range=cudaProfilerApi</text>
+<polyline points="778,202 810,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="800,196 810,202 800,208" fill="#8F959E"/>
+<rect x="816" y="150" width="344" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="845" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="845" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="864" y="181" font-size="18" fill="#1F2329" font-weight="bold">统计</text>
+<text x="832" y="211" font-size="14" fill="#646A73">nsys stats --report ...</text>
+<rect x="40" y="294" width="357" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="326" font-size="18" fill="#1F2329" font-weight="bold">cuda_gpu_kern_sum</text>
+<text x="56" y="356" font-size="14" fill="#646A73">按 kernel 名汇总</text>
+<text x="56" y="379" font-size="14" fill="#646A73">总时间和次数</text>
+<text x="56" y="402" font-size="14" fill="#646A73">找热点核</text>
+<rect x="421" y="294" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="437" y="326" font-size="18" fill="#1F2329" font-weight="bold">cuda_api_sum</text>
+<text x="437" y="356" font-size="14" fill="#646A73">CPU 端 CUDA API 时间</text>
+<text x="437" y="379" font-size="14" fill="#646A73">同步调用时间长要警惕</text>
+<rect x="803" y="294" width="357" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="819" y="326" font-size="18" fill="#1F2329" font-weight="bold">cuda_gpu_trace</text>
+<text x="819" y="356" font-size="14" fill="#646A73">逐条记录</text>
+<text x="819" y="379" font-size="14" fill="#646A73">带开始时间和时长</text>
+<text x="819" y="402" font-size="14" fill="#646A73">算空隙用它</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：NVIDIA Nsight Systems User Guide（--capture-range、nsys stats 报表）</text>
 </svg>

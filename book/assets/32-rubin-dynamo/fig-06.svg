@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">kernel 绑定一代硬件和一个模型版本</text>
+<text x="40" y="92" font-size="14" fill="#646A73">公开数字均带 GPU 型号与版本日期</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">kernel</text>
+<text x="276" y="176" font-size="14" fill="#1F2329" font-weight="bold">针对</text>
+<text x="671" y="176" font-size="14" fill="#1F2329" font-weight="bold">公开数字</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">FlashAttention-4</text>
+<text x="276" y="216" font-size="14" fill="#1F2329">Blackwell 上的指数单元与共享内存</text>
+<text x="671" y="216" font-size="14" fill="#1F2329">B200 BF16 1613 TFLOPs/s，利用率 71%</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">FlashMLA</text>
+<text x="276" y="254" font-size="14" fill="#1F2329">MLA 与 DSA 稀疏注意力，FP8/FP4 KV</text>
+<text x="671" y="254" font-size="14" fill="#1F2329">H800 最高 660；DSA prefill 640、解码 410</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">DeepGEMM</text>
+<text x="276" y="292" font-size="14" fill="#1F2329">FP8/FP4/BF16 GEMM 与融合 MoE</text>
+<text x="671" y="292" font-size="14" fill="#1F2329">H800 最高 1550 TFLOPS</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">DeepEP</text>
+<text x="276" y="330" font-size="14" fill="#1F2329">MoE dispatch 与 combine</text>
+<text x="671" y="330" font-size="14" fill="#1F2329">通信 kernel 要占 SM</text>
+<rect x="40" y="374" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="403" font-size="15" fill="#1F2329">FlashMLA 2026-09-30 版本移除了 Hopper 与 DeepSeek V3、V3.2、V4.0 的支持，并改了 KV 格式。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：FlashAttention-4（arXiv 2603.05451）；FlashMLA、DeepGEMM、DeepEP README</text>
+</svg>

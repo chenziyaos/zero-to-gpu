@@ -1,40 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="750"
-     viewBox="-20 -20 1240 750">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="710" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">FlashAttention-1 数据流：分块 Q、保持 K、V 不分</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">对 Q 逐块流入 SRAM；K、V 全量驻留；分子分母同步累加保精度</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="540" height="260" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">标准三段式（问题）</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">① S = Q · K^T （N×N）</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">② softmax(S)</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 255.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">③ O = softmax(S) · V</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(56, 301.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">HBM 流量：17.38 GB</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(56, 324.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">时间：5.19 ms</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(56, 347.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">瓶颈：搬数据</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(604, 165)"><rect x="0" y="0" width="540" height="260" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:11" transform="translate(620, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">FA1 分块融合（解决）</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(620, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">对 Q 逐块：</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(620, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">① 装 Q_block + 完整 K、V</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(620, 255.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">② S_block = Q_block · K^T</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(620, 278.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">③ softmax + 累加 O_block</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(620, 324.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">HBM 流量：4.50 GB（-74%）</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(620, 347.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">时间：1.34 ms（3.87×）</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(620, 370.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">新瓶颈：exp 吞吐</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(562, 295)"><path fill="none" stroke="#3370ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 36 0"/></g>
-<g id="d2:1" transform="translate(585.5, 286.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-585.5 -286.5)"><polygon points="588,289 598,295 588,301" fill="#3370FF" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:4" transform="translate(40, 465)"><rect x="0" y="0" width="553" height="180" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:20" transform="translate(56, 476.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">片上内存布局（Per-SM）</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(56, 507.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Q_block：256×128 = 32 KB</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 529.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">K：8 192×128 = 1 MB</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 551.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">V：8 192×128 = 1 MB</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(56, 573.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">总 SRAM：~2 MB（× 128 SM）</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(617, 465)"><rect x="0" y="0" width="553" height="180" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:25" transform="translate(633, 476.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">加速来源分解</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(633, 507.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">S 矩阵消掉：9.8 GB</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(633, 529.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">读 Q/K/V 各 1 次：4.5 GB</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(633, 551.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">exp 成本 ＜ 1%（~32 μs）</tspan></tspan></text></g>
-<g id="a2:29" transform="translate(633, 573.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">IO 下界：0.217 GB（接近达到）</tspan></tspan></text></g>
-<g id="a2:30" transform="translate(40, 671.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-08 code_outputs.md；Dao et al. NeurIPS 2022</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 410" width="1200" height="410">
+<rect x="0" y="0" width="1200" height="410" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">在线 softmax：最大值变了，就把已累加的和与输出一起换基准</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每个 Q 块维护三样东西：行最大值 m、指数和 l、未归一化的输出累加器</text>
+<rect x="40" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">读入 K、V 块</text>
+<text x="56" y="211" font-size="14" fill="#646A73">算出这一块的分数和块内</text>
+<text x="56" y="234" font-size="14" fill="#646A73">最大值</text>
+<polyline points="235,202 267,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,196 267,202 257,208" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">更新最大值</text>
+<text x="289" y="211" font-size="14" fill="#646A73">m′ = max(m, 块内最大</text>
+<text x="289" y="234" font-size="14" fill="#646A73">值)</text>
+<polyline points="468,202 500,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,196 500,202 490,208" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">换基准</text>
+<text x="522" y="211" font-size="14" fill="#646A73">l 和输出累加器都乘</text>
+<text x="522" y="234" font-size="14" fill="#646A73">exp(m − m′)</text>
+<polyline points="700,202 732,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,196 732,202 722,208" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">加上新块</text>
+<text x="754" y="211" font-size="14" fill="#646A73">l 加新块的指数和，输出</text>
+<text x="754" y="234" font-size="14" fill="#646A73">加新块的 P·V</text>
+<polyline points="933,202 965,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,196 965,202 955,208" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">全部读完</text>
+<text x="987" y="211" font-size="14" fill="#646A73">输出除以 l；只多存每行</text>
+<text x="987" y="234" font-size="14" fill="#646A73">的 m 和 l</text>
+<rect x="40" y="294" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="323" font-size="15" fill="#1F2329">代价是每块多出 exp、缩放和比较这些非矩阵乘运算，后几代 FlashAttention 一直在削减它们。</text>
+<text x="40" y="386" font-size="12" fill="#646A73">来源：Milakov, Gimelshein. Online normalizer calculation for softmax；Dao et al. FlashAttention</text>
 </svg>

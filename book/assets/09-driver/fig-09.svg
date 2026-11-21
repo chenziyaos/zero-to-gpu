@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">DCGM 诊断四级：8 卡系统上从 2.5 秒到 2.25 小时</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Hopper 8 卡系统的耗时上限，单位分钟；r1 不到 2.5 秒，在图上几乎看不见</text>
+<text x="278" y="168" font-size="14" fill="#1F2329" text-anchor="end">r1 Short · 就绪检查</text>
+<rect x="290" y="150" width="664" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="150" width="4" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="302" y="168" font-size="13" fill="#646A73">0.042 分钟  以内，即 2.5 秒</text>
+<text x="278" y="210" font-size="14" fill="#1F2329" text-anchor="end">r2 Medium · 失败收尾</text>
+<rect x="290" y="192" width="664" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="192" width="52" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="350" y="210" font-size="13" fill="#646A73">10.5 分钟  以内</text>
+<text x="278" y="252" font-size="14" fill="#1F2329" text-anchor="end">r3 Long · 事后检查</text>
+<rect x="290" y="234" width="664" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="234" width="172" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="470" y="252" font-size="13" fill="#646A73">35 分钟  以内</text>
+<text x="278" y="294" font-size="14" fill="#1F2329" text-anchor="end">r4 Extra Long · 事后检查</text>
+<rect x="290" y="276" width="664" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="276" width="664" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="962" y="294" font-size="13" fill="#646A73">135 分钟  以内，即 2.25 小时</text>
+<rect x="40" y="342" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="371" font-size="15" fill="#1F2329">高级别包含低级别的全部测试；diagnostic 默认压测五分钟，同时监控 Xid、温度和不可纠正的显存错误。</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：NVIDIA DCGM User Guide, DCGM Diagnostics（Run Levels and Tests）</text>
+</svg>

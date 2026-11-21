@@ -1,46 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="800"
-     viewBox="-20 -20 1240 800">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="760" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">MPS Chunk 分配：v2 vs v3 余数处理</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">H100: 132 SM = 16 chunk (8 SM/chunk) + 4 余数 SM；v2 自动给第 1 分区，v3 默认空闲</tspan></tspan></text></g>
-<g id="a2:3" transform="translate(40, 137.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">v2 接口（旧）· 余数自动给第 1 分区</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 173)"><rect x="0" y="0" width="60" height="60" fill="#3370ff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:4" transform="translate(63, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(106, 173)"><rect x="0" y="0" width="60" height="60" fill="#3370ff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:5" transform="translate(129, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(172, 173)"><rect x="0" y="0" width="30" height="60" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:6" transform="translate(180, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">4</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(40, 241.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Partition 1 (16+4=20 SM)</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 283)"><rect x="0" y="0" width="60" height="60" fill="#3370ff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:8" transform="translate(63, 302.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(106, 283)"><rect x="0" y="0" width="60" height="60" fill="#3370ff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:9" transform="translate(129, 302.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(40, 351.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Partition 2 (16 SM)</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(40, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">（第 1 分区拿走余数，实际比第 2 分区多 4 SM）</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(640, 137.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">v3 接口（新）· 余数默认空闲、显式打开分配</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(640, 173)"><rect x="0" y="0" width="60" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:13" transform="translate(663, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(706, 173)"><rect x="0" y="0" width="60" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:14" transform="translate(729, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(772, 173)"><rect x="0" y="0" width="30" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:15" transform="translate(780, 192.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">4</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(640, 241.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Partition 1 (16 SM)</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(640, 283)"><rect x="0" y="0" width="60" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:17" transform="translate(663, 302.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(706, 283)"><rect x="0" y="0" width="60" height="60" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:18" transform="translate(729, 302.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">8</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(772, 283)"><rect x="0" y="0" width="30" height="60" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a2:19" transform="translate(780, 302.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="7"><tspan x="7" y="16.471"><tspan x="2.87" text-anchor="start">4</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(640, 351.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Partition 2 (16 SM)</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(640, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">（余数默认空闲；显式 include-remainder 才分配）</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(40, 483)"><rect x="0" y="0" width="1130" height="100" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:22" transform="translate(60, 493.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">核心差异</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(60, 521.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">v2：自动把余数分给最早分区、不可控；v3：余数默认空闲，显式 include-remainder 才分配</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(60, 547.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">客户端需要 CUDA_MPS_SM_PARTITION 指定分区，否则报 CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION</tspan></tspan></text></g>
-<g id="o2:14" transform="translate(40, 613)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:25" transform="translate(56, 622.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">建议</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(56, 656.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">v3 把"是否给余数"从隐式行为变成显式配置，避免 v2 中"第 1 分区莫名多 4 SM"的不对称；建议升级到 v3 并显式 include-remainder</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(40, 721.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA MPS Architecture；GPU-12 code_outputs.md</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+<rect x="0" y="0" width="1200" height="600" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">放置决定能建什么：两个 1g 放错位置，3g 就建不出来</text>
+<text x="40" y="92" font-size="14" fill="#646A73">A100-40GB 的合法放置（nvidia-smi mig -lgipp），格式为“起始位置:占用数”；横轴是 8 个位置</text>
+<text x="280" y="140" font-size="13" fill="#646A73" text-anchor="middle">0</text>
+<text x="360" y="140" font-size="13" fill="#646A73" text-anchor="middle">1</text>
+<text x="440" y="140" font-size="13" fill="#646A73" text-anchor="middle">2</text>
+<text x="520" y="140" font-size="13" fill="#646A73" text-anchor="middle">3</text>
+<text x="600" y="140" font-size="13" fill="#646A73" text-anchor="middle">4</text>
+<text x="680" y="140" font-size="13" fill="#646A73" text-anchor="middle">5</text>
+<text x="760" y="140" font-size="13" fill="#646A73" text-anchor="middle">6</text>
+<text x="840" y="140" font-size="13" fill="#646A73" text-anchor="middle">7</text>
+<text x="228" y="172" font-size="14" fill="#1F2329" text-anchor="end">1g.5gb · 0 到 6，各占 1</text>
+<rect x="243" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="323" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="403" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="483" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="563" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="643" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="723" y="153" width="74" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="228" y="218" font-size="14" fill="#1F2329" text-anchor="end">2g.10gb · 0、2、4，各占 2</text>
+<rect x="243" y="199" width="154" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="403" y="199" width="154" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<rect x="563" y="199" width="154" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="228" y="264" font-size="14" fill="#1F2329" text-anchor="end">3g.20gb · 0、4，各占 4</text>
+<rect x="243" y="245" width="314" height="28" rx="6" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<rect x="563" y="245" width="314" height="28" rx="6" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="228" y="310" font-size="14" fill="#1F2329" text-anchor="end">4g.20gb · 0，占 4</text>
+<rect x="243" y="291" width="314" height="28" rx="6" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="228" y="356" font-size="14" fill="#1F2329" text-anchor="end">7g.40gb · 0，占 8</text>
+<rect x="243" y="337" width="634" height="28" rx="6" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="228" y="432" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">例：先建两个 1g</text>
+<rect x="243" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="323" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="403" y="413" width="74" height="28" rx="6" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="440" y="432" font-size="13" fill="#D46B08" text-anchor="middle">1g</text>
+<rect x="483" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="563" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="643" y="413" width="74" height="28" rx="6" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="680" y="432" font-size="13" fill="#D46B08" text-anchor="middle">1g</text>
+<rect x="723" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="803" y="413" width="74" height="28" rx="6" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<rect x="40" y="484" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="513" font-size="15" fill="#1F2329">位置 2 挡住了 0 起的 3g，位置 5 挡住了 4 起的 3g：还空着 6 个位置，却一个 3g.20gb 也建不出来。大实例先建，布局按方案整体重建。</text>
+<text x="40" y="576" font-size="12" fill="#646A73">来源：NVIDIA Multi-Instance GPU User Guide, Getting Started with MIG（-lgipp 示例）与 Concepts；下方例子为本文按放置表推演</text>
 </svg>

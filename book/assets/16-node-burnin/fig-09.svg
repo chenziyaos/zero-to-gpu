@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420">
+<rect x="0" y="0" width="1200" height="420" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">调优的边界：恢复出厂状态，让测量可重复</text>
+<text x="40" y="92" font-size="14" fill="#646A73">超出这个范围的调整会让验收结论失去代表性</text>
+<rect x="40" y="140" width="548" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="171" font-size="18" fill="#1F2329" font-weight="bold">属于验收</text>
+<text x="56" y="201" font-size="14" fill="#646A73">持久模式和生产一致</text>
+<text x="56" y="224" font-size="14" fill="#646A73">-lgc 锁频：对比和定位用（Volta 起，需 root）</text>
+<text x="56" y="247" font-size="14" fill="#646A73">修静态体检里的配置偏差</text>
+<rect x="612" y="140" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="171" font-size="18" fill="#1F2329" font-weight="bold">不属于验收</text>
+<text x="628" y="201" font-size="14" fill="#646A73">为一张卡单独调功耗上限</text>
+<text x="628" y="224" font-size="14" fill="#646A73">调低温度阈值、放宽合格线</text>
+<text x="628" y="247" font-size="14" fill="#646A73">用锁频分数放行</text>
+<rect x="40" y="304" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="332" font-size="15" fill="#1F2329">要用 Nsight 看某张卡：先暂停 DCGM 的性能分析采集，两者会冲突。</text>
+<text x="40" y="396" font-size="12" fill="#646A73">来源：nvidia-smi 文档（持久模式、--lock-gpu-clocks）；DCGM Feature Overview（与 Nsight 冲突）</text>
+</svg>

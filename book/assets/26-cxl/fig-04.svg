@@ -1,49 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="810"
-     viewBox="-20 -20 1240 810">
-<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="770" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">三种部署形态：直连 170ns / 单级 Switch 250ns / 端到端 +57ns</tspan></tspan></text></g>
-<g id="a1:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">下行是 baseline 对照：DDR idle ~90 ns；CXL 直连 ≈ 2× DDR</tspan></tspan></text></g>
-<g id="c1:1" transform="translate(220, 200)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 320"/></g>
-<g id="c1:2" transform="translate(220, 520)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:3" transform="translate(186, 509.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="1.71" text-anchor="start">0 ns</tspan></tspan></text></g>
-<g id="c1:3" transform="translate(220, 520)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:4" transform="translate(179, 452.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="31"><tspan x="31" y="14.118"><tspan x="2.05" text-anchor="start">50 ns</tspan></tspan></text></g>
-<g id="c1:4" transform="translate(220, 463)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:5" transform="translate(173, 395.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="37"><tspan x="37" y="14.118"><tspan x="1.39" text-anchor="start">100 ns</tspan></tspan></text></g>
-<g id="c1:5" transform="translate(220, 406)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:6" transform="translate(173, 338.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="37"><tspan x="37" y="14.118"><tspan x="1.39" text-anchor="start">150 ns</tspan></tspan></text></g>
-<g id="c1:6" transform="translate(220, 349)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:7" transform="translate(173, 280.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="37"><tspan x="37" y="14.118"><tspan x="1.39" text-anchor="start">200 ns</tspan></tspan></text></g>
-<g id="c1:7" transform="translate(220, 291)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:8" transform="translate(173, 223.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="37"><tspan x="37" y="14.118"><tspan x="1.39" text-anchor="start">250 ns</tspan></tspan></text></g>
-<g id="c1:8" transform="translate(220, 234)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 800 0"/></g>
-<g id="a1:9" transform="translate(220, 160.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">端到端延迟</tspan></tspan></text></g>
-<g id="o1:2" transform="translate(260, 417)"><rect x="0" y="0" width="150" height="103" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a1:10" transform="translate(311.5, 390.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="23.5"><tspan x="23.5" y="16.471"><tspan x="5.7" text-anchor="start">90 ns</tspan></tspan></text></g>
-<g id="a1:11" transform="translate(310.5, 529.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="24.5"><tspan x="24.5" y="14.118"><tspan x="0.69" text-anchor="start">DDR idle</tspan></tspan></text></g>
-<g id="a1:12" transform="translate(308.5, 547.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="26.5"><tspan x="26.5" y="14.118"><tspan x="-1.015" text-anchor="start">(baseline)</tspan></tspan></text></g>
-<g id="a1:13" transform="translate(303.5, 581.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="31.5"><tspan x="31.5" y="14.118"><tspan x="1.72" text-anchor="start">局部 DRAM</tspan></tspan></text></g>
-<g id="o1:3" transform="translate(460, 326)"><rect x="0" y="0" width="150" height="194" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a1:14" transform="translate(506.5, 299.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="28.5"><tspan x="28.5" y="16.471"><tspan x="6.57" text-anchor="start">170 ns</tspan></tspan></text></g>
-<g id="a1:15" transform="translate(509, 529.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="26"><tspan x="26" y="14.118"><tspan x="2.155" text-anchor="start">CXL 直连</tspan></tspan></text></g>
-<g id="a1:16" transform="translate(484.5, 547.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="50.5"><tspan x="50.5" y="14.118"><tspan x="-1.25" text-anchor="start">root port → device</tspan></tspan></text></g>
-<g id="a1:17" transform="translate(511, 581.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="0" text-anchor="start">合理近似</tspan></tspan></text></g>
-<g id="o1:4" transform="translate(660, 234)"><rect x="0" y="0" width="150" height="286" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a1:18" transform="translate(706.5, 207.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="28.5"><tspan x="28.5" y="16.471"><tspan x="6.57" text-anchor="start">250 ns</tspan></tspan></text></g>
-<g id="a1:19" transform="translate(689.5, 529.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="45.5"><tspan x="45.5" y="14.118"><tspan x="1.4" text-anchor="start">CXL 一级 Switch</tspan></tspan></text></g>
-<g id="a1:20" transform="translate(711, 547.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="1.325" text-anchor="start">+ 路由跳</tspan></tspan></text></g>
-<g id="a1:21" transform="translate(699, 581.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="14.118"><tspan x="0" text-anchor="start">拓扑灵活代价</tspan></tspan></text></g>
-<g id="o1:5" transform="translate(860, 261)"><rect x="0" y="0" width="150" height="259" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a1:22" transform="translate(906.5, 234.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="28.5"><tspan x="28.5" y="16.471"><tspan x="6.57" text-anchor="start">227 ns</tspan></tspan></text></g>
-<g id="a1:23" transform="translate(883.5, 529.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="51.5"><tspan x="51.5" y="14.118"><tspan x="3.635" text-anchor="start">CXL 直连 + 协议栈</tspan></tspan></text></g>
-<g id="a1:24" transform="translate(917, 547.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="18"><tspan x="18" y="14.118"><tspan x="0" text-anchor="start">端到端</tspan></tspan></text></g>
-<g id="a1:25" transform="translate(906, 581.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="29"><tspan x="29" y="14.118"><tspan x="-1.085" text-anchor="start">≈ 2× DDR</tspan></tspan></text></g>
-<g id="c1:9" transform="translate(220, 417)"><path fill="none" stroke="#dee0e3" stroke-width="2" stroke-dasharray="6 4" d="M 0 0 L 800 0"/></g>
-<g id="a1:26" transform="translate(929, 394.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="83"><tspan x="83" y="14.118"><tspan x="3.75" text-anchor="start">DDR idle 90 ns</tspan></tspan></text></g>
-<g id="o1:6" transform="translate(40, 630)"><rect x="0" y="0" width="1120" height="82" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:27" transform="translate(56, 639.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">落地</tspan></tspan></text></g>
-<g id="a1:28" transform="translate(56, 673.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">对 KV cache 而言 170-250 ns 已经够用：KV/token 40 KB / 128 GB/s = 312 ns 传输时间，传输时间主导，协议延迟噪声可接受</tspan></tspan></text></g>
-<g id="a1:29" transform="translate(40, 731.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：CXL Consortium；Meta CXL PoC 报告</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 570" width="1200" height="570">
+<rect x="0" y="0" width="1200" height="570" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">今天 KV 落在 CPU 一侧的 Type 3 内存，GPU 经 PCIe 到达</text>
+<text x="40" y="92" font-size="14" fill="#646A73">CXL 设备三类；H100 服务器上的 KV 路径</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">类型</text>
+<text x="243" y="176" font-size="14" fill="#1F2329" font-weight="bold">协议</text>
+<text x="571" y="176" font-size="14" fill="#1F2329" font-weight="bold">HDM</text>
+<text x="708" y="176" font-size="14" fill="#1F2329" font-weight="bold">例子</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">Type 1</text>
+<text x="243" y="216" font-size="14" fill="#1F2329">io + cache</text>
+<text x="571" y="216" font-size="14" fill="#1F2329">无</text>
+<text x="708" y="216" font-size="14" fill="#1F2329">智能网卡</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">Type 2</text>
+<text x="243" y="254" font-size="14" fill="#1F2329">io + cache + mem</text>
+<text x="571" y="254" font-size="14" fill="#1F2329">有</text>
+<text x="708" y="254" font-size="14" fill="#1F2329">带 HBM 的加速器</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">Type 3</text>
+<text x="243" y="292" font-size="14" fill="#1F2329">io + mem</text>
+<text x="571" y="292" font-size="14" fill="#1F2329">有</text>
+<text x="708" y="292" font-size="14" fill="#1F2329">内存扩展卡、内存池</text>
+<rect x="40" y="346" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="371" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="376" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="377" font-size="18" fill="#1F2329" font-weight="bold">HBM</text>
+<text x="56" y="407" font-size="14" fill="#646A73">活跃 KV</text>
+<polyline points="293,387 325,387" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,381 325,387 315,393" fill="#8F959E"/>
+<rect x="331" y="346" width="247" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="360" cy="371" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="360" y="376" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="377" font-size="18" fill="#1F2329" font-weight="bold">PCIe Gen5</text>
+<text x="347" y="407" font-size="14" fill="#646A73">H100 规格页 128GB/s 双向</text>
+<polyline points="584,387 616,387" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,381 616,387 606,393" fill="#8F959E"/>
+<rect x="622" y="346" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="651" cy="371" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="651" y="376" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="377" font-size="18" fill="#1F2329" font-weight="bold">CPU</text>
+<text x="638" y="407" font-size="14" fill="#646A73">内存控制器与 CXL 端口</text>
+<polyline points="875,387 907,387" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,381 907,387 897,393" fill="#8F959E"/>
+<rect x="913" y="346" width="247" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="371" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="376" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="377" font-size="18" fill="#1F2329" font-weight="bold">Type 3 卡</text>
+<text x="929" y="407" font-size="14" fill="#646A73">CXL.mem</text>
+<rect x="40" y="458" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="486" font-size="15" fill="#1F2329">NVIDIA 的 CPU 和 GPU 一致方案是 GH200 的 NVLink-C2C：900GB/s，规格页称比 PCIe Gen5 快 7 倍。</text>
+<text x="40" y="546" font-size="12" fill="#646A73">来源：Linux 内核文档 Devices and Protocols；H100 与 GH200 规格页</text>
 </svg>

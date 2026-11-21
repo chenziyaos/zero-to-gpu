@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">16384 张卡约是 227.6 个机柜：机柜之间仍是网络</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Llama 3 405B 的 16K 卡配置放到 NVL72 上</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">TP8</text>
+<text x="56" y="211" font-size="14" fill="#646A73">H100 上用满机内</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">CP16</text>
+<text x="347" y="211" font-size="14" fill="#646A73">长上下文切段</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">PP16</text>
+<text x="638" y="211" font-size="14" fill="#646A73">跨机流水线</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">DP8</text>
+<text x="929" y="211" font-size="14" fill="#646A73">最外层梯度同步</text>
+<rect x="40" y="262" width="548" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="293" font-size="18" fill="#1F2329" font-weight="bold">在 NVL72 上</text>
+<text x="56" y="323" font-size="14" fill="#646A73">TP、CP、EP 放进机柜</text>
+<text x="56" y="346" font-size="14" fill="#646A73">PP 段数可减少，气泡变小</text>
+<text x="56" y="369" font-size="14" fill="#646A73">DP 每步一次，可与反向重叠</text>
+<rect x="612" y="262" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="293" font-size="18" fill="#1F2329" font-weight="bold">厂商数字</text>
+<text x="628" y="323" font-size="14" fill="#646A73">GPT-MoE-1.8T 训练快 4 倍</text>
+<text x="628" y="346" font-size="14" fill="#646A73">32k GB200 对同数量 H100</text>
+<text x="628" y="369" font-size="14" fill="#646A73">包含算力、精度、拓扑</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：Llama 3 表 4；Megatron-LM（SC 2021）；NVIDIA 技术博客；主编核算</text>
+</svg>

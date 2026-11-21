@@ -1,46 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="720"
-     viewBox="-20 -20 1240 720">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="680" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">上线前核对清单与决策树</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">NVLink 配置从检查、诊断到决策的完整路径</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(400, 170)"><rect x="0" y="0" width="400" height="64" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:3" transform="translate(514.5, 190.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="85.5"><tspan x="85.5" y="17.648"><tspan x="17.725" text-anchor="start">✓ topo -m 矩阵检查</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(210, 234)"><path fill="none" stroke="#34c724" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 390 0 L 0 40"/></g>
-<g id="d2:1" transform="translate(207.5, 265.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-207.5 -265.5)"><polygon points="220,268 210,274 220,280" fill="#34C724" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="a2:4" transform="translate(377.5, 236.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="27.5"><tspan x="27.5" y="14.118"><tspan x="0.485" text-anchor="start">全 NVLink</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(40, 280)"><rect x="0" y="0" width="340" height="156" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:5" transform="translate(171, 298.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="39"><tspan x="39" y="17.648"><tspan x="13.265" text-anchor="start">✓ PASS</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(58, 331.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 所有 GPU 对距离 1</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(58, 357.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· busbw ≥ 90% algbw</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(58, 383.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 可投入生产</tspan></tspan></text></g>
-<g id="c2:2" transform="translate(590, 234)"><path fill="none" stroke="#f54a45" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 10 0 L 0 40"/></g>
-<g id="d2:2" transform="translate(587.5, 265.5)"><defs><symbol id="svgicon-d2-2" viewBox="0 0 15 17"><g transform="translate(-587.5 -265.5)"><polygon points="600,268 590,274 600,280" fill="#F54A45" /></g></symbol></defs><use href="#svgicon-d2-2" x="0" y="0" width="15" height="17"/></g>
-<g id="a2:9" transform="translate(565, 236.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="30"><tspan x="30" y="14.118"><tspan x="0" text-anchor="start">缺链或低速</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(420, 280)"><rect x="0" y="0" width="340" height="182" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:10" transform="translate(560, 298.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="30"><tspan x="30" y="17.648"><tspan x="5.12" text-anchor="start">✗ FAIL</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(438, 331.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· nvidia-smi -q 查卡状态</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(438, 357.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 检查 dmesg 错误日志</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(438, 383.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 隔离故障 GPU / 链路</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(438, 409.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 联系 OEM 返修</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(600, 234)"><path fill="none" stroke="#ff8800" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 370 40"/></g>
-<g id="d2:3" transform="translate(957.5, 265.5)"><defs><symbol id="svgicon-d2-3" viewBox="0 0 15 17"><g transform="translate(-957.5 -265.5)"><polygon points="960,268 970,274 960,280" fill="#FF8800" /></g></symbol></defs><use href="#svgicon-d2-3" x="0" y="0" width="15" height="17"/></g>
-<g id="a2:15" transform="translate(749, 236.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="14.118"><tspan x="2.605" text-anchor="start">有 PCIe 回退</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(800, 280)"><rect x="0" y="0" width="340" height="182" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:16" transform="translate(928, 298.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="42"><tspan x="42" y="17.648"><tspan x="10.39" text-anchor="start">⚠ WARN</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(818, 331.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 查 Fabric Manager 日志</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(818, 357.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 确认 GPU firmware 版本</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(818, 383.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 考虑手动调整拓扑</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(818, 409.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 降 message size 回避</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(40, 500)"><rect x="0" y="0" width="550" height="120" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:21" transform="translate(56, 511.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">全流程耗时预期</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 542.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">矩阵检查：5 分钟；nccl-tests：10-15 分钟</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 564.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">诊断修复：30 分钟 ~ 2 小时；总体：半天 ~ 一天</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(610, 500)"><rect x="0" y="0" width="550" height="120" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:24" transform="translate(626, 511.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">关键原则</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(626, 542.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">低于 PASS 必须做根因分析，不凭经验猜测</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(626, 564.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">PCIe 混合拓扑 all-reduce 跌向 63 GB/s</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(626, 586.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">FAIL 的 99% 是链路断 / 驱动旧 / 固件丢链接</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(40, 641.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 §11 核对清单；运维手册</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">NVSwitch 机器：作业之前先确认 fabric 就绪</text>
+<text x="40" y="92" font-size="14" fill="#646A73">H100 起链路由硬件训练，但每块 GPU 仍要向 fabric 注册</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">FM 启动</text>
+<text x="56" y="211" font-size="14" fill="#646A73">systemctl start</text>
+<text x="56" y="234" font-size="14" fill="#646A73">nvidia-fabricmanager</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">链路训练</text>
+<text x="347" y="211" font-size="14" fill="#646A73">H100 起在 GPU 和 NVSwitch</text>
+<text x="347" y="234" font-size="14" fill="#646A73">硬件层完成</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">GPU 注册</text>
+<text x="638" y="211" font-size="14" fill="#646A73">Fabric State：In Progress</text>
+<text x="638" y="234" font-size="14" fill="#646A73">→ Completed</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">作业启动</text>
+<text x="929" y="211" font-size="14" fill="#646A73">过早启动报</text>
+<text x="929" y="234" font-size="14" fill="#646A73">cudaErrorSystemNotReady</text>
+<rect x="40" y="290" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="319" font-size="15" fill="#1F2329">停掉 FM 会丢失 fabric 状态，重启后要重置 fabric 里的全部 GPU。最低驱动：HGX H100 为 525 系列，HGX B200 / B300 为 570 系列。</text>
+<rect x="40" y="364" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="393" font-size="15" fill="#1F2329">NVLS：第三代 NVSwitch 加 Hopper 及以后的 GPU；NCCL_NVLS_ENABLE 默认 2，同卡多 rank 时被静默关闭。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：NVIDIA Fabric Manager User Guide；NCCL Environment Variables</text>
 </svg>

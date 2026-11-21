@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/12-sharing.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-12](../book/12-sharing.md) 第 9 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 GPU-12 MIG、MPS 与容器的配套代码。对应文档 GPU-12 第 2-3 章（MIG 硬件与 MPS SM 分区）。
 
 ## 文件清单

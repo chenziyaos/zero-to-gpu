@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/21-train-parallel.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-21](../book/21-train-parallel.md) 第 10 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 GPU-21 训练并行：TP、PP、DP、ZeRO 与 FP8 的显存账、通信账和气泡。本章回答：给定集群和模型，如何选择并行方案；不同并行的显存和通信特性如何。
 
 | 文件 | 环境 | 做什么 | 对应文档章节 |

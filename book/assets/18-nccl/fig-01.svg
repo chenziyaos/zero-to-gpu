@@ -1,33 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="620"
-     viewBox="-20 -20 1240 620">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="580" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">通信 W_comm 的三个优化维度：算法、协议、Overlap</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">算法（Ring/Tree）决定路径，协议（Simple/LL/LL128）决定单跳代价，Overlap 隐藏通信本身</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 170)"><rect x="0" y="0" width="360" height="190" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:3" transform="translate(56, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">算法（决定路径）</tspan></tspan></text></g>
-<g id="a3:4" transform="translate(56, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Ring：带宽优先；大消息快 50-100%</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(56, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Tree：延迟优先；小消息快 30%+</tspan></tspan></text></g>
-<g id="a3:6" transform="translate(56, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Crossover 点：~256 KB</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(56, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">NVLS（NVLink Sharp）：10-15%（H100+ 大消息）</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(420, 170)"><rect x="0" y="0" width="360" height="190" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:8" transform="translate(436, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">协议（决定单跳代价）</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(436, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">Simple：通用 100% 带宽</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(436, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">LL（Low Latency）：Pipelining</tspan></tspan></text></g>
-<g id="a3:11" transform="translate(436, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">50% 带宽限制</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(436, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">LL128：最优 94% 带宽</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(436, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">5-10% 性能差异</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(800, 170)"><rect x="0" y="0" width="360" height="190" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:14" transform="translate(816, 181.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">Overlap（隐藏通信）</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(816, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">分桶隐藏：前 N-1 个 bucket</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(816, 234.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">通信被下一桶计算覆盖</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(816, 256.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">最后一个 bucket：永在关键路径</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(816, 278.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">隐藏率：75-95%</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(816, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">8-12 bucket 为最优范围</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(40, 410)"><rect x="0" y="0" width="1120" height="106" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:20" transform="translate(56, 419.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">组合</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(56, 453.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">三个维度独立可叠加：选 Ring 算法 + LL128 协议 + 8-12 bucket Overlap，W_comm 可从 35% 压到 8-12%；没有一个维度可以单独消除最后一段</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(56, 477.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">bucket 通信</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(40, 541.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本文整理</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">一次 all-reduce：三层选择定耗时，重叠定暴露多少</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇处理 W_comm 里由通信库决定的部分</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">算法</text>
+<text x="56" y="211" font-size="14" fill="#646A73">Ring、Tree、NVLS、CollNet（</text>
+<text x="56" y="234" font-size="14" fill="#646A73">第 3、5 章）</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">协议</text>
+<text x="347" y="211" font-size="14" fill="#646A73">Simple、LL、LL128（第 4 章）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">传输</text>
+<text x="638" y="211" font-size="14" fill="#646A73">P2P、SHM、NVLS、NET</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">重叠</text>
+<text x="929" y="211" font-size="14" fill="#646A73">分桶藏进反向（第 6 章）</text>
+<rect x="40" y="284" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">上限（第 2 章）</text>
+<text x="56" y="346" font-size="14" fill="#646A73">busbw 上限 = 链路单向带宽</text>
+<text x="56" y="369" font-size="14" fill="#646A73">8 卡 H100：450 GB/s</text>
+<rect x="421" y="284" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="437" y="316" font-size="18" fill="#1F2329" font-weight="bold">规模（第 7 章）</text>
+<text x="437" y="346" font-size="14" fill="#646A73">环的步数线性增长</text>
+<text x="437" y="369" font-size="14" fill="#646A73">大集群跨机延迟数十微秒</text>
+<rect x="803" y="284" width="357" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="819" y="316" font-size="18" fill="#1F2329" font-weight="bold">排障（第 8、9 章）</text>
+<text x="819" y="346" font-size="14" fill="#646A73">Flight Recorder、RAS</text>
+<text x="819" y="369" font-size="14" fill="#646A73">先看 TUNING 日志再改变量</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：NCCL 文档；Demystifying NCCL 论文；NCCL 2.4 博客；PyTorch DDP 论文</text>
 </svg>

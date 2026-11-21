@@ -1,31 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="484"
-     viewBox="-20 -20 1240 484">
-<g id="o7:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="444" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a7:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">occupancy 上限 50%,warp/寄存器/SMEM/块数各自限到 4-8 块</tspan></tspan></text></g>
-<g id="a7:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">sim_occupancy.py:CC 9.0 Hopper H100，块=256 线程 / 64 寄存器 / 48 KB SMEM</tspan></tspan></text></g>
-<g id="o7:2" transform="translate(40, 128)"><rect x="0" y="0" width="1120" height="46" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="o7:3" transform="translate(40, 128)"><rect x="0" y="0" width="4" height="46" fill="#3370ff" stroke="none" stroke-width="0" rx="2" ry="2"/></g>
-<g id="a7:3" transform="translate(60, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">关键洞察：occupancy ≠ 性能：</tspan></tspan></text></g>
-<g id="a7:4" transform="translate(309.7, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">驻留 = min(8,32,4,4) = 4 块 → 1024 线程 = 32 warp → occupancy = 50%；瓶颈在 registers + shared_mem</tspan></tspan></text></g>
-<g id="a7:5" transform="translate(106.9, 200.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="117"><tspan x="117" y="16.471"><tspan x="1.1" text-anchor="start">按 warps 限制最多</tspan></tspan></text></g>
-<g id="o7:4" transform="translate(237.9, 198)"><rect x="0" y="0" width="922.1" height="28" fill="#f2f3f5" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="o7:5" transform="translate(237.9, 198)"><rect x="0" y="0" width="215.4" height="28" fill="#bbbfc4" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="a7:6" transform="translate(461.3, 201.2055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">8 块</tspan></tspan></text></g>
-<g id="a7:7" transform="translate(103.9, 242.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="120"><tspan x="120" y="16.471"><tspan x="1.19" text-anchor="start">按 blocks 限制最多</tspan></tspan></text></g>
-<g id="o7:6" transform="translate(237.9, 240)"><rect x="0" y="0" width="922.1" height="28" fill="#f2f3f5" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="o7:7" transform="translate(237.9, 240)"><rect x="0" y="0" width="861.8" height="28" fill="#bbbfc4" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="a7:8" transform="translate(1107.6, 243.2055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">32 块</tspan></tspan></text></g>
-<g id="a7:9" transform="translate(89.9, 284.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="134"><tspan x="134" y="16.471"><tspan x="2.1" text-anchor="start">按 registers 限制最多</tspan></tspan></text></g>
-<g id="o7:8" transform="translate(237.9, 282)"><rect x="0" y="0" width="922.1" height="28" fill="#f2f3f5" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="o7:9" transform="translate(237.9, 282)"><rect x="0" y="0" width="107.7" height="28" fill="#f54a45" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="a7:10" transform="translate(353.6, 285.2055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">4 块</tspan></tspan></text></g>
-<g id="a7:11" transform="translate(61.9, 326.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="end" dominant-baseline="alphabetic" x="162"><tspan x="162" y="16.471"><tspan x="-0.43" text-anchor="start">按 shared_mem 限制最多</tspan></tspan></text></g>
-<g id="o7:10" transform="translate(237.9, 324)"><rect x="0" y="0" width="922.1" height="28" fill="#f2f3f5" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="o7:11" transform="translate(237.9, 324)"><rect x="0" y="0" width="107.7" height="28" fill="#f54a45" stroke="none" stroke-width="0" rx="4" ry="4"/></g>
-<g id="a7:12" transform="translate(353.6, 327.2055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">4 块</tspan></tspan></text></g>
-<g id="c7:1" transform="translate(345.6, 192)"><path fill="none" stroke="#8f959e" stroke-width="2" stroke-dasharray="6 4" d="M 0 0 L 0 166"/></g>
-<g id="a7:13" transform="translate(305.6, 361.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="40"><tspan x="40" y="14.118"><tspan x="-0.265" text-anchor="start">驻留下限 min()</tspan></tspan></text></g>
-<g id="a7:14" transform="translate(40, 405.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：sim_occupancy.py 实测输出</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">线程内的三根杠杆：两根加在途字节，一根减搬运字节</text>
+<text x="40" y="92" font-size="14" fill="#646A73">对应 Little 定律两侧：在途字节 = 带宽 × 延迟；总时间 ≈ 要搬的字节 ÷ 带宽</text>
+<rect x="40" y="140" width="357" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="165" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="170" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="171" font-size="18" fill="#1F2329" font-weight="bold">加宽单次加载</text>
+<text x="56" y="201" font-size="14" fill="#646A73">float 换 float4，每 SM 要的在途加载从约</text>
+<text x="56" y="224" font-size="14" fill="#646A73">1740 条降到约 435 条</text>
+<text x="56" y="247" font-size="14" fill="#646A73">代价：地址按 16 字节对齐，尾部单独处理</text>
+<rect x="421" y="140" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="450" cy="165" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="450" y="170" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="469" y="171" font-size="18" fill="#1F2329" font-weight="bold">加 ILP</text>
+<text x="437" y="201" font-size="14" fill="#646A73">每个线程先连发几条互不依赖的加载，再统一使用</text>
+<text x="437" y="224" font-size="14" fill="#646A73">代价：每条在途加载都要寄存器接结果</text>
+<rect x="803" y="140" width="357" height="150" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="832" cy="165" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="832" y="170" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="851" y="171" font-size="18" fill="#1F2329" font-weight="bold">靠复用少搬</text>
+<text x="819" y="201" font-size="14" fill="#646A73">分块放进共享内存，T × T 的块让全局读取约减为</text>
+<text x="819" y="224" font-size="14" fill="#646A73">1/T</text>
+<text x="819" y="247" font-size="14" fill="#646A73">代价：共享内存和同步；逐元素 kernel 没有复用</text>
+<text x="819" y="270" font-size="14" fill="#646A73">可挖</text>
+<rect x="40" y="326" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="355" font-size="15" fill="#1F2329">先算每 SM 要多少条在途加载，再挑最便宜的杠杆；DRAM 吞吐已接近峰值时，只有第 3 根还有用。</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：本篇 sim_inflight.py 输出；本篇第 6 章推导</text>
 </svg>

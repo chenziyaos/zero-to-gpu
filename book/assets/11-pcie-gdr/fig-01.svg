@@ -1,43 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="970"
-     viewBox="-20 -20 1240 970">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="930" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">跨 NUMA 延迟开销</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">DMA Read 跨 NUMA +20% 延迟；DMA Write 仅 -8%；H2D 拷多为 Read，跨 NUMA 显著变慢</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="340" height="200" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">Socket 0</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">DMA Controller</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">Local Memory</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(580, 165)"><rect x="0" y="0" width="340" height="200" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:6" transform="translate(596, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">Socket 1</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(596, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">DMA Controller</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(596, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">Remote Memory</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(384, 265)"><path fill="none" stroke="#ff8800" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 192 0"/></g>
-<g id="d2:1" transform="translate(563.5, 256.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-563.5 -256.5)"><polygon points="566,259 576,265 566,271" fill="#FF8800" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="a2:9" transform="translate(439, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="41"><tspan x="41" y="16.471"><tspan x="9.6" text-anchor="start">UPI / GMI</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(40, 405.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">DMA Read（需 UPI 往返）</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(40, 435)"><rect x="0" y="0" width="380" height="52" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:5" transform="translate(40, 435)"><rect x="0" y="0" width="380" height="52" fill="#3370ff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:11" transform="translate(169, 449.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="61"><tspan x="61" y="16.471"><tspan x="12.28" text-anchor="start">100 %（本地）</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(40, 501)"><rect x="0" y="0" width="380" height="52" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:7" transform="translate(40, 501)"><rect x="0" y="0" width="304" height="52" fill="#f54a45" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:12" transform="translate(113, 515.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="79"><tspan x="79" y="16.471"><tspan x="15.23" text-anchor="start">80 %（远端 -20%）</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(40, 577.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">DMA Write（异步 Push）</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(40, 607)"><rect x="0" y="0" width="380" height="52" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:9" transform="translate(40, 607)"><rect x="0" y="0" width="380" height="52" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:14" transform="translate(169, 621.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="61"><tspan x="61" y="16.471"><tspan x="12.28" text-anchor="start">100 %（本地）</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 673)"><rect x="0" y="0" width="380" height="52" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:11" transform="translate(40, 673)"><rect x="0" y="0" width="350" height="52" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:15" transform="translate(140.5, 687.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="alphabetic" x="74.5"><tspan x="74.5" y="16.471"><tspan x="14.86" text-anchor="start">92 %（远端 -8%）</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(500, 435)"><rect x="0" y="0" width="420" height="200" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:16" transform="translate(516, 446.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">三条关键结论</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(516, 477.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">DMA Read 跨 NUMA 延迟 +20%（UPI 往返）</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(516, 499.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">DMA Write 影响较小，仅 -8%（异步 Push 无返回）</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(516, 521.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">H2D 拷贝多为 Read → 跨 NUMA 显著变慢</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(40, 759)"><rect x="0" y="0" width="1120" height="106" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:20" transform="translate(56, 768.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">实战建议</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(56, 802.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">优化：把训练进程、DataLoader、cudaHostRegister 的 pinned 页都绑到与 GPU 同 NUMA 的 socket；否则 H2D 持续多付 20% 延迟，反向（D2H）影响</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 826.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">相对小</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(40, 891.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：neugebauer_et_al 论文数据；sim_pcie_bw.py topo 实测</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">一台 GPU 服务器里，数据进出显存的四条路</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每条路上可能出现的等待，以及本篇处理它的章节</text>
+<rect x="40" y="140" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="165" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="170" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="171" font-size="18" fill="#1F2329" font-weight="bold">GPU ↔ 主机内存</text>
+<text x="56" y="201" font-size="14" fill="#646A73">PCIe Gen5 x16，每个方向 63.015 GB/s（第 1 章）</text>
+<text x="56" y="224" font-size="14" fill="#646A73">跨 NUMA、可分页内存、IOMMU 翻译（第 3、4 章）</text>
+<rect x="612" y="140" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="641" cy="165" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="641" y="170" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="660" y="171" font-size="18" fill="#1F2329" font-weight="bold">GPU ↔ 另一张 GPU</text>
+<text x="628" y="201" font-size="14" fill="#646A73">NVLink 或 PCIe P2P，按 topo -m 的符号区分（第 2 章）</text>
+<text x="628" y="224" font-size="14" fill="#646A73">ACS 会把 switch 内的 P2P 改道到 CPU（第 7 章）</text>
+<rect x="40" y="268" width="548" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="69" cy="294" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="69" y="299" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="88" y="300" font-size="18" fill="#1F2329" font-weight="bold">GPU ↔ 网卡</text>
+<text x="56" y="330" font-size="14" fill="#646A73">GPUDirect RDMA 省掉主机内存中转（第 5 章）</text>
+<text x="56" y="353" font-size="14" fill="#646A73">路径上只有 PCIe switch 时最好</text>
+<rect x="612" y="268" width="548" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="641" cy="294" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="641" y="299" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="660" y="300" font-size="18" fill="#1F2329" font-weight="bold">GPU ↔ NVMe 存储</text>
+<text x="628" y="330" font-size="14" fill="#646A73">GPUDirect Storage 省掉 CPU 内存里的中转缓冲（第 6 章）</text>
+<text x="628" y="353" font-size="14" fill="#646A73">条件不满足时退回 POSIX 兼容模式</text>
+<rect x="40" y="409" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="438" font-size="15" fill="#1F2329">先用 topo -m 和 topo -cpu 记下每条路经过的部件，再按章节逐项检查；第 8 章拿 DGX H100 和 GH200 练习。</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：本篇第 1 至 8 章；PCIe 数字见 Wikipedia PCI Express 表，DGX H100 部件见 NVIDIA DGX H100 用户指南</text>
 </svg>

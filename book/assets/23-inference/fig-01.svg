@@ -1,47 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="900"
-     viewBox="-20 -20 1240 900">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="860" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Decode 等待由权重搬运、KV 搬运和系统开销组成</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">batch 增加时权重占主导，KV 随之增长</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(260, 171)"><rect x="0" y="0" width="14" height="14" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:3" transform="translate(280, 167.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">权重搬运</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(352, 171)"><rect x="0" y="0" width="14" height="14" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:4" transform="translate(372, 167.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">KV 搬运</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(441, 171)"><rect x="0" y="0" width="14" height="14" fill="#8f959e" stroke="#8f959e" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:5" transform="translate(461, 167.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">系统开销</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(260, 250)"><rect x="0" y="0" width="62" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:6" transform="translate(277.5, 264.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="13.5"><tspan x="13.5" y="15.295"><tspan x="3.715" text-anchor="start">5.3</tspan></tspan></text></g>
-<g id="d3:1" transform="translate(321.5, 249.5)"><defs><symbol id="svgicon-d3-1" viewBox="0 0 7 51"><g transform="translate(-321.5 -249.5)"><rect x="322" y="250" width="6" height="50" rx="4" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1" /></g></symbol></defs><use href="#svgicon-d3-1" x="0" y="0" width="7" height="51"/></g>
-<g id="o3:6" transform="translate(328, 250)"><rect x="0" y="0" width="9" height="50" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="3.5" ry="3.5"/></g>
-<g id="a3:7" transform="translate(40, 252.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">batch 1</tspan></tspan></text></g>
-<g id="a3:8" transform="translate(40, 270.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">seq=2K</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(349, 264.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">总 6.6 ms</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(260, 380)"><rect x="0" y="0" width="62" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:10" transform="translate(277.5, 394.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="13.5"><tspan x="13.5" y="15.295"><tspan x="3.715" text-anchor="start">5.3</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(322, 380)"><rect x="0" y="0" width="14" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="4" ry="4"/></g>
-<g id="d3:2" transform="translate(335.5, 379.5)"><defs><symbol id="svgicon-d3-2" viewBox="0 0 7 51"><g transform="translate(-335.5 -379.5)"><rect x="336" y="380" width="6" height="50" rx="4" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1" /></g></symbol></defs><use href="#svgicon-d3-2" x="0" y="0" width="7" height="51"/></g>
-<g id="a3:11" transform="translate(40, 382.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">batch 16</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(40, 400.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">seq=2K</tspan></tspan></text></g>
-<g id="a3:13" transform="translate(354, 394.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">总 7.0 ms</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(260, 510)"><rect x="0" y="0" width="408" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:14" transform="translate(446.5, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="17.5"><tspan x="17.5" y="15.295"><tspan x="3.88" text-anchor="start">35.0</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(668, 510)"><rect x="0" y="0" width="245" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:15" transform="translate(773.5, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17.5"><tspan x="17.5" y="15.295"><tspan x="3.88" text-anchor="start">21.0</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(913, 510)"><rect x="0" y="0" width="21" height="50" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="4" ry="4"/></g>
-<g id="a3:16" transform="translate(40, 512.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">batch 256</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(40, 530.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">seq=16K</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(946, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">总 57.8 ms</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(40, 660)"><rect x="0" y="0" width="545" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:19" transform="translate(56, 671.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">Llama 70B TP=8 H100（单卡视角）</tspan></tspan></text></g>
-<g id="a3:20" transform="translate(56, 702.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">权重 17.65 GB</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(56, 724.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">KV/token 40,960 字节</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(56, 746.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">HBM 带宽 3.35 TB/s · 拐点 295 FLOP/B</tspan></tspan></text></g>
-<g id="o3:13" transform="translate(615, 660)"><rect x="0" y="0" width="545" height="140" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:23" transform="translate(631, 671.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">三个 case 的启示</tspan></tspan></text></g>
-<g id="a3:24" transform="translate(631, 702.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">短 seq + 小 batch：权重搬运主导</tspan></tspan></text></g>
-<g id="a3:25" transform="translate(631, 724.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">长 seq + 大 batch：KV 搬运爆炸</tspan></tspan></text></g>
-<g id="a3:26" transform="translate(631, 746.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">系统开销几乎与规模无关</tspan></tspan></text></g>
-<g id="a3:27" transform="translate(40, 821.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：vLLM PagedAttention；本篇 sim_decode.py</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470">
+<rect x="0" y="0" width="1200" height="470" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">推理服务：预填充等算力，解码等带宽，中间等显存和调度</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇各章在时间账里的位置</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">请求到达</text>
+<text x="56" y="211" font-size="14" fill="#646A73">排队等显存（第 3、5 章）</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">预填充</text>
+<text x="347" y="211" font-size="14" fill="#646A73">受算力限制，决定 TTFT（第 1</text>
+<text x="347" y="234" font-size="14" fill="#646A73">章）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">KV 传输</text>
+<text x="638" y="211" font-size="14" fill="#646A73">分离部署时才有（第 7 章）</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">解码</text>
+<text x="929" y="211" font-size="14" fill="#646A73">受带宽限制，决定 TPOT（第 4</text>
+<text x="929" y="234" font-size="14" fill="#646A73">章）</text>
+<rect x="40" y="284" width="357" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">算账</text>
+<text x="56" y="346" font-size="14" fill="#646A73">KV 字节（第 2 章）</text>
+<text x="56" y="369" font-size="14" fill="#646A73">显存与并发（第 3 章）</text>
+<text x="56" y="392" font-size="14" fill="#646A73">解码时间（第 4 章）</text>
+<rect x="421" y="284" width="357" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="437" y="316" font-size="18" fill="#1F2329" font-weight="bold">手段</text>
+<text x="437" y="346" font-size="14" fill="#646A73">分页（第 5 章）</text>
+<text x="437" y="369" font-size="14" fill="#646A73">调度与分块（第 6 章）</text>
+<text x="437" y="392" font-size="14" fill="#646A73">分离、压缩与复用（第 7、8 章）</text>
+<rect x="803" y="284" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="819" y="316" font-size="18" fill="#1F2329" font-weight="bold">验收</text>
+<text x="819" y="346" font-size="14" fill="#646A73">TTFT、TPOT 分别设上限</text>
+<text x="819" y="369" font-size="14" fill="#646A73">按 goodput 比较（第 9 章）</text>
+<text x="40" y="446" font-size="12" fill="#646A73">来源：Splitwise、DistServe、vLLM 论文；本篇第 1 到 9 章</text>
 </svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640">
+<rect x="0" y="0" width="1200" height="640" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">四代对照：拿到下一代规格时按这张表填</text>
+<text x="40" y="92" font-size="14" fill="#646A73">FP16 稠密口径；T4 的 SM 数由 Tensor Core 数折算</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold"></text>
+<text x="287" y="176" font-size="14" fill="#1F2329" font-weight="bold">V100</text>
+<text x="494" y="176" font-size="14" fill="#1F2329" font-weight="bold">T4</text>
+<text x="702" y="176" font-size="14" fill="#1F2329" font-weight="bold">A100</text>
+<text x="923" y="176" font-size="14" fill="#1F2329" font-weight="bold">H100</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">SM 数</text>
+<text x="287" y="216" font-size="14" fill="#1F2329">80</text>
+<text x="494" y="216" font-size="14" fill="#1F2329">40</text>
+<text x="702" y="216" font-size="14" fill="#1F2329">108</text>
+<text x="923" y="216" font-size="14" fill="#1F2329">132</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">每 SM Tensor Core</text>
+<text x="287" y="254" font-size="14" fill="#1F2329">8</text>
+<text x="494" y="254" font-size="14" fill="#1F2329">8</text>
+<text x="702" y="254" font-size="14" fill="#1F2329">4</text>
+<text x="923" y="254" font-size="14" fill="#1F2329">4</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">每 SM 每时钟乘加</text>
+<text x="287" y="292" font-size="14" fill="#1F2329">512</text>
+<text x="494" y="292" font-size="14" fill="#1F2329">512</text>
+<text x="702" y="292" font-size="14" fill="#1F2329">1024</text>
+<text x="923" y="292" font-size="14" fill="#1F2329">2048</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">稠密 FP16 TFLOPS</text>
+<text x="287" y="330" font-size="14" fill="#1F2329">125</text>
+<text x="494" y="330" font-size="14" fill="#1F2329">65</text>
+<text x="702" y="330" font-size="14" fill="#1F2329">312</text>
+<text x="923" y="330" font-size="14" fill="#1F2329">约 989.5</text>
+<rect x="40" y="344" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="368" font-size="14" fill="#1F2329" font-weight="bold">HBM 带宽</text>
+<text x="287" y="368" font-size="14" fill="#1F2329">900 GB/s</text>
+<text x="494" y="368" font-size="14" fill="#1F2329">320 GB/s</text>
+<text x="702" y="368" font-size="14" fill="#1F2329">1555 GB/s</text>
+<text x="923" y="368" font-size="14" fill="#1F2329">3.35 TB/s</text>
+<rect x="40" y="382" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="406" font-size="14" fill="#1F2329" font-weight="bold">脊点 FLOP/B</text>
+<text x="287" y="406" font-size="14" fill="#1F2329">139</text>
+<text x="494" y="406" font-size="14" fill="#1F2329">203</text>
+<text x="702" y="406" font-size="14" fill="#1F2329">201</text>
+<text x="923" y="406" font-size="14" fill="#1F2329">295</text>
+<rect x="40" y="420" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="444" font-size="14" fill="#1F2329" font-weight="bold">乘加指令</text>
+<text x="287" y="444" font-size="14" fill="#1F2329">wmma、m8n8k4</text>
+<text x="494" y="444" font-size="14" fill="#1F2329">m16n8k8</text>
+<text x="702" y="444" font-size="14" fill="#1F2329">m16n8k16</text>
+<text x="923" y="444" font-size="14" fill="#1F2329">wgmma</text>
+<rect x="40" y="458" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="482" font-size="14" fill="#1F2329" font-weight="bold">搬运</text>
+<text x="287" y="482" font-size="14" fill="#1F2329">经寄存器</text>
+<text x="494" y="482" font-size="14" fill="#1F2329">经寄存器</text>
+<text x="702" y="482" font-size="14" fill="#1F2329">cp.async</text>
+<text x="923" y="482" font-size="14" fill="#1F2329">TMA</text>
+<rect x="40" y="526" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="555" font-size="15" fill="#1F2329">比较前先把带星号的稀疏数字减半，不同数据类型分开列。</text>
+<text x="40" y="616" font-size="12" fill="#646A73">来源：V100、Turing 白皮书；T4、H100 产品页；Ampere、Hopper 技术博客；PTX ISA；CUTLASS 文档</text>
+</svg>

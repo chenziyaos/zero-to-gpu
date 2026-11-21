@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">KV 从显存一路往下放，路由要知道它在哪一层</text>
+<text x="40" y="92" font-size="14" fill="#646A73">编排层管去向，专用机柜管存取</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">显存</text>
+<text x="56" y="211" font-size="14" fill="#646A73">Rubin 整柜 20.7 TB HBM4</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">主机内存</text>
+<text x="347" y="211" font-size="14" fill="#646A73">引擎内分层（HiCache 等）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">存储</text>
+<text x="638" y="211" font-size="14" fill="#646A73">S3、Azure blob；BlueField-4</text>
+<text x="638" y="234" font-size="14" fill="#646A73">STX</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">路由</text>
+<text x="929" y="211" font-size="14" fill="#646A73">全局 KV 事件，知道缓存在哪</text>
+<rect x="40" y="284" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="313" font-size="15" fill="#1F2329">STX 配 DOCA Memos，新闻稿称推理吞吐最高 5 倍（对比通用存储）；Vera CPU 机柜 256 颗 CPU 给 Agent 环境。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：Dynamo README；NIXL README；NVIDIA Vera Rubin 平台新闻稿（2026-03-16）</text>
+</svg>

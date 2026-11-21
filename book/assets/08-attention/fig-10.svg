@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 410" width="1200" height="410">
+<rect x="0" y="0" width="1200" height="410" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Flash-Decoding：查询只有一行时，沿 KV 切块把 SM 喂满</text>
+<text x="40" y="92" font-size="14" fill="#646A73">例子：上下文 8192、32 个头、d = 128、BF16；一层 KV 约 134.2 MB，读完约 40.1 μs</text>
+<rect x="40" y="150" width="344" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">切 KV</text>
+<text x="56" y="211" font-size="14" fill="#646A73">切成小块；块是原张量的视图，不涉及 GPU 操作</text>
+<polyline points="390,202 422,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="412,196 422,202 412,208" fill="#8F959E"/>
+<rect x="428" y="150" width="344" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="457" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="457" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="476" y="181" font-size="18" fill="#1F2329" font-weight="bold">各块并行</text>
+<text x="444" y="211" font-size="14" fill="#646A73">每块用 FlashAttention 算，额外写出每行的</text>
+<text x="444" y="234" font-size="14" fill="#646A73">log-sum-exp</text>
+<polyline points="778,202 810,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="800,196 810,202 800,208" fill="#8F959E"/>
+<rect x="816" y="150" width="344" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="845" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="845" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="864" y="181" font-size="18" fill="#1F2329" font-weight="bold">归约</text>
+<text x="832" y="211" font-size="14" fill="#646A73">按 log-sum-exp 换到同一基准再相加，得到</text>
+<text x="832" y="234" font-size="14" fill="#646A73">输出</text>
+<rect x="40" y="294" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="323" font-size="15" fill="#1F2329">每读一字节约做一次运算，远低于 H100 约 295 FLOP/字节的拐点：衡量 decode 注意力看带宽，不看算力。</text>
+<text x="40" y="386" font-size="12" fill="#646A73">来源：Stanford CRFM, Flash-Decoding for long-context inference；本篇第 9 章推算</text>
+</svg>

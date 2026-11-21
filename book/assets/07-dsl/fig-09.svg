@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+<rect x="0" y="0" width="1200" height="560" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Blackwell 的 tcgen05.mma：比 Hopper WGMMA 快 2 到 4 倍</text>
+<text x="40" y="92" font-size="14" fill="#646A73">CUTLASS 文档列出的指令种类与相对 Hopper 的吞吐</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">kind</text>
+<text x="414" y="166" font-size="14" fill="#1F2329" font-weight="bold">输入类型</text>
+<text x="908" y="166" font-size="14" fill="#1F2329" font-weight="bold">相对 Hopper</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">tf32</text>
+<text x="414" y="206" font-size="14" fill="#1F2329">tf32</text>
+<text x="908" y="206" font-size="14" fill="#1F2329">2 倍</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">f16</text>
+<text x="414" y="244" font-size="14" fill="#1F2329">f16 或 bf16</text>
+<text x="908" y="244" font-size="14" fill="#1F2329">2 倍</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">i8</text>
+<text x="414" y="282" font-size="14" fill="#1F2329">int8 或 uint8</text>
+<text x="908" y="282" font-size="14" fill="#1F2329">2 倍</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">f8f6f4</text>
+<text x="414" y="320" font-size="14" fill="#1F2329">8、6、4 位浮点混合</text>
+<text x="908" y="320" font-size="14" fill="#1F2329">2 倍</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">mxf8f6f4（块缩放）</text>
+<text x="414" y="358" font-size="14" fill="#1F2329">mxf8、mxf6、mxf4</text>
+<text x="908" y="358" font-size="14" fill="#1F2329">2 倍</text>
+<rect x="40" y="372" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="396" font-size="14" fill="#1F2329" font-weight="bold">mxf4、nvf4（块缩放）</text>
+<text x="414" y="396" font-size="14" fill="#1F2329">4 位浮点</text>
+<text x="908" y="396" font-size="14" fill="#1F2329">4 倍</text>
+<rect x="40" y="446" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="475" font-size="15" fill="#1F2329">块缩放沿 K 维每 16 或 32 个元素共用一个缩放因子；SM100 的 warp 特化结构与 Hopper 不同，为 sm_90 编的 kernel 要重新生成。</text>
+<text x="40" y="536" font-size="12" fill="#646A73">来源：NVIDIA CUTLASS 文档 Blackwell SM100 GEMMs</text>
+</svg>

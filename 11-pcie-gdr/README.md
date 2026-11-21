@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/11-pcie-gdr.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-11](../book/11-pcie-gdr.md) 第 9 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 GPU-11 PCIe、NUMA 与 GPUDirect 的配套代码。GPU 与主机之间的数据搬运性能取决于 PCIe 链路配置、系统拓扑和内存管理策略。本目录提供了模拟器和拓扑解析工具，用于量化各环节的开销。
 
 ## 文件清单

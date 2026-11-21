@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">常驻监控：利用率之外，再看 SM、Tensor、DRAM Activity</text>
+<text x="40" y="92" font-size="14" fill="#646A73">DCGM 指标是一段时间的平均值；收集 profiling 指标时要给 Nsight 让路</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">指标</text>
+<text x="335" y="166" font-size="14" fill="#1F2329" font-weight="bold">含义</text>
+<text x="803" y="166" font-size="14" fill="#1F2329" font-weight="bold">怎样读</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">GPU 利用率（nvidia-smi）</text>
+<text x="335" y="206" font-size="14" fill="#1F2329">采样周期内有 kernel 执行的时间占比</text>
+<text x="803" y="206" font-size="14" fill="#1F2329">只说明有没有 kernel 在跑</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">SM Activity（ID 1002）</text>
+<text x="335" y="244" font-size="14" fill="#1F2329">每个 SM 至少一个 warp 活跃的时间比例，对 SM 求平均</text>
+<text x="803" y="244" font-size="14" fill="#1F2329">0.8 以上必要不充分，低于 0.5 多半没用好</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">Tensor Activity</text>
+<text x="335" y="282" font-size="14" fill="#1F2329">Tensor（HMMA/IMMA）管线活跃的周期比例</text>
+<text x="803" y="282" font-size="14" fill="#1F2329">训练任务偏低：没用上 Tensor Core</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">DRAM Activity</text>
+<text x="335" y="320" font-size="14" fill="#1F2329">读写显存的周期比例</text>
+<text x="803" y="320" font-size="14" fill="#1F2329">实际峰值约 0.8，接近即访存受限</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">抓 nsys / ncu 前：dcgmi profile --pause；用完：dcgmi profile --resume。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：nvidia-smi 文档；NVIDIA DCGM User Guide, Feature Overview</text>
+</svg>

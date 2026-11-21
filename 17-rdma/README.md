@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/17-rdma.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-17](../book/17-rdma.md) 第 10 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 GPU-17 RDMA 网络的配套练习。先用 CPU 计算器把跨机这一跳的带宽账算清：轨道优化网络里每卡能拿多少、收敛比和 PXN 怎样改变 all-to-all；再看 ECMP 哈希碰撞和 incast 下 PFC 暂停各让通信等多久；最后在真机上用 perftest 和 GID 检查确认链路本身达标。
 
 | 文件 | 环境 | 做什么 |

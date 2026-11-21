@@ -1,44 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="730"
-     viewBox="-20 -20 1240 730">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="690" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">H100 Roofline 与 GEMM 位置</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">横轴算术强度（FLOP/B），纵轴性能（TFLOPS）；拐点 295 处 H100 带宽与算力平衡</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 150)"><rect x="0" y="0" width="350" height="170" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 159.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">朴素 GEMM</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 194.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">带宽受限区</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 217.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">算术强度 = 0.25 FLOP/B</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 240.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">实测性能 ≈ 0.42 TFLOPS</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(56, 263.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">访存量 549 822 MB</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(602, 171.646)"><text font-size="36" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="18"><tspan x="18" y="42.354"><tspan x="0" text-anchor="start">→</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(597, 237.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="23"><tspan x="23" y="20.001"><tspan x="6" text-anchor="start">拐点</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(600.5, 259.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="19.5"><tspan x="19.5" y="20.001"><tspan x="4.455" text-anchor="start">295</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(860, 150)"><rect x="0" y="0" width="320" height="170" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:11" transform="translate(876, 159.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">分块 GEMM</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(876, 194.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">计算受限区</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(876, 217.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">算术强度 = 682.67 FLOP/B</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(876, 240.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">实测性能 ≈ 989 TFLOPS</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(876, 263.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">访存量 201.3 MB</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(40, 350)"><rect x="0" y="0" width="1120" height="42" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:17" transform="translate(254, 359.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">访存量</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(522, 359.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">block 数</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(724, 359.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">强度</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(970, 359.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">瓶颈</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 392)"><rect x="0" y="0" width="1120" height="38" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:21" transform="translate(52, 399.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">朴素</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(254, 399.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">549 822 MB</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(522, 399.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">1 024</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(724, 399.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">0.25</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(970, 399.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">带宽</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(40, 430)"><rect x="0" y="0" width="1120" height="38" fill="#f5f6f7" stroke="#dee0e3" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a2:26" transform="translate(52, 437.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">分块</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(254, 437.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">201.3 MB</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(522, 437.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">1 024</tspan></tspan></text></g>
-<g id="a2:29" transform="translate(724, 437.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">682.67</tspan></tspan></text></g>
-<g id="a2:30" transform="translate(970, 437.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">算力</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(40, 550)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:31" transform="translate(56, 559.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本篇第 1 章的视角</tspan></tspan></text></g>
-<g id="a2:32" transform="translate(56, 593.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">本篇的目标就是把 GEMM 从带宽受限（0.25）推到计算受限（682.67）；分块、共享内存、双缓冲是把数据复用从 1 倍拉高到 64 倍</tspan></tspan></text></g>
-<g id="a2:33" transform="translate(40, 651.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Williams et al. Roofline + NVIDIA H100 tensor 规格</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460">
+<rect x="0" y="0" width="1200" height="460" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">分块消掉重复搬运，流水藏住剩下的等待</text>
+<text x="40" y="92" font-size="14" fill="#646A73">H100 SXM、FP32 不用 Tensor Core、4096³；五步闭环对应本篇章节</text>
+<rect x="40" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">定天花板</text>
+<text x="56" y="211" font-size="14" fill="#646A73">第 1 章：67 TFLOPS、</text>
+<text x="56" y="234" font-size="14" fill="#646A73">拐点 20 FLOP/B</text>
+<polyline points="235,202 267,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,196 267,202 257,208" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">测实际</text>
+<text x="289" y="211" font-size="14" fill="#646A73">第 8 章：ncu 实测配对</text>
+<text x="289" y="234" font-size="14" fill="#646A73">估算</text>
+<polyline points="468,202 500,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,196 500,202 490,208" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">定位等待</text>
+<text x="522" y="211" font-size="14" fill="#646A73">搬得太多，还是等得太久</text>
+<polyline points="700,202 732,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,196 732,202 722,208" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">消除或隐藏</text>
+<text x="754" y="211" font-size="14" fill="#646A73">第 2 到 7 章：分块、</text>
+<text x="754" y="234" font-size="14" fill="#646A73">流水、向量化</text>
+<polyline points="933,202 965,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,196 965,202 955,208" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">复测</text>
+<text x="987" y="211" font-size="14" fill="#646A73">第 9、10 章：调参、对</text>
+<text x="987" y="234" font-size="14" fill="#646A73">照 cuBLAS</text>
+<rect x="40" y="294" width="548" height="104" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="326" font-size="18" fill="#1F2329" font-weight="bold">搬得太多 → 复用</text>
+<text x="56" y="356" font-size="14" fill="#646A73">朴素 0.25 FLOP/B；128×128 块分块到 32 FLOP/B，8×8 线程分块把共享内存</text>
+<text x="56" y="379" font-size="14" fill="#646A73">读从 2 次降到 0.25 次</text>
+<rect x="612" y="294" width="548" height="82" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="628" y="326" font-size="18" fill="#1F2329" font-weight="bold">等得太久 → 流水</text>
+<text x="628" y="356" font-size="14" fill="#646A73">双缓冲让下一段搬运和本段计算重叠；占用率 25% 时靠 ILP 和流水跑满</text>
+<text x="40" y="436" font-size="12" fill="#646A73">来源：NVIDIA H100 规格页；Boehm, How to Optimize a CUDA Matmul Kernel；本篇第 1 到 3 章推算</text>
 </svg>

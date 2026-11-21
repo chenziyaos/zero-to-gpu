@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">warp 特化：生产者 warpgroup 只搬，消费者 warpgroup 只算</text>
+<text x="40" y="92" font-size="14" fill="#646A73">示意图：缓冲区轮转使用，第 k 块在计算时，第 k+1 块已经在搬</text>
+<text x="238" y="172" font-size="14" fill="#1F2329" text-anchor="end">生产者 · TMA</text>
+<rect x="250" y="150" width="910" height="34" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="250" y="153" width="182" height="28" rx="4" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="341" y="172" font-size="12" fill="#D46B08" text-anchor="middle">搬块 1</text>
+<rect x="432" y="153" width="182" height="28" rx="4" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="523" y="172" font-size="12" fill="#D46B08" text-anchor="middle">搬块 2</text>
+<rect x="614" y="153" width="182" height="28" rx="4" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="705" y="172" font-size="12" fill="#D46B08" text-anchor="middle">搬块 3</text>
+<rect x="796" y="153" width="182" height="28" rx="4" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="887" y="172" font-size="12" fill="#D46B08" text-anchor="middle">搬块 4</text>
+<text x="238" y="220" font-size="14" fill="#1F2329" text-anchor="end">消费者 · Tensor Core</text>
+<rect x="250" y="198" width="910" height="34" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="432" y="201" width="182" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="523" y="220" font-size="12" fill="#245BDB" text-anchor="middle">算块 1</text>
+<rect x="614" y="201" width="182" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="705" y="220" font-size="12" fill="#245BDB" text-anchor="middle">算块 2</text>
+<rect x="796" y="201" width="182" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="887" y="220" font-size="12" fill="#245BDB" text-anchor="middle">算块 3</text>
+<rect x="978" y="201" width="182" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="1069" y="220" font-size="12" fill="#245BDB" text-anchor="middle">算块 4</text>
+<rect x="40" y="272" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="301" font-size="15" fill="#1F2329">TMA 可在全局内存与共享内存之间搬一到五维的张量块；Hopper 的 Tensor Core 指令以 128 线程（4 个 warp）组成的 warpgroup 为粒度。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：NVIDIA CUTLASS 文档 Efficient GEMM in CUDA（Warp Specialization）；NVIDIA Hopper Tuning Guide；Shah et al., FlashAttention-3</text>
+</svg>

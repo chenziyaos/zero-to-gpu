@@ -1,38 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="730"
-     viewBox="-20 -20 1240 730">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="690" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">时间账中的 W_comm：所有 rank 在 all-reduce barrier 等网络</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">T = T_compute + W_mem + W_host + W_comm + W_idle；W_comm 35% 是单机外最大等待</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 220)"><rect x="0" y="0" width="224" height="64" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:3" transform="translate(131.5, 239.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">20%</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(264, 220)"><rect x="0" y="0" width="168" height="64" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:4" transform="translate(327.5, 239.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">15%</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(432, 220)"><rect x="0" y="0" width="112" height="64" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:5" transform="translate(467.5, 239.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">10%</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(544, 220)"><rect x="0" y="0" width="392" height="64" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:6" transform="translate(719.5, 239.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">35%</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(936, 220)"><rect x="0" y="0" width="224" height="64" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:7" transform="translate(1027.5, 239.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">20%</tspan></tspan></text></g>
-<g id="a3:8" transform="translate(357, 162.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="243"><tspan x="243" y="17.648"><tspan x="41.43" text-anchor="start">T = T_compute + W_mem + W_host + W_comm + W_idle</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(40, 322)"><rect x="0" y="0" width="14" height="14" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:9" transform="translate(66, 318.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">T_compute · 20%</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(360, 318.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">矩阵乘法、激活函数</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(40, 354)"><rect x="0" y="0" width="14" height="14" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:11" transform="translate(66, 350.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_mem · 15%</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(360, 350.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">HBM/L2 访存延迟</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(40, 386)"><rect x="0" y="0" width="14" height="14" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:13" transform="translate(66, 382.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_host · 10%</tspan></tspan></text></g>
-<g id="a3:14" transform="translate(360, 382.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">GPU 等 CPU、驱动开销</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(40, 418)"><rect x="0" y="0" width="14" height="14" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:15" transform="translate(66, 414.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_comm · 35%</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(360, 414.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">all-reduce 等网络</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(40, 450)"><rect x="0" y="0" width="14" height="14" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a3:17" transform="translate(66, 446.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_idle · 20%</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(360, 446.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">卡等任务、调度、故障</tspan></tspan></text></g>
-<g id="o3:12" transform="translate(40, 524)"><rect x="0" y="0" width="1120" height="100" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:19" transform="translate(60, 535.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">W_comm = 35%（最大单项等待）</tspan></tspan></text></g>
-<g id="a3:20" transform="translate(60, 566.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">任何一个 rank 慢都会被 all-reduce barrier 拖累；本篇聚焦如何消除 / 隐藏 W_comm</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(40, 651.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 MAINLINE 第 2 节</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">跨机这一跳：上限由网卡定，等待来自网络和主机</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇处理 W_comm 里跨机网络造成的等待</text>
+<rect x="40" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">拓扑</text>
+<text x="56" y="211" font-size="14" fill="#646A73">流量离不离开 leaf（第</text>
+<text x="56" y="234" font-size="14" fill="#646A73">3 章）</text>
+<polyline points="235,202 267,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,196 267,202 257,208" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">哈希</text>
+<text x="289" y="211" font-size="14" fill="#646A73">ECMP 让大流挤在一起（</text>
+<text x="289" y="234" font-size="14" fill="#646A73">第 4 章）</text>
+<polyline points="468,202 500,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,196 500,202 490,208" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">暂停</text>
+<text x="522" y="211" font-size="14" fill="#646A73">PFC 按端口暂停（第 5</text>
+<text x="522" y="234" font-size="14" fill="#646A73">章）</text>
+<polyline points="700,202 732,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,196 732,202 722,208" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">拥塞控制</text>
+<text x="754" y="211" font-size="14" fill="#646A73">ECN、CNP、接收端准入</text>
+<text x="754" y="234" font-size="14" fill="#646A73">（第 6 章）</text>
+<polyline points="933,202 965,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,196 965,202 955,208" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">多路径</text>
+<text x="987" y="211" font-size="14" fill="#646A73">自适应路由、PXN（第 7</text>
+<text x="987" y="234" font-size="14" fill="#646A73">章）</text>
+<rect x="40" y="284" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">上限（第 1、2 章）</text>
+<text x="56" y="346" font-size="14" fill="#646A73">400 Gbps 网卡每方向 50 GB/s</text>
+<text x="56" y="369" font-size="14" fill="#646A73">NVLink 每方向 450 GB/s，相差 9 倍</text>
+<rect x="612" y="284" width="548" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="628" y="316" font-size="18" fill="#1F2329" font-weight="bold">主机与诊断（第 8、9 章）</text>
+<text x="628" y="346" font-size="14" fill="#646A73">NCCL_IB_HCA、GID、GPUDirect RDMA</text>
+<text x="628" y="369" font-size="14" fill="#646A73">一对网卡测到全规模</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：DCQCN（SIGCOMM 2015）；RDMA over Commodity Ethernet at Scale（SIGCOMM 2016）；Meta RoCE 博客；Llama 3 论文；NCCL 文档</text>
 </svg>

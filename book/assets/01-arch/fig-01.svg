@@ -1,40 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="514"
-     viewBox="-20 -20 1240 514">
-<g id="o4:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="474" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a4:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">H100 访存延迟从 1 周期到 480 周期，差 480 倍</tspan></tspan></text></g>
-<g id="a4:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">从 SM 到 HBM 的四级硬件，每层驻留并行度配合延迟决定了等待长度</tspan></tspan></text></g>
-<g id="o4:2" transform="translate(40, 128)"><rect x="0" y="0" width="1120" height="46" fill="#f0f4ff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="o4:3" transform="translate(40, 128)"><rect x="0" y="0" width="4" height="46" fill="#3370ff" stroke="none" stroke-width="0" rx="2" ry="2"/></g>
-<g id="a4:3" transform="translate(60, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">结论：</tspan></tspan></text></g>
-<g id="a4:4" transform="translate(114.4, 139.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">本篇看两件事：延迟隐藏（warp 等 HBM 480 周期时调度器切到别的 warp），以及榨出 1024 线程 × 41.5% ≈ 425 个同时在路的加载来填 HBM</tspan></tspan></text></g>
-<g id="o4:4" transform="translate(40, 198)"><rect x="0" y="0" width="1120" height="212" fill="#ffffff" stroke="#dee0e3" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o4:5" transform="translate(41, 199)"><rect x="0" y="0" width="1118" height="43" fill="#f0f4ff" stroke="none" stroke-width="0" rx="11" ry="11"/></g>
-<g id="o4:6" transform="translate(41, 230)"><rect x="0" y="0" width="1118" height="12" fill="#f0f4ff" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
-<g id="c4:1" transform="translate(40, 242)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1120 0"/></g>
-<g id="c4:2" transform="translate(41, 284)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1118 0"/></g>
-<g id="c4:3" transform="translate(41, 326)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1118 0"/></g>
-<g id="c4:4" transform="translate(41, 368)"><path fill="none" stroke="#eff0f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1118 0"/></g>
-<g id="a4:5" transform="translate(58, 208.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">层级</tspan></tspan></text></g>
-<g id="a4:6" transform="translate(222, 208.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">硬件资源</tspan></tspan></text></g>
-<g id="a4:7" transform="translate(562.7, 208.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">容量/并行度</tspan></tspan></text></g>
-<g id="a4:8" transform="translate(928, 208.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">关键延迟</tspan></tspan></text></g>
-<g id="a4:9" transform="translate(58, 251.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">整卡</tspan></tspan></text></g>
-<g id="a4:10" transform="translate(222, 251.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">132 SM · 共 27 万+ 线程驻留</tspan></tspan></text></g>
-<g id="a4:11" transform="translate(562.7, 251.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">897 KB 在途数据</tspan></tspan></text></g>
-<g id="a4:12" transform="translate(928, 251.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">480 ns HBM 延迟</tspan></tspan></text></g>
-<g id="a4:13" transform="translate(58, 293.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">每 SM</tspan></tspan></text></g>
-<g id="a4:14" transform="translate(222, 293.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">2048 线程（64 块 × 32 线程）</tspan></tspan></text></g>
-<g id="a4:15" transform="translate(562.7, 293.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">寄存器 256 KB · SMEM 233 KB</tspan></tspan></text></g>
-<g id="a4:16" transform="translate(928, 293.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">~1-29 周期</tspan></tspan></text></g>
-<g id="a4:17" transform="translate(58, 335.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">每线程</tspan></tspan></text></g>
-<g id="a4:18" transform="translate(222, 335.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">最多 255 个 32bit 寄存器</tspan></tspan></text></g>
-<g id="a4:19" transform="translate(562.7, 335.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">封在 warp 里 32 线程/周期</tspan></tspan></text></g>
-<g id="a4:20" transform="translate(928, 335.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">1 周期寄存器</tspan></tspan></text></g>
-<g id="a4:21" transform="translate(58, 377.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">每 HBM</tspan></tspan></text></g>
-<g id="a4:22" transform="translate(222, 377.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">3.35 TB/s（单向）</tspan></tspan></text></g>
-<g id="a4:23" transform="translate(562.7, 377.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">决定整卡吞吐上限</tspan></tspan></text></g>
-<g id="a4:24" transform="translate(928, 377.429)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">480 周期 ≈ 480 ns</tspan></tspan></text></g>
-<g id="a4:25" transform="translate(40, 435.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 code_outputs.md、NVIDIA Technical Blog、luo_et_al</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460">
+<rect x="0" y="0" width="1200" height="460" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">等待约 480 个周期，要靠在途请求填满</text>
+<text x="40" y="92" font-size="14" fill="#646A73">H100 SXM；五步闭环在本篇各章的落点</text>
+<rect x="40" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">定天花板</text>
+<text x="56" y="211" font-size="14" fill="#646A73">第 2、5 章：资源上限、</text>
+<text x="56" y="234" font-size="14" fill="#646A73">Little 定律</text>
+<polyline points="235,202 267,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,196 267,202 257,208" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">测实际</text>
+<text x="289" y="211" font-size="14" fill="#646A73">ncu：DRAM 吞吐、停顿</text>
+<text x="289" y="234" font-size="14" fill="#646A73">原因</text>
+<polyline points="468,202 500,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,196 500,202 490,208" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">定位等待</text>
+<text x="522" y="211" font-size="14" fill="#646A73">第 3、4 章：全局、共</text>
+<text x="522" y="234" font-size="14" fill="#646A73">享内存还是栅栏</text>
+<polyline points="700,202 732,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,196 732,202 722,208" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">消除或隐藏</text>
+<text x="754" y="211" font-size="14" fill="#646A73">第 6、7 章：加宽加载、</text>
+<text x="754" y="234" font-size="14" fill="#646A73">ILP、异步拷贝</text>
+<polyline points="933,202 965,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,196 965,202 955,208" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">复测</text>
+<text x="987" y="211" font-size="14" fill="#646A73">第 8、9 章：波次、换</text>
+<text x="987" y="234" font-size="14" fill="#646A73">卡重算</text>
+<rect x="40" y="294" width="548" height="104" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="326" font-size="18" fill="#1F2329" font-weight="bold">等待有多长</text>
+<text x="56" y="356" font-size="14" fill="#646A73">全局内存约 478.8 个周期（H800 实测）；吃满 3.35 TB/s 要整卡约 897 KB、</text>
+<text x="56" y="379" font-size="14" fill="#646A73">每 SM 约 6.8 KB 同时在路上</text>
+<rect x="612" y="294" width="548" height="104" rx="12" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="628" y="326" font-size="18" fill="#1F2329" font-weight="bold">靠什么藏</text>
+<text x="628" y="356" font-size="14" fill="#646A73">驻留更多 warp（TLP），或让每个线程同时发出多条独立加载（ILP）；读</text>
+<text x="628" y="379" font-size="14" fill="#646A73">float4 时只需 21.2% 的线程挂着加载</text>
+<text x="40" y="436" font-size="12" fill="#646A73">来源：Luo et al. Benchmarking and Dissecting the Nvidia Hopper GPU Architecture（H800 实测）；NVIDIA H100 规格页；本篇 sim_inflight.py 输出</text>
 </svg>

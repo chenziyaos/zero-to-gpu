@@ -1,33 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="590"
-     viewBox="-20 -20 1240 590">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="550" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">朴素 vs 分块：访存量对比</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">Y 轴访存（MB），X 轴分块参数；朴素 → 分块削减 2700 倍</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 160)"><rect x="0" y="0" width="160" height="68" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:3" transform="translate(58, 167.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">朴素 GEMM</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(58, 195.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">一个一个读</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(220, 160)"><rect x="0" y="0" width="600" height="68" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:4" transform="translate(220, 160)"><rect x="0" y="0" width="594" height="68" fill="#f54a45" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:5" transform="translate(684, 179.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="end" dominant-baseline="alphabetic" x="118"><tspan x="118" y="20.001"><tspan x="22.36" text-anchor="start">549,822 MB</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(836, 183.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">强度 0.25</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 272)"><rect x="0" y="0" width="160" height="68" fill="#f0fbef" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:7" transform="translate(58, 279.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">分块 GEMM</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(58, 307.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">三级复用</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(220, 272)"><rect x="0" y="0" width="600" height="68" fill="#f2f3f5" stroke="#f2f3f5" stroke-width="1" rx="6" ry="6"/></g>
-<g id="o2:7" transform="translate(220, 272)"><rect x="0" y="0" width="48" height="68" fill="#34c724" stroke="#8ee085" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:9" transform="translate(280, 291.9995)"><text font-size="17" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="20.001"><tspan x="0" text-anchor="start">201.3 MB</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(836, 295.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">强度 682.67</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(446.5, 244.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="73.5"><tspan x="73.5" y="21.177"><tspan x="12.17" text-anchor="start">↓ 削减 2700×</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(840, 160)"><rect x="0" y="0" width="280" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:12" transform="translate(856, 171.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">关键转变</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(856, 203.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">访存：549 822 → 201.3 MB</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(856, 224.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">强度：0.25 → 682.67 FLOP/B</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(856, 245.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">拐点：越过 H100 295</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(856, 266.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">瓶颈转移：带宽 → 算力</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(40, 404)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:17" transform="translate(56, 413.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">本篇主线</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(56, 447.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">本篇 GEMM 三级分块让访存量降 2700 倍，每个字节被 64 个 MAC 分摊；这是本篇后续 warp 分块、Tensor Core 对齐、Pipeline 重叠的前置结果</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(40, 511.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-05 code_outputs.md（sim_gemm.py 朴素 vs 分块输出）</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+<rect x="0" y="0" width="1200" height="600" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">最大的两跳来自复用：从 12.8% 到 68.7%</text>
+<text x="40" y="92" font-size="14" fill="#646A73">A6000 上 FP32 SGEMM 各优化步骤的吞吐，单位为相对 cuBLAS 的百分比</text>
+<text x="228" y="168" font-size="14" fill="#1F2329" text-anchor="end">1 朴素</text>
+<rect x="240" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="150" width="10" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="258" y="168" font-size="13" fill="#646A73">1.3%</text>
+<text x="228" y="210" font-size="14" fill="#1F2329" text-anchor="end">2 全局内存合并</text>
+<rect x="240" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="192" width="64" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="312" y="210" font-size="13" fill="#646A73">8.5%</text>
+<text x="228" y="252" font-size="14" fill="#1F2329" text-anchor="end">3 共享内存缓存</text>
+<rect x="240" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="234" width="96" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="344" y="252" font-size="13" fill="#646A73">12.8%  显存读一次、片上复用</text>
+<text x="228" y="294" font-size="14" fill="#1F2329" text-anchor="end">4 一维线程分块</text>
+<rect x="240" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="276" width="273" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="521" y="294" font-size="13" fill="#646A73">36.5%</text>
+<text x="228" y="336" font-size="14" fill="#1F2329" text-anchor="end">5 二维线程分块</text>
+<rect x="240" y="318" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="318" width="513" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="761" y="336" font-size="13" fill="#646A73">68.7%  每线程 8×8 个输出</text>
+<text x="228" y="378" font-size="14" fill="#1F2329" text-anchor="end">6 向量化访存</text>
+<rect x="240" y="360" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="360" width="586" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="834" y="378" font-size="13" fill="#646A73">78.4%</text>
+<text x="228" y="420" font-size="14" fill="#1F2329" text-anchor="end">10 warp 分块</text>
+<rect x="240" y="402" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="402" width="700" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="948" y="420" font-size="13" fill="#646A73">93.7%</text>
+<rect x="40" y="464" width="1120" height="73" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="493" font-size="15" fill="#1F2329">第 3 到第 5 步把同一个数在共享内存和寄存器里复用的次数一级级抬高，吞吐从 12.8% 涨到 68.7%；后面的向量化和 warp 分块是在复用到位之后再削指令和</text>
+<text x="56" y="517" font-size="15" fill="#1F2329">搬运开销。</text>
+<text x="40" y="576" font-size="12" fill="#646A73">来源：Boehm, How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance（A6000，4092²）</text>
 </svg>

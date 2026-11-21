@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/16-node-burnin.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-16](../book/16-node-burnin.md) 第 10 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 单机验收把 H100/A100/B200 八卡机器从清点、固件、静态体检、微基准、互联通信、长测六层漏斗拆开，每层落盘一份观测 JSON 后汇总给判定引擎，输出 PASS（0）或 FAIL（1）的整机结论。六条合格线用比例口径（九成、八成五、八成、零容忍）跨代稳定，从判定、分析到基线沉淀一体化。
 
 ## 文件清单

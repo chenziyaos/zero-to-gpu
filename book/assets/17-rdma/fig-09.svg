@@ -1,56 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="750"
-     viewBox="-20 -20 1240 750">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="710" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">双平面轨道优化：同一流源端口自然分散</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">左：单平面（16 条流碰撞严重）；右：双平面（两个平面各 8 条流，碰撞率减半）</tspan></tspan></text></g>
-<g id="a2:3" transform="translate(40, 153.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">单平面</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(80, 200)"><rect x="0" y="0" width="100" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:4" transform="translate(107.5, 215.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="22.5"><tspan x="22.5" y="15.295"><tspan x="4.34" text-anchor="start">Spine</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(40, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:5" transform="translate(68, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(180, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:6" transform="translate(208, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(85, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 45 0 L 0 90"/></g>
-<g id="c2:2" transform="translate(130, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 95 90"/></g>
-<g id="a2:7" transform="translate(40, 404.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">16 流 → 8 uplink</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(40, 430.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">碰撞率高</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(620, 153.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">双平面</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(660, 200)"><rect x="0" y="0" width="100" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:10" transform="translate(679.5, 215.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="30.5"><tspan x="30.5" y="15.295"><tspan x="6.7" text-anchor="start">Spine A</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(820, 200)"><rect x="0" y="0" width="100" height="50" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:11" transform="translate(839.5, 215.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="30.5"><tspan x="30.5" y="15.295"><tspan x="6.44" text-anchor="start">Spine B</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(620, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:12" transform="translate(648, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(760, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:13" transform="translate(788, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(900, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:14" transform="translate(928, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(1040, 340)"><rect x="0" y="0" width="90" height="50" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:15" transform="translate(1068, 355.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="17"><tspan x="17" y="15.295"><tspan x="4.975" text-anchor="start">ToR</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(665, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 45 0 L 0 90"/></g>
-<g id="c2:4" transform="translate(710, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 95 90"/></g>
-<g id="c2:5" transform="translate(710, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 235 90"/></g>
-<g id="c2:6" transform="translate(710, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 375 90"/></g>
-<g id="c2:7" transform="translate(665, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 205 0 L 0 90"/></g>
-<g id="c2:8" transform="translate(805, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 65 0 L 0 90"/></g>
-<g id="c2:9" transform="translate(870, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 75 90"/></g>
-<g id="c2:10" transform="translate(870, 250)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 215 90"/></g>
-<g id="a2:16" transform="translate(620, 404.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">8 流 × 2 → 4 uplink/平面</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(620, 430.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">碰撞率减半</tspan></tspan></text></g>
-<g id="c2:11" transform="translate(600, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-dasharray="6 4" d="M 0 0 L 0 320"/></g>
-<g id="o2:11" transform="translate(40, 540)"><rect x="0" y="0" width="360" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:18" transform="translate(56, 551.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">工作原理</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(56, 582.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">每个平面独立 ECMP</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(56, 604.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">同一流源端口自然分开</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(420, 540)"><rect x="0" y="0" width="360" height="110" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:21" transform="translate(436, 551.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">收益</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(436, 582.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">碰撞率减半（λ=2 → λ=1）</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(436, 604.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">有效带宽近 2×</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(800, 540)"><rect x="0" y="0" width="360" height="110" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:24" transform="translate(816, 551.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">代价</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(816, 582.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">平面数 × 链路资源</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(816, 604.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">无需应用改动</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(40, 671.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Meta SIGCOMM 2024；Alibaba HPN SIGCOMM 2024</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">主机侧：每张 GPU 用自己的集群网卡，直读显存</text>
+<text x="40" y="92" font-size="14" fill="#646A73">DGX H100：8 块单口 ConnectX-7 做集群网络，另有 2 块双口做存储和管理</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">变量</text>
+<text x="421" y="166" font-size="14" fill="#1F2329" font-weight="bold">作用</text>
+<text x="831" y="166" font-size="14" fill="#1F2329" font-weight="bold">核对</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">NCCL_IB_HCA</text>
+<text x="421" y="206" font-size="14" fill="#1F2329">指定用于通信的 RDMA 网卡</text>
+<text x="831" y="206" font-size="14" fill="#1F2329">只列集群网卡</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">NCCL_IB_GID_INDEX</text>
+<text x="421" y="244" font-size="14" fill="#1F2329">RoCE 模式的 GID 索引</text>
+<text x="831" y="244" font-size="14" fill="#1F2329">和 show_gids 的 RoCEv2 一致</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">NCCL_NET_GDR_LEVEL</text>
+<text x="421" y="282" font-size="14" fill="#1F2329">GPU 与网卡多远仍用 GPUDirect RDMA</text>
+<text x="831" y="282" font-size="14" fill="#1F2329">PIX：同一 PCI 交换芯片</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">NCCL_CROSS_NIC</text>
+<text x="421" y="320" font-size="14" fill="#1F2329">同一 ring 是否跨网卡</text>
+<text x="831" y="320" font-size="14" fill="#1F2329">轨道优化网络不跨</text>
+<rect x="40" y="334" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="358" font-size="14" fill="#1F2329" font-weight="bold">NCCL_IB_QPS_PER_CONNECTION</text>
+<text x="421" y="358" font-size="14" fill="#1F2329">每个连接的 QP 数，1 到 128</text>
+<text x="831" y="358" font-size="14" fill="#1F2329">RoCE 多级网络按需加大</text>
+<rect x="40" y="408" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="437" font-size="15" fill="#1F2329">用 NCCL_DEBUG=INFO 的启动日志核对：每个 rank 用了哪块网卡、是否用了 GPUDirect RDMA。</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：DGX H100 User Guide；ConnectX-7 Datasheet；NCCL 文档</text>
 </svg>

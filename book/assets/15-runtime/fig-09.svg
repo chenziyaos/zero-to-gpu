@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">测得准的四条规则</text>
+<text x="40" y="92" font-size="14" fill="#646A73">计时之外再抓时间线，确认变快的原因</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">规则</text>
+<text x="326" y="166" font-size="14" fill="#1F2329" font-weight="bold">为什么</text>
+<text x="799" y="166" font-size="14" fill="#1F2329" font-weight="bold">怎样做</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">同步后计时</text>
+<text x="326" y="206" font-size="14" fill="#1F2329">不同步的计时只量到排队</text>
+<text x="799" y="206" font-size="14" fill="#1F2329">CUDA 事件，或前后 synchronize()</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">排除首次编译和热身</text>
+<text x="326" y="244" font-size="14" fill="#1F2329">抓图、编译、捕获是一次性开销</text>
+<text x="799" y="244" font-size="14" fill="#1F2329">先热身若干次，编译耗时单独记</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">固定输入形状</text>
+<text x="326" y="282" font-size="14" fill="#1F2329">形状变化触发 guard 失败和重编译</text>
+<text x="799" y="282" font-size="14" fill="#1F2329">比较方案用同一组形状</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">先核对数值</text>
+<text x="326" y="320" font-size="14" fill="#1F2329">CUDA Graphs 部分违规不报错</text>
+<text x="799" y="320" font-size="14" fill="#1F2329">每换一种方式先和 eager 比输出</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">时间线上看三件事：核的个数（融合）、核间空隙（CUDA Graphs）、CPU 行上的同步调用。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：PyTorch, CUDA semantics；Dynamo Overview（guard 与重编译）</text>
+</svg>

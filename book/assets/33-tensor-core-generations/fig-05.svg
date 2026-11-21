@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 550" width="1200" height="550">
+<rect x="0" y="0" width="1200" height="550" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">A100 的 cp.async：全局内存直接进共享内存，不经过寄存器</text>
+<text x="40" y="92" font-size="14" fill="#646A73">上：Volta、Turing 的搬运；下：Ampere 的搬运</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">全局内存</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">寄存器</text>
+<text x="347" y="211" font-size="14" fill="#646A73">load 中转</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">共享内存</text>
+<text x="638" y="211" font-size="14" fill="#646A73">store 后同步</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">mma</text>
+<rect x="40" y="272" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="297" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="302" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="303" font-size="18" fill="#1F2329" font-weight="bold">全局内存</text>
+<polyline points="293,312 325,312" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,306 325,312 315,318" fill="#8F959E"/>
+<rect x="331" y="272" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="297" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="302" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="303" font-size="18" fill="#1F2329" font-weight="bold">cp.async</text>
+<text x="347" y="333" font-size="14" fill="#646A73">要求 sm_80</text>
+<polyline points="584,312 616,312" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,306 616,312 606,318" fill="#8F959E"/>
+<rect x="622" y="272" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="651" cy="297" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="651" y="302" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="303" font-size="18" fill="#1F2329" font-weight="bold">共享内存</text>
+<text x="638" y="333" font-size="14" fill="#646A73">mbarrier 等到达</text>
+<polyline points="875,312 907,312" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,306 907,312 897,318" fill="#8F959E"/>
+<rect x="913" y="272" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="942" cy="297" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="942" y="302" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="303" font-size="18" fill="#1F2329" font-weight="bold">ldmatrix + mma</text>
+<text x="929" y="333" font-size="14" fill="#646A73">m16n8k16</text>
+<rect x="40" y="383" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="412" font-size="15" fill="#1F2329">共享内存放两块：一块给当前计算，一块接收下一轮的数据（双缓冲）。</text>
+<rect x="40" y="433" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="462" font-size="15" fill="#1F2329">发 cp.async 的仍是计算线程：每 SM 每时钟要喂 1024 次乘加。</text>
+<text x="40" y="526" font-size="12" fill="#646A73">来源：NVIDIA Ampere 技术博客；PTX ISA（cp.async、ldmatrix、mbarrier）；CUTLASS 文档</text>
+</svg>

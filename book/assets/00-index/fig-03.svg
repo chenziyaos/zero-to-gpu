@@ -1,60 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="930"
-     viewBox="-20 -20 1240 930">
-<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="890" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">五级框架 · 由内向外的等待分层</tspan></tspan></text></g>
-<g id="a1:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">31 篇按等待发生的位置分 L1-L6,每层消一种等待,相互衔接</tspan></tspan></text></g>
-<g id="a1:3" transform="translate(40, 156.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">层</tspan></tspan></text></g>
-<g id="a1:4" transform="translate(300, 156.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">覆盖与消除的等待</tspan></tspan></text></g>
-<g id="a1:5" transform="translate(820, 156.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">关键等待</tspan></tspan></text></g>
-<g id="o1:2" transform="translate(40, 200)"><rect x="0" y="0" width="244" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:6" transform="translate(64, 210.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L1</tspan></tspan></text></g>
-<g id="a1:7" transform="translate(64, 239.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">01-03</tspan></tspan></text></g>
-<g id="a1:8" transform="translate(130, 219.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">GPU 架构与性能账</tspan></tspan></text></g>
-<g id="o1:3" transform="translate(300, 200)"><rect x="0" y="0" width="720" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:9" transform="translate(324, 212.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">算力/带宽/roofline</tspan></tspan></text></g>
-<g id="a1:10" transform="translate(324, 239.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: SM 等 HBM、等指令</tspan></tspan></text></g>
-<g id="o1:4" transform="translate(40, 288)"><rect x="0" y="0" width="244" height="78" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:11" transform="translate(64, 298.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L2</tspan></tspan></text></g>
-<g id="a1:12" transform="translate(64, 327.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">04-08</tspan></tspan></text></g>
-<g id="a1:13" transform="translate(130, 307.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">Kernel 优化</tspan></tspan></text></g>
-<g id="o1:5" transform="translate(300, 288)"><rect x="0" y="0" width="720" height="78" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:14" transform="translate(324, 300.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">CUDA/GEMM/attention/算子融合</tspan></tspan></text></g>
-<g id="a1:15" transform="translate(324, 327.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: SM 等访存、等启动</tspan></tspan></text></g>
-<g id="o1:6" transform="translate(40, 376)"><rect x="0" y="0" width="244" height="78" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:16" transform="translate(64, 386.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L3</tspan></tspan></text></g>
-<g id="a1:17" transform="translate(64, 415.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">09-12</tspan></tspan></text></g>
-<g id="a1:18" transform="translate(130, 395.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">单机与运行时</tspan></tspan></text></g>
-<g id="o1:7" transform="translate(300, 376)"><rect x="0" y="0" width="720" height="78" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:19" transform="translate(324, 388.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">CUDA Graph/stream/MPS/编译</tspan></tspan></text></g>
-<g id="a1:20" transform="translate(324, 415.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: GPU 等 host/驱动/分配</tspan></tspan></text></g>
-<g id="o1:8" transform="translate(40, 464)"><rect x="0" y="0" width="244" height="78" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:21" transform="translate(64, 474.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L4</tspan></tspan></text></g>
-<g id="a1:22" transform="translate(64, 503.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">13-20</tspan></tspan></text></g>
-<g id="a1:23" transform="translate(130, 483.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">网络与多机通信</tspan></tspan></text></g>
-<g id="o1:9" transform="translate(300, 464)"><rect x="0" y="0" width="720" height="78" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:24" transform="translate(324, 476.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">NVLink/RDMA/NCCL/拓扑/故障</tspan></tspan></text></g>
-<g id="a1:25" transform="translate(324, 503.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: 卡等卡、等故障恢复</tspan></tspan></text></g>
-<g id="o1:10" transform="translate(40, 552)"><rect x="0" y="0" width="244" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:26" transform="translate(64, 562.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L5</tspan></tspan></text></g>
-<g id="a1:27" transform="translate(64, 591.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">21-24</tspan></tspan></text></g>
-<g id="a1:28" transform="translate(130, 571.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">LLM 训练基础设施</tspan></tspan></text></g>
-<g id="o1:11" transform="translate(300, 552)"><rect x="0" y="0" width="720" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:29" transform="translate(324, 564.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">并行/MoE/训练推理总账</tspan></tspan></text></g>
-<g id="a1:30" transform="translate(324, 591.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: 通信与流水气泡、最慢的专家</tspan></tspan></text></g>
-<g id="o1:12" transform="translate(40, 640)"><rect x="0" y="0" width="244" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:31" transform="translate(64, 650.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">L6</tspan></tspan></text></g>
-<g id="a1:32" transform="translate(64, 679.0585)"><text font-size="11" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">25-31</tspan></tspan></text></g>
-<g id="a1:33" transform="translate(130, 659.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">推理专项</tspan></tspan></text></g>
-<g id="o1:13" transform="translate(300, 640)"><rect x="0" y="0" width="720" height="78" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a1:34" transform="translate(324, 652.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">投机/CXL/NVL72/成本/引擎/线性注意力/Agent</tspan></tspan></text></g>
-<g id="a1:35" transform="translate(324, 679.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">消: decode 等 KV 与权重、Agent 等新形态</tspan></tspan></text></g>
-<g id="c1:1" transform="translate(1060, 208)"><path fill="none" stroke="#82a7fc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 502 L 0 0"/></g>
-<g id="d1:1" transform="translate(1051.5, 205.5)"><defs><symbol id="svgicon-d1-1" viewBox="0 0 17 15"><g transform="translate(-1051.5 -205.5)"><polygon points="1054,218 1060,208 1066,218" fill="#82A7FC" /></g></symbol></defs><use href="#svgicon-d1-1" x="0" y="0" width="17" height="15"/></g>
-<g id="a1:36" transform="translate(1072, 448.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">由内向外</tspan></tspan></text></g>
-<g id="o1:14" transform="translate(40, 744)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:37" transform="translate(56, 753.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">用法</tspan></tspan></text></g>
-<g id="a1:38" transform="translate(56, 787.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">层级越低,等待越近 compute — 优化从最近的 Layer 开始,效率上限才被推得最高. L6 推理专项接在 L5 训练侧之后,共享同一本时间账</tspan></tspan></text></g>
-<g id="a1:39" transform="translate(40, 851.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-00 §2.1</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">五步闭环：先算不该等多久，再量实际等了多久</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每篇至少有一个按这五步走完的案例</text>
+<rect x="40" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">定天花板</text>
+<text x="56" y="211" font-size="14" fill="#646A73">Roofline、带宽账、通</text>
+<text x="56" y="234" font-size="14" fill="#646A73">信下限</text>
+<polyline points="235,202 267,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,196 267,202 257,208" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">测实际</text>
+<text x="289" y="211" font-size="14" fill="#646A73">命令和指标名</text>
+<polyline points="468,202 500,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,196 500,202 490,208" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">定位等待</text>
+<text x="522" y="211" font-size="14" fill="#646A73">落在时间账哪一项</text>
+<polyline points="700,202 732,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,196 732,202 722,208" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">消除或隐藏</text>
+<text x="754" y="211" font-size="14" fill="#646A73">手段和前后对比</text>
+<polyline points="933,202 965,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,196 965,202 955,208" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">复测</text>
+<text x="987" y="211" font-size="14" fill="#646A73">瓶颈转到哪，接下一篇</text>
+<rect x="40" y="284" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="313" font-size="15" fill="#1F2329">跳过定天花板直接调参，最常见的结果是在不在关键路径上的等待上花了很多时间。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：本系列主线定义（spec/MAINLINE.md）</text>
 </svg>

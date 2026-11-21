@@ -1,46 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="700"
-     viewBox="-20 -20 1240 700">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="660" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">时间账：五类等待分布与优化顺序</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">T_total = T_compute + W_mem + W_host + W_comm + W_idle（现实例）</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 170)"><rect x="0" y="0" width="459" height="64" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:3" transform="translate(249.5, 190.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">41%</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(499, 170)"><rect x="0" y="0" width="269" height="64" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:4" transform="translate(613.5, 190.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">24%</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(768, 170)"><rect x="0" y="0" width="202" height="64" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:5" transform="translate(848.5, 190.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">18%</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(970, 170)"><rect x="0" y="0" width="134" height="64" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:6" transform="translate(1016.5, 190.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="20.5"><tspan x="20.5" y="17.648"><tspan x="4.425" text-anchor="start">12%</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(1104, 170)"><rect x="0" y="0" width="56" height="64" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a2:7" transform="translate(1118.5, 236.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="13.5"><tspan x="13.5" y="15.295"><tspan x="3.405" text-anchor="start">5%</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(40, 280)"><rect x="0" y="0" width="14" height="14" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:8" transform="translate(66, 276.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">T_compute · 41%</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(300, 276.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">GPU 芯片计算时间（越大越好）</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(40, 314)"><rect x="0" y="0" width="14" height="14" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:10" transform="translate(66, 310.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_mem · 24%</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(300, 310.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">显存延迟 + 带宽饱和等待（需消除）</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(40, 348)"><rect x="0" y="0" width="14" height="14" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:12" transform="translate(66, 344.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_host · 18%</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(300, 344.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">CPU 同步、GPU-CPU 交互等待（需隐藏）</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(40, 382)"><rect x="0" y="0" width="14" height="14" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:14" transform="translate(66, 378.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_comm · 12%</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(300, 378.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">卡间通信等待（需并行化）</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(40, 416)"><rect x="0" y="0" width="14" height="14" fill="#f2f3f5" stroke="#dee0e3" stroke-width="1" rx="3" ry="3"/></g>
-<g id="a2:16" transform="translate(66, 412.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">W_idle · 5%</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(300, 412.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">设备空转（= 优化完成）</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(40, 484)"><rect x="0" y="0" width="360" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:18" transform="translate(56, 495.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">① 先消除 W_mem</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(56, 526.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">合并访存、缓存复用</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(56, 548.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">改用 Tensor Core / 量化</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(420, 484)"><rect x="0" y="0" width="360" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:21" transform="translate(436, 495.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">② 再隐藏 W_host</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(436, 526.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">CUDA Graph、async stream</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(436, 548.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">批处理减少同步</tspan></tspan></text></g>
-<g id="o2:14" transform="translate(800, 484)"><rect x="0" y="0" width="360" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:24" transform="translate(816, 495.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">③ 最后压 W_comm</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(816, 526.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">通信与计算重叠</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(816, 548.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">用 NVLink 而非 PCIe</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(40, 621.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 MAINLINE + code_outputs.md</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430">
+<rect x="0" y="0" width="1200" height="430" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">时间去哪了：从整卡到时间线，再到单个核</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇给出测量时间账的工具；时间线空隙记 W_host、W_idle，核的瓶颈归 T_compute 或 W_mem</text>
+<rect x="40" y="150" width="189" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">整卡</text>
+<text x="56" y="211" font-size="14" fill="#646A73">nvidia-smi 与 DCGM：</text>
+<text x="56" y="234" font-size="14" fill="#646A73">SM、Tensor、DRAM</text>
+<text x="56" y="257" font-size="14" fill="#646A73">Activity（第 1、8 章）</text>
+<polyline points="235,214 267,214" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,208 267,214 257,220" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">时间线</text>
+<text x="289" y="211" font-size="14" fill="#646A73">nsys 抓稳态，分同步、</text>
+<text x="289" y="234" font-size="14" fill="#646A73">发射、CPU 空隙（第 2、</text>
+<text x="289" y="257" font-size="14" fill="#646A73">3 章）</text>
+<polyline points="468,214 500,214" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,208 500,214 490,220" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">对回代码</text>
+<text x="522" y="211" font-size="14" fill="#646A73">PyTorch profiler 与</text>
+<text x="522" y="234" font-size="14" fill="#646A73">NVTX（第 7 章）</text>
+<polyline points="700,214 732,214" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,208 732,214 722,220" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">单个核</text>
+<text x="754" y="211" font-size="14" fill="#646A73">ncu：重放、SOL、占用</text>
+<text x="754" y="234" font-size="14" fill="#646A73">率、stall（第 4、5</text>
+<text x="754" y="257" font-size="14" fill="#646A73">章）</text>
+<polyline points="933,214 965,214" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,208 965,214 955,220" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">上限</text>
+<text x="987" y="211" font-size="14" fill="#646A73">Roofline：按精度算脊</text>
+<text x="987" y="234" font-size="14" fill="#646A73">点（第 6 章）</text>
+<rect x="40" y="318" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="346" font-size="15" fill="#1F2329">每改一处，回到时间线用同样的范围重抓（第 9 章）；时长以 nsys 为准，ncu 只看比例和瓶颈类型。</text>
+<text x="40" y="406" font-size="12" fill="#646A73">来源：NVIDIA Nsight Systems User Guide；Nsight Compute Profiling Guide；DCGM User Guide；PyTorch profiler 文档</text>
 </svg>

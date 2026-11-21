@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640">
+<rect x="0" y="0" width="1200" height="640" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">同一精度下拐点几乎不动，右移的是 FP4</text>
+<text x="40" y="92" font-size="14" fill="#646A73">单卡稠密峰值 ÷ 显存带宽，单位 FLOP/B；灰色 BF16，蓝色 FP8，橙色 FP4</text>
+<text x="228" y="168" font-size="14" fill="#1F2329" text-anchor="end">H100 · BF16</text>
+<rect x="240" y="150" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="150" width="118" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="366" y="168" font-size="13" fill="#646A73">295 FLOP/B</text>
+<text x="228" y="210" font-size="14" fill="#1F2329" text-anchor="end">H200 · BF16</text>
+<rect x="240" y="192" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="192" width="82" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="330" y="210" font-size="13" fill="#646A73">206 FLOP/B</text>
+<text x="228" y="252" font-size="14" fill="#1F2329" text-anchor="end">B200 / B300 · BF16</text>
+<rect x="240" y="234" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="234" width="112" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="360" y="252" font-size="13" fill="#646A73">281 FLOP/B</text>
+<text x="228" y="294" font-size="14" fill="#1F2329" text-anchor="end">H100 · FP8</text>
+<rect x="240" y="276" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="276" width="236" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="484" y="294" font-size="13" fill="#646A73">591 FLOP/B</text>
+<text x="228" y="336" font-size="14" fill="#1F2329" text-anchor="end">H200 · FP8</text>
+<rect x="240" y="318" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="318" width="164" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="412" y="336" font-size="13" fill="#646A73">412 FLOP/B</text>
+<text x="228" y="378" font-size="14" fill="#1F2329" text-anchor="end">B200 / B300 · FP8</text>
+<rect x="240" y="360" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="360" width="225" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="473" y="378" font-size="13" fill="#646A73">563 FLOP/B</text>
+<text x="228" y="420" font-size="14" fill="#1F2329" text-anchor="end">B200 · FP4</text>
+<rect x="240" y="402" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="402" width="449" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="697" y="420" font-size="13" fill="#646A73">1,125 FLOP/B</text>
+<text x="228" y="462" font-size="14" fill="#1F2329" text-anchor="end">B300 · FP4</text>
+<rect x="240" y="444" width="674" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="240" y="444" width="674" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="922" y="462" font-size="13" fill="#646A73">1,688 FLOP/B  算力 +50%，带宽不变</text>
+<rect x="40" y="506" width="1120" height="73" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="535" font-size="15" fill="#1F2329">低精度把每个元素的字节数也一起减了：同一形状的 GEMM 换成 FP8，强度和拐点一起翻倍，分类不变。只有 B300 FP4 让 decode 越过拐点所需的批大小从约</text>
+<text x="56" y="559" font-size="15" fill="#1F2329">296 升到约 475。</text>
+<text x="40" y="616" font-size="12" fill="#646A73">来源：NVIDIA H100、HGX B200/B300、DGX B200、GB300 NVL72 官网规格，按单卡稠密口径换算</text>
+</svg>

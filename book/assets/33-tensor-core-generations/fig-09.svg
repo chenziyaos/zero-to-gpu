@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 490" width="1200" height="490">
+<rect x="0" y="0" width="1200" height="490" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">同一张 H100：注意力从 35% 到 75%，靠的是把搬运和 softmax 异步起来</text>
+<text x="40" y="92" font-size="14" fill="#646A73">FP16 前向，TFLOPs/s；中间三行是论文第 4.2 节的消融（批 4、序列 8448、头 16、头维 128）</text>
+<text x="358" y="168" font-size="14" fill="#1F2329" text-anchor="end">FlashAttention-2（35%，推算）</text>
+<rect x="370" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="150" width="327" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="705" y="168" font-size="13" fill="#646A73">  约 346</text>
+<text x="358" y="210" font-size="14" fill="#1F2329" text-anchor="end">只做流水，不做 warp 分工</text>
+<rect x="370" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="192" width="539" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="917" y="210" font-size="13" fill="#646A73">  570</text>
+<text x="358" y="252" font-size="14" fill="#1F2329" text-anchor="end">只做 warp 分工，不做流水</text>
+<rect x="370" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="234" width="551" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="929" y="252" font-size="13" fill="#646A73">  582</text>
+<text x="358" y="294" font-size="14" fill="#1F2329" text-anchor="end">两者都做</text>
+<rect x="370" y="276" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="276" width="625" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="1003" y="294" font-size="13" fill="#646A73">  661</text>
+<text x="358" y="336" font-size="14" fill="#1F2329" text-anchor="end">FlashAttention-3 最高（75%）</text>
+<rect x="370" y="318" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="370" y="318" width="700" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="1078" y="336" font-size="13" fill="#646A73">  740</text>
+<rect x="40" y="374" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="403" font-size="15" fill="#1F2329">天花板：FP16 矩阵乘 989 TFLOPS，指数等特殊函数只有 3.9 TFLOPS。</text>
+<text x="40" y="466" font-size="12" fill="#646A73">来源：FlashAttention-3 论文（arXiv:2407.08608）；FlashAttention-2 一行由 35% × 989 推算</text>
+</svg>

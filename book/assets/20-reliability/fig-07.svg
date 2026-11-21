@@ -1,50 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="850"
-     viewBox="-20 -20 1240 850">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="810" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">SDC 检测方法的成本-收益权衡</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">X 轴额外计算成本；Y 轴检测覆盖率；重复计算最可靠但 2 倍成本；checksum 低成本但有漏报</tspan></tspan></text></g>
-<g id="c3:1" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="c3:2" transform="translate(100, 580)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:3" transform="translate(91, 585.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="9"><tspan x="9" y="14.118"><tspan x="0.145" text-anchor="start">0%</tspan></tspan></text></g>
-<g id="c3:3" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="a3:4" transform="translate(342.5, 585.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="12.5"><tspan x="12.5" y="14.118"><tspan x="0.315" text-anchor="start">50%</tspan></tspan></text></g>
-<g id="c3:4" transform="translate(355, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="a3:5" transform="translate(594.5, 585.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15.5"><tspan x="15.5" y="14.118"><tspan x="-0.015" text-anchor="start">100%</tspan></tspan></text></g>
-<g id="c3:5" transform="translate(610, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="a3:6" transform="translate(849.5, 585.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15.5"><tspan x="15.5" y="14.118"><tspan x="-0.015" text-anchor="start">150%</tspan></tspan></text></g>
-<g id="c3:6" transform="translate(865, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="a3:7" transform="translate(1104.5, 585.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="15.5"><tspan x="15.5" y="14.118"><tspan x="-0.015" text-anchor="start">200%</tspan></tspan></text></g>
-<g id="c3:7" transform="translate(1120, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="a3:8" transform="translate(65, 569.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">80%</tspan></tspan></text></g>
-<g id="c3:8" transform="translate(100, 580)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:9" transform="translate(65, 469.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">85%</tspan></tspan></text></g>
-<g id="c3:9" transform="translate(100, 480)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:10" transform="translate(65, 369.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">90%</tspan></tspan></text></g>
-<g id="c3:10" transform="translate(100, 380)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:11" transform="translate(65, 269.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="0.63" text-anchor="start">95%</tspan></tspan></text></g>
-<g id="c3:11" transform="translate(100, 280)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:12" transform="translate(59, 169.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="31"><tspan x="31" y="14.118"><tspan x="-0.03" text-anchor="start">100%</tspan></tspan></text></g>
-<g id="c3:12" transform="translate(100, 180)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:13" transform="translate(545, 614.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="65"><tspan x="65" y="15.295"><tspan x="13.35" text-anchor="start">额外计算成本 (%)</tspan></tspan></text></g>
-<g id="a3:14" transform="translate(100, 140.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检测覆盖率 (%)</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(94, 474)"><rect x="0" y="0" width="12" height="12" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:15" transform="translate(84, 443.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">无检测</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(145, 554)"><rect x="0" y="0" width="12" height="12" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:16" transform="translate(175, 533.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">Checksum 低成本</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(196, 534)"><rect x="0" y="0" width="12" height="12" fill="#34c724" stroke="#34c724" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:17" transform="translate(226, 513.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">梯度直方图统计</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(604, 414)"><rect x="0" y="0" width="12" height="12" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:18" transform="translate(634, 393.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">轻量重复（抽样流）</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(859, 574)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:19" transform="translate(715, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">3 副本投票最可靠</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(1063, 574)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:20" transform="translate(879, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">完整重复计算</tspan></tspan></text></g>
-<g id="c3:13" transform="translate(100, 420)"><path fill="none" stroke="#dee0e3" stroke-width="2" stroke-dasharray="6 4" d="M 0 60 L 510 0"/></g>
-<g id="c3:14" transform="translate(610, 420)"><path fill="none" stroke="#dee0e3" stroke-width="2" stroke-dasharray="6 4" d="M 0 0 L 510 160"/></g>
-<g id="o3:8" transform="translate(40, 660)"><rect x="0" y="0" width="1120" height="90" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:21" transform="translate(60, 677.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">无银弹：选择哪种方法取决于</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(60, 706.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">SDC 频率预期、成本容忍度、漏报风险；金融 / 医疗选重复计算；通用训练选 checksum + 抽查</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(40, 771.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Silent Data Corruptions at Scale；Cores that don't count</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+<rect x="0" y="0" width="1200" height="440" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">慢节点：不报错，但同步训练每步都等它</text>
+<text x="40" y="92" font-size="14" fill="#646A73">生产集群的统计口径各不相同，下面各条分别标出</text>
+<text x="348" y="168" font-size="14" fill="#1F2329" text-anchor="end">至少慢 10% 的作业占比</text>
+<rect x="360" y="150" width="631" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="360" y="150" width="268" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="636" y="168" font-size="13" fill="#646A73">  42.5%（what-if）</text>
+<text x="348" y="210" font-size="14" fill="#1F2329" text-anchor="end">尾部作业浪费的资源</text>
+<rect x="360" y="192" width="631" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="360" y="192" width="284" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="652" y="210" font-size="13" fill="#646A73">  45%（what-if）</text>
+<text x="348" y="252" font-size="14" fill="#1F2329" text-anchor="end">人工检查的大作业中遇到慢故障</text>
+<rect x="360" y="234" width="631" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="360" y="234" width="374" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="742" y="252" font-size="13" fill="#646A73">  16 / 27（FALCON）</text>
+<text x="348" y="294" font-size="14" fill="#1F2329" text-anchor="end">一个 1.5 倍慢节点的吞吐损失</text>
+<rect x="360" y="276" width="631" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="360" y="276" width="210" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="578" y="294" font-size="13" fill="#646A73">  33.3%（配套代码模型）</text>
+<rect x="40" y="332" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="361" font-size="15" fill="#1F2329">MegaScale：约 0.5% 的机器明显更慢，移除后 MFU 提升约 0.7%。FALCON：慢故障平均让作业完成时间延长到 1.34 倍。</text>
+<text x="40" y="416" font-size="12" fill="#646A73">来源：Lin et al. 慢节点 what-if 分析；Wu et al. FALCON；MegaScale 论文；Llama 3 论文</text>
 </svg>

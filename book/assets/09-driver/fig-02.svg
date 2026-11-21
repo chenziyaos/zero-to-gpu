@@ -1,55 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="700"
-     viewBox="-20 -20 1240 700">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="660" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">任务等环境的五步闭环</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">定天花板 → 测实际 → 定位等待 → 消除或隐藏 → 复测；典型耗时 5+2+3+10+5 ≈ 25 分钟</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="210" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:3" transform="translate(56, 177)"><ellipse fill="#e1eaff" stroke="#82a7fc" stroke-width="1.5" cx="13" cy="13" rx="13" ry="13"/></g>
-<g id="a2:3" transform="translate(62.5, 179.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="15.295"><tspan x="2.665" text-anchor="start">1</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(88, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">定天花板</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">R615 + CUDA 13.4 无</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(56, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">限制</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(256, 235)"><path fill="none" stroke="#8f959e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 8 0"/></g>
-<g id="d2:1" transform="translate(251.5, 226.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-251.5 -226.5)"><polygon points="254,229 264,235 254,241" fill="#8F959E" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:4" transform="translate(270, 165)"><rect x="0" y="0" width="210" height="140" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:5" transform="translate(286, 177)"><ellipse fill="#fff1e0" stroke="#ffba6b" stroke-width="1.5" cx="13" cy="13" rx="13" ry="13"/></g>
-<g id="a2:7" transform="translate(292.5, 179.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="15.295"><tspan x="2.665" text-anchor="start">2</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(318, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">测实际</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(286, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">nvidia-smi python -c</tspan></tspan></text></g>
-<g id="c2:2" transform="translate(486, 235)"><path fill="none" stroke="#8f959e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 8 0"/></g>
-<g id="d2:2" transform="translate(481.5, 226.5)"><defs><symbol id="svgicon-d2-2" viewBox="0 0 15 17"><g transform="translate(-481.5 -226.5)"><polygon points="484,229 494,235 484,241" fill="#8F959E" /></g></symbol></defs><use href="#svgicon-d2-2" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:6" transform="translate(500, 165)"><rect x="0" y="0" width="210" height="140" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:7" transform="translate(516, 177)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="13" cy="13" rx="13" ry="13"/></g>
-<g id="a2:10" transform="translate(522.5, 179.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="15.295"><tspan x="2.665" text-anchor="start">3</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(548, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">定位等待</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(516, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">sim_compat.py check</tspan></tspan></text></g>
-<g id="c2:3" transform="translate(716, 235)"><path fill="none" stroke="#8f959e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 8 0"/></g>
-<g id="d2:3" transform="translate(711.5, 226.5)"><defs><symbol id="svgicon-d2-3" viewBox="0 0 15 17"><g transform="translate(-711.5 -226.5)"><polygon points="714,229 724,235 714,241" fill="#8F959E" /></g></symbol></defs><use href="#svgicon-d2-3" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:8" transform="translate(730, 165)"><rect x="0" y="0" width="210" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:9" transform="translate(746, 177)"><ellipse fill="#e1eaff" stroke="#82a7fc" stroke-width="1.5" cx="13" cy="13" rx="13" ry="13"/></g>
-<g id="a2:13" transform="translate(752.5, 179.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="15.295"><tspan x="2.665" text-anchor="start">4</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(778, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">消除或隐藏</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(746, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">装 compat 或升驱动</tspan></tspan></text></g>
-<g id="c2:4" transform="translate(946, 235)"><path fill="none" stroke="#8f959e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 8 0"/></g>
-<g id="d2:4" transform="translate(941.5, 226.5)"><defs><symbol id="svgicon-d2-4" viewBox="0 0 15 17"><g transform="translate(-941.5 -226.5)"><polygon points="944,229 954,235 944,241" fill="#8F959E" /></g></symbol></defs><use href="#svgicon-d2-4" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:10" transform="translate(960, 165)"><rect x="0" y="0" width="210" height="140" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="o2:11" transform="translate(976, 177)"><ellipse fill="#fff1e0" stroke="#ffba6b" stroke-width="1.5" cx="13" cy="13" rx="13" ry="13"/></g>
-<g id="a2:16" transform="translate(982.5, 179.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="15.295"><tspan x="2.665" text-anchor="start">5</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(1008, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">复测</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(976, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">验证任务能否启动</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(40, 345)"><rect x="0" y="0" width="359" height="130" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:19" transform="translate(58, 364.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">✓ 兼容性通过</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(58, 399.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">完全兼容或 compat 包解决</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(425, 345)"><rect x="0" y="0" width="359" height="130" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:21" transform="translate(443, 364.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">⚠ 需要 compat 包</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(443, 399.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">安装 cuda-compat 或升级驱动</tspan></tspan></text></g>
-<g id="o2:14" transform="translate(811, 345)"><rect x="0" y="0" width="359" height="130" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:23" transform="translate(829, 364.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">✗ 不兼容</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(829, 399.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">硬件故障或版本过旧</tspan></tspan></text></g>
-<g id="o2:15" transform="translate(40, 515)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:25" transform="translate(56, 524.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">为何用五步框架</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(56, 558.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">为什么遵循五步：环境问题的根因多样（应用/驱动/系统/硬件），需要结构化定位；每一步都用一句命令验证，避免盲目排查</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(40, 621.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-09 sim_compat.py；五步闭环框架</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">一个 CUDA 程序依赖四层，nvidia-smi 的 CUDA 版本只是驱动的上限</text>
+<text x="40" y="92" font-size="14" fill="#646A73">从下往上：前两层来自驱动包，后两层随应用或镜像分发</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold">层</text>
+<text x="332" y="166" font-size="14" fill="#1F2329" font-weight="bold">是什么</text>
+<text x="752" y="166" font-size="14" fill="#1F2329" font-weight="bold">在哪看版本</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">内核态驱动</text>
+<text x="332" y="206" font-size="14" fill="#1F2329">驱动包里的内核模块</text>
+<text x="752" y="206" font-size="14" fill="#1F2329">nvidia-smi 的 KMD Version</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">用户态 CUDA 驱动</text>
+<text x="332" y="244" font-size="14" fill="#1F2329">libcuda.so，与内核态同包</text>
+<text x="752" y="244" font-size="14" fill="#1F2329">CUDA UMD Version：驱动支持的最高 CUDA</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">运行时和库</text>
+<text x="332" y="282" font-size="14" fill="#1F2329">libcudart、cuBLAS、cuDNN</text>
+<text x="752" y="282" font-size="14" fill="#1F2329">deviceQuery 的 Runtime Version</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">框架和应用</text>
+<text x="332" y="320" font-size="14" fill="#1F2329">PyTorch 等，带编译时的 CUDA 版本</text>
+<text x="752" y="320" font-size="14" fill="#1F2329">框架自带的版本查询</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">CUDA 13.4 起 Linux 驱动不再随工具包分发；无头服务器上 GPU 去初始化后，每张卡重新初始化要 1 到 3 秒。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：NVIDIA CUDA Compatibility（Why CUDA Compatibility）；nvidia-smi 文档</text>
 </svg>

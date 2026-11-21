@@ -1,42 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="790"
-     viewBox="-20 -20 1240 790">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="750" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">上线前的三层核对清单</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">显存 → 通信 → 精度；任一不过都要按修复路径退到相应层</tspan></tspan></text></g>
-<g id="o3:2" transform="translate(40, 180)"><rect x="0" y="0" width="370" height="260" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:3" transform="translate(60, 192.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">① 显存检查</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(60, 228)"><rect x="0" y="0" width="114" height="24" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:4" transform="translate(68.5, 228.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="48.5"><tspan x="48.5" y="14.118"><tspan x="1.1" text-anchor="start">目标 ≤ 80% HBM</tspan></tspan></text></g>
-<g id="a3:5" transform="translate(60, 264.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ ZeRO-3 分片确认</tspan></tspan></text></g>
-<g id="a3:6" transform="translate(60, 292.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ 激活重算已启用</tspan></tspan></text></g>
-<g id="a3:7" transform="translate(60, 320.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ KV cache 预留</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(430, 180)"><rect x="0" y="0" width="370" height="260" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:8" transform="translate(450, 192.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">② 通信检查</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(450, 228)"><rect x="0" y="0" width="122" height="24" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:9" transform="translate(462.5, 228.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="48.5"><tspan x="48.5" y="14.118"><tspan x="2.28" text-anchor="start">目标 ＜ 50% 时间</tspan></tspan></text></g>
-<g id="a3:10" transform="translate(450, 264.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ TP ≤ 20 ms（机内）</tspan></tspan></text></g>
-<g id="a3:11" transform="translate(450, 292.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ PP 气泡 ＜ 50%</tspan></tspan></text></g>
-<g id="a3:12" transform="translate(450, 320.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ DP all-reduce 隐藏</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(820, 180)"><rect x="0" y="0" width="370" height="260" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:13" transform="translate(840, 192.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">③ 精度检查</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(840, 228)"><rect x="0" y="0" width="140" height="24" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:14" transform="translate(858, 228.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="52"><tspan x="52" y="14.118"><tspan x="1.825" text-anchor="start">目标 ＜ 0.25% loss</tspan></tspan></text></g>
-<g id="a3:15" transform="translate(840, 264.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ 对齐 BF16 基线</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(840, 292.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ Loss 差异 ＜ 2%</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(840, 320.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✓ amax 无跳变</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(40, 463.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">常见失败与快速修复</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(40, 514)"><rect x="0" y="0" width="360" height="80" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:19" transform="translate(56, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✗ 显存溢出</tspan></tspan></text></g>
-<g id="a3:20" transform="translate(56, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">→ 启用 ZeRO-3 + 激活重算</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(420, 514)"><rect x="0" y="0" width="360" height="80" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:21" transform="translate(436, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✗ 通信慢</tspan></tspan></text></g>
-<g id="a3:22" transform="translate(436, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">→ 降 DP 度数 / 增加 batch</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(800, 514)"><rect x="0" y="0" width="360" height="80" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a3:23" transform="translate(816, 524.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">✗ 精度掉</tspan></tspan></text></g>
-<g id="a3:24" transform="translate(816, 553.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">→ 增大 loss scale / 细粒度量化</tspan></tspan></text></g>
-<g id="o3:11" transform="translate(40, 624)"><rect x="0" y="0" width="1120" height="60" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:25" transform="translate(435.5, 644.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="164.5"><tspan x="164.5" y="17.648"><tspan x="31.75" text-anchor="start">全部通过 → 可以上线，监控首个 epoch</tspan></tspan></text></g>
-<g id="a3:26" transform="translate(40, 711.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：清单</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 530" width="1200" height="530">
+<rect x="0" y="0" width="1200" height="530" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">选方案：先放得下，再按带宽由内到外排</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Llama 3 的次序是 [TP, CP, PP, DP]，最内层限在同一台服务器</text>
+<rect x="40" y="150" width="189" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">算显存</text>
+<text x="56" y="211" font-size="14" fill="#646A73">16 字节 + 激活</text>
+<polyline points="235,191 267,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="257,185 267,191 257,197" fill="#8F959E"/>
+<rect x="273" y="150" width="189" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="302" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="302" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="321" y="181" font-size="18" fill="#1F2329" font-weight="bold">定 TP</text>
+<text x="289" y="211" font-size="14" fill="#646A73">机内 2、4、8</text>
+<polyline points="468,191 500,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="490,185 500,191 490,197" fill="#8F959E"/>
+<rect x="506" y="150" width="189" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="535" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="535" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="554" y="181" font-size="18" fill="#1F2329" font-weight="bold">定 PP、CP</text>
+<text x="522" y="211" font-size="14" fill="#646A73">m 远大于 p</text>
+<polyline points="700,191 732,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="722,185 732,191 722,197" fill="#8F959E"/>
+<rect x="738" y="150" width="189" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="767" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="767" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">4</text>
+<text x="786" y="181" font-size="18" fill="#1F2329" font-weight="bold">选分片</text>
+<text x="754" y="211" font-size="14" fill="#646A73">放得下的最低阶段</text>
+<polyline points="933,191 965,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="955,185 965,191 955,197" fill="#8F959E"/>
+<rect x="971" y="150" width="189" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="1000" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="1000" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">5</text>
+<text x="1019" y="181" font-size="18" fill="#1F2329" font-weight="bold">DP 扩规模</text>
+<text x="987" y="211" font-size="14" fill="#646A73">每组批不能太小</text>
+<rect x="40" y="272" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="298" font-size="14" fill="#1F2329" font-weight="bold">配套代码 search 的假设</text>
+<text x="520" y="298" font-size="14" fill="#1F2329" font-weight="bold">结果</text>
+<text x="846" y="298" font-size="14" fill="#1F2329" font-weight="bold">应为</text>
+<rect x="40" y="314" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="337" font-size="14" fill="#1F2329" font-weight="bold">不计激活</text>
+<text x="520" y="337" font-size="14" fill="#1F2329">TP 1、PP 1、DP 64 排第一，73.9%</text>
+<text x="846" y="337" font-size="14" fill="#1F2329">不重算时激活约 380.1 GB，放不下</text>
+<rect x="40" y="352" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="375" font-size="14" fill="#1F2329" font-weight="bold">核心利用率固定 0.8</text>
+<text x="520" y="375" font-size="14" fill="#1F2329">MFU 上限 80%</text>
+<text x="846" y="375" font-size="14" fill="#1F2329">按实测效率</text>
+<rect x="40" y="390" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="413" font-size="14" fill="#1F2329" font-weight="bold">TP 通信不重叠</text>
+<text x="520" y="413" font-size="14" fill="#1F2329">TP 8 排第十，49.7%</text>
+<text x="846" y="413" font-size="14" fill="#1F2329">实测重叠和带宽</text>
+<rect x="40" y="428" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="451" font-size="14" fill="#1F2329" font-weight="bold">“共 12 个可行方案”</text>
+<text x="520" y="451" font-size="14" fill="#1F2329">只列 10 行</text>
+<text x="846" y="451" font-size="14" fill="#1F2329">列全或注明前 10</text>
+<text x="40" y="506" font-size="12" fill="#646A73">来源：PTD-P 论文三条经验；Llama 3 论文；zero-to-gpu/21-train-parallel/sim_parallel.py search 实跑</text>
 </svg>

@@ -1,51 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="750"
-     viewBox="-20 -20 1240 750">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="710" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">DCGM 监控栈让 GPU 活性可观测：从固件到告警</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">底层采集 → Exporter 导出 → Prometheus 聚合 → Grafana 可视化</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 175)"><rect x="0" y="0" width="340" height="140" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:3" transform="translate(126, 190.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="84"><tspan x="84" y="16.471"><tspan x="16.305" text-anchor="start">GPU 固件 &amp; Daemon</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(173.5, 222.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="14.118"><tspan x="1.565" text-anchor="start">采集：8 GPU</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(161.5, 248.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="48.5"><tspan x="48.5" y="14.118"><tspan x="-0.01" text-anchor="start">指标：SM Activity</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(174, 274.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="14.118"><tspan x="0" text-anchor="start">周期：毫秒级</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(384, 245)"><path fill="none" stroke="#dee0e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 22 0"/></g>
-<g id="d2:1" transform="translate(393.5, 236.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-393.5 -236.5)"><polygon points="396,239 406,245 396,251" fill="#DEE0E3" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:3" transform="translate(410, 175)"><rect x="0" y="0" width="340" height="140" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:7" transform="translate(517, 190.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="63"><tspan x="63" y="16.471"><tspan x="11.315" text-anchor="start">DCGM Exporter</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(529.5, 222.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="50.5"><tspan x="50.5" y="14.118"><tspan x="-1.69" text-anchor="start">导出：Prometheus</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(546.5, 248.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="14.118"><tspan x="0.51" text-anchor="start">端口：:9400</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(536.5, 274.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="43.5"><tspan x="43.5" y="14.118"><tspan x="1.39" text-anchor="start">覆盖：MIG 分区</tspan></tspan></text></g>
-<g id="c2:2" transform="translate(754, 245)"><path fill="none" stroke="#dee0e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 22 0"/></g>
-<g id="d2:2" transform="translate(763.5, 236.5)"><defs><symbol id="svgicon-d2-2" viewBox="0 0 15 17"><g transform="translate(-763.5 -236.5)"><polygon points="766,239 776,245 766,251" fill="#DEE0E3" /></g></symbol></defs><use href="#svgicon-d2-2" x="0" y="0" width="15" height="17"/></g>
-<g id="o2:4" transform="translate(780, 175)"><rect x="0" y="0" width="340" height="140" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:11" transform="translate(860, 190.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="90"><tspan x="90" y="16.471"><tspan x="12.28" text-anchor="start">Prometheus &amp; Grafana</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(914, 222.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="14.118"><tspan x="0" text-anchor="start">时间序列存储</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(926, 248.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="0" text-anchor="start">告警规则</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(932, 274.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="18"><tspan x="18" y="14.118"><tspan x="0" text-anchor="start">可视化</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(40, 365)"><rect x="0" y="0" width="555" height="110" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:15" transform="translate(56, 376.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">GPU-Util（虚高）</tspan></tspan></text></g>
-<g id="a2:16" transform="translate(56, 407.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">定义：采样窗口内有 kernel 就显 100%</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(56, 429.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">问题：无法区分计算 vs 空转</tspan></tspan></text></g>
-<g id="o2:6" transform="translate(605, 365)"><rect x="0" y="0" width="555" height="110" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:18" transform="translate(621, 376.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">dcgm_sm_active（真实）</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(621, 407.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">定义：有多少 SM 在干活</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(621, 429.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">优势：反映活性，可诊断 kernel 低效</tspan></tspan></text></g>
-<g id="o2:7" transform="translate(40, 515)"><rect x="0" y="0" width="360" height="130" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:21" transform="translate(56, 526.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">GPU 突然变慢</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 557.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检查：温度 ＞ 80 °C</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 579.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检查：驱动错误 ＞ 0</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(56, 601.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检查：功耗掉电</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(420, 515)"><rect x="0" y="0" width="360" height="130" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:25" transform="translate(436, 526.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">高空闲但排队长</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(436, 557.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检查：空闲 ＞ 20%</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(436, 579.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">检查：pending pod ＞ 0</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(436, 601.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">诊断：碎片症状</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(800, 515)"><rect x="0" y="0" width="360" height="130" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:29" transform="translate(816, 526.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">虚假饱满</tspan></tspan></text></g>
-<g id="a2:30" transform="translate(816, 557.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">现象：Util=100%</tspan></tspan></text></g>
-<g id="a2:31" transform="translate(816, 579.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">但：SM active=5%</tspan></tspan></text></g>
-<g id="a2:32" transform="translate(816, 601.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">诊断：kernel 低效</tspan></tspan></text></g>
-<g id="a2:33" transform="translate(40, 671.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：NVIDIA DCGM + Kubernetes integration</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Kueue 的配额：保底、借用、回收</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Kueue 决定准入和抢占，Pod 落在哪个节点仍由 kube-scheduler 决定</text>
+<rect x="40" y="150" width="247" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">LocalQueue</text>
+<text x="56" y="211" font-size="14" fill="#646A73">团队提交作业</text>
+<polyline points="293,191 325,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,185 325,191 315,197" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">ClusterQueue</text>
+<text x="347" y="211" font-size="14" fill="#646A73">nominalQuota 保底</text>
+<polyline points="584,191 616,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,185 616,191 606,197" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">cohort</text>
+<text x="638" y="211" font-size="14" fill="#646A73">borrowingLimit 内借用</text>
+<polyline points="875,191 907,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,185 907,191 897,197" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="82" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">回收</text>
+<text x="929" y="211" font-size="14" fill="#646A73">reclaimWithinCohort</text>
+<rect x="40" y="262" width="548" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="293" font-size="18" fill="#1F2329" font-weight="bold">排序</text>
+<text x="56" y="323" font-size="14" fill="#646A73">StrictFIFO：放不下的老作业挡住新作业</text>
+<text x="56" y="346" font-size="14" fill="#646A73">BestEffortFIFO（默认）：放得下的先走</text>
+<rect x="612" y="262" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="628" y="293" font-size="18" fill="#1F2329" font-weight="bold">抢占的代价</text>
+<text x="628" y="323" font-size="14" fill="#646A73">reclaimWithinCohort 默认 Never</text>
+<text x="628" y="346" font-size="14" fill="#646A73">被抢占的作业丢掉上次 checkpoint 后的进度</text>
+<text x="628" y="369" font-size="14" fill="#646A73">DRA 资源目前不能抢占</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：Kueue 文档（Overview、Cluster Queue）；Kubernetes DRA 文档</text>
 </svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">域大 9 倍，碰到故障也约多 9 倍：72 卡域约 29.3 天一次</text>
+<text x="40" y="92" font-size="14" fill="#646A73">按 Llama 3 的意外中断率粗算，每卡每天 4.736e-04 次（假设 16384 卡跑满 54 天）</text>
+<text x="278" y="168" font-size="14" fill="#1F2329" text-anchor="end">8 卡域</text>
+<rect x="290" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="150" width="700" height="26" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="998" y="168" font-size="13" fill="#646A73">  约 263.9 天一次</text>
+<text x="278" y="210" font-size="14" fill="#1F2329" text-anchor="end">72 卡域，只算 GPU 原因</text>
+<rect x="290" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="192" width="133" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="431" y="210" font-size="13" fill="#646A73">  约 50.0 天一次</text>
+<text x="278" y="252" font-size="14" fill="#1F2329" text-anchor="end">72 卡域，全部原因</text>
+<rect x="290" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="290" y="234" width="78" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="376" y="252" font-size="13" fill="#646A73">  约 29.3 天一次</text>
+<rect x="40" y="290" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="319" font-size="15" fill="#1F2329">应对：推理用较小副本、按副本预留备用容量、集合通信设超时；Blackwell 的 RAS 引擎做提前预警。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：Llama 3 第 3.3.4 节（466 次中断、419 次意外、GPU 占 58.7%）；Blackwell 架构页；主编核算</text>
+</svg>

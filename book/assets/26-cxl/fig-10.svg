@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+<rect x="0" y="0" width="1200" height="560" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">引擎按主机内存设计接口，CXL 内存接在 L2 这一层</text>
+<text x="40" y="92" font-size="14" fill="#646A73">SGLang HiCache 的三层与写回策略；vLLM、LMCache 的对应接口</text>
+<rect x="40" y="150" width="344" height="82" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">L1 GPU 显存</text>
+<text x="56" y="211" font-size="14" fill="#646A73">活跃 KV</text>
+<polyline points="390,191 422,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="412,185 422,191 412,197" fill="#8F959E"/>
+<rect x="428" y="150" width="344" height="82" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="457" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="457" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">2</text>
+<text x="476" y="181" font-size="18" fill="#1F2329" font-weight="bold">L2 主机内存</text>
+<text x="444" y="211" font-size="14" fill="#646A73">本地 DRAM + CXL 节点</text>
+<polyline points="778,191 810,191" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="800,185 810,191 800,197" fill="#8F959E"/>
+<rect x="816" y="150" width="344" height="82" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="845" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="845" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">3</text>
+<text x="864" y="181" font-size="18" fill="#1F2329" font-weight="bold">L3 分布式存储</text>
+<text x="832" y="211" font-size="14" fill="#646A73">Mooncake、3FS 等</text>
+<rect x="40" y="262" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="288" font-size="14" fill="#1F2329" font-weight="bold">写回策略</text>
+<text x="462" y="288" font-size="14" fill="#1F2329" font-weight="bold">何时写到下一层</text>
+<text x="817" y="288" font-size="14" fill="#1F2329" font-weight="bold">适合</text>
+<rect x="40" y="304" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="327" font-size="14" fill="#1F2329" font-weight="bold">write_through</text>
+<text x="462" y="327" font-size="14" fill="#1F2329">每次访问</text>
+<text x="817" y="327" font-size="14" fill="#1F2329">带宽充足</text>
+<rect x="40" y="342" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="365" font-size="14" fill="#1F2329" font-weight="bold">write_through_selective</text>
+<text x="462" y="365" font-size="14" fill="#1F2329">访问次数过阈值</text>
+<text x="817" y="365" font-size="14" fill="#1F2329">只备份热数据</text>
+<rect x="40" y="380" width="1120" height="38" rx="0" fill="#F0FBEF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="403" font-size="14" fill="#1F2329" font-weight="bold">write_back</text>
+<text x="462" y="403" font-size="14" fill="#1F2329">上一层逐出时</text>
+<text x="817" y="403" font-size="14" fill="#1F2329">容量或带宽紧</text>
+<rect x="40" y="448" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="476" font-size="15" fill="#1F2329">vLLM OffloadingConnector 设块大小和 cpu_bytes_to_use；LMCache 与 vLLM 合用吞吐最多提升 15 倍。</text>
+<text x="40" y="536" font-size="12" fill="#646A73">来源：SGLang HiCache 文档；vLLM 文档；LMCache 论文；Mooncake 论文</text>
+</svg>

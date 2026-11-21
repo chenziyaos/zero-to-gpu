@@ -2,6 +2,8 @@
 
 [![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/15-runtime.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
+> 已知问题：本目录部分输出与公开资料不符，代码保持原样作为找错练习。逐条说明见 [GPU-15](../book/15-runtime.md) 第 10 章，汇总见 [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)。
+
 ## 一句话
 
 GPU 等 CPU 发射：Python 和框架开销让 kernel 之间出现空隙，torch.compile 融合与 CUDA Graph 消除 launch 等待、多流隐藏拷贝与计算的串行。

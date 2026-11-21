@@ -1,55 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="850"
-     viewBox="-20 -20 1240 850">
-<g id="o3:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="810" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a3:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">PFC 暂停对 all-reduce 吞吐的影响：32 个 sender 时损失 96.9%</tspan></tspan></text></g>
-<g id="a3:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">有效吞吐从 50 GB/s（无 incast）→ 1.56 GB/s（32 sender）；损失随 sender 数非线性增长</tspan></tspan></text></g>
-<g id="c3:1" transform="translate(90, 175)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 0 400"/></g>
-<g id="c3:2" transform="translate(90, 575)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:3" transform="translate(73, 564.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="7"><tspan x="7" y="14.118"><tspan x="0.34" text-anchor="start">0</tspan></tspan></text></g>
-<g id="c3:3" transform="translate(90, 575)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:4" transform="translate(66, 484.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.68" text-anchor="start">10</tspan></tspan></text></g>
-<g id="c3:4" transform="translate(90, 495)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:5" transform="translate(66, 364.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.68" text-anchor="start">25</tspan></tspan></text></g>
-<g id="c3:5" transform="translate(90, 375)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:6" transform="translate(66, 244.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.68" text-anchor="start">40</tspan></tspan></text></g>
-<g id="c3:6" transform="translate(90, 255)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:7" transform="translate(66, 164.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="14"><tspan x="14" y="14.118"><tspan x="0.68" text-anchor="start">50</tspan></tspan></text></g>
-<g id="c3:7" transform="translate(90, 175)"><path fill="none" stroke="#dee0e3" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1020 0"/></g>
-<g id="a3:8" transform="translate(542, 599.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="15.295"><tspan x="11.22" text-anchor="start">Incast 发送端数</tspan></tspan></text></g>
-<g id="a3:9" transform="translate(90, 135.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">吞吐 (GB/s)</tspan></tspan></text></g>
-<g id="c3:8" transform="translate(90, 175)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 204 200"/></g>
-<g id="c3:9" transform="translate(294, 375)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 204 100"/></g>
-<g id="c3:10" transform="translate(498, 475)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 204 50"/></g>
-<g id="c3:11" transform="translate(702, 525)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 204 25"/></g>
-<g id="c3:12" transform="translate(906, 550)"><path fill="none" stroke="#f54a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 204 13"/></g>
-<g id="o3:2" transform="translate(84, 169)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:10" transform="translate(102, 152.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">50.0</tspan></tspan></text></g>
-<g id="o3:3" transform="translate(288, 369)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:11" transform="translate(306, 352.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">25.0</tspan></tspan></text></g>
-<g id="o3:4" transform="translate(492, 469)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:12" transform="translate(510, 452.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">12.5</tspan></tspan></text></g>
-<g id="o3:5" transform="translate(696, 519)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:13" transform="translate(714, 502.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">6.20</tspan></tspan></text></g>
-<g id="o3:6" transform="translate(900, 544)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:14" transform="translate(918, 527.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">3.10</tspan></tspan></text></g>
-<g id="o3:7" transform="translate(1104, 557)"><rect x="0" y="0" width="12" height="12" fill="#f54a45" stroke="#f54a45" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a3:15" transform="translate(1122, 540.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">1.56</tspan></tspan></text></g>
-<g id="a3:16" transform="translate(84, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="6"><tspan x="6" y="14.118"><tspan x="0" text-anchor="start">无</tspan></tspan></text></g>
-<g id="a3:17" transform="translate(287.5, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="14.118"><tspan x="0.36" text-anchor="start">2s</tspan></tspan></text></g>
-<g id="a3:18" transform="translate(491.5, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="14.118"><tspan x="0.36" text-anchor="start">4s</tspan></tspan></text></g>
-<g id="a3:19" transform="translate(695.5, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="6.5"><tspan x="6.5" y="14.118"><tspan x="0.36" text-anchor="start">8s</tspan></tspan></text></g>
-<g id="a3:20" transform="translate(896, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="10"><tspan x="10" y="14.118"><tspan x="0.53" text-anchor="start">16s</tspan></tspan></text></g>
-<g id="a3:21" transform="translate(1100, 580.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="10"><tspan x="10" y="14.118"><tspan x="0.53" text-anchor="start">32s</tspan></tspan></text></g>
-<g id="o3:8" transform="translate(334, 295)"><rect x="0" y="0" width="240" height="70" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:22" transform="translate(420.5, 309.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="15.295"><tspan x="6.235" text-anchor="start">2 sender</tspan></tspan></text></g>
-<g id="a3:23" transform="translate(394, 332.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="60"><tspan x="60" y="14.118"><tspan x="1.225" text-anchor="start">25 GB/s（50% 损失）</tspan></tspan></text></g>
-<g id="o3:9" transform="translate(850, 463)"><rect x="0" y="0" width="240" height="80" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a3:24" transform="translate(932, 477.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="38"><tspan x="38" y="15.295"><tspan x="6.9" text-anchor="start">32 sender</tspan></tspan></text></g>
-<g id="a3:25" transform="translate(900, 502.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="middle" dominant-baseline="alphabetic" x="70"><tspan x="70" y="14.118"><tspan x="1.235" text-anchor="start">1.56 GB/s（96.9% 损失）</tspan></tspan></text></g>
-<g id="o3:10" transform="translate(40, 665)"><rect x="0" y="0" width="1120" height="82" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a3:26" transform="translate(56, 674.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">结论</tspan></tspan></text></g>
-<g id="a3:27" transform="translate(56, 708.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">受害流吞吐随 incast sender 数非线性衰减，PFC 暂停堆积导致带宽严重浪费；DCQCN / HPCC 的设计目标是避免全 PFC 暂停，改为流级速率退避</tspan></tspan></text></g>
-<g id="a3:28" transform="translate(40, 771.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 sim_pfc.py</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">ECMP：16 条大流哈希到 8 条上行，平均只剩理想值的 47.8%</text>
+<text x="40" y="92" font-size="14" fill="#646A73">集合通信等最慢的流，按最挤的那条上行算</text>
+<text x="288" y="168" font-size="14" fill="#1F2329" text-anchor="end">理想</text>
+<rect x="300" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="150" width="700" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="1008" y="168" font-size="13" fill="#646A73">25 GB/s</text>
+<text x="288" y="210" font-size="14" fill="#1F2329" text-anchor="end">典型（平均最挤 4.18 条）</text>
+<rect x="300" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="192" width="335" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="643" y="210" font-size="13" fill="#646A73">11.96 GB/s</text>
+<text x="288" y="252" font-size="14" fill="#1F2329" text-anchor="end">最坏（9 条挤一起）</text>
+<rect x="300" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="300" y="234" width="156" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="464" y="252" font-size="13" fill="#646A73">5.56 GB/s</text>
+<rect x="40" y="290" width="357" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="321" font-size="18" fill="#1F2329" font-weight="bold">固定路径</text>
+<text x="56" y="351" font-size="14" fill="#646A73">碎片放置时性能降超过 30%</text>
+<text x="56" y="374" font-size="14" fill="#646A73">上行翻倍缓解，成本高</text>
+<rect x="421" y="290" width="357" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="437" y="321" font-size="18" fill="#1F2329" font-weight="bold">增加流数</text>
+<text x="437" y="351" font-size="14" fill="#646A73">多 QP + 按 QP 哈希（E-ECMP）</text>
+<text x="437" y="374" font-size="14" fill="#646A73">AllReduce 最多提升 40%</text>
+<text x="437" y="397" font-size="14" fill="#646A73">Llama 3：两卡之间 16 条流</text>
+<rect x="803" y="290" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="819" y="321" font-size="18" fill="#1F2329" font-weight="bold">减少哈希层级</text>
+<text x="819" y="351" font-size="14" fill="#646A73">HPN 两层双平面</text>
+<text x="819" y="374" font-size="14" fill="#646A73">聚合层避免哈希极化</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：sim_ecmp.py --flows 16 --uplinks 8 实跑输出（Python 3.14.7）；Meta RoCE 博客；Llama 3 论文</text>
 </svg>

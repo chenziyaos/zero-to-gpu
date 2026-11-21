@@ -1,34 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="750"
-     viewBox="-20 -20 1240 750">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="710" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">FA2 的循环反序与 warp 分工</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">左：FA1 外扫 KV 内扫 Q；右：FA2 外扫 Q 内扫 KV</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="540" height="280" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:3" transform="translate(56, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">FA1 风格</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(56, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">外循环：扫 K、V 块</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(56, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">内循环：扫 Q 块</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(56, 278.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">结果：每个 Q 块都要重复加载 K、V 数据</tspan></tspan></text></g>
-<g id="a2:9" transform="translate(56, 324.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">A100：25-40% MFU</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(56, 347.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">片上重复 IO 高</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(604, 165)"><rect x="0" y="0" width="540" height="280" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:11" transform="translate(620, 174.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">FA2 风格</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(620, 209.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">外循环：扫 Q 块</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(620, 232.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">内循环：扫 K、V 块</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(620, 278.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">结果：K、V 被加载后所有 warp 共享，减少重复加载</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(620, 324.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">A100：50-73% MFU</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(620, 347.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">H100：10-20% 收益</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(40, 485)"><rect x="0" y="0" width="553" height="160" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:19" transform="translate(56, 496.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">关键改动</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(56, 527.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">循环反序：从"对每个 K、V 块扫所有 Q"改成"对每个 Q 块扫所有 K、V"</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(56, 549.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">warp 分工：同一线程块内不同 warp 处理不同 Q 块</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 571.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">K、V 仅加载一次，被所有 warp 共享</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(617, 485)"><rect x="0" y="0" width="553" height="160" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:23" transform="translate(633, 496.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">性能来源</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(633, 527.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">不减少 HBM 总流量（与 FA1 持平）</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(633, 549.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">减少片上 SMEM/L1 重复读取</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(633, 571.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">更高效 warp 级数据复用</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(633, 593.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">减少 exp 重复计算次数</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(40, 671.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Dao et al. FlashAttention-2</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">FlashAttention-1：S、P 留在片上，HBM 访问量和 SRAM 大小挂钩</text>
+<text x="40" y="92" font-size="14" fill="#646A73">N 是序列长度，d 是头维度，M 是 SRAM 大小</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold"></text>
+<text x="296" y="166" font-size="14" fill="#1F2329" font-weight="bold">标准注意力</text>
+<text x="727" y="166" font-size="14" fill="#1F2329" font-weight="bold">FlashAttention-1</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">S、P</text>
+<text x="296" y="206" font-size="14" fill="#1F2329">写回 HBM，再读出来</text>
+<text x="727" y="206" font-size="14" fill="#1F2329">只在 SRAM 里分块处理</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">kernel</text>
+<text x="296" y="244" font-size="14" fill="#1F2329">三段各一个</text>
+<text x="727" y="244" font-size="14" fill="#1F2329">融合成一个</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">HBM 访问量</text>
+<text x="296" y="282" font-size="14" fill="#1F2329">Θ(Nd + N²)</text>
+<text x="727" y="282" font-size="14" fill="#1F2329">Θ(N²d²/M)，M 越大越少</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">论文收益</text>
+<text x="296" y="320" font-size="14" fill="#1F2329"></text>
+<text x="727" y="320" font-size="14" fill="#1F2329">GPT-2 注意力提速 7.6 倍</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">H100 每个线程块最多用 227 KB 共享内存，块要同时放下 Q、K、V 块和输出累加器。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：Dao et al. FlashAttention（定理 2、摘要）；NVIDIA Hopper Tuning Guide</text>
 </svg>

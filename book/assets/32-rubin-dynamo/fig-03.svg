@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 530" width="1200" height="530">
+<rect x="0" y="0" width="1200" height="530" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">同一种数据类型，三代的脊点只差一两倍</text>
+<text x="40" y="92" font-size="14" fill="#646A73">脊点 = 每卡稠密算力 ÷ HBM 带宽（FLOP/B）；低于脊点的 kernel 受带宽限制</text>
+<rect x="160" y="139" width="14" height="14" rx="3" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="180" y="150" font-size="13" fill="#646A73">H100</text>
+<rect x="234" y="139" width="14" height="14" rx="3" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="254" y="150" font-size="13" fill="#646A73">GB300</text>
+<rect x="316" y="139" width="14" height="14" rx="3" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="336" y="150" font-size="13" fill="#646A73">Rubin</text>
+<text x="148" y="215" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">BF16</text>
+<rect x="160" y="174" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="174" width="313" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="481" y="189" font-size="13" fill="#646A73">295</text>
+<rect x="160" y="200" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="200" width="331" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="499" y="215" font-size="13" fill="#646A73">312</text>
+<rect x="160" y="226" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="226" width="220" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="388" y="241" font-size="13" fill="#646A73">208</text>
+<text x="148" y="309" font-size="14" fill="#1F2329" font-weight="bold" text-anchor="end">FP8</text>
+<rect x="160" y="268" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="268" width="626" height="20" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="794" y="283" font-size="13" fill="#646A73">591</text>
+<rect x="160" y="294" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="294" width="662" height="20" rx="4" fill="#3370FF" stroke="#3370FF" stroke-width="1"/>
+<text x="830" y="309" font-size="13" fill="#646A73">625</text>
+<rect x="160" y="320" width="965" height="20" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="160" y="320" width="965" height="20" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="1133" y="335" font-size="13" fill="#646A73">911</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">FP4 稠密：GB300 约 1875，Rubin 约 1823。</text>
+<rect x="40" y="420" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="449" font-size="15" fill="#1F2329">解码每读一字节权重只做约 2b 次运算（b 为批大小），在三代卡上都远低于脊点。</text>
+<text x="40" y="506" font-size="12" fill="#646A73">来源：NVIDIA 产品页规格；主编核算</text>
+</svg>

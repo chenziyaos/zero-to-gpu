@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+<rect x="0" y="0" width="1200" height="520" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">每代要重写的三层：指令、操作数布局、同步与流水</text>
+<text x="40" y="92" font-size="14" fill="#646A73">同一个 GEMM 从上一代搬到下一代要改的地方</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold"></text>
+<text x="221" y="176" font-size="14" fill="#1F2329" font-weight="bold">Volta</text>
+<text x="443" y="176" font-size="14" fill="#1F2329" font-weight="bold">Turing</text>
+<text x="664" y="176" font-size="14" fill="#1F2329" font-weight="bold">Ampere</text>
+<text x="912" y="176" font-size="14" fill="#1F2329" font-weight="bold">Hopper</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">指令</text>
+<text x="221" y="216" font-size="14" fill="#1F2329">wmma、m8n8k4</text>
+<text x="443" y="216" font-size="14" fill="#1F2329">m16n8k8</text>
+<text x="664" y="216" font-size="14" fill="#1F2329">m16n8k16</text>
+<text x="912" y="216" font-size="14" fill="#1F2329">wgmma m64nNk16</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">目标</text>
+<text x="221" y="254" font-size="14" fill="#1F2329">sm_70</text>
+<text x="443" y="254" font-size="14" fill="#1F2329">sm_75</text>
+<text x="664" y="254" font-size="14" fill="#1F2329">sm_80</text>
+<text x="912" y="254" font-size="14" fill="#1F2329">sm_90a</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">进寄存器</text>
+<text x="221" y="292" font-size="14" fill="#1F2329">wmma.load</text>
+<text x="443" y="292" font-size="14" fill="#1F2329">ldmatrix</text>
+<text x="664" y="292" font-size="14" fill="#1F2329">ldmatrix</text>
+<text x="912" y="292" font-size="14" fill="#1F2329">可直接读共享内存</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">进共享内存</text>
+<text x="221" y="330" font-size="14" fill="#1F2329">经寄存器</text>
+<text x="443" y="330" font-size="14" fill="#1F2329">经寄存器</text>
+<text x="664" y="330" font-size="14" fill="#1F2329">cp.async</text>
+<text x="912" y="330" font-size="14" fill="#1F2329">TMA</text>
+<rect x="40" y="344" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="368" font-size="14" fill="#1F2329" font-weight="bold">流水</text>
+<text x="221" y="368" font-size="14" fill="#1F2329">同步</text>
+<text x="443" y="368" font-size="14" fill="#1F2329">同步</text>
+<text x="664" y="368" font-size="14" fill="#1F2329">双缓冲、mbarrier</text>
+<text x="912" y="368" font-size="14" fill="#1F2329">warp 分工、乒乓</text>
+<rect x="40" y="412" width="1120" height="49" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="441" font-size="15" fill="#1F2329">sm_90a 的代码不能在后续世代运行：用 wgmma 写的 kernel 到下一代必须重写。</text>
+<text x="40" y="496" font-size="12" fill="#646A73">来源：PTX ISA；NVIDIA Ampere、Hopper 技术博客；CUTLASS 文档</text>
+</svg>

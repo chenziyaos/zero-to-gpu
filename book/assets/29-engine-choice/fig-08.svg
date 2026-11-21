@@ -1,56 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="830"
-     viewBox="-20 -20 1240 830">
-<g id="o1:16" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="790" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:25" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">SGLang DSpark 动态 K + spec_accept_length 质量探针</tspan></tspan></text></g>
-<g id="a1:26" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">batch 内请求 draft 质量差异 → 动态调 K;accept length 异常下降 = draft 模型漂移预警</tspan></tspan></text></g>
-<g id="a1:27" transform="translate(40, 173.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">静态 K 的问题</tspan></tspan></text></g>
-<g id="o1:17" transform="translate(40, 216)"><rect x="0" y="0" width="545" height="130" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:28" transform="translate(215, 224.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="97"><tspan x="97" y="15.295"><tspan x="20.485" text-anchor="start">batch 内请求 K 全固定 = 4</tspan></tspan></text></g>
-<g id="a1:29" transform="translate(64, 257.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 好请求(alpha=0.8)理论 K=8 浪费 2 forward</tspan></tspan></text></g>
-<g id="a1:30" transform="translate(64, 281.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· 坏请求(alpha=0.2)理论 K=2 浪费 2 forward</tspan></tspan></text></g>
-<g id="a1:31" transform="translate(64, 305.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">→ 平均浪费 30% forward 算力</tspan></tspan></text></g>
-<g id="a1:32" transform="translate(615, 173.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">DSpark 动态调 K</tspan></tspan></text></g>
-<g id="o1:18" transform="translate(615, 216)"><rect x="0" y="0" width="545" height="130" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:33" transform="translate(785, 224.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="102"><tspan x="102" y="15.295"><tspan x="15.985" text-anchor="start">按 spec_accept_length 动态</tspan></tspan></text></g>
-<g id="a1:34" transform="translate(639, 257.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· alpha 高 → K 调高(2-8)</tspan></tspan></text></g>
-<g id="a1:35" transform="translate(639, 281.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">· alpha 低 → K 调低(0-2)</tspan></tspan></text></g>
-<g id="a1:36" transform="translate(639, 305.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">→ 算力浪费 → 5-10%</tspan></tspan></text></g>
-<g id="a1:37" transform="translate(40, 369.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">spec_accept_length 不是性能指标,是质量探针</tspan></tspan></text></g>
-<g id="o1:19" transform="translate(40, 416)"><rect x="0" y="0" width="1100" height="200" fill="#ffffff" stroke="#82a7fc" stroke-width="1" rx="8" ry="8"/></g>
-<g id="c1:13" transform="translate(80, 586)"><path fill="none" stroke="#1f2329" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1040 0"/></g>
-<g id="c1:14" transform="translate(80, 436)"><path fill="none" stroke="#1f2329" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 150 L 0 0"/></g>
-<g id="o1:20" transform="translate(136, 477)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="a1:38" transform="translate(116, 452.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="6" text-anchor="start">正常期</tspan></tspan></text></g>
-<g id="c1:15" transform="translate(140, 478)"><path fill="none" stroke="#8ee085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 3 L 100 0"/></g>
-<g id="o1:21" transform="translate(236, 474)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="c1:16" transform="translate(240, 478)"><path fill="none" stroke="#8ee085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 2"/></g>
-<g id="o1:22" transform="translate(336, 476)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="c1:17" transform="translate(340, 480)"><path fill="none" stroke="#8ee085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 8"/></g>
-<g id="o1:23" transform="translate(436, 484)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="c1:18" transform="translate(440, 488)"><path fill="none" stroke="#ffba6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 16"/></g>
-<g id="o1:24" transform="translate(536, 500)"><ellipse fill="#fff1e0" stroke="#ffba6b" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="a1:39" transform="translate(516, 475.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="6" text-anchor="start">漂移期</tspan></tspan></text></g>
-<g id="c1:19" transform="translate(540, 504)"><path fill="none" stroke="#ffba6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 19"/></g>
-<g id="o1:25" transform="translate(636, 519)"><ellipse fill="#fff1e0" stroke="#ffba6b" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="a1:40" transform="translate(602.5, 494.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="37.5"><tspan x="37.5" y="14.118"><tspan x="7.45" text-anchor="start">alpha 下降</tspan></tspan></text></g>
-<g id="c1:20" transform="translate(640, 523)"><path fill="none" stroke="#f98e8b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 18"/></g>
-<g id="o1:26" transform="translate(736, 537)"><ellipse fill="#fef1f1" stroke="#f98e8b" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="c1:21" transform="translate(740, 541)"><path fill="none" stroke="#f98e8b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 3"/></g>
-<g id="o1:27" transform="translate(836, 540)"><ellipse fill="#fef1f1" stroke="#f98e8b" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="c1:22" transform="translate(840, 544)"><path fill="none" stroke="#f98e8b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 100 20"/></g>
-<g id="o1:28" transform="translate(936, 560)"><ellipse fill="#fef1f1" stroke="#f98e8b" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="a1:41" transform="translate(916, 535.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="6" text-anchor="start">警报期</tspan></tspan></text></g>
-<g id="c1:23" transform="translate(940, 493)"><path fill="none" stroke="#8ee085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 71 L 100 0"/></g>
-<g id="o1:29" transform="translate(1036, 489)"><ellipse fill="#e4fae1" stroke="#8ee085" stroke-width="1.5" cx="4" cy="4" rx="4" ry="4"/></g>
-<g id="a1:42" transform="translate(1016, 464.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="6" text-anchor="start">回滚后</tspan></tspan></text></g>
-<g id="a1:43" transform="translate(52, 431.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">accept_len</tspan></tspan></text></g>
-<g id="a1:44" transform="translate(1090, 586.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">time</tspan></tspan></text></g>
-<g id="c1:24" transform="translate(80, 511)"><path fill="none" stroke="#f98e8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 1040 0"/></g>
-<g id="a1:45" transform="translate(1040, 491.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">阈值 0.5</tspan></tspan></text></g>
-<g id="o1:30" transform="translate(40, 642)"><rect x="0" y="0" width="1120" height="82" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:46" transform="translate(56, 651.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">探针</tspan></tspan></text></g>
-<g id="a1:47" transform="translate(56, 685.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">含义:alpha 从 0.72 跌到 0.15 说明 draft 模型与 target 模型已漂移;运维上可自动 rollback draft + 报警,防止劣化 SpecDec 反而拖慢主流程</tspan></tspan></text></g>
-<g id="a1:48" transform="translate(40, 751.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：SGLang DSpark + Scaling Pain case study + GPU-25 SpecDec 链</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<rect x="0" y="0" width="1200" height="400" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">结构化输出的开销已经能藏住：预检、重叠、跳跃解码</text>
+<text x="40" y="92" font-size="14" fill="#646A73">两边都可用 XGrammar：SGLang 默认，vLLM 可选 xgrammar 或 guidance</text>
+<rect x="40" y="150" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="181" font-size="18" fill="#1F2329" font-weight="bold">预检</text>
+<text x="56" y="211" font-size="14" fill="#646A73">上下文无关 token 编译期检查</text>
+<text x="56" y="234" font-size="14" fill="#646A73">每 token 延迟最多降 100 倍</text>
+<rect x="421" y="150" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="437" y="181" font-size="18" fill="#1F2329" font-weight="bold">重叠</text>
+<text x="437" y="211" font-size="14" fill="#646A73">语法计算和 GPU 执行并行</text>
+<text x="437" y="234" font-size="14" fill="#646A73">JSON 解码最多快 10 倍</text>
+<rect x="803" y="150" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="819" y="181" font-size="18" fill="#1F2329" font-weight="bold">跳跃</text>
+<text x="819" y="211" font-size="14" fill="#646A73">唯一路径一次解多个 token</text>
+<text x="819" y="234" font-size="14" fill="#646A73">延迟降 2 倍、吞吐 2.5 倍</text>
+<rect x="40" y="284" width="1120" height="49" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="56" y="313" font-size="15" fill="#1F2329">倍数都是各自论文或博客对当时基线的结果；用自己的 schema 比较带约束和不带约束的每 token 延迟。</text>
+<text x="40" y="376" font-size="12" fill="#646A73">来源：SGLang 论文与压缩 FSM 博客；XGrammar 论文；SGLang、vLLM 结构化输出文档</text>
 </svg>

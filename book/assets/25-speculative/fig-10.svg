@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 410" width="1200" height="410">
+<rect x="0" y="0" width="1200" height="410" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">投机解码的时间账：多一点 T_compute，少几次读权重</text>
+<text x="40" y="92" font-size="14" fill="#646A73">上线时要处理的三件事</text>
+<rect x="40" y="150" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="176" font-size="14" fill="#1F2329" font-weight="bold">时间账</text>
+<text x="285" y="176" font-size="14" fill="#1F2329" font-weight="bold">变化</text>
+<text x="765" y="176" font-size="14" fill="#1F2329" font-weight="bold">上线要做的</text>
+<rect x="40" y="192" width="1120" height="38" rx="0" fill="#F0F4FF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="216" font-size="14" fill="#1F2329" font-weight="bold">W_mem</text>
+<text x="285" y="216" font-size="14" fill="#1F2329">一次读权重出 1 到 K+1 个 token</text>
+<text x="765" y="216" font-size="14" fill="#1F2329">盯平均接受长度</text>
+<rect x="40" y="230" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="254" font-size="14" fill="#1F2329" font-weight="bold">T_compute</text>
+<text x="285" y="254" font-size="14" fill="#1F2329">草稿计算和猜错白算的部分</text>
+<text x="765" y="254" font-size="14" fill="#1F2329">按批大小调 K 或关闭</text>
+<rect x="40" y="268" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="292" font-size="14" fill="#1F2329" font-weight="bold">W_host</text>
+<text x="285" y="292" font-size="14" fill="#1F2329">树形验证和 KV 回滚的调度</text>
+<text x="765" y="292" font-size="14" fill="#1F2329">按块回退逻辑长度，不拷贝</text>
+<rect x="40" y="306" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="330" font-size="14" fill="#1F2329" font-weight="bold">一致性</text>
+<text x="285" y="330" font-size="14" fill="#1F2329">数值精度和批大小可能带来细微差别</text>
+<text x="765" y="330" font-size="14" fill="#1F2329">固定种子比较评测指标</text>
+<text x="40" y="386" font-size="12" fill="#646A73">来源：vLLM 文档 Speculative Decoding；GPU-23 第 5 章；本篇第 9 章</text>
+</svg>

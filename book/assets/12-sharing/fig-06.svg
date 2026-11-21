@@ -1,47 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="740"
-     viewBox="-20 -20 1240 740">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="700" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">三种共享方案的隔离度与性能权衡</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">横轴左→右隔离度递增；纵轴：吞吐衰减幅度（%）</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 165)"><rect x="0" y="0" width="350" height="200" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:3" transform="translate(40, 165)"><rect x="0" y="0" width="350" height="50" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:4" transform="translate(40, 190)"><rect x="0" y="0" width="350" height="25" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="11.5" ry="11.5"/></g>
-<g id="a2:3" transform="translate(60, 178.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">容器 cgroup</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(60, 225.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 隔离度：无</tspan></tspan></text></g>
-<g id="a2:5" transform="translate(60, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 吞吐衰减：15-30%</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(60, 277.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 配置难度：简单</tspan></tspan></text></g>
-<g id="a2:7" transform="translate(60, 303.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 适用场景：测试、开发</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(178.5, 370.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="16.471"><tspan x="8.5" text-anchor="start">隔离度低</tspan></tspan></text></g>
-<g id="o2:5" transform="translate(416, 165)"><rect x="0" y="0" width="350" height="200" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:6" transform="translate(416, 165)"><rect x="0" y="0" width="350" height="50" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:7" transform="translate(416, 190)"><rect x="0" y="0" width="350" height="25" fill="#3370ff" stroke="#3370ff" stroke-width="1" rx="11.5" ry="11.5"/></g>
-<g id="a2:9" transform="translate(436, 178.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">MPS 时间片</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(436, 225.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 隔离度：中（地址空间）</tspan></tspan></text></g>
-<g id="a2:11" transform="translate(436, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 吞吐衰减：30-50%</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(436, 277.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 块对齐浪费：32-50%</tspan></tspan></text></g>
-<g id="a2:13" transform="translate(436, 303.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 配置难度：中等</tspan></tspan></text></g>
-<g id="a2:14" transform="translate(436, 329.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 适用场景：异构推理</tspan></tspan></text></g>
-<g id="a2:15" transform="translate(554.5, 370.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="16.471"><tspan x="8.5" text-anchor="start">隔离度中</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(792, 165)"><rect x="0" y="0" width="350" height="200" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:9" transform="translate(792, 165)"><rect x="0" y="0" width="350" height="50" fill="#34c724" stroke="#34c724" stroke-width="1" rx="10" ry="10"/></g>
-<g id="o2:10" transform="translate(792, 190)"><rect x="0" y="0" width="350" height="25" fill="#34c724" stroke="#34c724" stroke-width="1" rx="11.5" ry="11.5"/></g>
-<g id="a2:16" transform="translate(812, 178.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#ffffff" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">MIG 硬件隔离</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(812, 225.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 隔离度：高（物理）</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(812, 251.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 吞吐衰减：5-15%</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(812, 277.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 碎片率：最高 14%</tspan></tspan></text></g>
-<g id="a2:20" transform="translate(812, 303.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 配置难度：复杂（需重启）</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(812, 329.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 适用场景：生产关键业务</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(930.5, 370.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="16.471"><tspan x="8.5" text-anchor="start">隔离度高</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(215, 415)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 752 0"/></g>
-<g id="d2:1" transform="translate(954.5, 406.5)"><defs><symbol id="svgicon-d2-1" viewBox="0 0 15 17"><g transform="translate(-954.5 -406.5)"><polygon points="957,409 967,415 957,421" fill="#3370FF" /></g></symbol></defs><use href="#svgicon-d2-1" x="0" y="0" width="15" height="17"/></g>
-<g id="a2:23" transform="translate(554.5, 425.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="15.295"><tspan x="9.025" text-anchor="start">隔离度 →</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(40, 495)"><rect x="0" y="0" width="1130" height="144" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:24" transform="translate(56, 506.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">选择指南</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(56, 537.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">开发和低端集群：用容器，最简单</tspan></tspan></text></g>
-<g id="a2:26" transform="translate(56, 559.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">推理和异构任务：选 MPS，配置灵活、吞吐损失可接受</tspan></tspan></text></g>
-<g id="a2:27" transform="translate(56, 581.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">生产关键业务、高性能集群：选 MIG，隔离最强但需专人运维</tspan></tspan></text></g>
-<g id="a2:28" transform="translate(56, 603.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">集群级碎片优化详见 GPU-19</tspan></tspan></text></g>
-<g id="a2:29" transform="translate(40, 661.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：Lee et al. SC(2024)；Li et al. MISO SoCC(2022)；GPU-12</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 570" width="1200" height="570">
+<rect x="0" y="0" width="1200" height="570" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">MPS：客户端并发提交，致命错误一起承担</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Volta 起客户端直接向 GPU 提交工作；server 持有调度资源，一个用户一个 server</text>
+<rect x="40" y="140" width="357" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="171" font-size="18" fill="#1F2329" font-weight="bold">nvidia-cuda-mps-control</text>
+<text x="56" y="201" font-size="14" fill="#646A73">控制守护进程</text>
+<text x="56" y="224" font-size="14" fill="#646A73">启停 server，协调连接</text>
+<text x="56" y="247" font-size="14" fill="#646A73">同一时间最多一个活动 server</text>
+<rect x="421" y="140" width="357" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="437" y="171" font-size="18" fill="#1F2329" font-weight="bold">nvidia-cuda-mps-server</text>
+<text x="437" y="201" font-size="14" fill="#646A73">客户端共用的 GPU 连接</text>
+<text x="437" y="224" font-size="14" fill="#646A73">持有调度资源</text>
+<text x="437" y="247" font-size="14" fill="#646A73">与客户端同一用户 ID</text>
+<rect x="803" y="140" width="357" height="128" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="819" y="171" font-size="18" fill="#1F2329" font-weight="bold">客户端（libcuda.so）</text>
+<text x="819" y="201" font-size="14" fill="#646A73">对程序透明</text>
+<text x="819" y="224" font-size="14" fill="#646A73">直接提交工作，不经 server</text>
+<text x="819" y="247" font-size="14" fill="#646A73">地址空间各自独立</text>
+<rect x="40" y="318" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="69" cy="343" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="69" y="348" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="349" font-size="18" fill="#1F2329" font-weight="bold">客户端出错</text>
+<text x="56" y="379" font-size="14" fill="#646A73">某个客户端触发致命 GPU 错误</text>
+<polyline points="293,370 325,370" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,364 325,370 315,376" fill="#8F959E"/>
+<rect x="331" y="318" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="360" cy="343" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="360" y="348" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="349" font-size="18" fill="#1F2329" font-weight="bold">全部通知</text>
+<text x="347" y="379" font-size="14" fill="#646A73">同组 GPU 上所有客户端收到错误，</text>
+<text x="347" y="402" font-size="14" fill="#646A73">不说是谁</text>
+<polyline points="584,370 616,370" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,364 616,370 606,376" fill="#8F959E"/>
+<rect x="622" y="318" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="651" cy="343" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="651" y="348" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="349" font-size="18" fill="#1F2329" font-weight="bold">FAULT</text>
+<text x="638" y="379" font-size="14" fill="#646A73">server 拒绝新连接，等这些客户</text>
+<text x="638" y="402" font-size="14" fill="#646A73">端全部退出</text>
+<polyline points="875,370 907,370" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,364 907,370 897,376" fill="#8F959E"/>
+<rect x="913" y="318" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="343" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="348" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="349" font-size="18" fill="#1F2329" font-weight="bold">恢复</text>
+<text x="929" y="379" font-size="14" fill="#646A73">重建上下文，回到 ACTIVE</text>
+<rect x="40" y="458" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="487" font-size="15" fill="#1F2329">客户端上限：MPS 文档写每卡 60 个上下文（CUDA_DEVICE_MAX_CONNECTIONS 默认 2），MIG 指南写 48；规划按 48。</text>
+<text x="40" y="546" font-size="12" fill="#646A73">来源：NVIDIA Multi-Process Service：Overview、Architecture、When to Use MPS；MIG User Guide, Concepts</text>
 </svg>

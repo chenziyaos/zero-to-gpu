@@ -1,55 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="830"
-     viewBox="-20 -20 1240 830">
-<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="790" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a1:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">Chat vs Agent:推理系统的五假设被打破</tspan></tspan></text></g>
-<g id="a1:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">KV 生命周期、调度语义、路由粘性、容量公式、流量形态 — 全部要重写</tspan></tspan></text></g>
-<g id="o1:2" transform="translate(40, 190)"><rect x="0" y="0" width="1120" height="40" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="6" ry="6"/></g>
-<g id="a1:3" transform="translate(220.5, 199.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="19.5"><tspan x="19.5" y="16.471"><tspan x="5.5" text-anchor="start">维度</tspan></tspan></text></g>
-<g id="a1:4" transform="translate(460, 199.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="40"><tspan x="40" y="16.471"><tspan x="8.39" text-anchor="start">Chat 假设</tspan></tspan></text></g>
-<g id="a1:5" transform="translate(745.5, 199.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="44.5"><tspan x="44.5" y="16.471"><tspan x="8.875" text-anchor="start">Agent 真实</tspan></tspan></text></g>
-<g id="a1:6" transform="translate(1013.5, 199.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="16.471"><tspan x="8.5" text-anchor="start">破裂后果</tspan></tspan></text></g>
-<g id="o1:3" transform="translate(40, 230)"><rect x="0" y="0" width="1120" height="44" fill="#ffffff" stroke="#d0d0d0" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a1:7" transform="translate(52, 242.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">KV 生命周期</tspan></tspan></text></g>
-<g id="a1:8" transform="translate(240, 242.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">随单次请求生灭</tspan></tspan></text></g>
-<g id="a1:9" transform="translate(520, 242.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">随会话生灭(几十分~几天)</tspan></tspan></text></g>
-<g id="a1:10" transform="translate(890, 242.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">re-prefill 占 31.5%</tspan></tspan></text></g>
-<g id="o1:4" transform="translate(40, 274)"><rect x="0" y="0" width="1120" height="44" fill="#f5f6f7" stroke="#d0d0d0" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a1:11" transform="translate(52, 286.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">调度语义</tspan></tspan></text></g>
-<g id="a1:12" transform="translate(240, 286.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">请求按到达顺序</tspan></tspan></text></g>
-<g id="a1:13" transform="translate(520, 286.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">会话脉冲(活跃→休眠→活跃)</tspan></tspan></text></g>
-<g id="a1:14" transform="translate(890, 286.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">队头阻塞 7.1-35.7×</tspan></tspan></text></g>
-<g id="o1:5" transform="translate(40, 318)"><rect x="0" y="0" width="1120" height="44" fill="#ffffff" stroke="#d0d0d0" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a1:15" transform="translate(52, 330.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">路由粘性</tspan></tspan></text></g>
-<g id="a1:16" transform="translate(240, 330.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">任意台都行</tspan></tspan></text></g>
-<g id="a1:17" transform="translate(520, 330.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">同会话到同一台(或共享 KV)</tspan></tspan></text></g>
-<g id="a1:18" transform="translate(890, 330.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">prefix cache 形同虚设</tspan></tspan></text></g>
-<g id="o1:6" transform="translate(40, 362)"><rect x="0" y="0" width="1120" height="44" fill="#f5f6f7" stroke="#d0d0d0" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a1:19" transform="translate(52, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">容量公式</tspan></tspan></text></g>
-<g id="a1:20" transform="translate(240, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">QPS × token/req</tspan></tspan></text></g>
-<g id="a1:21" transform="translate(520, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">并发会话 × 寿命 × token 强度</tspan></tspan></text></g>
-<g id="a1:22" transform="translate(890, 374.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">容量低估 3-5×</tspan></tspan></text></g>
-<g id="o1:7" transform="translate(40, 406)"><rect x="0" y="0" width="1120" height="44" fill="#ffffff" stroke="#d0d0d0" stroke-width="1" rx="0" ry="0"/></g>
-<g id="a1:23" transform="translate(52, 418.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">流量形态</tspan></tspan></text></g>
-<g id="a1:24" transform="translate(240, 418.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">单轮短 prompt</tspan></tspan></text></g>
-<g id="a1:25" transform="translate(520, 418.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d46b08" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">多轮长 prompt + tool 调用</tspan></tspan></text></g>
-<g id="a1:26" transform="translate(890, 418.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#d83931" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">TTFT 500ms→5s</tspan></tspan></text></g>
-<g id="a1:27" transform="translate(40, 463.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">AgentSysBench 四组实测数字</tspan></tspan></text></g>
-<g id="o1:8" transform="translate(40, 510)"><rect x="0" y="0" width="270" height="110" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:28" transform="translate(146, 520.117)"><text font-size="22" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="29"><tspan x="29" y="25.883"><tspan x="5.425" text-anchor="start">20%</tspan></tspan></text></g>
-<g id="a1:29" transform="translate(127, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="48"><tspan x="48" y="14.118"><tspan x="0" text-anchor="start">会话中位活跃计算</tspan></tspan></text></g>
-<g id="o1:9" transform="translate(325, 510)"><rect x="0" y="0" width="270" height="110" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:30" transform="translate(419.5, 520.117)"><text font-size="22" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="25.883"><tspan x="6.86" text-anchor="start">55.9%</tspan></tspan></text></g>
-<g id="a1:31" transform="translate(395.5, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="64.5"><tspan x="64.5" y="14.118"><tspan x="-1.965" text-anchor="start">re-prefill 占 cache token</tspan></tspan></text></g>
-<g id="o1:10" transform="translate(610, 510)"><rect x="0" y="0" width="270" height="110" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:32" transform="translate(704.5, 520.117)"><text font-size="22" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d83931" text-anchor="middle" dominant-baseline="alphabetic" x="40.5"><tspan x="40.5" y="25.883"><tspan x="6.86" text-anchor="start">84.3%</tspan></tspan></text></g>
-<g id="a1:33" transform="translate(691, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="54"><tspan x="54" y="14.118"><tspan x="0" text-anchor="start">元数据最高占上下文</tspan></tspan></text></g>
-<g id="o1:11" transform="translate(895, 510)"><rect x="0" y="0" width="270" height="110" fill="#f2ecff" stroke="#ad82f7" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a1:34" transform="translate(970.5, 520.117)"><text font-size="22" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#6425d0" text-anchor="middle" dominant-baseline="alphabetic" x="59.5"><tspan x="59.5" y="25.883"><tspan x="4.83" text-anchor="start">7.1-35.7×</tspan></tspan></text></g>
-<g id="a1:35" transform="translate(982, 565.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="48"><tspan x="48" y="14.118"><tspan x="0" text-anchor="start">长短请求混批阻塞</tspan></tspan></text></g>
-<g id="o1:12" transform="translate(40, 650)"><rect x="0" y="0" width="1120" height="82" fill="#fef1f1" stroke="#f98e8b" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a1:36" transform="translate(56, 659.823)"><text font-size="18" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="21.177"><tspan x="0" text-anchor="start">现象</tspan></tspan></text></g>
-<g id="a1:37" transform="translate(56, 693.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="17.648"><tspan x="0" text-anchor="start">同一段 50K 上下文在一次 Agent debug session 里被 prefill 12 次 — 这是 chat 系统跑 Agent 负载的真实成本</tspan></tspan></text></g>
-<g id="a1:38" transform="translate(40, 751.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：GPU-31 ch1 + AgentSysBench 2026</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
+<rect x="0" y="0" width="1200" height="450" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">Agent 会话的 KV 要跨过步与步之间的等待留下来</text>
+<text x="40" y="92" font-size="14" fill="#646A73">本篇各章的位置</text>
+<rect x="40" y="150" width="247" height="104" rx="12" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<circle cx="69" cy="175" r="13" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1.5"/>
+<text x="69" y="180" font-size="13" fill="#646A73" font-weight="bold" text-anchor="middle">1</text>
+<text x="88" y="181" font-size="18" fill="#1F2329" font-weight="bold">负载形态</text>
+<text x="56" y="211" font-size="14" fill="#646A73">输入长、输出短（第 1 章）</text>
+<polyline points="293,202 325,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="315,196 325,202 315,208" fill="#8F959E"/>
+<rect x="331" y="150" width="247" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<circle cx="360" cy="175" r="13" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1.5"/>
+<text x="360" y="180" font-size="13" fill="#D46B08" font-weight="bold" text-anchor="middle">2</text>
+<text x="379" y="181" font-size="18" fill="#1F2329" font-weight="bold">等待</text>
+<text x="347" y="211" font-size="14" fill="#646A73">间隔与过期代价（第 2、3 章）</text>
+<polyline points="584,202 616,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="606,196 616,202 606,208" fill="#8F959E"/>
+<rect x="622" y="150" width="247" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<circle cx="651" cy="175" r="13" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1.5"/>
+<text x="651" y="180" font-size="13" fill="#245BDB" font-weight="bold" text-anchor="middle">3</text>
+<text x="670" y="181" font-size="18" fill="#1F2329" font-weight="bold">留住 KV</text>
+<text x="638" y="211" font-size="14" fill="#646A73">去留、原语、路由、分层（第 4</text>
+<text x="638" y="234" font-size="14" fill="#646A73">到 7 章）</text>
+<polyline points="875,202 907,202" fill="none" stroke="#8F959E" stroke-width="2"/>
+<polygon points="897,196 907,202 897,208" fill="#8F959E"/>
+<rect x="913" y="150" width="247" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<circle cx="942" cy="175" r="13" fill="#E4FAE1" stroke="#8EE085" stroke-width="1.5"/>
+<text x="942" y="180" font-size="13" fill="#2EA121" font-weight="bold" text-anchor="middle">4</text>
+<text x="961" y="181" font-size="18" fill="#1F2329" font-weight="bold">交界处</text>
+<text x="929" y="211" font-size="14" fill="#646A73">压缩、约束解码（第 8、9 章）</text>
+<rect x="40" y="284" width="357" height="104" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="316" font-size="18" fill="#1F2329" font-weight="bold">问题</text>
+<text x="56" y="346" font-size="14" fill="#646A73">等待被当作结束</text>
+<text x="56" y="369" font-size="14" fill="#646A73">KV 被回收后整段重算</text>
+<rect x="421" y="284" width="357" height="104" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="437" y="316" font-size="18" fill="#1F2329" font-weight="bold">推理系统补什么</text>
+<text x="437" y="346" font-size="14" fill="#646A73">按会话定去留、会话标识</text>
+<text x="437" y="369" font-size="14" fill="#646A73">亲和路由、分层存储</text>
+<rect x="803" y="284" width="357" height="104" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="819" y="316" font-size="18" fill="#1F2329" font-weight="bold">框架配合什么</text>
+<text x="819" y="346" font-size="14" fill="#646A73">前缀稳定、适时压缩</text>
+<text x="819" y="369" font-size="14" fill="#646A73">关键工具设 strict</text>
+<text x="40" y="426" font-size="12" fill="#646A73">来源：AgentSysBench（arXiv 2608.15127）；SGLang、vLLM、Anthropic、OpenAI 文档</text>
 </svg>

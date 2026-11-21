@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">反向：不存 P，存每行一个统计量，再按块重算</text>
+<text x="40" y="92" font-size="14" fill="#646A73">例子：N = 8192、32 个头、BF16</text>
+<rect x="40" y="140" width="1120" height="42" rx="0" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="52" y="166" font-size="14" fill="#1F2329" font-weight="bold"></text>
+<text x="267" y="166" font-size="14" fill="#1F2329" font-weight="bold">标准实现</text>
+<text x="698" y="166" font-size="14" fill="#1F2329" font-weight="bold">FlashAttention 系列</text>
+<rect x="40" y="182" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="206" font-size="14" fill="#1F2329" font-weight="bold">前向存下</text>
+<text x="267" y="206" font-size="14" fill="#1F2329">P，每头 N × N</text>
+<text x="698" y="206" font-size="14" fill="#1F2329">输出 O 和每行的归一化因子</text>
+<rect x="40" y="220" width="1120" height="38" rx="0" fill="#FFF5EB" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="244" font-size="14" fill="#1F2329" font-weight="bold">例子里的量</text>
+<text x="267" y="244" font-size="14" fill="#1F2329">一层约 4.29 GB</text>
+<text x="698" y="244" font-size="14" fill="#1F2329">个数少 8192 倍</text>
+<rect x="40" y="258" width="1120" height="38" rx="0" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="282" font-size="14" fill="#1F2329" font-weight="bold">反向做什么</text>
+<text x="267" y="282" font-size="14" fill="#1F2329">从 HBM 读回 P</text>
+<text x="698" y="282" font-size="14" fill="#1F2329">在片上重算 S 和 P</text>
+<rect x="40" y="296" width="1120" height="38" rx="0" fill="#F5F6F7" stroke="#DEE0E3" stroke-width="1"/>
+<text x="52" y="320" font-size="14" fill="#1F2329" font-weight="bold">跨块累加</text>
+<text x="267" y="320" font-size="14" fill="#1F2329">各算子分开算，中间结果都在 HBM</text>
+<text x="698" y="320" font-size="14" fill="#1F2329">FA2 按 warp 避开 split-K；FA4 用 TMEM 和 2-CTA</text>
+<rect x="40" y="370" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="399" font-size="15" fill="#1F2329">重算多做一遍矩阵乘，但第 1 章的例子里搬 S、P 的时间是计算下限的 4.6 倍，重算更划算。</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：Dao et al. FlashAttention（第 3 节）；Dao. FlashAttention-2；Zadouri et al. FlashAttention-4</text>
+</svg>

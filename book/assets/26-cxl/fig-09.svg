@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+<rect x="0" y="0" width="1200" height="480" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">回载比重算快，逐步读取比 HBM 慢 52.3 倍</text>
+<text x="40" y="92" font-size="14" fill="#646A73">Llama 3 70B，16K 请求，8 张 H100；毫秒</text>
+<text x="258" y="168" font-size="14" fill="#1F2329" text-anchor="end">经 8 路 PCIe 回载</text>
+<rect x="270" y="150" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="270" y="150" width="13" height="26" rx="4" fill="#34C724" stroke="#34C724" stroke-width="1"/>
+<text x="291" y="168" font-size="13" fill="#646A73">  10.49 ms</text>
+<text x="258" y="210" font-size="14" fill="#1F2329" text-anchor="end">从一张 CXL-A 卡回载</text>
+<rect x="270" y="192" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="270" y="192" width="364" height="26" rx="4" fill="#FF8800" stroke="#FF8800" stroke-width="1"/>
+<text x="642" y="210" font-size="13" fill="#646A73">  303.9 ms</text>
+<text x="258" y="252" font-size="14" fill="#1F2329" text-anchor="end">重算预填充</text>
+<rect x="270" y="234" width="700" height="26" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="270" y="234" width="700" height="26" rx="4" fill="#8F959E" stroke="#8F959E" stroke-width="1"/>
+<text x="978" y="252" font-size="13" fill="#646A73">  585 ms</text>
+<rect x="40" y="290" width="548" height="128" rx="12" fill="#FFF1E0" stroke="#FFBA6B" stroke-width="1"/>
+<text x="56" y="321" font-size="18" fill="#1F2329" font-weight="bold">逐步读取</text>
+<text x="56" y="351" font-size="14" fill="#646A73">每卡 0.6711 GB</text>
+<text x="56" y="374" font-size="14" fill="#646A73">HBM 0.200 ms，PCIe 10.49 ms</text>
+<text x="56" y="397" font-size="14" fill="#646A73">只能停放，不能流式</text>
+<rect x="612" y="290" width="548" height="128" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="628" y="321" font-size="18" fill="#1F2329" font-weight="bold">实测佐证</text>
+<text x="628" y="351" font-size="14" fill="#646A73">CXL 到 GPU 受 PCIe 限制</text>
+<text x="628" y="374" font-size="14" fill="#646A73">FlexGen 比 NVMe 高 24%</text>
+<text x="628" y="397" font-size="14" fill="#646A73">与远端 DRAM 差不到 3%</text>
+<text x="40" y="456" font-size="12" fill="#646A73">来源：主编核算（Llama 3 表 3、H100 规格页、Demystifying CXL Memory）；重算按假设 MFU 0.5</text>
+</svg>

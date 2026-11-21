@@ -1,49 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1240"
-     height="710"
-     viewBox="-20 -20 1240 710">
-<g id="o2:1" transform="translate(0, 0)"><rect x="0" y="0" width="1200" height="670" fill="#fafbfd" stroke="#dee0e3" stroke-width="1" rx="16" ry="16"/></g>
-<g id="a2:1" transform="translate(40, 25.058)"><text font-size="28" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="32.942"><tspan x="0" text-anchor="start">DCGM 常驻监控与单次 Profiler 的分工</tspan></tspan></text></g>
-<g id="a2:2" transform="translate(40, 75.529)"><text font-size="14" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="16.471"><tspan x="0" text-anchor="start">横轴时间尺度从秒到天：DCGM（小时/天级）→ nsys（秒级）→ ncu（单 kernel）</tspan></tspan></text></g>
-<g id="o2:2" transform="translate(40, 170)"><rect x="0" y="0" width="360" height="220" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:3" transform="translate(150.5, 182.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#245bdb" text-anchor="middle" dominant-baseline="alphabetic" x="69.5"><tspan x="69.5" y="17.648"><tspan x="16.04" text-anchor="start">DCGM 常驻监控</tspan></tspan></text></g>
-<g id="a2:4" transform="translate(178, 207.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="42"><tspan x="42" y="14.118"><tspan x="0.96" text-anchor="start">小时 / 天级窗口</tspan></tspan></text></g>
-<g id="c2:1" transform="translate(70, 320)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 30 L 60 0"/></g>
-<g id="c2:2" transform="translate(130, 290)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 30 L 60 0"/></g>
-<g id="c2:3" transform="translate(190, 260)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 30 L 60 0"/></g>
-<g id="c2:4" transform="translate(250, 260)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 60 20"/></g>
-<g id="c2:5" transform="translate(310, 250)"><path fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 30 L 60 0"/></g>
-<g id="a2:5" transform="translate(70, 355.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">0 h</tspan></tspan></text></g>
-<g id="a2:6" transform="translate(345, 355.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="25"><tspan x="25" y="14.118"><tspan x="1.71" text-anchor="start">24 h</tspan></tspan></text></g>
-<g id="o2:3" transform="translate(420, 170)"><rect x="0" y="0" width="360" height="220" fill="#fff1e0" stroke="#ffba6b" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:7" transform="translate(539.5, 182.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#d46b08" text-anchor="middle" dominant-baseline="alphabetic" x="60.5"><tspan x="60.5" y="17.648"><tspan x="12.26" text-anchor="start">nsys 单次采集</tspan></tspan></text></g>
-<g id="a2:8" transform="translate(541.5, 207.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="58.5"><tspan x="58.5" y="14.118"><tspan x="0.89" text-anchor="start">秒级窗口，1-5% 开销</tspan></tspan></text></g>
-<g id="o2:4" transform="translate(480, 290)"><rect x="0" y="0" width="30" height="60" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="4" ry="4"/></g>
-<g id="o2:5" transform="translate(560, 325)"><rect x="0" y="0" width="30" height="25" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="4" ry="4"/></g>
-<g id="o2:6" transform="translate(620, 270)"><rect x="0" y="0" width="30" height="80" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="4" ry="4"/></g>
-<g id="o2:7" transform="translate(720, 305)"><rect x="0" y="0" width="30" height="45" fill="#ff8800" stroke="#ff8800" stroke-width="1" rx="4" ry="4"/></g>
-<g id="c2:6" transform="translate(450, 350)"><path fill="none" stroke="#ffba6b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 300 0"/></g>
-<g id="a2:9" transform="translate(450, 355.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">0 s</tspan></tspan></text></g>
-<g id="a2:10" transform="translate(726, 355.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="end" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="2.37" text-anchor="start">10 s</tspan></tspan></text></g>
-<g id="o2:8" transform="translate(800, 170)"><rect x="0" y="0" width="360" height="220" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="10" ry="10"/></g>
-<g id="a2:11" transform="translate(900, 182.3525)"><text font-size="15" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="80"><tspan x="80" y="17.648"><tspan x="14.67" text-anchor="start">ncu 单 Kernel 分析</tspan></tspan></text></g>
-<g id="a2:12" transform="translate(908.5, 207.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="71.5"><tspan x="71.5" y="14.118"><tspan x="0.755" text-anchor="start">10-50 倍重放、硬件计数器</tspan></tspan></text></g>
-<g id="o2:9" transform="translate(830, 260)"><rect x="0" y="0" width="120" height="36" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:13" transform="translate(853.5, 269.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="36.5"><tspan x="36.5" y="14.118"><tspan x="7.925" text-anchor="start">SM 68.5%</tspan></tspan></text></g>
-<g id="o2:10" transform="translate(970, 260)"><rect x="0" y="0" width="120" height="36" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:14" transform="translate(983.5, 269.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="46.5"><tspan x="46.5" y="14.118"><tspan x="9.495" text-anchor="start">DRAM 78.9%</tspan></tspan></text></g>
-<g id="o2:11" transform="translate(830, 310)"><rect x="0" y="0" width="120" height="36" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:15" transform="translate(862.5, 319.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="27.5"><tspan x="27.5" y="14.118"><tspan x="6.27" text-anchor="start">L1 55%</tspan></tspan></text></g>
-<g id="o2:12" transform="translate(970, 310)"><rect x="0" y="0" width="120" height="36" fill="#e4fae1" stroke="#8ee085" stroke-width="1" rx="8" ry="8"/></g>
-<g id="a2:16" transform="translate(1002.5, 319.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#2ea121" text-anchor="middle" dominant-baseline="alphabetic" x="27.5"><tspan x="27.5" y="14.118"><tspan x="6.27" text-anchor="start">L2 71%</tspan></tspan></text></g>
-<g id="a2:17" transform="translate(136, 403.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="84"><tspan x="84" y="14.118"><tspan x="0" text-anchor="start">功耗、利用率、显存的长期趋势</tspan></tspan></text></g>
-<g id="a2:18" transform="translate(492.5, 403.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="107.5"><tspan x="107.5" y="14.118"><tspan x="1.68" text-anchor="start">哪个 kernel 慢、有间隙、GPU 在忙什么</tspan></tspan></text></g>
-<g id="a2:19" transform="translate(870, 403.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="middle" dominant-baseline="alphabetic" x="110"><tspan x="110" y="14.118"><tspan x="1.7" text-anchor="start">热点 kernel 的根因（带宽 / 计算 / 延迟）</tspan></tspan></text></g>
-<g id="o2:13" transform="translate(40, 440)"><rect x="0" y="0" width="1120" height="170" fill="#e1eaff" stroke="#82a7fc" stroke-width="1" rx="12" ry="12"/></g>
-<g id="a2:20" transform="translate(56, 451.176)"><text font-size="16" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="bold" fill="#1f2329" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="18.824"><tspan x="0" text-anchor="start">集成策略</tspan></tspan></text></g>
-<g id="a2:21" transform="translate(56, 482.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 日常开发：主要靠 DCGM 观察长期趋势（晨会看板、周期性告警）</tspan></tspan></text></g>
-<g id="a2:22" transform="translate(56, 504.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 性能异常：用 nsys 单次采集定位问题（开发完成前或线上调查）</tspan></tspan></text></g>
-<g id="a2:23" transform="translate(56, 526.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 单 kernel 深挖：ncu 对热点 kernel 重放采集硬件计数器</tspan></tspan></text></g>
-<g id="a2:24" transform="translate(56, 548.7055)"><text font-size="13" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="15.295"><tspan x="0" text-anchor="start">· 融合理解：nsys 中看秒级现象，对照 DCGM 曲线看是否持续 / 普遍</tspan></tspan></text></g>
-<g id="a2:25" transform="translate(40, 631.882)"><text font-size="12" font-family="Noto Sans SC, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-weight="normal" fill="#646a73" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="14.118"><tspan x="0" text-anchor="start">来源：本篇 code_outputs.md；NVIDIA DCGM 文档</tspan></tspan></text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430">
+<rect x="0" y="0" width="1200" height="430" rx="16" fill="#FAFBFD" stroke="#DEE0E3"/>
+<text x="40" y="58" font-size="28" fill="#1F2329" font-weight="bold">PyTorch profiler 的 schedule：只记录稳态的几步</text>
+<text x="40" y="92" font-size="14" fill="#646A73">每步结束调用 prof.step()；读表按 self 时间排序</text>
+<text x="128" y="182" font-size="14" fill="#1F2329" text-anchor="end">步骤</text>
+<rect x="140" y="160" width="1020" height="34" rx="4" fill="#F2F3F5" stroke="#F2F3F5" stroke-width="1"/>
+<rect x="140" y="163" width="102" height="28" rx="4" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="191" y="182" font-size="12" fill="#646A73" text-anchor="middle">wait</text>
+<rect x="242" y="163" width="102" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="293" y="182" font-size="12" fill="#245BDB" text-anchor="middle">warmup</text>
+<rect x="344" y="163" width="306" height="28" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="497" y="182" font-size="12" fill="#2EA121" text-anchor="middle">active 记录</text>
+<rect x="650" y="163" width="102" height="28" rx="4" fill="#F2F3F5" stroke="#DEE0E3" stroke-width="1"/>
+<text x="701" y="182" font-size="12" fill="#646A73" text-anchor="middle">wait</text>
+<rect x="752" y="163" width="102" height="28" rx="4" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="803" y="182" font-size="12" fill="#245BDB" text-anchor="middle">warmup</text>
+<rect x="854" y="163" width="306" height="28" rx="4" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="1007" y="182" font-size="12" fill="#2EA121" text-anchor="middle">active 记录</text>
+<line x1="140" y1="156" x2="140" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="140" y="216" font-size="12" fill="#646A73" text-anchor="middle">0 步</text>
+<line x1="344" y1="156" x2="344" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="344" y="216" font-size="12" fill="#646A73" text-anchor="middle">2 步</text>
+<line x1="548" y1="156" x2="548" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="548" y="216" font-size="12" fill="#646A73" text-anchor="middle">4 步</text>
+<line x1="752" y1="156" x2="752" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="752" y="216" font-size="12" fill="#646A73" text-anchor="middle">6 步</text>
+<line x1="956" y1="156" x2="956" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="956" y="216" font-size="12" fill="#646A73" text-anchor="middle">8 步</text>
+<line x1="1160" y1="156" x2="1160" y2="198" stroke="#DEE0E3" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="1160" y="216" font-size="12" fill="#646A73" text-anchor="middle">10 步</text>
+<rect x="40" y="250" width="1120" height="49" rx="12" fill="#E1EAFF" stroke="#82A7FC" stroke-width="1"/>
+<text x="56" y="279" font-size="15" fill="#1F2329">self 时间不含子算子，total 时间包含；按 total 排序时排前面的总是外层区间。</text>
+<rect x="40" y="320" width="1120" height="49" rx="12" fill="#E4FAE1" stroke="#8EE085" stroke-width="1"/>
+<text x="56" y="349" font-size="15" fill="#1F2329">NVTX 默认什么也不做，只在工具里运行时才记录；torch.cuda.nvtx.range_push / range_pop 加上 nsys -t nvtx，时间线上多一行带名字的区间。</text>
+<text x="40" y="406" font-size="12" fill="#646A73">来源：PyTorch torch.profiler 文档；PyTorch Profiler recipe；NVTX 文档</text>
 </svg>
