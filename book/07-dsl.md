@@ -424,4 +424,4 @@ zero-to-gpu/07-dsl/ 下的 sim_dsl.py、sim_autotune.py 和 test_dsl.py 只需 P
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/07-dsl.ipynb) · 上一章：[GPU-06｜硬件｜Tensor Core 与低精度：从 mma 到 FP8 和 FP4](./06-tensor-core.md) · [目录](./README.md) · 下一章：[GPU-08｜硬件｜注意力内核](./08-attention.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/07-dsl.ipynb) · 上一章：[GPU-06｜硬件｜Tensor Core 与低精度：从 mma 到 FP8 和 FP4](./06-tensor-core.md) · [目录](./README.md) · 下一章：[GPU-08｜硬件｜注意力内核](./08-attention.md)

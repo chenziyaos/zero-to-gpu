@@ -481,4 +481,4 @@ test_attn.py 六项全过，只说明代码和它自己的假设一致。
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/08-attention.ipynb) · 上一章：[GPU-07｜硬件｜Triton、CUTLASS 与 CuTe DSL](./07-dsl.md) · [目录](./README.md) · 下一章：[GPU-09｜系统｜驱动、CUDA 兼容与 Xid](./09-driver.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/08-attention.ipynb) · 上一章：[GPU-07｜硬件｜Triton、CUTLASS 与 CuTe DSL](./07-dsl.md) · [目录](./README.md) · 下一章：[GPU-09｜系统｜驱动、CUDA 兼容与 Xid](./09-driver.md)

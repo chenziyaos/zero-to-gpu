@@ -397,4 +397,4 @@ zero-to-gpu/21-train-parallel/ 的 sim_memory.py 在 Python 3.9.6 上能跑；si
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/21-train-parallel.ipynb) · 上一章：[GPU-20｜集群｜可靠性与可观测：故障、静默错误与 checkpoint](./20-reliability.md) · [目录](./README.md) · 下一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/21-train-parallel.ipynb) · 上一章：[GPU-20｜集群｜可靠性与可观测：故障、静默错误与 checkpoint](./20-reliability.md) · [目录](./README.md) · 下一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md)

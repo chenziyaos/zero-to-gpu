@@ -1,6 +1,6 @@
 # 02-ledger
 
-[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/02-ledger.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/02-ledger.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
 GPU-02 性能账本的配套练习。先在 CPU 上把每个算子的浮点数和字节数算清楚，判断它落在 Roofline 的哪一侧；再到真卡上测出本机的两根线，用三个小实验看开销、带宽、算力三类瓶颈各长什么样，最后用 ncu 拍一张 Speed Of Light。
 

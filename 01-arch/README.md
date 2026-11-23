@@ -1,6 +1,6 @@
 # 01-arch
 
-[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/01-arch.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
+[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/01-arch.ipynb)　CPU 练习和单元测试可以直接在 Colab 里跑。
 
 GPU-01 GPU 架构的配套练习。先用 CPU 计算器把 occupancy、在途字节和 wave 量化这三本账算清楚，再到真卡上跑微基准，拿实测数和论文数对照。
 

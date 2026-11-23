@@ -394,4 +394,4 @@ zero-to-gpu/16-node-burnin/ 下有 sim_burnin.py、make_samples.py 和 test_burn
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/16-node-burnin.ipynb) · 上一章：[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md) · [目录](./README.md) · 下一章：[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/16-node-burnin.ipynb) · 上一章：[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md) · [目录](./README.md) · 下一章：[GPU-17｜集群｜RDMA 网络：InfiniBand、RoCE 与拥塞控制](./17-rdma.md)

@@ -490,4 +490,4 @@ Blackwell Ultra 的每个 SM 配了 256 KB 的 Tensor Memory（TMEM），官方�
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/01-arch.ipynb) · 上一章：[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md) · [目录](./README.md) · 下一章：[GPU-02｜硬件｜性能账本：Roofline、算术强度与三类瓶颈](./02-ledger.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/01-arch.ipynb) · 上一章：[GPU-00｜索引｜从 0 开始 GPU 优化：路线、章节与练习](./README.md) · [目录](./README.md) · 下一章：[GPU-02｜硬件｜性能账本：Roofline、算术强度与三类瓶颈](./02-ledger.md)
