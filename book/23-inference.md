@@ -385,4 +385,4 @@ zero-to-gpu/23-inference/ 下的 sim_kv.py、sim_decode.py、sim_pd.py 只用 Py
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/23-inference.ipynb) · 上一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md) · [目录](./README.md) · 下一章：[GPU-24｜LLM｜综合：从选卡到上线](./24-capstone.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/23-inference.ipynb) · 上一章：[GPU-22｜LLM｜MoE 与专家并行：all-to-all 与负载均衡](./22-moe-ep.md) · [目录](./README.md) · 下一章：[GPU-24｜LLM｜综合：从选卡到上线](./24-capstone.md)

@@ -414,4 +414,4 @@ zero-to-gpu/15-runtime/ 下有 sim_launch.py、sim_compile.py、sim_streams.py�
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/15-runtime.ipynb) · 上一章：[GPU-14｜单机｜性能分析与 Profiling](./14-profiling.md) · [目录](./README.md) · 下一章：[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/15-runtime.ipynb) · 上一章：[GPU-14｜单机｜性能分析与 Profiling](./14-profiling.md) · [目录](./README.md) · 下一章：[GPU-16｜单机｜单机验收与调优](./16-node-burnin.md)

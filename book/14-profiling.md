@@ -414,4 +414,4 @@ zero-to-gpu/14-profiling/ 下有 sim_prof_parse.py、sim_gpu_util.py、gpu_workl
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/14-profiling.ipynb) · 上一章：[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md) · [目录](./README.md) · 下一章：[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/14-profiling.ipynb) · 上一章：[GPU-13｜单机｜NVLink 与 NVSwitch](./13-nvlink.md) · [目录](./README.md) · 下一章：[GPU-15｜单机｜PyTorch 运行时](./15-runtime.md)

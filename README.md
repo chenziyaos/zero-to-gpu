@@ -4,13 +4,13 @@
 
 系列文档的 Markdown 版放在 [`book/`](book/README.md)，共 34 篇（索引 GPU-00 加 GPU-01 到 GPU-33），从索引页读起；各章末尾有上一章、下一章的链接。配套代码只覆盖 GPU-01 到 GPU-24，GPU-25 到 GPU-33 没有代码目录。
 
-在线阅读：<https://chenziyaos.github.io/zero-to-gpu/>，带侧边目录和全文搜索。它由 `mkdocs.yml` 从 `book/` 生成，推送到 main 后自动发布；本地预览：`pip install -r docs-site/requirements.txt && mkdocs serve`。
+在线阅读：<https://zyaochen.github.io/zero-to-gpu/>，带侧边目录和全文搜索。它由 `mkdocs.yml` 从 `book/` 生成，推送到 main 后自动发布；本地预览：`pip install -r docs-site/requirements.txt && mkdocs serve`。
 
 ## 在 Colab 上跑
 
 [`colab/`](colab/) 下每章一个 notebook，打开后依次执行：克隆本仓库、装 `requirements-cpu.txt`、跑本章单元测试、跑正文里的 CPU 命令。notebook 里的命令都在 Python 3.11 的 CPU 环境下实跑过，退出码为 0；少数演示脚本按设计以非 0 退出（样例本身不达标），已在命令后注明。需要 GPU、模型文件或运行中服务的命令没有放进去。
 
-入口示例：[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/02-ledger.ipynb)
+入口示例：[![在 Colab 中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/02-ledger.ipynb)
 
 ## 版本基线
 
@@ -95,10 +95,10 @@ python3 common/specs.py          # 打印各代 GPU 规格和 BF16 拐点
 
 ```bibtex
 @misc{zero-to-gpu,
-  author       = {chenziyaos},
+  author       = {zyaochen},
   title        = {从 0 开始 GPU 优化（zero-to-gpu）},
   year         = {2026},
-  howpublished = {\url{https://github.com/chenziyaos/zero-to-gpu}},
+  howpublished = {\url{https://github.com/zyaochen/zero-to-gpu}},
   note         = {GitHub repository}
 }
 ```

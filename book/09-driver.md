@@ -461,4 +461,4 @@ test_driver.py 全部通过，只说明代码和它自己的规则一致。
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/09-driver.ipynb) · 上一章：[GPU-08｜硬件｜注意力内核](./08-attention.md) · [目录](./README.md) · 下一章：[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/09-driver.ipynb) · 上一章：[GPU-08｜硬件｜注意力内核](./08-attention.md) · [目录](./README.md) · 下一章：[GPU-10｜系统｜显存管理](./10-memory-mgmt.md)

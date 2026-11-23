@@ -410,4 +410,4 @@ zero-to-gpu/11-pcie-gdr/ 下有 sim_pcie_bw.py、sim_topo.py 和 test_pcie_gdr.p
 
 ---
 
-[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/chenziyaos/zero-to-gpu/blob/main/colab/11-pcie-gdr.ipynb) · 上一章：[GPU-10｜系统｜显存管理](./10-memory-mgmt.md) · [目录](./README.md) · 下一章：[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)
+[在 Colab 里跑本章 CPU 练习](https://colab.research.google.com/github/zyaochen/zero-to-gpu/blob/main/colab/11-pcie-gdr.ipynb) · 上一章：[GPU-10｜系统｜显存管理](./10-memory-mgmt.md) · [目录](./README.md) · 下一章：[GPU-12｜系统｜MIG、MPS 与容器](./12-sharing.md)
